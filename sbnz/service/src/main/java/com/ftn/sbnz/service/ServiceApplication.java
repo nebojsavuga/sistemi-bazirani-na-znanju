@@ -9,10 +9,11 @@ import org.kie.api.builder.KieScanner;
 import org.kie.api.runtime.KieContainer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@SpringBootApplication
+@SpringBootApplication( exclude = { SecurityAutoConfiguration.class } )
 public class ServiceApplication  {
 	
 	private static Logger log = LoggerFactory.getLogger(ServiceApplication.class);
