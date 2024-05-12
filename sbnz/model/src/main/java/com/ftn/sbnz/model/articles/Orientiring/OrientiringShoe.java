@@ -7,7 +7,6 @@ import javax.persistence.Enumerated;
 
 @Entity
 public class OrientiringShoe extends OrientiringArticle{
+
     
-    @Enumerated(EnumType.STRING)
-    private Sole soleType;
 }
