@@ -88,6 +88,12 @@
 			<artifactId>drools-templates</artifactId>
 			<version>${drools.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>mssql-jdbc</artifactId>
+			<version>9.4.1.jre8</version> <!-- Replace with the latest version -->
+		</dependency>
+
 	</dependencies>
 
 	<build>
