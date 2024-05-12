@@ -56,6 +56,9 @@ public class User {
     @OneToMany
     private Set<Article> favoriteArticles = new HashSet<Article>();
 
+    @OneToMany
+    private Set<Article> nonRecommendedArticles = new HashSet<Article>();
+
     @Override
     public String toString() {
         return "User [id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName
