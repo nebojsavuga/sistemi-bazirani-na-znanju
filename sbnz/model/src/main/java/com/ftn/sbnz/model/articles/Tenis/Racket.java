@@ -5,10 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
-import org.eclipse.sisu.Nullable;
-
-
-
 @Entity
 public class Racket extends TenisArticle{
     @Column
@@ -19,13 +15,4 @@ public class Racket extends TenisArticle{
 
     @Enumerated(EnumType.STRING)
     private TypeOfRacketSpanning spanningType;
-
-    @Column
-    private Grip grip;
-
-    @Column
-    private RackterString string;
-
-
-    
 }
