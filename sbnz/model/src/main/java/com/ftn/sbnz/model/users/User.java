@@ -1,5 +1,8 @@
 package com.ftn.sbnz.model.users;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -30,7 +34,18 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Column
+    private int age;
     
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    // Height in cm
+    @Column
+    private float height;
+
+    @OneToMany(mappedBy = "user")
+    private Set<ConcreteInjury> injuries = new HashSet<ConcreteInjury>();
 
     @Override
     public String toString() {
@@ -148,6 +163,38 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
+    }
+
+    public float getHeight() {
+        return height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
+    public Set<ConcreteInjury> getInjuries() {
+        return injuries;
+    }
+
+    public void setInjuries(Set<ConcreteInjury> injuries) {
+        this.injuries = injuries;
     }
 
     
