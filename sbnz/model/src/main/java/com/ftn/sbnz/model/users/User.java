@@ -12,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.Rating;
+
 @Entity
 public class User {
     
@@ -46,6 +49,12 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private Set<ConcreteInjury> injuries = new HashSet<ConcreteInjury>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Rating> ratings = new HashSet<Rating>();
+
+    @OneToMany
+    private Set<Article> favoriteArticles = new HashSet<Article>();
 
     @Override
     public String toString() {
