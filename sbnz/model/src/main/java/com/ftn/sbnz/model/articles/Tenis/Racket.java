@@ -15,4 +15,7 @@ public class Racket extends TenisArticle{
 
     @Enumerated(EnumType.STRING)
     private TypeOfRacketSpanning spanningType;
+
+    @Column
+    private float size;
 }
