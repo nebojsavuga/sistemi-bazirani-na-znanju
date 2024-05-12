@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import com.ftn.sbnz.model.users.User;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 public class Rating {
@@ -31,6 +32,7 @@ public class Rating {
     private LocalDateTime timestamp;
 
     @Column
+    @Range(min = 1,max = 5)
     private int rating;
 
     public Long getId() {
