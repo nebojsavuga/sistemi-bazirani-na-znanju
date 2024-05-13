@@ -79,6 +79,15 @@ public class User implements Serializable{
         this.lastName = lastName;
         this.role = role;
     }
+    public User(String email, String password, String firstName, String lastName, Role role, Gender gender) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.gender = gender;
+    }
+
 
     @Override
     public int hashCode() {

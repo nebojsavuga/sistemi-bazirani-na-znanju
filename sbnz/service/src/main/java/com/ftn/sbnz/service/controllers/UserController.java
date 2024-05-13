@@ -34,10 +34,15 @@ public class UserController {
 
         
 	@PutMapping()
-	public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO,  HttpSession session) {
+	public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO) {
 		User user = userService.getByEmailAndPassword(loginDTO.email, loginDTO.password);
-		session.setAttribute("user", user);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/register")
+	public ResponseEntity<User> register(@RequestBody RegisterDTO registerDTO) {
+		User user = userService.register(registerDTO);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
 	
