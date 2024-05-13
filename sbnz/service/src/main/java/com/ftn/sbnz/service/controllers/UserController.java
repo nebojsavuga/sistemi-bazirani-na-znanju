@@ -34,8 +34,9 @@ public class UserController {
 
         
 	@PutMapping()
-	public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO) {
+	public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO, HttpSession session) {
 		User user = userService.getByEmailAndPassword(loginDTO.email, loginDTO.password);
+		session.setAttribute("user", user);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
