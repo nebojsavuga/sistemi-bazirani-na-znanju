@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,12 @@ public class UserController {
 	@PutMapping()
 	public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO) {
 		User user = userService.getByEmailAndPassword(loginDTO.email, loginDTO.password);
+		return new ResponseEntity<>(user, HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/register")
+	public ResponseEntity<User> register(@RequestBody RegisterDTO registerDTO) {
+		User user = userService.register(registerDTO);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 }
