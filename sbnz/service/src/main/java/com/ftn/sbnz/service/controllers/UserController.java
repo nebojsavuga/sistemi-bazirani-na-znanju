@@ -30,7 +30,7 @@ public class UserController {
 
 	@PutMapping()
 	public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO) {
-		User user = userService.getByEmailAndPassword(loginDTO.email, loginDTO.password)
-		return new ResponseEntity<>(HttpStatus.OK);
+		User user = userService.getByEmailAndPassword(loginDTO.email, loginDTO.password);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 }
