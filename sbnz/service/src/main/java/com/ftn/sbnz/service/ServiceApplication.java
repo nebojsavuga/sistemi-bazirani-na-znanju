@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@SpringBootApplication( exclude = { SecurityAutoConfiguration.class } )
+@SpringBootApplication()
 public class ServiceApplication  {
 	
 	private static Logger log = LoggerFactory.getLogger(ServiceApplication.class);

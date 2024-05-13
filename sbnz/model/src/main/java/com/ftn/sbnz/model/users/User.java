@@ -1,5 +1,6 @@
 package com.ftn.sbnz.model.users;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,12 +12,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.articles.Rating;
 
 @Entity
-public class User {
+@Table(name = "Users")
+public class User implements Serializable{
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

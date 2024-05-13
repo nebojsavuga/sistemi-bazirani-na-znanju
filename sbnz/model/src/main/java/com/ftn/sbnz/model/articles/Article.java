@@ -1,5 +1,6 @@
 package com.ftn.sbnz.model.articles;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +18,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-public class Article {
+public class Article implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,5 +1,6 @@
 package com.ftn.sbnz.model.users;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -11,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class ConcreteInjury {
+public class ConcreteInjury implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

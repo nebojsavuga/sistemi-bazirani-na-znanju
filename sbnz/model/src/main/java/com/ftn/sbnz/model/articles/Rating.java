@@ -1,5 +1,6 @@
 package com.ftn.sbnz.model.articles;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -14,7 +15,7 @@ import com.ftn.sbnz.model.users.User;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
-public class Rating {
+public class Rating implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
