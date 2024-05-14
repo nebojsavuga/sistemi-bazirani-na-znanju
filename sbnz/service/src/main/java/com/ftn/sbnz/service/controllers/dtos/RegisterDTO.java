@@ -1,4 +1,4 @@
-package com.ftn.sbnz.service.controllers;
+package com.ftn.sbnz.service.controllers.dtos;
 
 import com.ftn.sbnz.model.users.Gender;
 

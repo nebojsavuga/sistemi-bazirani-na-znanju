@@ -24,6 +24,8 @@ public class RatingDTO {
         this.rating = rating;
     }
 
-    
-    
+    public RatingDTO(long articleId, @Range(min = 1, max = 5) int rating) {
+        this.articleId = articleId;
+        this.rating = rating;
+    }
 }

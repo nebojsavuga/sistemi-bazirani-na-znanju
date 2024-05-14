@@ -1,4 +1,4 @@
-package com.ftn.sbnz.service.controllers;
+package com.ftn.sbnz.service.controllers.dtos;
 
 public class LoginDTO {
     public String email;

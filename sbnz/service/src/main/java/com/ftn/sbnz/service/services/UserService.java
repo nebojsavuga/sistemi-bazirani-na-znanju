@@ -14,23 +14,24 @@ import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.users.Role;
 import com.ftn.sbnz.model.users.User;
-import com.ftn.sbnz.service.controllers.RegisterDTO;
+import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
+import com.ftn.sbnz.service.exceptions.BadCredentialsException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.exceptions.UnauthorizedException;
-import com.ftn.sbnz.service.exceptions.UserAlreadyExistsException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
 import com.ftn.sbnz.service.repositories.RatingRepository;
 import com.ftn.sbnz.service.repositories.UserRepository;
 
 @Service
-public class UserService implements IUserService{
+public class UserService implements IUserService {
 
     private UserRepository userRepository;
     private ArticleRepository articleRepository;
     private RatingRepository ratingRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, ArticleRepository articleRepository, RatingRepository ratingRepository) {
+    public UserService(UserRepository userRepository, ArticleRepository articleRepository,
+            RatingRepository ratingRepository) {
         this.userRepository = userRepository;
         this.articleRepository = articleRepository;
         this.ratingRepository = ratingRepository;
@@ -44,49 +45,62 @@ public class UserService implements IUserService{
 
     @Override
     public User register(RegisterDTO registerDTO) {
-        User user = new User(registerDTO.email, registerDTO.password, registerDTO.firstName, registerDTO.lastName, Role.User, registerDTO.gender);
+        User user = new User(registerDTO.email, registerDTO.password, registerDTO.firstName, registerDTO.lastName,
+                Role.User, registerDTO.gender);
         user = userRepository.save(user);
         return user;
     }
 
     @Override
-    public Article addFavoriteArticle(Long id, HttpSession session) {
+    public String addFavoriteArticle(Long id, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if (user == null){
-            throw new UnauthorizedException("Not authorized!");
+        if (user == null) {
+            throw new UnauthorizedException("Not authorized.");
         }
+
+        for (Article article : user.getFavoriteArticles()) {
+            if (article.getId() == id) {
+                throw new BadCredentialsException("Article is already in favorite list.");
+            }
+        }
+
         Optional<Article> article = this.articleRepository.findById(id);
-        if (article.isEmpty()){
+        if (article.isEmpty()) {
             throw new NotFoundException("Article with that id does not exist.");
         }
-        
-        Set<Article> userArticles = user.getFavoriteArticles();
-        userArticles.add(article.get());
-        user.setFavoriteArticles(userArticles);
+
+        user.addFavoriteArticle(article.get());
         userRepository.save(user);
-        return article.get();
-        
+        return article.get().getName();
     }
 
     @Override
     public Set<Article> getFavoriteArticles(HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if (user == null){
+        if (user == null) {
             throw new UnauthorizedException("Not authorized!");
         }
         Set<Article> articles = user.getFavoriteArticles();
-        return(articles);
+        return (articles);
     }
 
     @Override
-    public Rating rateArticle(RatingDTO ratingDTO, HttpSession session) {
+    public RatingDTO rateArticle(RatingDTO ratingDTO, HttpSession session) {
         User user = (User) session.getAttribute("user");
-        if (user == null){
+        if (user == null) {
             throw new UnauthorizedException("Not authorized!");
         }
         Optional<Article> article = this.articleRepository.findById(ratingDTO.getArticleId());
-        if (article.isEmpty()){
+        if (article.isEmpty()) {
             throw new NotFoundException("Article with that id does not exist.");
+        }
+        Optional<Rating> existingRating = this.ratingRepository
+                .findByUserIdAndArticleId(user.getId(), ratingDTO.getArticleId());
+        if (existingRating.isPresent()) {
+            existingRating.get().setRating(ratingDTO.getRating());
+            existingRating.get().setTimestamp(LocalDateTime.now());
+            this.ratingRepository.save(existingRating.get());
+            return ratingDTO;
         }
 
         Rating rating = new Rating();
@@ -94,9 +108,8 @@ public class UserService implements IUserService{
         rating.setRating(ratingDTO.getRating());
         rating.setTimestamp(LocalDateTime.now());
         rating.setUser(user);
-        this.ratingRepository.save(rating);
-        return(rating);
 
+        this.ratingRepository.save(rating);
+        return ratingDTO;
     }
-    
 }

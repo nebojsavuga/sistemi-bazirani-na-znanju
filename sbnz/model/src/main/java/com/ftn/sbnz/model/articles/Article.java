@@ -15,11 +15,10 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
-
 @Entity
-@Inheritance(strategy=InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.JOINED)
 
-public class Article implements Serializable{
+public class Article implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,9 +30,7 @@ public class Article implements Serializable{
     @Column
     private float price;
 
-    
     @OneToMany(mappedBy = "article")
-    @JsonIgnore
     private Set<Rating> ratings = new HashSet<Rating>();
 
     @Enumerated(EnumType.STRING)
@@ -41,7 +38,6 @@ public class Article implements Serializable{
 
     @Column
     private String brandName;
-    
 
     public Long getId() {
         return id;
@@ -67,6 +63,10 @@ public class Article implements Serializable{
         this.price = price;
     }
 
+    public void addRating(Rating rating) {
+        this.ratings.add(rating);
+    }
+
     public Set<Rating> getRatings() {
         return ratings;
     }
@@ -81,49 +81,6 @@ public class Article implements Serializable{
 
     public void setGender(ArticleGenderType gender) {
         this.gender = gender;
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + Float.floatToIntBits(price);
-        result = prime * result + ((ratings == null) ? 0 : ratings.hashCode());
-        result = prime * result + ((gender == null) ? 0 : gender.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Article other = (Article) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (Float.floatToIntBits(price) != Float.floatToIntBits(other.price))
-            return false;
-        if (ratings == null) {
-            if (other.ratings != null)
-                return false;
-        } else if (!ratings.equals(other.ratings))
-            return false;
-        if (gender != other.gender)
-            return false;
-        return true;
     }
 
     @Override
