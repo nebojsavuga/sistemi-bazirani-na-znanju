@@ -13,3 +13,11 @@ rule "GreetWhenTimeOfDayMatches"
     then
         System.out.println("Good morning!");
 end
+
+rule "GiveBackArticle"
+    when
+    $filters: Filters()
+    $article: RecommendedArticleDTO();
+    then
+    recommendations.add($article);
+end

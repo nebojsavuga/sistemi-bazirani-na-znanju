@@ -25,7 +25,9 @@ public class RecommendationService implements IRecommendationService {
     @Override
     public Set<RecommendedArticleDTO> getRecommendations(Filters filters) {
         KieSession kieSession = kieContainer.newKieSession("basicKsession");
+        RecommendedArticleDTO rc = new RecommendedArticleDTO();
         kieSession.setGlobal("recommendations", recommendations);
+        kieSession.insert(rc);
         kieSession.insert(filters);
         kieSession.fireAllRules();
         kieSession.dispose();
