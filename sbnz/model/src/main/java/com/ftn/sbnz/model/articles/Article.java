@@ -3,7 +3,6 @@ package com.ftn.sbnz.model.articles;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,7 +16,6 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-
 public class Article implements Serializable {
 
     @Id
