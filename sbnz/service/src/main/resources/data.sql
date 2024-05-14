@@ -7,3 +7,5 @@ values ( 'bogdanjanosevic@gmail.com', 'Bogdan123', 'Bogdan', 'Janosevic', 'User'
 insert into Users
 (email, password, first_name, last_name, role, age, gender, height)
 values ( 'dusanbibin@gmail.com', 'Dusan123', 'Dusan', 'Bibin', 'User', 22, 'Musko', 183.0);
+INSERT INTO Article (name, price, gender, brand_name) 
+VALUES ('Tenis patike', 99.99, 'Unisex', 'Nike');

@@ -17,7 +17,8 @@ import javax.persistence.OneToMany;
 
 
 @Entity
-@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy=InheritanceType.JOINED)
+
 public class Article implements Serializable{
 
     @Id

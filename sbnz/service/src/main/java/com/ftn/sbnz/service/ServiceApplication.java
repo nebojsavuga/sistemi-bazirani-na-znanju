@@ -27,7 +27,7 @@ public class ServiceApplication  {
 		ApplicationContext ctx = SpringApplication.run(ServiceApplication.class, args);
 
 		String[] beanNames = ctx.getBeanDefinitionNames();
-		Arrays.sort(beanNames);
+		Arrays.sort(beanNames);	
 
 		StringBuilder sb = new StringBuilder("Application beans:\n");
 		for (String beanName : beanNames) {

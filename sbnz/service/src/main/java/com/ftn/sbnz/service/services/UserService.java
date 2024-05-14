@@ -61,5 +61,15 @@ public class UserService implements IUserService{
         return article.get();
         
     }
+
+    @Override
+    public Set<Article> getFavoriteArticles(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null){
+            throw new UnauthorizedException("Not authorized!");
+        }
+        Set<Article> articles = user.getFavoriteArticles();
+        return(articles);
+    }
     
 }

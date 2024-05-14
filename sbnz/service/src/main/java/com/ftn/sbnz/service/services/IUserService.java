@@ -1,5 +1,7 @@
 package com.ftn.sbnz.service.services;
 
+import java.util.Set;
+
 import javax.servlet.http.HttpSession;
 
 import com.ftn.sbnz.model.articles.Article;
@@ -13,4 +15,6 @@ public interface IUserService {
     User register(RegisterDTO registerDTO);
 
     Article addFavoriteArticle(Long id, HttpSession session);
+
+    Set<Article> getFavoriteArticles(HttpSession session);
 }
