@@ -1,5 +1,6 @@
 package com.ftn.sbnz.service.services;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Set;
 
@@ -8,7 +9,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ftn.sbnz.model.DTO.RatingDTO;
 import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.users.Role;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.RegisterDTO;
@@ -16,6 +19,7 @@ import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.exceptions.UnauthorizedException;
 import com.ftn.sbnz.service.exceptions.UserAlreadyExistsException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
+import com.ftn.sbnz.service.repositories.RatingRepository;
 import com.ftn.sbnz.service.repositories.UserRepository;
 
 @Service
@@ -23,11 +27,13 @@ public class UserService implements IUserService{
 
     private UserRepository userRepository;
     private ArticleRepository articleRepository;
+    private RatingRepository ratingRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, ArticleRepository articleRepository) {
+    public UserService(UserRepository userRepository, ArticleRepository articleRepository, RatingRepository ratingRepository) {
         this.userRepository = userRepository;
         this.articleRepository = articleRepository;
+        this.ratingRepository = ratingRepository;
     }
 
     @Override
@@ -70,6 +76,27 @@ public class UserService implements IUserService{
         }
         Set<Article> articles = user.getFavoriteArticles();
         return(articles);
+    }
+
+    @Override
+    public Rating rateArticle(RatingDTO ratingDTO, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null){
+            throw new UnauthorizedException("Not authorized!");
+        }
+        Optional<Article> article = this.articleRepository.findById(ratingDTO.getArticleId());
+        if (article.isEmpty()){
+            throw new NotFoundException("Article with that id does not exist.");
+        }
+
+        Rating rating = new Rating();
+        rating.setArticle(article.get());
+        rating.setRating(ratingDTO.getRating());
+        rating.setTimestamp(LocalDateTime.now());
+        rating.setUser(user);
+        this.ratingRepository.save(rating);
+        return(rating);
+
     }
     
 }

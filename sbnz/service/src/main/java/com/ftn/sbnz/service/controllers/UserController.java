@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftn.sbnz.model.DTO.RatingDTO;
 import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.exceptions.BadCredentialsException;
 import com.ftn.sbnz.service.services.IUserService;
@@ -65,6 +67,14 @@ public class UserController {
 		Set<Article>articles = userService.getFavoriteArticles(session);
 
 		return new ResponseEntity<>(articles, HttpStatus.OK);
+	}
+
+	@PostMapping(value = "/RateArticle")
+	public ResponseEntity<Rating> RateArticle(@RequestBody RatingDTO ratingDTO, HttpSession session){
+
+		Rating rating = userService.rateArticle(ratingDTO, session);
+
+		return new ResponseEntity<>(rating, HttpStatus.OK);
 	}
 
 	

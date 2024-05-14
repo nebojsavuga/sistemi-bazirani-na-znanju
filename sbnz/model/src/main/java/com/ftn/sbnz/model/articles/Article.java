@@ -3,7 +3,7 @@ package com.ftn.sbnz.model.articles;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -31,7 +31,9 @@ public class Article implements Serializable{
     @Column
     private float price;
 
+    
     @OneToMany(mappedBy = "article")
+    @JsonIgnore
     private Set<Rating> ratings = new HashSet<Rating>();
 
     @Enumerated(EnumType.STRING)
