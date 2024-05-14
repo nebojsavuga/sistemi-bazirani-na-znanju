@@ -6,15 +6,29 @@ import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.articles.Weightlifting.ElasticBand;
 import com.ftn.sbnz.model.articles.Weightlifting.WeightliftingArticle;
 import com.ftn.sbnz.model.articles.Football.GrassFootbalShoe;
+import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.articles.Tenis.TenisGear;
+import com.ftn.sbnz.model.articles.Tenis.TypeOfGear;
 import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
 
-rule "Reccomend shoes based on gender"
+// public Gender gender;
+//     public float height;
+//     public int age;
+//     public Set<Long> injuries = new HashSet<>();
+//     public SportLevel level;
+//     public Sport sport;
+//     public SportFootballPlayer typeOfFotballPlayer;
+//     public SportFootballType typeOfFootball;
+//     public SportOrientiringType typeOfRace;
+//     public SportTenisField typeOfField;
+//     public SportWeightliftingType typeOfWeightlifting;
+rule "Preporuci znojnicu ako se bavi tenisom"
 when
-    $filters: Filters()
+    $filters: Filters(sport == Sport.Tenis)
     $article: Article()
-    $elasticBand: ElasticBand() from $article
+    $znojnica: TenisGear(gearType == TypeOfGear.Znojnica) from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());
@@ -22,7 +36,6 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendations.add(recommendedArticle);
-    System.out.println($elasticBand.getWeight());
 end
 
 

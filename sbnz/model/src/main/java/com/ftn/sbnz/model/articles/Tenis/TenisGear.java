@@ -10,6 +10,14 @@ import javax.persistence.Enumerated;
 public class TenisGear extends TenisArticle{
 
     @Enumerated(EnumType.STRING)
-    private TypeOfGear type;
+    private TypeOfGear gearType;
+
+    public TypeOfGear getGearType() {
+        return gearType;
+    }
+
+    public void setGearType(TypeOfGear type) {
+        this.gearType = type;
+    }
     
 }

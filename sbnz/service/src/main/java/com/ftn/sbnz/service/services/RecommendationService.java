@@ -20,7 +20,6 @@ import com.ftn.sbnz.service.repositories.ArticleRepository;
 public class RecommendationService implements IRecommendationService {
 
     private final KieContainer kieContainer;
-    private Set<RecommendedArticleDTO> recommendations = new HashSet<>();
     private ArticleRepository articleRepository;
 
     @Autowired
@@ -31,7 +30,7 @@ public class RecommendationService implements IRecommendationService {
 
     @Override
     public Set<RecommendedArticleDTO> getRecommendations(Filters filters) {
-
+        Set<RecommendedArticleDTO> recommendations = new HashSet<>();
         KieSession kieSession = kieContainer.newKieSession("basicKsession");
         kieSession.setGlobal("recommendations", recommendations);
         kieSession.insert(filters);
