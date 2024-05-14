@@ -7,9 +7,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftn.sbnz.service.controllers.dtos.Filters;
 import com.ftn.sbnz.service.controllers.dtos.RecommendedArticleDTO;
 import com.ftn.sbnz.service.services.IRecommendationService;
 
@@ -26,7 +28,7 @@ public class RecommendationController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<Set<RecommendedArticleDTO>> recommend() {
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity<Set<RecommendedArticleDTO>> recommend(@RequestBody Filters filters) {
+        return new ResponseEntity<>(this.recommendationService.getRecommendations(filters), HttpStatus.OK);
     }
 }
