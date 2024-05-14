@@ -7,5 +7,7 @@ values ( 'bogdanjanosevic@gmail.com', 'Bogdan123', 'Bogdan', 'Janosevic', 'User'
 insert into Users
 (email, password, first_name, last_name, role, age, gender, height)
 values ( 'dusanbibin@gmail.com', 'Dusan123', 'Dusan', 'Bibin', 'User', 22, 'Musko', 183.0);
-INSERT INTO Article (name, price, gender, brand_name) 
-VALUES ('Tenis patike', 99.99, 'Unisex', 'Nike');
+INSERT INTO Article (name, price, gender, brand_name, weight, DTYPE) 
+VALUES ('Elasticna Traka', 40.00, 'Unisex', 'Joga', 25, 'Elastic_Band');
+INSERT INTO Article (name, price, gender, brand_name, number_Of_Crampsons, DTYPE) 
+VALUES ('Kramponi x6', 10.00, 'Unisex', 'Nike', 6, 'GrassFootbalShoe');

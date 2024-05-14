@@ -1,11 +1,10 @@
 package com.ftn.sbnz.model.articles.Orientiring;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-
 
 @Entity
+@DiscriminatorValue("OrientiringShoe")
 public class OrientiringShoe extends OrientiringArticle{
 
     

@@ -3,8 +3,10 @@ package basic;
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.Weightlifting.ElasticBand;
+import com.ftn.sbnz.model.articles.Weightlifting.WeightliftingArticle;
+import com.ftn.sbnz.model.articles.Football.GrassFootbalShoe;
 import java.util.Set;
-
 
 global Set<RecommendedArticleDTO> recommendations;
 
@@ -16,10 +18,11 @@ rule "GreetWhenTimeOfDayMatches"
         System.out.println("Good morning!");
 end
 
-rule "GiveBackArticle"
+rule "GiveBackArticle1"
 when
     $filters: Filters()
     $article: Article()
+    $elasticBand: ElasticBand() from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());
@@ -27,4 +30,36 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendations.add(recommendedArticle);
+    System.out.println($elasticBand.getWeight());
+end
+
+
+rule "GiveBackArticle2"
+when
+    $filters: Filters()
+    $article: Article()
+    $elasticBand: GrassFootbalShoe() from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendations.add(recommendedArticle);
+    System.out.println($elasticBand.getNumberOfCrampsons());
+end
+
+rule "GiveBackArticle3"
+when
+    $filters: Filters()
+    $article: Article()
+    $elasticBand: WeightliftingArticle() from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendations.add(recommendedArticle);
+    System.out.println($elasticBand.getText());
 end
