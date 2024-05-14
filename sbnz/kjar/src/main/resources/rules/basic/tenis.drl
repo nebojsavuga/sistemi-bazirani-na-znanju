@@ -2,10 +2,12 @@ package basic;
 
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.articles.Article;
 import java.util.Set;
 
 
 global Set<RecommendedArticleDTO> recommendations;
+
 
 rule "GreetWhenTimeOfDayMatches"
     when
@@ -15,9 +17,14 @@ rule "GreetWhenTimeOfDayMatches"
 end
 
 rule "GiveBackArticle"
-    when
+when
     $filters: Filters()
-    $article: RecommendedArticleDTO();
-    then
-    recommendations.add($article);
+    $article: Article()
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendations.add(recommendedArticle);
 end

@@ -36,15 +36,11 @@ public class RecommendationService implements IRecommendationService {
         kieSession.insert(rc);
         kieSession.insert(filters);
         List<Article> allArticles = articleRepository.findAll();
-        for(Article article: allArticles){
-            RecommendedArticleDTO recomendedArticle = new RecommendedArticleDTO();
-            recomendedArticle.brandName = article.getBrandName();
-            recomendedArticle.name = article.getName();
-            recomendedArticle.price = article.getPrice();
-            recomendedArticle.id = article.getId();
-            kieSession.insert(recomendedArticle);
-             
+        for (Article article : allArticles) {
+            kieSession.insert(article);
         }
+        
+        
         kieSession.fireAllRules();
         kieSession.dispose();
         return recommendations;
