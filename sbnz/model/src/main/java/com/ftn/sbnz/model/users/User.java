@@ -221,5 +221,31 @@ public class User implements Serializable{
         this.injuries = injuries;
     }
 
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public Set<Article> getFavoriteArticles() {
+        return favoriteArticles;
+    }
+
+    public void setFavoriteArticles(Set<Article> favoriteArticles) {
+        this.favoriteArticles = favoriteArticles;
+    }
+
+    public Set<Article> getNonRecommendedArticles() {
+        return nonRecommendedArticles;
+    }
+
+    public void setNonRecommendedArticles(Set<Article> nonRecommendedArticles) {
+        this.nonRecommendedArticles = nonRecommendedArticles;
+    }
+
+    
+
     
 }

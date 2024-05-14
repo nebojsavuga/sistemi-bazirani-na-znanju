@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.ftn.sbnz.service.exceptions.BadCredentialsException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
+import com.ftn.sbnz.service.exceptions.UnauthorizedException;
 import com.ftn.sbnz.service.exceptions.UserAlreadyExistsException;
 import com.ftn.sbnz.service.security.ErrorResponse;
 import java.util.ArrayList;
@@ -51,10 +53,28 @@ public class ValidationHandler {
     }
 
     @ExceptionHandler(value
+            = BadCredentialsException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody ErrorResponse
+    handleBadCredentialsException(BadCredentialsException ex)
+    {
+        return new ErrorResponse(ex.getMessage());
+    }
+
+    @ExceptionHandler(value
             = NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public @ResponseBody ErrorResponse
     handleNotFoundException(NotFoundException ex)
+    {
+        return new ErrorResponse(ex.getMessage());
+    }
+
+    @ExceptionHandler(value
+            = UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public @ResponseBody ErrorResponse
+    handleUnauthorizedException(UnauthorizedException ex)
     {
         return new ErrorResponse(ex.getMessage());
     }
