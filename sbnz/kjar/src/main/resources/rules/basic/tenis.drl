@@ -10,15 +10,7 @@ import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
 
-
-rule "GreetWhenTimeOfDayMatches"
-    when
-        $filters: Filters()
-    then
-        System.out.println("Good morning!");
-end
-
-rule "GiveBackArticle1"
+rule "Reccomend shoes based on gender"
 when
     $filters: Filters()
     $article: Article()
@@ -34,32 +26,32 @@ then
 end
 
 
-rule "GiveBackArticle2"
-when
-    $filters: Filters()
-    $article: Article()
-    $elasticBand: GrassFootbalShoe() from $article
-then
-    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
-    recommendedArticle.setName($article.getName());
-    recommendedArticle.setPrice($article.getPrice());
-    recommendedArticle.setId($article.getId());
-    recommendedArticle.setBrandName($article.getBrandName());
-    recommendations.add(recommendedArticle);
-    System.out.println($elasticBand.getNumberOfCrampsons());
-end
+// rule "GiveBackArticle2"
+// when
+//     $filters: Filters()
+//     $article: Article()
+//     $elasticBand: GrassFootbalShoe() from $article
+// then
+//     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+//     recommendedArticle.setName($article.getName());
+//     recommendedArticle.setPrice($article.getPrice());
+//     recommendedArticle.setId($article.getId());
+//     recommendedArticle.setBrandName($article.getBrandName());
+//     recommendations.add(recommendedArticle);
+//     System.out.println($elasticBand.getNumberOfCrampsons());
+// end
 
-rule "GiveBackArticle3"
-when
-    $filters: Filters()
-    $article: Article()
-    $elasticBand: WeightliftingArticle() from $article
-then
-    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
-    recommendedArticle.setName($article.getName());
-    recommendedArticle.setPrice($article.getPrice());
-    recommendedArticle.setId($article.getId());
-    recommendedArticle.setBrandName($article.getBrandName());
-    recommendations.add(recommendedArticle);
-    System.out.println($elasticBand.getText());
-end
+// rule "GiveBackArticle3"
+// when
+//     $filters: Filters()
+//     $article: Article()
+//     $elasticBand: WeightliftingArticle() from $article
+// then
+//     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+//     recommendedArticle.setName($article.getName());
+//     recommendedArticle.setPrice($article.getPrice());
+//     recommendedArticle.setId($article.getId());
+//     recommendedArticle.setBrandName($article.getBrandName());
+//     recommendations.add(recommendedArticle);
+//     System.out.println($elasticBand.getText());
+// end
