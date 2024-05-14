@@ -1,0 +1,15 @@
+package basic;
+
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import java.util.Set;
+
+
+global Set<RecommendedArticleDTO> recommendations;
+
+rule "GreetWhenTimeOfDayMatches"
+    when
+        $filters: Filters()
+    then
+        System.out.println("Good morning!");
+end

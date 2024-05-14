@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieScanner;
 import org.kie.api.runtime.KieContainer;
-import org.kie.api.runtime.KieSession;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -48,13 +47,13 @@ public class ServiceApplication {
 		return kContainer;
 	}
 
-	@Bean
-	public KieSession getKieSession() {
-		KieServices ks = KieServices.Factory.get();
-		KieContainer kContainer = ks.getKieClasspathContainer();
-		KieSession ksession = kContainer.newKieSession("ksessionRealtimeClock");
-		return ksession;
-	}
+	// @Bean
+	// public KieSession getKieSession() {
+	// 	KieServices ks = KieServices.Factory.get();
+	// 	KieContainer kContainer = ks.getKieClasspathContainer();
+	// 	KieSession ksession = kContainer.newKieSession("basicKsession");
+	// 	return ksession;
+	// }
 
 	/*
 	 * KieServices ks = KieServices.Factory.get(); KieContainer kContainer =

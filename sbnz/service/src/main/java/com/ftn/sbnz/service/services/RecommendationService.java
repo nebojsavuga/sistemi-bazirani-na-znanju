@@ -6,10 +6,12 @@ import java.util.Set;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import com.ftn.sbnz.service.controllers.dtos.Filters;
-import com.ftn.sbnz.service.controllers.dtos.RecommendedArticleDTO;
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
 
+@Service
 public class RecommendationService implements IRecommendationService {
 
 	private final KieContainer kieContainer;
@@ -22,7 +24,7 @@ public class RecommendationService implements IRecommendationService {
 
     @Override
     public Set<RecommendedArticleDTO> getRecommendations(Filters filters) {
-        KieSession kieSession = kieContainer.newKieSession();
+        KieSession kieSession = kieContainer.newKieSession("basicKsession");
         kieSession.setGlobal("recommendations", recommendations);
         kieSession.insert(filters);
         kieSession.fireAllRules();

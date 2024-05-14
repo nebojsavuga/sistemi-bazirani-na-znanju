@@ -24,7 +24,7 @@ public class SampleAppService {
 	}
 
 	public Item getClassifiedItem(Item i) {
-		KieSession kieSession = kieContainer.newKieSession();
+		KieSession kieSession = kieContainer.newKieSession("basicKsession");
 		kieSession.insert(i);
 		kieSession.fireAllRules();
 		kieSession.dispose();

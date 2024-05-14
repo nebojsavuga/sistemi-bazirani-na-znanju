@@ -1,4 +1,4 @@
-package com.ftn.sbnz.service.controllers.dtos;
+package com.ftn.sbnz.model;
 
 import java.util.HashSet;
 import java.util.Set;
