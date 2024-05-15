@@ -1,0 +1,207 @@
+package basic;
+
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.sport.SportLevel;
+import com.ftn.sbnz.model.sport.SportTenisField;
+import com.ftn.sbnz.model.articles.Tenis.TenisGear;
+import com.ftn.sbnz.model.articles.Tenis.Racket;
+import com.ftn.sbnz.model.articles.Tenis.TypeOfRacket;
+import com.ftn.sbnz.model.articles.Tenis.TypeOfRacketSpanning;
+import com.ftn.sbnz.model.articles.Tenis.TypeOfGear;
+import com.ftn.sbnz.model.articles.Tenis.TenisShoe;
+import com.ftn.sbnz.model.articles.Tenis.Sole;
+import com.ftn.sbnz.model.articles.Tenis.RacketString;
+import com.ftn.sbnz.model.articles.Tenis.Grip;
+
+
+import java.util.Set;
+
+global Set<RecommendedArticleDTO> recommendations;
+
+// public Gender gender;
+//     public float height;
+//     public int age;
+//     public Set<Long> injuries = new HashSet<>();
+//     public SportLevel level;
+//     public Sport sport;
+//     public SportFootballPlayer typeOfFotballPlayer;
+//     public SportFootballType typeOfFootball;
+//     public SportOrientiringType typeOfRace;
+//     public SportTenisField typeOfField;
+//     public SportWeightliftingType typeOfWeightlifting;
+rule "Preporuci znojnicu ako se bavi tenisom"
+salience 10
+when
+    $filters: Filters(sport == Sport.Tenis)
+    $article: Article()
+    $znojnica: TenisGear(gearType == TypeOfGear.Znojnica) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Sweatband");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci loptice ako se bavi tenisom"
+salience 10
+when
+    $filters: Filters(sport == Sport.Tenis)
+    $article: Article()
+    $loptice: TenisGear(gearType == TypeOfGear.Loptice) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Tenis Balls");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci rekete sa tvrdim spanovanjem koji su pro ako se bavi tenisom i profesionalac je"
+salience 10
+when
+    $filters: Filters(sport == Sport.Tenis, level == SportLevel.Pro)
+    $article: Article()
+    $ewkwr: Racket(spanningType == TypeOfRacketSpanning.Tvrdo, type== TypeOfRacket.Pro) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci rekete sa mekim spanovanjem koji su klasik ako se bavi tenisom i amater ili rekreativac je"
+salience 10
+when
+    $filters: Filters(sport == Sport.Tenis, level != SportLevel.Pro)
+    $article: Article()
+    $reket: Racket(spanningType == TypeOfRacketSpanning.Meko, type== TypeOfRacket.Klasik) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci teniske patike sa ravnim djonom ako zeli da igra na tvrdoj podlozi"
+salience 10
+when
+    $filters: Filters(sport == Sport.Tenis, typeOfField == SportTenisField.Beton)
+    $article: Article()
+    $patike: TenisShoe(sole == Sole.Ravan) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Tenis Shoe");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci teniske patike sa riblja kost djonom ako zeli da igra na sljaci"
+salience 10
+when
+    $filters: Filters(sport == Sport.Tenis, typeOfField == SportTenisField.Sljaka)
+    $article: Article()
+    $patike: TenisShoe(sole == Sole.RibljaKost) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Tenis Shoe");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci teniske patike sa kramponima ako zeli da igra na travnatoj podlozi"
+salience 10
+when
+    $filters: Filters(sport == Sport.Tenis, typeOfField == SportTenisField.Trava)
+    $article: Article()
+    $patike: TenisShoe(sole == Sole.Kramponi) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Tenis Shoe");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+
+rule "Preporuci zicu ukoliko je preporucen pro reket"
+salience 100
+when
+    $article: Article()
+    $e1: RecommendedArticleDTO()
+    $racket: Racket(id == $e1.getId(), type== TypeOfRacket.Profesionalni)
+    $zica: RacketString() from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci grip ukoliko je preporucen pro reket"
+salience 100
+when
+    $article: Article()
+    $e1: RecommendedArticleDTO()
+    $racket: Racket(id == $e1.getId(), type== TypeOfRacket.Profesionalni)
+    $grip: Grip() from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Grip");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci vibrastop ukoliko je preporucena zica"
+salience 110
+when
+    $article: Article()
+    $e1: RecommendedArticleDTO()
+    $zica: RacketString(id == $e1.getId())
+    $vibrastop: TenisGear(gearType == TypeOfGear.Vibrastop) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Vibrastop");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
