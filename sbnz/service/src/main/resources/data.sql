@@ -13,3 +13,6 @@ INSERT INTO Article (name, price, gender, brand_name, number_Of_Crampsons, DTYPE
 VALUES ('Kramponi x6', 10.00, 'Unisex', 'Nike', 6, 'GrassFootbalShoe');
 INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE) 
 VALUES ('Znojnica 1', 5.00, 'Unisex', 'Nike', 'Znojnica', 'TenisGear');
+
+INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE) 
+VALUES ('Wilson oprema US Open 3tball', 9.00, 'Unisex', 'Wilson', 'Loptice', 'TenisGear');
