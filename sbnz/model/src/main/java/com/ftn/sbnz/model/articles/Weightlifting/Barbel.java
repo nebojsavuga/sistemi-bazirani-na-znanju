@@ -15,4 +15,22 @@ public class Barbel extends WeightliftingArticle{
 
     @Enumerated(EnumType.STRING)
     private BarbelType type;
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+    public BarbelType getType() {
+        return type;
+    }
+
+    public void setType(BarbelType type) {
+        this.type = type;
+    }
+
+    
 }

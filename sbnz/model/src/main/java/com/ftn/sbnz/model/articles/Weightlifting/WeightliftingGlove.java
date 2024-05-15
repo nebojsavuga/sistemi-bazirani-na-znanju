@@ -9,5 +9,15 @@ import javax.persistence.Entity;
 public class WeightliftingGlove extends WeightliftingArticle{
     
     @Column
-    private String size;
+    private String gloveSize;
+
+    public String getGloveSize() {
+        return gloveSize;
+    }
+
+    public void setGloveSize(String gloveSize) {
+        this.gloveSize = gloveSize;
+    }
+
+    
 }

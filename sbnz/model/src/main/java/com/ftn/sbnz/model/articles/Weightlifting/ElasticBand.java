@@ -6,20 +6,18 @@ import javax.persistence.Entity;
 import javax.validation.constraints.Min;
 
 @Entity
-@DiscriminatorValue("Elastic_Band")
+@DiscriminatorValue("ElasticBand")
 public class ElasticBand extends WeightliftingArticle{
     
     @Column
     @Min(1)
-    private float weight;
+    private float ebWeight;
 
-    public float getWeight() {
-        return weight;
+    public float getEbWeight() {
+        return ebWeight;
     }
 
-    public void setWeight(float weight) {
-        this.weight = weight;
+    public void setEbWeight(float weight) {
+        this.ebWeight = weight;
     }
-
-    
 }

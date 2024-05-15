@@ -7,8 +7,8 @@ values ( 'bogdanjanosevic@gmail.com', 'Bogdan123', 'Bogdan', 'Janosevic', 'User'
 insert into Users
 (email, password, first_name, last_name, role, age, gender, height)
 values ( 'dusanbibin@gmail.com', 'Dusan123', 'Dusan', 'Bibin', 'User', 22, 'Musko', 183.0);
-INSERT INTO Article (name, price, gender, brand_name, weight, DTYPE) 
-VALUES ('Elasticna Traka', 40.00, 'Unisex', 'Joga', 25, 'Elastic_Band');
+INSERT INTO Article (name, price, gender, brand_name, eb_weight, DTYPE) 
+VALUES ('Elasticna Traka', 40.00, 'Unisex', 'Joga', 25.0, 'ElasticBand');
 INSERT INTO Article (name, price, gender, brand_name, number_Of_Crampsons, DTYPE) 
 VALUES ('Kramponi x6', 10.00, 'Unisex', 'Nike', 6, 'GrassFootbalShoe');
 INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE) 
@@ -38,3 +38,41 @@ VALUES ('Luxilon ALU Power Rough', 23.99, 'Unisex', 'Luxilon', 'RacketString');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE) 
 VALUES ('Wilson Pro Overgrip', 5.99, 'Unisex', 'Wilson', 'Grip');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE) 
+VALUES ('Hard padding shoes M', 49.99, 'Male', 'Nike', 'WeightliftingShoe');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE) 
+VALUES ('Hard padding shoes F', 47.99, 'Female', 'Nike', 'WeightliftingShoe');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight) 
+VALUES ('Dumbell 5kg', 10.99, 'Unisex', 'Nike', 'Dumbell', 5.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight) 
+VALUES ('Dumbell 3kg', 8.99, 'Unisex', 'Nike', 'Dumbell', 3.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight) 
+VALUES ('Dumbell 2kg', 7.99, 'Unisex', 'Nike', 'Dumbell', 2.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight) 
+VALUES ('Dumbell 10kg', 13.99, 'Unisex', 'Nike', 'Dumbell', 10.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight) 
+VALUES ('Dumbell 15kg', 16.99, 'Unisex', 'Nike', 'Dumbell', 15.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight) 
+VALUES ('Dumbell 20kg', 18.99, 'Unisex', 'Nike', 'Dumbell', 20.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight) 
+VALUES ('Elastic Band 15kg', 7.99, 'Unisex', 'Nike', 'ElasticBand', 15.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight) 
+VALUES ('Elastic Band 20kg', 8.99, 'Unisex', 'Nike', 'ElasticBand', 20.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight) 
+VALUES ('Elastic Band 30kg', 9.99, 'Unisex', 'Nike', 'ElasticBand', 30.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight) 
+VALUES ('Elastic Band 45kg', 11.99, 'Unisex', 'Nike', 'ElasticBand', 45.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight) 
+VALUES ('Elastic Band 60kg', 13.99, 'Unisex', 'Nike', 'ElasticBand', 60.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, glove_size) 
+VALUES ('WL Gloves M', 12.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'M');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, glove_size) 
+VALUES ('WL Gloves XL', 14.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'XL');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, glove_size) 
+VALUES ('WL GLoves L', 13.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'L');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
+VALUES ('Chalk 200g', 5.99, 'Unisex', 'Thor', 'WeightliftingGear', 'Chalk');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
+VALUES ('Chalk 500g', 5.99, 'Unisex', 'Thor', 'WeightliftingGear', 'Chalk');

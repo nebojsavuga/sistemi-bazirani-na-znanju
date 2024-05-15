@@ -10,6 +10,15 @@ import javax.persistence.Enumerated;
 public class WeightliftingGear extends WeightliftingArticle{
 
     @Enumerated(EnumType.STRING)
-    private TypeOfGear type;
+    private WlTypeOfGear type;
+
+    public WlTypeOfGear getType() {
+        return type;
+    }
+
+    public void setType(WlTypeOfGear type) {
+        this.type = type;
+    }
+    
     
 }

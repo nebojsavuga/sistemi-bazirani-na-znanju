@@ -3,8 +3,6 @@ package basic;
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
-import com.ftn.sbnz.model.articles.Weightlifting.ElasticBand;
-import com.ftn.sbnz.model.articles.Weightlifting.WeightliftingArticle;
 import com.ftn.sbnz.model.articles.Football.GrassFootbalShoe;
 import com.ftn.sbnz.model.sport.Sport;
 import com.ftn.sbnz.model.sport.SportLevel;

@@ -12,4 +12,14 @@ public class Dumbell extends WeightliftingArticle {
     @Column
     @Min(1)
     private float weight;
+
+    public float getWeight() {
+        return weight;
+    }
+
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
+    
 }
