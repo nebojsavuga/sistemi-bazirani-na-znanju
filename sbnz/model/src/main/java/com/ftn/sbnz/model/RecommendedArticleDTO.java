@@ -5,6 +5,7 @@ public class RecommendedArticleDTO {
     public String name;
     public float price;
     public String brandName;
+    public String articleType;
 
     public Long getId() {
         return id;
@@ -38,4 +39,11 @@ public class RecommendedArticleDTO {
         this.brandName = brandName;
     }
 
+    public String getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(String articleType) {
+        this.articleType = articleType;
+    }
 }

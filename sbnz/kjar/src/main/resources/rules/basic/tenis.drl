@@ -47,6 +47,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Sweatband");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -63,6 +64,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Tenis Balls");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -79,6 +81,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -95,6 +98,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -111,6 +115,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Tenis Shoe");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -127,6 +132,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Tenis Shoe");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -143,6 +149,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Tenis Shoe");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -161,6 +168,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -178,6 +186,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Grip");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -195,35 +204,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Vibrastop");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
-// rule "GiveBackArticle2"
-// when
-//     $filters: Filters()
-//     $article: Article()
-//     $elasticBand: GrassFootbalShoe() from $article
-// then
-//     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
-//     recommendedArticle.setName($article.getName());
-//     recommendedArticle.setPrice($article.getPrice());
-//     recommendedArticle.setId($article.getId());
-//     recommendedArticle.setBrandName($article.getBrandName());
-//     recommendations.add(recommendedArticle);
-//     System.out.println($elasticBand.getNumberOfCrampsons());
-// end
-
-// rule "GiveBackArticle3"
-// when
-//     $filters: Filters()
-//     $article: Article()
-//     $elasticBand: WeightliftingArticle() from $article
-// then
-//     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
-//     recommendedArticle.setName($article.getName());
-//     recommendedArticle.setPrice($article.getPrice());
-//     recommendedArticle.setId($article.getId());
-//     recommendedArticle.setBrandName($article.getBrandName());
-//     recommendations.add(recommendedArticle);
-//     System.out.println($elasticBand.getText());
-// end
