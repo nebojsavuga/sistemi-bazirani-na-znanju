@@ -47,3 +47,6 @@ VALUES ('Silva kamasne za orijentiring', 29.99, 'Unisex', 'Silva', 'Kamasne', 'O
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE) 
 VALUES ('Silva Race Jet Compass Glasses', 89.99, 'Unisex', 'Silva', 'Naocare', 'OrientiringGear');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE) 
+VALUES ('Suunto M-3 Global Compass', 59.99, 'Unisex', 'Suunto', 'Busola', 'OrientiringGear');

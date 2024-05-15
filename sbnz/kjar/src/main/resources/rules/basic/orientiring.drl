@@ -13,6 +13,22 @@ import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
 
+rule "Preporuci sportsku busolu ukoliko se bavi orijentiringom"
+salience 10
+when
+    $filters: Filters(sport == Sport.Orijentiring)
+    $article: Article()
+    $busola: OrientiringGear(type == TypeOfOrientiringGear.Busola) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Sportska busola");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
 
 rule "Preporuci patike sa velikim kramponima ako se bavi orijentiringom i trka je sumska sprint"
 salience 10
