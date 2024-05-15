@@ -7,8 +7,12 @@ import com.ftn.sbnz.model.articles.Weightlifting.ElasticBand;
 import com.ftn.sbnz.model.articles.Weightlifting.WeightliftingArticle;
 import com.ftn.sbnz.model.articles.Football.GrassFootbalShoe;
 import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.sport.SportLevel;
 import com.ftn.sbnz.model.articles.Tenis.TenisGear;
+import com.ftn.sbnz.model.articles.Tenis.Racket;
+import com.ftn.sbnz.model.articles.Tenis.TypeOfRacketSpanning;
 import com.ftn.sbnz.model.articles.Tenis.TypeOfGear;
+
 import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
@@ -43,6 +47,20 @@ when
     $filters: Filters(sport == Sport.Tenis)
     $article: Article()
     $loptice: TenisGear(gearType == TypeOfGear.Loptice) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendations.add(recommendedArticle);
+end
+
+rule "Preporuci rekete sa tvrdim spanovanjem ako se bavi tenisom i profesionalac je"
+when
+    $filters: Filters(sport == Sport.Tenis, level == SportLevel.Pro)
+    $article: Article()
+    $loptice: Racket(spanningType == TypeOfRacketSpanning.Tvrdo) from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());

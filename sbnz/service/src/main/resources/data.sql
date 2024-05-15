@@ -16,3 +16,6 @@ VALUES ('Znojnica 1', 5.00, 'Unisex', 'Nike', 'Znojnica', 'TenisGear');
 
 INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE) 
 VALUES ('Wilson oprema US Open 3tball', 9.00, 'Unisex', 'Wilson', 'Loptice', 'TenisGear');
+
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE) 
+VALUES ('Pure Areo 2023', 250.00, 'Unisex', 'Babolat', 300.0,'Profesionalni','Tvrdo',27.0, 'Racket');
