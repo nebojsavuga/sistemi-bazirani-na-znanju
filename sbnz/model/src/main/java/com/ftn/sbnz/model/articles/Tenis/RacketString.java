@@ -5,6 +5,6 @@ import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("RacketString")
-public class RackterString extends TenisArticle{
+public class RacketString extends TenisArticle{
     
 }

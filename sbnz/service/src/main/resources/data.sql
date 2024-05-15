@@ -28,3 +28,6 @@ INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE)
 VALUES ('NikeCourt Air Zoom Vapor X Clay', 135.00, 'Unisex', 'Nike', 'RibljaKost', 'TenisShoe');
 INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE) 
 VALUES ('NikeCourt Lite 2', 65.00, 'Unisex', 'Nike', 'Ravan', 'TenisShoe');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE) 
+VALUES ('Luxilon ALU Power Rough', 23.99, 'Unisex', 'Luxilon',  'RacketString');
