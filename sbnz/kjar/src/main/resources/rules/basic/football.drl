@@ -1,0 +1,137 @@
+package basic;
+
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.Football.GrassFootbalShoe;
+import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.sport.SportLevel;
+import com.ftn.sbnz.model.sport.SportTenisField;
+import com.ftn.sbnz.model.articles.Football.Ball;
+import com.ftn.sbnz.model.articles.Football.BallType;
+import com.ftn.sbnz.model.sport.SportFootballType;
+import com.ftn.sbnz.model.sport.SportLevel;
+
+import java.util.Set;
+
+global Set<RecommendedArticleDTO> recommendations;
+
+
+rule "Preporuci mu fudbalske lopte"
+salience 10
+when
+    $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null), level == null)
+    $article: Article()
+    $ball: Ball() from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Ball");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci mu fudbalske lopte za decu"
+salience 10
+when
+    $filters: Filters(sport == Sport.Fudbal, age < 12)
+    $article: Article()
+    $ball: Ball(type == BallType.Decija) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Ball");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci mu fudbalkse lopte 4 sa tegom"
+salience 10
+when
+    $filters: Filters(sport == Sport.Fudbal, age > 12, typeOfFootball == SportFootballType.Mali)
+    $article: Article()
+    $ball: Ball(type == BallType.CetiriSaTegom) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Ball");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Rekreativan, preporuci amaterske lopte"
+salience 10
+when
+    $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null), level == SportLevel.Rekreativac)
+    $article: Article()
+    $ball: Ball(type == BallType.Amaterska) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Ball");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Amater, preporuci amaterske i trening lopte"
+salience 10
+when
+    $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null), level == SportLevel.Amater)
+    $article: Article()
+    $ball: Ball(type == BallType.Amaterska || type == BallType.Trening) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Ball");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Profesionalac, preporuci amaterske i trening lopte"
+salience 10
+when
+    $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null), level == SportLevel.Pro)
+    $article: Article()
+    $ball: Ball(type == BallType.Profesionalna || type == BallType.Trening) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Ball");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Povreda skocnog zgloba, ponudi kostobran sa stitnikom za skocni zglob"
+salience 10
+when
+    $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null), level == SportLevel.Pro)
+    $article: Article()
+    $ball: Ball(type == BallType.Profesionalna || type == BallType.Trening) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Ball");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end

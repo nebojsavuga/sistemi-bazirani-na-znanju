@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.ftn.sbnz.model.sport.Sport;
-import com.ftn.sbnz.model.sport.SportFootballPlayer;
 import com.ftn.sbnz.model.sport.SportFootballType;
+import com.ftn.sbnz.model.sport.SportFootballPlayer;
 import com.ftn.sbnz.model.sport.SportLevel;
 import com.ftn.sbnz.model.sport.SportOrientiringType;
 import com.ftn.sbnz.model.sport.SportTenisField;

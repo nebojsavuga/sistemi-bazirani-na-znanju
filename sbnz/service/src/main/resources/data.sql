@@ -7,6 +7,16 @@ values ( 'bogdanjanosevic@gmail.com', 'Bogdan123', 'Bogdan', 'Janosevic', 'User'
 insert into Users
 (email, password, first_name, last_name, role, age, gender, height)
 values ( 'dusanbibin@gmail.com', 'Dusan123', 'Dusan', 'Bibin', 'User', 22, 'Musko', 183.0);
+
+INSERT INTO Injury (name) 
+VALUES ('Povreda skocnog zgloba');
+INSERT INTO Injury (name) 
+VALUES ('Povreda kolena');
+INSERT INTO Injury (name) 
+VALUES ('Povreda lakta');
+INSERT INTO Injury (name) 
+VALUES ('Povreda rucnog zgloba');
+
 INSERT INTO Article (name, price, gender, brand_name, eb_weight, DTYPE) 
 VALUES ('Elasticna Traka', 40.00, 'Unisex', 'Joga', 25.0, 'ElasticBand');
 INSERT INTO Article (name, price, gender, brand_name, number_Of_Crampsons, DTYPE) 
@@ -75,4 +85,4 @@ VALUES ('WL GLoves L', 13.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'L');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
 VALUES ('Chalk 200g', 5.99, 'Unisex', 'Thor', 'WeightliftingGear', 'Chalk');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
-VALUES ('Chalk 500g', 5.99, 'Unisex', 'Thor', 'WeightliftingGear', 'Chalk');
+VALUES ('Chalk 500g', 5.99, 'Unisex', 'T hor', 'WeightliftingGear', 'Chalk');
