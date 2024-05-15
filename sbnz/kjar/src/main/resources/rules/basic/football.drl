@@ -72,7 +72,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci mu fudbalkse lopte 4 sa tegom"
+rule "Mali fudbal, preko 12 godina, Preporuci mu fudbalkse lopte 4 sa tegom"
 salience 10
 when
     $filters: Filters(sport == Sport.Fudbal, age > 12, typeOfFootball == SportFootballType.Mali)
@@ -145,7 +145,7 @@ salience 10
 when
     $filters: Filters(sport == Sport.Fudbal, $selectedInjuries: injuries)
     Injury(name == "Povreda skocnog zgloba", $injuryId: id) from injuries
-    $injuryId memberOf $selectedInjuries
+    $injuryId from $selectedInjuries
     $article: Article()
     $shinProtector: FootballGear(type == GearType.KostobranSaStitnikomZaSkocniZglob) from $article
 then
@@ -164,7 +164,7 @@ salience 10
 when
     $filters: Filters(sport == Sport.Fudbal, $selectedInjuries: injuries)
     Injury(name == "Povreda skocnog zgloba", $injuryId: id) from injuries
-    not ($injuryId memberOf $selectedInjuries)
+    not ($injuryId from $selectedInjuries)
     $article: Article()
     $shinProtector: FootballGear(type == GearType.KostobranBezStitnika) from $article
 then

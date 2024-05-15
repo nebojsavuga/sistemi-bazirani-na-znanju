@@ -87,6 +87,22 @@ VALUES ('Chalk 200g', 5.99, 'Unisex', 'Thor', 'WeightliftingGear', 'Chalk');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
 VALUES ('Chalk 500g', 5.99, 'Unisex', 'T hor', 'WeightliftingGear', 'Chalk');
 
-
+-- lopte
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
-VALUES ('Venum X', 24.99, 'Unisex', 'T hor', 'WeightliftingGear', 'Chalk');
+VALUES ('Venum X TG', 24.99, 'Unisex', 'Adidas', 'Ball', 'CetiriSaTegom');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
+VALUES ('Rapid', 14.99, 'Unisex', 'Adidas', 'Ball', 'Decija');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
+VALUES ('Rapid AM', 15.99, 'Unisex', 'Adidas', 'Ball', 'Amaterska');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
+VALUES ('Rapid TR', 19.99, 'Unisex', 'Adidas', 'Ball', 'Trening');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
+VALUES ('Rapid PRO', 24.99, 'Unisex', 'Adidas', 'Ball', 'Profesionalna');
+
+-- patike
+INSERT INTO Article (name, price, gender, brand_name, DTYPE) 
+VALUES ('Venum Max Sprint', 84.99, 'Male', 'Adidas', 'FootbalShoeNoCrampons');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
+VALUES ('Kostobran SK ZGL', 45.99, 'Unisex', 'Adidas', 'FootballGear', 'KostobranSaStitnikomZaSkocniZglob');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
+VALUES ('Kostobran Bez SSZ', 45.99, 'Unisex', 'Adidas', 'FootballGear', 'KostobranBezStitnika');
