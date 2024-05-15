@@ -61,3 +61,6 @@ INSERT INTO Article (name, price, gender, brand_name, type, DTYPE)
 VALUES ('SportIdent 8', 189.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear');
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE) 
 VALUES ('SportIdent 9', 199.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE) 
+VALUES ('SportIdent Elastic Finger Strap', 4.99, 'Unisex', 'SportIdent', 'KanapZaCip', 'OrientiringGear');

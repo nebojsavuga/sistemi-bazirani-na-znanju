@@ -189,3 +189,41 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
+
+rule "Preporuci mu kanap za vezivanje cipa ukoliko je preporucen Cip  i trka je sumska sprint "
+salience 120
+when
+    $filters: Filters(typeOfRace == SportOrientiringType.SumskaSprint )
+    $article: Article()
+    $e1: RecommendedArticleDTO()
+    $cip: OrientiringGear(id == $e1.getId(), type== TypeOfOrientiringGear.Cip)
+    $kanap: OrientiringGear(type == TypeOfOrientiringGear.KanapZaCip) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Kanap za cip");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci mu kanap za vezivanje cipa ukoliko je preporucen Cip  i trka je sumska duga "
+salience 120
+when
+    $filters: Filters(typeOfRace == SportOrientiringType.SumskaDuga )
+    $article: Article()
+    $e1: RecommendedArticleDTO()
+    $cip: OrientiringGear(id == $e1.getId(), type== TypeOfOrientiringGear.Cip)
+    $kanap: OrientiringGear(type == TypeOfOrientiringGear.KanapZaCip) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Kanap za cip");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
