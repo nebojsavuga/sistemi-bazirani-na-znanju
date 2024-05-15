@@ -17,6 +17,7 @@ import com.ftn.sbnz.model.articles.Tenis.TypeOfGear;
 import com.ftn.sbnz.model.articles.Tenis.TenisShoe;
 import com.ftn.sbnz.model.articles.Tenis.Sole;
 import com.ftn.sbnz.model.articles.Tenis.RacketString;
+import com.ftn.sbnz.model.articles.Tenis.Grip;
 
 
 import java.util.Set;
@@ -87,7 +88,7 @@ salience 10
 when
     $filters: Filters(sport == Sport.Tenis, level != SportLevel.Pro)
     $article: Article()
-    $reket: Racket(spanningType == TypeOfRacketSpanning.Meko) from $article
+    $reket: Racket(spanningType == TypeOfRacketSpanning.Meko, type== TypeOfRacket.Klasik) from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());
@@ -154,8 +155,23 @@ when
     $e1: RecommendedArticleDTO()
     $racket: Racket(id == $e1.getId(), type== TypeOfRacket.Profesionalni)
     $zica: RacketString() from $article
-   
-    // $reket: Racket(spanningType == TypeOfRacketSpanning.Meko) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci grip ukoliko je preporucen pro reket"
+salience 100
+when
+    $article: Article()
+    $e1: RecommendedArticleDTO()
+    $racket: Racket(id == $e1.getId(), type== TypeOfRacket.Profesionalni)
+    $grip: Grip() from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());

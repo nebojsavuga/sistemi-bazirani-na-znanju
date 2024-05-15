@@ -21,6 +21,8 @@ INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_typ
 VALUES ('Pure Areo 2023', 250.00, 'Unisex', 'Babolat', 300.0,'Profesionalni','Tvrdo',27.0, 'Racket');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE) 
 VALUES ('Wilson Clash 100', 220.00, 'Unisex', 'Wilson', 295.0,'Profesionalni','Meko',27.0, 'Racket');
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE) 
+VALUES ('Wilson Tour Slam Lite', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',27.0, 'Racket');
 
 INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE) 
 VALUES ('NikeCourt Air Zoom Zero HC Grass', 150.00, 'Unisex', 'Nike', 'Kramponi', 'TenisShoe');
@@ -30,4 +32,7 @@ INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE)
 VALUES ('NikeCourt Lite 2', 65.00, 'Unisex', 'Nike', 'Ravan', 'TenisShoe');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE) 
-VALUES ('Luxilon ALU Power Rough', 23.99, 'Unisex', 'Luxilon',  'RacketString');
+VALUES ('Luxilon ALU Power Rough', 23.99, 'Unisex', 'Luxilon', 'RacketString');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE) 
+VALUES ('Wilson Pro Overgrip', 5.99, 'Unisex', 'Wilson', 'Grip');
