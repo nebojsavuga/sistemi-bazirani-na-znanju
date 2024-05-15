@@ -181,6 +181,23 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
+
+rule "Preporuci vibrastop ukoliko je preporucena zica"
+salience 110
+when
+    $article: Article()
+    $e1: RecommendedArticleDTO()
+    $zica: RacketString(id == $e1.getId())
+    $vibrastop: TenisGear(gearType == TypeOfGear.Vibrastop) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
 // rule "GiveBackArticle2"
 // when
 //     $filters: Filters()
