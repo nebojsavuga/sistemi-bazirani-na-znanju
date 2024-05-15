@@ -26,7 +26,8 @@ public class RecommendationService implements IRecommendationService {
     private InjuryRepository injuryRepository;
 
     @Autowired
-    public RecommendationService(KieContainer kieContainer, ArticleRepository articleRepository, InjuryRepository injuryRepository) {
+    public RecommendationService(KieContainer kieContainer, ArticleRepository articleRepository,
+            InjuryRepository injuryRepository) {
         this.kieContainer = kieContainer;
         this.articleRepository = articleRepository;
         this.injuryRepository = injuryRepository;
@@ -37,7 +38,7 @@ public class RecommendationService implements IRecommendationService {
         Set<RecommendedArticleDTO> recommendations = new HashSet<>();
         KieSession kieSession = kieContainer.newKieSession("basicKsession");
         List<Injury> injuries = injuryRepository.findAll();
-        
+
         kieSession.setGlobal("recommendations", recommendations);
         kieSession.setGlobal("injuries", injuries);
         kieSession.insert(filters);

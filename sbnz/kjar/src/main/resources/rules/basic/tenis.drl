@@ -71,7 +71,7 @@ salience 10
 when
     $filters: Filters(sport == Sport.Tenis, level == SportLevel.Pro)
     $article: Article()
-    $ewkwr: Racket(spanningType == TypeOfRacketSpanning.Tvrdo, type== TypeOfRacket.Klasik) from $article
+    $ewkwr: Racket(spanningType == TypeOfRacketSpanning.Tvrdo, type== TypeOfRacket.Pro) from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());
