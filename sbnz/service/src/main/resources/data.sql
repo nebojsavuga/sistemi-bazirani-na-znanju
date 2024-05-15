@@ -86,3 +86,7 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, type)
 VALUES ('Chalk 200g', 5.99, 'Unisex', 'Thor', 'WeightliftingGear', 'Chalk');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
 VALUES ('Chalk 500g', 5.99, 'Unisex', 'T hor', 'WeightliftingGear', 'Chalk');
+
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
+VALUES ('Venum X', 24.99, 'Unisex', 'T hor', 'WeightliftingGear', 'Chalk');

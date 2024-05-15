@@ -9,12 +9,16 @@ import com.ftn.sbnz.model.sport.SportLevel;
 import com.ftn.sbnz.model.sport.SportTenisField;
 import com.ftn.sbnz.model.articles.Football.Ball;
 import com.ftn.sbnz.model.articles.Football.BallType;
+import com.ftn.sbnz.model.articles.Football.GearType;
+import com.ftn.sbnz.model.articles.Football.FootballGear;
+import com.ftn.sbnz.model.articles.Football.FootbalShoeNoCrampons;
 import com.ftn.sbnz.model.sport.SportFootballType;
 import com.ftn.sbnz.model.sport.SportLevel;
 
 import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
+global Set<Injury> injuries;
 
 
 rule "Preporuci mu fudbalske lopte"
@@ -47,6 +51,23 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Ball");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Izabrana opcija mali fudbal, preporuci patike bez krampona"
+salience 10
+when
+    $filters: Filters(sport == Sport.Fudbal, typeOfFootball == SportFootballType.Mali)
+    $article: Article()
+    $shoe: FootbalShoeNoCrampons() from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Shoes");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -122,16 +143,37 @@ end
 rule "Povreda skocnog zgloba, ponudi kostobran sa stitnikom za skocni zglob"
 salience 10
 when
-    $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null), level == SportLevel.Pro)
+    $filters: Filters(sport == Sport.Fudbal, $selectedInjuries: injuries)
+    Injury(name == "Povreda skocnog zgloba", $injuryId: id) from injuries
+    $injuryId memberOf $selectedInjuries
     $article: Article()
-    $ball: Ball(type == BallType.Profesionalna || type == BallType.Trening) from $article
+    $shinProtector: FootballGear(type == GearType.KostobranSaStitnikomZaSkocniZglob) from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Ball");
+    recommendedArticle.setArticleType("Shin protector");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Nema povrede skocnog zgloba, ponudi kostobran bez stitnika"
+salience 10
+when
+    $filters: Filters(sport == Sport.Fudbal, $selectedInjuries: injuries)
+    Injury(name == "Povreda skocnog zgloba", $injuryId: id) from injuries
+    not ($injuryId memberOf $selectedInjuries)
+    $article: Article()
+    $shinProtector: FootballGear(type == GearType.KostobranBezStitnika) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Shin protector");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
