@@ -10,6 +10,16 @@ import javax.persistence.Enumerated;
 public class OrientiringGear extends OrientiringArticle{
 
     @Enumerated(EnumType.STRING)
-    private TypeOfGear type;
+    private TypeOfOrientiringGear type;
+
+    public TypeOfOrientiringGear getType() {
+        return type;
+    }
+
+    public void setType(TypeOfOrientiringGear type) {
+        this.type = type;
+    }
+
+    
     
 }

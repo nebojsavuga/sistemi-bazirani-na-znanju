@@ -66,12 +66,12 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci rekete sa tvrdim spanovanjem ako se bavi tenisom i profesionalac je"
+rule "Preporuci rekete sa tvrdim spanovanjem koji su pro ako se bavi tenisom i profesionalac je"
 salience 10
 when
     $filters: Filters(sport == Sport.Tenis, level == SportLevel.Pro)
     $article: Article()
-    $ewkwr: Racket(spanningType == TypeOfRacketSpanning.Tvrdo) from $article
+    $ewkwr: Racket(spanningType == TypeOfRacketSpanning.Tvrdo, type== TypeOfRacket.Klasik) from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());
@@ -83,7 +83,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci rekete sa mekim spanovanjem ako se bavi tenisom i amater ili rekreativac je"
+rule "Preporuci rekete sa mekim spanovanjem koji su klasik ako se bavi tenisom i amater ili rekreativac je"
 salience 10
 when
     $filters: Filters(sport == Sport.Tenis, level != SportLevel.Pro)
