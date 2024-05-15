@@ -38,3 +38,12 @@ VALUES ('Luxilon ALU Power Rough', 23.99, 'Unisex', 'Luxilon', 'RacketString');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE) 
 VALUES ('Wilson Pro Overgrip', 5.99, 'Unisex', 'Wilson', 'Grip');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE) 
+VALUES ('Icebug Acceleritas8 RB9X', 139.99, 'Unisex', 'Icebug', 'BigCramponOrientiringShoe');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE) 
+VALUES ('Silva kamasne za orijentiring', 29.99, 'Unisex', 'Silva', 'Kamasne', 'OrientiringGear');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE) 
+VALUES ('Silva Race Jet Compass Glasses', 89.99, 'Unisex', 'Silva', 'Naocare', 'OrientiringGear');

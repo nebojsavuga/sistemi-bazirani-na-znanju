@@ -1,0 +1,117 @@
+package basic;
+
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.sport.SportOrientiringType;
+import com.ftn.sbnz.model.articles.Orientiring.BigCramponOrientiringShoe;
+import com.ftn.sbnz.model.articles.Orientiring.TypeOfOrientiringGear;
+import com.ftn.sbnz.model.articles.Orientiring.OrientiringGear;
+
+import java.util.Set;
+
+global Set<RecommendedArticleDTO> recommendations;
+
+
+rule "Preporuci patike sa velikim kramponima ako se bavi orijentiringom i trka je sumska sprint"
+salience 10
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaSprint)
+    $article: Article()
+    $patike: BigCramponOrientiringShoe() from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Orientiring shoes");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci patike sa velikim kramponima ako se bavi orijentiringom i trka je sumska duga"
+salience 10
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaDuga)
+    $article: Article()
+    $patike: BigCramponOrientiringShoe() from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Orientiring shoes");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci kamasne ako se bavi orijentiringom i trka je sumska sprint"
+salience 10
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaSprint)
+    $article: Article()
+    $kamasne: OrientiringGear(type == TypeOfOrientiringGear.Kamasne) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("gaiters");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci kamasne ako se bavi orijentiringom i trka je sumska duga"
+salience 10
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaDuga)
+    $article: Article()
+    $kamasne: OrientiringGear(type == TypeOfOrientiringGear.Kamasne) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("gaiters");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci naocare za orijentiring ako se bavi orijentiringom i trka je sumska sprint"
+salience 10
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaSprint)
+    $article: Article()
+    $naocare: OrientiringGear(type == TypeOfOrientiringGear.Naocare) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Glasses");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci naocare za orijentiring ako se bavi orijentiringom i trka je gradska sprint"
+salience 10
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.GradskaSprint)
+    $article: Article()
+    $naocare: OrientiringGear(type == TypeOfOrientiringGear.Naocare) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Glasses");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
