@@ -1,6 +1,6 @@
 package com.ftn.sbnz.model.articles.Football;
 
-public enum GearType {
+public enum GearTypeFootball {
     Krampon,
     KljucZaKrampone,
     KostobranSaStitnikomZaSkocniZglob,

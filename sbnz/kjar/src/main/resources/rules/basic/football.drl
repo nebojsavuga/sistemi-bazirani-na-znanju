@@ -1,5 +1,5 @@
 package basic;
-
+import com.ftn.sbnz.model.users.Injury
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
@@ -9,16 +9,17 @@ import com.ftn.sbnz.model.sport.SportLevel;
 import com.ftn.sbnz.model.sport.SportTenisField;
 import com.ftn.sbnz.model.articles.Football.Ball;
 import com.ftn.sbnz.model.articles.Football.BallType;
-import com.ftn.sbnz.model.articles.Football.GearType;
+import com.ftn.sbnz.model.articles.Football.GearTypeFootball;
 import com.ftn.sbnz.model.articles.Football.FootballGear;
 import com.ftn.sbnz.model.articles.Football.FootbalShoeNoCrampons;
 import com.ftn.sbnz.model.sport.SportFootballType;
 import com.ftn.sbnz.model.sport.SportLevel;
 
 import java.util.Set;
+import java.util.List;
 
 global Set<RecommendedArticleDTO> recommendations;
-global Set<Injury> injuries;
+global List<Injury> injuries;
 
 
 rule "Preporuci mu fudbalske lopte"
@@ -145,9 +146,9 @@ salience 10
 when
     $filters: Filters(sport == Sport.Fudbal, $selectedInjuries: injuries)
     Injury(name == "Povreda skocnog zgloba", $injuryId: id) from injuries
-    $injuryId from $selectedInjuries
+    eval($selectedInjuries.contains($injuryId))
     $article: Article()
-    $shinProtector: FootballGear(type == GearType.KostobranSaStitnikomZaSkocniZglob) from $article
+    $shinProtector: FootballGear(type == GearTypeFootball.KostobranSaStitnikomZaSkocniZglob) from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());
@@ -164,9 +165,9 @@ salience 10
 when
     $filters: Filters(sport == Sport.Fudbal, $selectedInjuries: injuries)
     Injury(name == "Povreda skocnog zgloba", $injuryId: id) from injuries
-    not ($injuryId from $selectedInjuries)
+    eval(!$selectedInjuries.contains($injuryId))
     $article: Article()
-    $shinProtector: FootballGear(type == GearType.KostobranBezStitnika) from $article
+    $shinProtector: FootballGear(type == GearTypeFootball.KostobranBezStitnika) from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());

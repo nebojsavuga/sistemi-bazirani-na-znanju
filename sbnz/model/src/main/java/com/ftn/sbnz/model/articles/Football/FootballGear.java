@@ -10,6 +10,18 @@ import javax.persistence.Enumerated;
 public class FootballGear extends FootballArticle{
     
     @Enumerated(EnumType.STRING)
-    private GearType type;
+    private GearTypeFootball type;
+
+    public GearTypeFootball getType() {
+        return type;
+    }
+
+    public void setType(GearTypeFootball type) {
+        this.type = type;
+    }
+
+    
+
+
 
 }
