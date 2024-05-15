@@ -50,3 +50,14 @@ VALUES ('Silva Race Jet Compass Glasses', 89.99, 'Unisex', 'Silva', 'Naocare', '
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE) 
 VALUES ('Suunto M-3 Global Compass', 59.99, 'Unisex', 'Suunto', 'Busola', 'OrientiringGear');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE) 
+VALUES ('SportIdent 6', 109.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE) 
+VALUES ('SportIdent 7', 139.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE) 
+VALUES ('SportIdent 8', 189.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear');
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE) 
+VALUES ('SportIdent 9', 199.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear');
