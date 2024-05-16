@@ -69,9 +69,9 @@ end
 rule "Preporuci rekete sa tvrdim spanovanjem koji su pro ako se bavi tenisom i profesionalac je"
 salience 10
 when
-    $filters: Filters(sport == Sport.Tenis, level == SportLevel.Pro)
+    $filters: Filters(sport == Sport.Tenis, (level == SportLevel.Pro || level == null))
     $article: Article()
-    $ewkwr: Racket(spanningType == TypeOfRacketSpanning.Tvrdo, type== TypeOfRacket.Pro) from $article
+    $ewkwr: Racket(spanningType == TypeOfRacketSpanning.Tvrdo, type== TypeOfRacket.Profesionalni) from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());
@@ -86,9 +86,9 @@ end
 rule "Preporuci rekete sa mekim spanovanjem koji su klasik ako se bavi tenisom i amater ili rekreativac je"
 salience 10
 when
-    $filters: Filters(sport == Sport.Tenis, level != SportLevel.Pro)
+    $filters: Filters(sport == Sport.Tenis, level != SportLevel.Pro )
     $article: Article()
-    $reket: Racket(spanningType == TypeOfRacketSpanning.Meko, type== TypeOfRacket.Klasik) from $article
+    $reket: Racket((spanningType == TypeOfRacketSpanning.Meko || spanningType == TypeOfRacketSpanning.Tvrdo), type== TypeOfRacket.Klasik) from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());
@@ -165,7 +165,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Racket");
+    recommendedArticle.setArticleType("Racket string");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
