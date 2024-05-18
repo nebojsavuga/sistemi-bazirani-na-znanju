@@ -5,9 +5,9 @@ import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.sport.Sport;
 import com.ftn.sbnz.model.sport.SportOrientiringType;
-import com.ftn.sbnz.model.articles.Orientiring.BigCramponOrientiringShoe;
-import com.ftn.sbnz.model.articles.Orientiring.TypeOfOrientiringGear;
-import com.ftn.sbnz.model.articles.Orientiring.OrientiringGear;
+import com.ftn.sbnz.model.articles.BigCramponOrientiringShoe;
+import com.ftn.sbnz.model.articles.TypeOfOrientiringGear;
+import com.ftn.sbnz.model.articles.OrientiringGear;
 import com.ftn.sbnz.model.sport.SportLevel;
 
 import java.util.Set;

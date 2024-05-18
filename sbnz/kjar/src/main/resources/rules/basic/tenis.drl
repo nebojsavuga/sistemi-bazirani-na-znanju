@@ -6,15 +6,15 @@ import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.sport.Sport;
 import com.ftn.sbnz.model.sport.SportLevel;
 import com.ftn.sbnz.model.sport.SportTenisField;
-import com.ftn.sbnz.model.articles.Tenis.TenisGear;
-import com.ftn.sbnz.model.articles.Tenis.Racket;
-import com.ftn.sbnz.model.articles.Tenis.TypeOfRacket;
-import com.ftn.sbnz.model.articles.Tenis.TypeOfRacketSpanning;
-import com.ftn.sbnz.model.articles.Tenis.TypeOfGear;
-import com.ftn.sbnz.model.articles.Tenis.TenisShoe;
-import com.ftn.sbnz.model.articles.Tenis.Sole;
-import com.ftn.sbnz.model.articles.Tenis.RacketString;
-import com.ftn.sbnz.model.articles.Tenis.Grip;
+import com.ftn.sbnz.model.articles.TenisGear;
+import com.ftn.sbnz.model.articles.Racket;
+import com.ftn.sbnz.model.articles.TypeOfRacket;
+import com.ftn.sbnz.model.articles.TypeOfRacketSpanning;
+import com.ftn.sbnz.model.articles.TypeOfGear;
+import com.ftn.sbnz.model.articles.TenisShoe;
+import com.ftn.sbnz.model.articles.Sole;
+import com.ftn.sbnz.model.articles.RacketString;
+import com.ftn.sbnz.model.articles.Grip;
 
 
 import java.util.Set;
@@ -71,7 +71,7 @@ salience 10
 when
     $filters: Filters(sport == Sport.Tenis, level == SportLevel.Pro)
     $article: Article()
-    $ewkwr: Racket(spanningType == TypeOfRacketSpanning.Tvrdo, type== TypeOfRacket.Pro) from $article
+    $ewkwr: Racket(spanningType == TypeOfRacketSpanning.Tvrdo, type== TypeOfRacket.Profesionalni) from $article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());

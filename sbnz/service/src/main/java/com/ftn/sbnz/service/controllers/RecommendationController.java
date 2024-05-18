@@ -1,11 +1,16 @@
 package com.ftn.sbnz.service.controllers;
 
+import java.util.List;
 import java.util.Set;
+
+import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,5 +35,10 @@ public class RecommendationController {
     @PutMapping()
     public ResponseEntity<Set<RecommendedArticleDTO>> recommend(@RequestBody Filters filters) {
         return new ResponseEntity<>(this.recommendationService.getRecommendations(filters), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<String>> getParents(@PathVariable Long id) {
+        return new ResponseEntity<>(this.recommendationService.getParents(id), HttpStatus.OK);
     }
 }

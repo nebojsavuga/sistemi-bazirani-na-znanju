@@ -106,4 +106,13 @@ public class Article implements Serializable {
         this.gender = gender;
         this.brandName = brandName;
     }
+
+    public String getSupper() {
+        Class<?> superclass = this.getClass().getSuperclass();
+        return (superclass != null && superclass != Object.class) ? superclass.getSimpleName() : null;
+    }
+
+    public String getClassName(){
+        return this.getClass().getSimpleName();
+    }
 }
