@@ -14,6 +14,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
+import com.ftn.sbnz.model.events.Purchase;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Article implements Serializable {
@@ -30,6 +32,9 @@ public class Article implements Serializable {
 
     @OneToMany(mappedBy = "article")
     private Set<Rating> ratings = new HashSet<Rating>();
+    
+    @OneToMany(mappedBy = "article")
+    private Set<Purchase> purchases = new HashSet<Purchase>();
 
     @Enumerated(EnumType.STRING)
     private ArticleGenderType gender;

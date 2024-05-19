@@ -60,8 +60,7 @@ public class ArticleService implements IArticleService {
     }
 
     @Override
-    public Object buyArticle(Long id, Long userId) {
-        // TODO Auto-generated method stub
+    public ArticleDTO buyArticle(Long id, Long userId) {
         throw new UnsupportedOperationException("Unimplemented method 'buyArticle'");
     }
 

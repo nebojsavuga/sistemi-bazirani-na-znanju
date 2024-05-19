@@ -7,5 +7,5 @@ import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 public interface IArticleService {
     ArticleDTO getArticle(Long id);
     Set<ArticleDTO> getArticlesByType(String type);
-    Object buyArticle(Long id, Long userId);
+    ArticleDTO buyArticle(Long id, Long userId);
 }

@@ -138,3 +138,11 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, type)
 VALUES ('Nike MatchFit Crew Socks', 25.99, 'Unisex', 'Nike', 'FootballGear', 'Stucne');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
 VALUES ('Nike Guard Stay II', 8.99, 'Unisex', 'Nike', 'FootballGear', 'Podvezice');
+
+-- kupovine
+INSERT INTO Purchase (user_id, article_id, timestamp, price) 
+VALUES (2, 1, '2024-05-18 14:30:00', 5.99);
+INSERT INTO Purchase (user_id, article_id, timestamp, price) 
+VALUES (2, 2, '2024-05-17 14:30:00', 139.99);
+INSERT INTO Purchase (user_id, article_id, timestamp, price) 
+VALUES (2, 3, '2024-05-16 14:30:00', 29.99);
