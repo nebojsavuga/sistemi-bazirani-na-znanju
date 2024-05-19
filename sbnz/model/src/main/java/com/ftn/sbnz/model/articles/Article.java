@@ -86,9 +86,6 @@ public class Article implements Serializable {
         return "Article [id=" + id + ", name=" + name + ", price=" + price + ", ratings=" + ratings + ", gender="
                 + gender + "]";
     }
-    
-
-    
 
     @Override
     public boolean equals(Object obj) {
@@ -104,7 +101,7 @@ public class Article implements Serializable {
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        
+
         return true;
     }
 
@@ -133,7 +130,7 @@ public class Article implements Serializable {
         return (superclass != null && superclass != Object.class) ? superclass.getSimpleName() : null;
     }
 
-    public String getClassName(){
+    public String getClassName() {
         return this.getClass().getSimpleName();
     }
 }

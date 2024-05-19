@@ -59,4 +59,10 @@ public class ArticleService implements IArticleService {
                 .collect(Collectors.toSet());
     }
 
+    @Override
+    public Object buyArticle(Long id, Long userId) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'buyArticle'");
+    }
+
 }

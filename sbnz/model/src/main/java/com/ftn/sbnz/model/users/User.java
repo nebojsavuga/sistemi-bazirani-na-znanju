@@ -11,11 +11,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.articles.Rating;
+import com.ftn.sbnz.model.events.Purchase;
 
 @Entity
 @Table(name = "Users")
@@ -61,6 +63,9 @@ public class User implements Serializable {
 
     @OneToMany
     private Set<Article> nonRecommendedArticles = new HashSet<Article>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Purchase> purchases = new HashSet<Purchase>();
 
     @Override
     public String toString() {
