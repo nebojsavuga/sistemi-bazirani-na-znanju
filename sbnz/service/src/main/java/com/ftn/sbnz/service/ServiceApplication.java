@@ -13,8 +13,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 @EnableJpaRepositories("com.ftn.sbnz.*")
 @ComponentScan(basePackages = { "com.ftn.sbnz.*" })
@@ -22,19 +21,8 @@ import org.slf4j.LoggerFactory;
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 public class ServiceApplication {
 
-	private static Logger log = LoggerFactory.getLogger(ServiceApplication.class);
-
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(ServiceApplication.class, args);
-
-		String[] beanNames = ctx.getBeanDefinitionNames();
-		Arrays.sort(beanNames);
-
-		StringBuilder sb = new StringBuilder("Application beans:\n");
-		for (String beanName : beanNames) {
-			sb.append(beanName + "\n");
-		}
-		log.info(sb.toString());
+		SpringApplication.run(ServiceApplication.class, args);
 	}
 
 	@Bean

@@ -1,6 +1,5 @@
 package com.ftn.sbnz.service.services;
 
-
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -8,6 +7,7 @@ import java.util.Set;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ftn.sbnz.model.articles.Article;
@@ -26,11 +26,14 @@ public class UserService implements IUserService {
 
     private UserRepository userRepository;
     private ArticleRepository articleRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, ArticleRepository articleRepository) {
+    public UserService(UserRepository userRepository, ArticleRepository articleRepository,
+            PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.articleRepository = articleRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -41,20 +44,28 @@ public class UserService implements IUserService {
 
     @Override
     public User register(RegisterDTO registerDTO) {
-        User user = new User(registerDTO.email, registerDTO.password, registerDTO.firstName, registerDTO.lastName,
-                Role.User, registerDTO.gender);
+        User existingUser = userRepository.findByEmail(registerDTO.email);
+        if (existingUser != null) {
+            throw new BadCredentialsException("User with the given email address exists.");
+        }
+        User user = new User(registerDTO.email,
+                this.passwordEncoder.encode(registerDTO.password),
+                registerDTO.firstName,
+                registerDTO.lastName,
+                Role.User,
+                registerDTO.gender);
         user = userRepository.save(user);
         return user;
     }
 
     @Override
-    public String addFavoriteArticle(Long id, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
+    public String addFavoriteArticle(Long id, Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
             throw new UnauthorizedException("Not authorized.");
         }
 
-        for (Article article : user.getFavoriteArticles()) {
+        for (Article article : user.get().getFavoriteArticles()) {
             if (article.getId() == id) {
                 throw new BadCredentialsException("Article is already in favorite list.");
             }
@@ -65,26 +76,32 @@ public class UserService implements IUserService {
             throw new NotFoundException("Article with that id does not exist.");
         }
 
-        user.addFavoriteArticle(article.get());
-        userRepository.save(user);
+        user.get().addFavoriteArticle(article.get());
+        userRepository.save(user.get());
         return article.get().getName();
     }
 
     @Override
-    public Set<ArticleDTO> getFavoriteArticles(HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            throw new UnauthorizedException("Not authorized!");
+    public Set<ArticleDTO> getFavoriteArticles(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new UnauthorizedException("Not authorized.");
         }
-        Set<Article> articles = user.getFavoriteArticles();
+        Set<Article> articles = user.get().getFavoriteArticles();
         Set<ArticleDTO> dtos = new HashSet<>();
-        for(Article article : articles){
+        for (Article article : articles) {
             dtos.add(new ArticleDTO(article.getId(),
-            article.getName(),
-            article.getPrice(),
-            article.getBrandName(),
-            ""));
+                    article.getName(),
+                    article.getPrice(),
+                    article.getBrandName(),
+                    article.getClassName()));
         }
         return dtos;
+    }
+
+    @Override
+    public User getByEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return user;
     }
 }

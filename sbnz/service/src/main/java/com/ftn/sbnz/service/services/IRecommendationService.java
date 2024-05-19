@@ -5,10 +5,9 @@ import java.util.Set;
 
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
-import com.ftn.sbnz.model.users.User;
 
 public interface IRecommendationService {
-    Set<RecommendedArticleDTO> getRecommendations(Filters filters, User user);
+    Set<RecommendedArticleDTO> getRecommendations(Filters filters, Long userId);
 
     List<String> getParents(Long id);
 }
