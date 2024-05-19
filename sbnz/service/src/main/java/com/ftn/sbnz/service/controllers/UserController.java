@@ -1,5 +1,6 @@
 package com.ftn.sbnz.service.controllers;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
@@ -35,13 +36,13 @@ public class UserController {
 	}
 
 	@PutMapping()
-	public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO, HttpSession session) {
+	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO, HttpSession session) {
 		User user = userService.getByEmailAndPassword(loginDTO.email, loginDTO.password);
 		if (user == null) {
 			throw new BadCredentialsException("Bad credentials!");
 		}
 		session.setAttribute("user", user);
-		return new ResponseEntity<>(user, HttpStatus.OK);
+		return new ResponseEntity<>(user.getEmail(), HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/register")

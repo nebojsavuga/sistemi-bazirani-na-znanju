@@ -16,7 +16,7 @@ import com.ftn.sbnz.model.articles.FootbalShoeNoCrampons;
 import com.ftn.sbnz.model.sport.SportFootballType;
 import com.ftn.sbnz.model.sport.SportLevel;
 import com.ftn.sbnz.model.events.Purchase;
-import com.ftn.sbnz.model.articles.Rating
+import com.ftn.sbnz.model.articles.Rating;
 
 import java.util.Set;
 import java.util.List;

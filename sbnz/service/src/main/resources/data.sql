@@ -147,14 +147,14 @@ VALUES (2, 2, '2024-05-17', 139.99);
 INSERT INTO Purchase (user_id, article_id, execution_time, price) 
 VALUES (2, 3, '2024-02-16', 29.99);
 
---Ratings
+-- rejtinzi
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 
 VALUES (2, 41, '2024-05-18', 2);
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 
-VALUES (2, 42, '2024-05-18', 2);
+VALUES (2, 42, '2024-05-19', 2);
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 
-VALUES (2, 43, '2024-05-18', 2);
+VALUES (2, 43, '2024-05-17', 2);
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 
-VALUES (2, 44, '2024-05-18', 2);
+VALUES (2, 44, '2024-05-16', 2);
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 
-VALUES (2, 45, '2022-05-18', 2);
+VALUES (2, 45, '2022-05-15', 2);

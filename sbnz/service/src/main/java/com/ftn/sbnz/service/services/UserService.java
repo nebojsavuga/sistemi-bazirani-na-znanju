@@ -1,7 +1,6 @@
 package com.ftn.sbnz.service.services;
 
-import java.time.LocalDateTime;
-import java.util.Date;
+
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -11,9 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ftn.sbnz.model.DTO.RatingDTO;
 import com.ftn.sbnz.model.articles.Article;
-import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.users.Role;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
@@ -22,7 +19,6 @@ import com.ftn.sbnz.service.exceptions.BadCredentialsException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.exceptions.UnauthorizedException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
-import com.ftn.sbnz.service.repositories.RatingRepository;
 import com.ftn.sbnz.service.repositories.UserRepository;
 
 @Service
@@ -30,14 +26,11 @@ public class UserService implements IUserService {
 
     private UserRepository userRepository;
     private ArticleRepository articleRepository;
-    private RatingRepository ratingRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, ArticleRepository articleRepository,
-            RatingRepository ratingRepository) {
+    public UserService(UserRepository userRepository, ArticleRepository articleRepository) {
         this.userRepository = userRepository;
         this.articleRepository = articleRepository;
-        this.ratingRepository = ratingRepository;
     }
 
     @Override
