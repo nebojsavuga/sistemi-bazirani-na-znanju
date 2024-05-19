@@ -196,3 +196,21 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
+
+rule "Preporuci stucne ukoliko je preporucen kostobran"
+salience 100
+when
+    $article: Article()
+    $e1: RecommendedArticleDTO()
+    $shinProtector: FootballGear((type == GearTypeFootball.KostobranBezStitnika || type == GearTypeFootball.KostobranSaStitnikomZaSkocniZglob), id == $e1.getId())
+    $stucne: FootballGear(type == GearTypeFootball.Stucne) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Leg warmers");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end

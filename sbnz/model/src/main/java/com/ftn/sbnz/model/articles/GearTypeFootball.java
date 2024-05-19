@@ -4,5 +4,6 @@ public enum GearTypeFootball {
     Krampon,
     KljucZaKrampone,
     KostobranSaStitnikomZaSkocniZglob,
-    KostobranBezStitnika
+    KostobranBezStitnika,
+    Stucne
 }
