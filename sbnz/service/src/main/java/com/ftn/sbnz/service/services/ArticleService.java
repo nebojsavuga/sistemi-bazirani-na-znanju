@@ -33,7 +33,7 @@ public class ArticleService implements IArticleService {
                 article.get().getName(),
                 article.get().getPrice(),
                 article.get().getBrandName(),
-                "");
+                article.get().getClassName());
     }
 
     @Override
