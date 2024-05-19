@@ -219,11 +219,11 @@ end
 rule "Preporuci podvezice ukoliko su preporucene stucne i pro je"
 salience 110
 when
-    $filters: Filters(sport == Sport.Fudbal, (level == SportLevel.Pro))
+    $filters: Filters(sport == Sport.Fudbal, level == SportLevel.Pro)
     $article: Article()
-    $e1: RecommendedArticleDTO()
-    $shinProtector: FootballGear((type == GearTypeFootball.Stucne ), id == $e1.getId())
-    $stucne: FootballGear(type == GearTypeFootball.Podvezice) from $article
+    $e1: RecommendedArticleDTO(articleType == "Leg warmers")
+    $podvezice: FootballGear(type == GearTypeFootball.Podvezice) from $article
+    
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());
@@ -232,5 +232,5 @@ then
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("sock garters");
     recommendations.add(recommendedArticle);
-    insert(recommendedArticle);
+    
 end
