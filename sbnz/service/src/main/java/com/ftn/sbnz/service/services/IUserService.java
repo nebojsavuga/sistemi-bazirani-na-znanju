@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import com.ftn.sbnz.model.DTO.RatingDTO;
 import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.users.User;
+import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
 
 public interface IUserService {
@@ -16,7 +17,7 @@ public interface IUserService {
 
     String addFavoriteArticle(Long id, HttpSession session);
 
-    Set<Article> getFavoriteArticles(HttpSession session);
+    Set<ArticleDTO> getFavoriteArticles(HttpSession session);
 
     RatingDTO rateArticle(RatingDTO ratingDTO, HttpSession session);
 }
