@@ -158,3 +158,9 @@ INSERT INTO Rating (user_id, article_id, execution_time, rating)
 VALUES (2, 44, '2024-05-16', 2);
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 
 VALUES (2, 45, '2022-05-15', 2);
+
+-- tegovi
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight) 
+VALUES ('Titan Fitness Gumirane Olimpijske Ploče', 59.99, 'Unisex', 'Titan Fitness', 'Weight', 20.0);
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, type) 
+VALUES ('Titan Fitness', 159.99, 'Unisex', 'Titan Fitness', 'Barbel', 20.0, 'Olimpijska');

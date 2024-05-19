@@ -74,6 +74,15 @@ public class RecommendationService implements IRecommendationService {
         KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");
         cepKsession.setGlobal("recommendations", recommendations);
         if(user != null){
+                j = 0;
+            for (int i = 0; i < totalArticles; i += 100) {
+                PageRequest pageRequest = PageRequest.of(j, i + 100);
+                Page<Article> allArticles = articleRepository.findAll(pageRequest);
+                j += 1;
+                for (Article article : allArticles) {
+                    cepKsession.insert(article);
+                }
+            }
             Set<Purchase> purchases = purchaseRepository.findByUserId(user.getId());
             for(Purchase purchase : purchases){
                 cepKsession.insert(purchase);
