@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.sbnz.model.DTO.RatingDTO;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.LoginDTO;
@@ -65,13 +64,5 @@ public class UserController {
 		Set<ArticleDTO> articles = userService.getFavoriteArticles(session);
 
 		return new ResponseEntity<>(articles, HttpStatus.OK);
-	}
-
-	@PostMapping(value = "/rate-article")
-	public ResponseEntity<RatingDTO> RateArticle(@RequestBody RatingDTO ratingDTO, HttpSession session) {
-
-		RatingDTO rating = userService.rateArticle(ratingDTO, session);
-
-		return new ResponseEntity<>(rating, HttpStatus.OK);
 	}
 }

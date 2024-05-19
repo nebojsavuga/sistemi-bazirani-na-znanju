@@ -17,6 +17,4 @@ public interface IUserService {
     String addFavoriteArticle(Long id, HttpSession session);
 
     Set<ArticleDTO> getFavoriteArticles(HttpSession session);
-
-    RatingDTO rateArticle(RatingDTO ratingDTO, HttpSession session);
 }

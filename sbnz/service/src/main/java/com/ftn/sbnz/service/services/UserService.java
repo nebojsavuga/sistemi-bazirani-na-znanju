@@ -1,6 +1,7 @@
 package com.ftn.sbnz.service.services;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -92,34 +93,5 @@ public class UserService implements IUserService {
             ""));
         }
         return dtos;
-    }
-
-    @Override
-    public RatingDTO rateArticle(RatingDTO ratingDTO, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            throw new UnauthorizedException("Not authorized!");
-        }
-        Optional<Article> article = this.articleRepository.findById(ratingDTO.getArticleId());
-        if (article.isEmpty()) {
-            throw new NotFoundException("Article with that id does not exist.");
-        }
-        Optional<Rating> existingRating = this.ratingRepository
-                .findByUserIdAndArticleId(user.getId(), ratingDTO.getArticleId());
-        if (existingRating.isPresent()) {
-            existingRating.get().setRating(ratingDTO.getRating());
-            existingRating.get().setTimestamp(LocalDateTime.now());
-            this.ratingRepository.save(existingRating.get());
-            return ratingDTO;
-        }
-
-        Rating rating = new Rating();
-        rating.setArticle(article.get());
-        rating.setRating(ratingDTO.getRating());
-        rating.setTimestamp(LocalDateTime.now());
-        rating.setUser(user);
-
-        this.ratingRepository.save(rating);
-        return ratingDTO;
     }
 }

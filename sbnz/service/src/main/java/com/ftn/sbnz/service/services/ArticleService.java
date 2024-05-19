@@ -1,5 +1,6 @@
 package com.ftn.sbnz.service.services;
 
+import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -8,12 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.events.Purchase;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
 import com.ftn.sbnz.service.repositories.PurchaseRepository;
+import com.ftn.sbnz.service.repositories.RatingRepository;
 import com.ftn.sbnz.service.repositories.UserRepository;
 
 @Service
@@ -22,14 +26,17 @@ public class ArticleService implements IArticleService {
     private ArticleRepository articleRepository;
     private UserRepository userRepository;
     private PurchaseRepository purchaseRepository;
+    private RatingRepository ratingRepository;
 
     @Autowired
     public ArticleService(ArticleRepository articleRepository,
             UserRepository userRepository,
-            PurchaseRepository purchaseRepository) {
+            PurchaseRepository purchaseRepository,
+            RatingRepository ratingRepository) {
         this.articleRepository = articleRepository;
         this.userRepository = userRepository;
         this.purchaseRepository = purchaseRepository;
+        this.ratingRepository = ratingRepository;
     }
 
     @Override
@@ -83,6 +90,28 @@ public class ArticleService implements IArticleService {
         purchaseRepository.save(purchase);
         return new ArticleDTO(article.get().getId(), article.get().getName(), purchase.getPrice(),
                 article.get().getBrandName(), article.get().getClassName());
+    }
+
+    @Override
+    public void rateArticle(RateArticleDTO articleDTO, Long userId) {
+        Optional<Article> article = articleRepository.findById(articleDTO.getArticleId());
+        if (article.isEmpty()) {
+            throw new NotFoundException("Article with the given id doesn't exist.");
+        }
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new NotFoundException("User with the given id doesn't exist.");
+        }
+        Optional<Rating> existingRating = this.ratingRepository
+                .findByUserIdAndArticleId(userId, articleDTO.getArticleId());
+        if (existingRating.isPresent()) {
+            existingRating.get().setRating(articleDTO.getRating());
+            existingRating.get().setExecutionTime(new Date());
+            this.ratingRepository.save(existingRating.get());
+            return;
+        }
+        Rating rating = new Rating(user.get(), article.get(), articleDTO.getRating());
+        ratingRepository.save(rating);
     }
 
 }
