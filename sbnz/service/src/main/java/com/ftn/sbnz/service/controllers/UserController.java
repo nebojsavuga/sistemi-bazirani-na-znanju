@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.sbnz.model.DTO.RatingDTO;
-import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.users.User;
+import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.LoginDTO;
 import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
 import com.ftn.sbnz.service.exceptions.BadCredentialsException;
@@ -34,11 +34,11 @@ public class UserController {
 	public UserController(IUserService userService) {
 		this.userService = userService;
 	}
-        
+
 	@PutMapping()
 	public ResponseEntity<User> login(@RequestBody LoginDTO loginDTO, HttpSession session) {
 		User user = userService.getByEmailAndPassword(loginDTO.email, loginDTO.password);
-		if (user == null){
+		if (user == null) {
 			throw new BadCredentialsException("Bad credentials!");
 		}
 		session.setAttribute("user", user);
@@ -52,7 +52,7 @@ public class UserController {
 	}
 
 	@PutMapping(value = "/favorite-article/{articleId}")
-	public ResponseEntity<String> addFavoriteArticle(@PathVariable("articleId") Long id, HttpSession session){
+	public ResponseEntity<String> addFavoriteArticle(@PathVariable("articleId") Long id, HttpSession session) {
 
 		String name = userService.addFavoriteArticle(id, session);
 
@@ -60,15 +60,15 @@ public class UserController {
 	}
 
 	@GetMapping(value = "/favorite-articles")
-	public ResponseEntity<Set<Article>> getFavoriteArticles(HttpSession session){
+	public ResponseEntity<Set<ArticleDTO>> getFavoriteArticles(HttpSession session) {
 
-		Set<Article>articles = userService.getFavoriteArticles(session);
+		Set<ArticleDTO> articles = userService.getFavoriteArticles(session);
 
 		return new ResponseEntity<>(articles, HttpStatus.OK);
 	}
 
 	@PostMapping(value = "/rate-article")
-	public ResponseEntity<RatingDTO> RateArticle(@RequestBody RatingDTO ratingDTO, HttpSession session){
+	public ResponseEntity<RatingDTO> RateArticle(@RequestBody RatingDTO ratingDTO, HttpSession session) {
 
 		RatingDTO rating = userService.rateArticle(ratingDTO, session);
 

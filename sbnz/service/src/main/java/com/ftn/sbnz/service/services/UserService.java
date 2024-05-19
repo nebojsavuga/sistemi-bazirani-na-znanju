@@ -1,6 +1,7 @@
 package com.ftn.sbnz.service.services;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -14,6 +15,7 @@ import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.users.Role;
 import com.ftn.sbnz.model.users.User;
+import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
 import com.ftn.sbnz.service.exceptions.BadCredentialsException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
@@ -75,13 +77,21 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public Set<Article> getFavoriteArticles(HttpSession session) {
+    public Set<ArticleDTO> getFavoriteArticles(HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             throw new UnauthorizedException("Not authorized!");
         }
         Set<Article> articles = user.getFavoriteArticles();
-        return (articles);
+        Set<ArticleDTO> dtos = new HashSet<>();
+        for(Article article : articles){
+            dtos.add(new ArticleDTO(article.getId(),
+            article.getName(),
+            article.getPrice(),
+            article.getBrandName(),
+            ""));
+        }
+        return dtos;
     }
 
     @Override
