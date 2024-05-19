@@ -178,3 +178,21 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
+
+rule "Preporuci kostobrane ako je amater ili pro"
+salience 10
+when
+    $filters: Filters(sport == Sport.Fudbal, (level == SportLevel.Pro || level == SportLevel.Amater))
+
+    $article: Article()
+    $shinProtector: FootballGear(type == GearTypeFootball.KostobranBezStitnika || type == GearTypeFootball.KostobranSaStitnikomZaSkocniZglob ) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Shin protector");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
