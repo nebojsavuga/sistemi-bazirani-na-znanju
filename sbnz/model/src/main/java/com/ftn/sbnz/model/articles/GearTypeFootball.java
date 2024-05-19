@@ -5,5 +5,6 @@ public enum GearTypeFootball {
     KljucZaKrampone,
     KostobranSaStitnikomZaSkocniZglob,
     KostobranBezStitnika,
-    Stucne
+    Stucne,
+    Podvezice
 }

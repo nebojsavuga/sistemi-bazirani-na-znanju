@@ -200,6 +200,7 @@ end
 rule "Preporuci stucne ukoliko je preporucen kostobran"
 salience 100
 when
+    $filters: Filters(sport == Sport.Fudbal)
     $article: Article()
     $e1: RecommendedArticleDTO()
     $shinProtector: FootballGear((type == GearTypeFootball.KostobranBezStitnika || type == GearTypeFootball.KostobranSaStitnikomZaSkocniZglob), id == $e1.getId())
@@ -211,6 +212,25 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Leg warmers");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci podvezice ukoliko su preporucene stucne i pro je"
+salience 110
+when
+    $filters: Filters(sport == Sport.Fudbal, (level == SportLevel.Pro))
+    $article: Article()
+    $e1: RecommendedArticleDTO()
+    $shinProtector: FootballGear((type == GearTypeFootball.Stucne ), id == $e1.getId())
+    $stucne: FootballGear(type == GearTypeFootball.Podvezice) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("sock garters");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end

@@ -136,3 +136,5 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, type)
 VALUES ('Kostobran Bez SSZ', 45.99, 'Unisex', 'Adidas', 'FootballGear', 'KostobranBezStitnika');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
 VALUES ('Nike MatchFit Crew Socks', 25.99, 'Unisex', 'Nike', 'FootballGear', 'Stucne');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
+VALUES ('Nike Guard Stay II', 8.99, 'Unisex', 'Nike', 'FootballGear', 'Podvezice');
