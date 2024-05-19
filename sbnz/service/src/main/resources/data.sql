@@ -166,3 +166,5 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, type)
 VALUES ('Titan Fitness', 159.99, 'Unisex', 'Titan Fitness', 'Barbel', 20.0, 'Olimpijska');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
 VALUES ('Rogue Fitness Ohio Lifting Belt', 119.99, 'Unisex', 'Rogue Fitness', 'WeightliftingGear', 'Belt');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type) 
+VALUES ('SBD Knee Sleeves', 89.99, 'Unisex', 'SBD', 'WeightliftingGear', 'KneeWrap');
