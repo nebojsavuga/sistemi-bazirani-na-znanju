@@ -15,9 +15,11 @@ import com.ftn.sbnz.model.articles.Article;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     Optional<Article> findById(Long id);
+
     Page<Article> findAll(Pageable pageable);
+
     long count();
 
     @Query("SELECT a FROM Article a WHERE TYPE(a) = :type")
-    Set<Article> findArticlesByType(String type);
+    Set<Article> findArticlesByType(Class<?> type);
 }

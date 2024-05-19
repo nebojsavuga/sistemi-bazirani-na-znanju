@@ -38,9 +38,16 @@ public class ArticleService implements IArticleService {
 
     @Override
     public Set<ArticleDTO> getArticlesByType(String type) {
-        Set<Article> articles = articleRepository.findArticlesByType(type);
-        if (articles.isEmpty()) {
+        Class<?> classType;
+        try {
+            classType = Class.forName("com.ftn.sbnz.model.articles." + type);
+        } catch (ClassNotFoundException e) {
             throw new NotFoundException("No articles of type " + type + " found.");
+
+        }
+        Set<Article> articles = articleRepository.findArticlesByType(classType);
+        if (articles.isEmpty()) {
+            throw new NotFoundException("No articles of type " + classType.getSimpleName() + " found.");
         }
         return articles.stream()
                 .map(article -> new ArticleDTO(
