@@ -14,12 +14,13 @@ import com.ftn.sbnz.model.articles.GearTypeFootball;
 import com.ftn.sbnz.model.articles.FootballGear;
 import com.ftn.sbnz.model.articles.FootbalShoeNoCrampons;
 import com.ftn.sbnz.model.sport.SportFootballType;
-import com.ftn.sbnz.model.sport.SportLevel;
 import com.ftn.sbnz.model.events.Purchase;
 import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.articles.Barbel;
 import com.ftn.sbnz.model.articles.BarbelType;
 import com.ftn.sbnz.model.articles.Weight;
+import com.ftn.sbnz.model.articles.WlTypeOfGear;
+import com.ftn.sbnz.model.articles.WeightliftingGear;
 
 import java.util.Set;
 import java.util.List;
@@ -55,7 +56,7 @@ salience 1
 when
     $article: Article()
     $proSipka: Barbel(type == BarbelType.Olimpijska) from $article
-    $tezina: Weight($idWeight:id, weight > 19.0)
+    $tezina: Weight($idWeight:id, weight > 19.9)
     Number(intValue >= 4) from accumulate(
     $purchase : Purchase(article.getId() == $idWeight)
     over window: time(365d),
@@ -67,8 +68,35 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Olimpijska sipka");
+    recommendedArticle.setArticleType("Olympic barbel");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
-    recommendations.add($article);
+    
+end
+
+rule "Ukoliko je kupio preko 4 ploce od 20kg i olimpijsku sipku i pro je, nudimo mu kais za dizanje tegova"
+salience 1
+when
+    $filters: Filters(sport == Sport.DizanjeTegova, level == SportLevel.Pro)
+    $article: Article()
+    $kais: WeightliftingGear(type == WlTypeOfGear.Belt) from $article
+    Barbel($idSipka:id, type == BarbelType.Olimpijska)
+    Purchase(article.getId() == $idSipka)
+    $tezina: Weight($idWeight:id, weight > 19.9)
+    Number(intValue >= 4) from accumulate(
+    $purchase : Purchase(article.getId() == $idWeight)
+    over window: time(365d),
+    count($purchase)
+)
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Belt");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+    System.out.println("Caaas");
+    
 end
