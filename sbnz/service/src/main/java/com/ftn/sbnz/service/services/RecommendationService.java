@@ -17,6 +17,7 @@ import com.ftn.sbnz.model.ClassNameBackward;
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.events.Purchase;
 import com.ftn.sbnz.model.users.Injury;
 import com.ftn.sbnz.model.users.User;
@@ -24,6 +25,7 @@ import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
 import com.ftn.sbnz.service.repositories.InjuryRepository;
 import com.ftn.sbnz.service.repositories.PurchaseRepository;
+import com.ftn.sbnz.service.repositories.RatingRepository;
 
 @Service
 public class RecommendationService implements IRecommendationService {
@@ -32,15 +34,18 @@ public class RecommendationService implements IRecommendationService {
     private ArticleRepository articleRepository;
     private InjuryRepository injuryRepository;
     private PurchaseRepository purchaseRepository;
+    private RatingRepository ratingRepository;
 
     @Autowired
     public RecommendationService(KieContainer kieContainer, ArticleRepository articleRepository,
             InjuryRepository injuryRepository,
-            PurchaseRepository purchaseRepository) {
+            PurchaseRepository purchaseRepository,
+            RatingRepository ratingRepository) {
         this.kieContainer = kieContainer;
         this.articleRepository = articleRepository;
         this.injuryRepository = injuryRepository;
         this.purchaseRepository = purchaseRepository;
+        this.ratingRepository = ratingRepository;
     }
 
     @Override
@@ -73,8 +78,15 @@ public class RecommendationService implements IRecommendationService {
             for(Purchase purchase : purchases){
                 cepKsession.insert(purchase);
             }
+
+            Set<Rating> ratings = ratingRepository.findByUserId(user.getId());
+            for(Rating rating : ratings){
+                cepKsession.insert(rating);
+            }
             cepKsession.fireAllRules();
             cepKsession.dispose();
+
+            
         }
         
         return recommendations;

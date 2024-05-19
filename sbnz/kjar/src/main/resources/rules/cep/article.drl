@@ -16,6 +16,7 @@ import com.ftn.sbnz.model.articles.FootbalShoeNoCrampons;
 import com.ftn.sbnz.model.sport.SportFootballType;
 import com.ftn.sbnz.model.sport.SportLevel;
 import com.ftn.sbnz.model.events.Purchase;
+import com.ftn.sbnz.model.articles.Rating
 
 import java.util.Set;
 import java.util.List;
@@ -27,6 +28,20 @@ salience 1000
 when
     $article: RecommendedArticleDTO($id: id) from recommendations
     $purchase : Purchase(article.getId() == $id) over window:time(30d)
+then
+    System.out.println($article);
+    recommendations.remove($article);
+end
+
+rule "Ukoliko je brend ocenjen ispod 3 5 ili vise puta u poslednjih godinu dana ne preporucuj ga"
+salience 1000
+when
+    $article: RecommendedArticleDTO($brand: brandName) from recommendations
+    Number(intValue >= 5) from accumulate(
+    $rating:Rating(article.getBrandName() == $brand, rating <= 3)
+    over window: time(365d),
+    count($rating)
+)
 then
     System.out.println($article);
     recommendations.remove($article);
