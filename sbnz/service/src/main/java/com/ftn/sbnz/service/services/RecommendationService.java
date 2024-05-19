@@ -26,6 +26,7 @@ import com.ftn.sbnz.service.repositories.ArticleRepository;
 import com.ftn.sbnz.service.repositories.InjuryRepository;
 import com.ftn.sbnz.service.repositories.PurchaseRepository;
 import com.ftn.sbnz.service.repositories.RatingRepository;
+import com.ftn.sbnz.service.repositories.UserRepository;
 
 @Service
 public class RecommendationService implements IRecommendationService {
@@ -35,21 +36,24 @@ public class RecommendationService implements IRecommendationService {
     private InjuryRepository injuryRepository;
     private PurchaseRepository purchaseRepository;
     private RatingRepository ratingRepository;
+    private UserRepository userRepository;
 
     @Autowired
     public RecommendationService(KieContainer kieContainer, ArticleRepository articleRepository,
             InjuryRepository injuryRepository,
             PurchaseRepository purchaseRepository,
-            RatingRepository ratingRepository) {
+            RatingRepository ratingRepository,
+            UserRepository userRepository) {
         this.kieContainer = kieContainer;
         this.articleRepository = articleRepository;
         this.injuryRepository = injuryRepository;
         this.purchaseRepository = purchaseRepository;
         this.ratingRepository = ratingRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
-    public Set<RecommendedArticleDTO> getRecommendations(Filters filters, User user) {
+    public Set<RecommendedArticleDTO> getRecommendations(Filters filters, Long userId) {
         Set<RecommendedArticleDTO> recommendations = new HashSet<>();
         KieSession kieSession = kieContainer.newKieSession("basicKsession");
         List<Injury> injuries = injuryRepository.findAll();
@@ -73,26 +77,28 @@ public class RecommendationService implements IRecommendationService {
 
         KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");
         cepKsession.setGlobal("recommendations", recommendations);
-        if(user != null){
-            Set<Purchase> purchases = purchaseRepository.findByUserId(user.getId());
-            for(Purchase purchase : purchases){
+        if(userId == null){
+            return recommendations;
+        }
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent()) {
+            Set<Purchase> purchases = purchaseRepository.findByUserId(user.get().getId());
+            for (Purchase purchase : purchases) {
                 cepKsession.insert(purchase);
             }
 
-            Set<Rating> ratings = ratingRepository.findByUserId(user.getId());
-            for(Rating rating : ratings){
+            Set<Rating> ratings = ratingRepository.findByUserId(user.get().getId());
+            for (Rating rating : ratings) {
                 cepKsession.insert(rating);
             }
             cepKsession.fireAllRules();
             cepKsession.dispose();
-
-            
         }
-        
+
         return recommendations;
     }
 
-    private List<String> getClassNames(KieSession kbw,  List<String> parentClasses, String childName) {
+    private List<String> getClassNames(KieSession kbw, List<String> parentClasses, String childName) {
         List<ClassNameBackward> names = new ArrayList<>();
         names.add(new ClassNameBackward("FootballArticle", "Article"));
         names.add(new ClassNameBackward("Ball", "FootballArticle"));

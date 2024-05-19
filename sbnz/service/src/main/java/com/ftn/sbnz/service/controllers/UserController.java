@@ -1,68 +1,60 @@
 package com.ftn.sbnz.service.controllers;
 
-import java.util.HashSet;
 import java.util.Set;
 
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.sbnz.model.users.User;
+import com.ftn.sbnz.service.config.JwtUtils;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
-import com.ftn.sbnz.service.controllers.dtos.LoginDTO;
-import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
-import com.ftn.sbnz.service.exceptions.BadCredentialsException;
+
 import com.ftn.sbnz.service.services.IUserService;
 
-@CrossOrigin
 @RestController
 @RequestMapping(value = "api/users")
 public class UserController {
 
 	private IUserService userService;
+	@Autowired
+	private JwtUtils jwt;
 
 	@Autowired
 	public UserController(IUserService userService) {
 		this.userService = userService;
 	}
 
-	@PutMapping()
-	public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO, HttpSession session) {
-		User user = userService.getByEmailAndPassword(loginDTO.email, loginDTO.password);
-		if (user == null) {
-			throw new BadCredentialsException("Bad credentials!");
-		}
-		session.setAttribute("user", user);
-		return new ResponseEntity<>(user.getEmail(), HttpStatus.OK);
-	}
-
-	@PostMapping(value = "/register")
-	public ResponseEntity<User> register(@RequestBody RegisterDTO registerDTO) {
-		User user = userService.register(registerDTO);
-		return new ResponseEntity<>(user, HttpStatus.OK);
-	}
-
 	@PutMapping(value = "/favorite-article/{articleId}")
-	public ResponseEntity<String> addFavoriteArticle(@PathVariable("articleId") Long id, HttpSession session) {
-
-		String name = userService.addFavoriteArticle(id, session);
+	public ResponseEntity<String> addFavoriteArticle(@PathVariable("articleId") Long id,
+			@RequestHeader("Authorization") String token) {
+		Long userId = null;
+		if (token != null && token != "") {
+			String jwtt = token.substring(7);
+			userId = jwt.getId(jwtt);
+		}
+		String name = userService.addFavoriteArticle(id, userId);
 
 		return new ResponseEntity<>(name, HttpStatus.OK);
 	}
 
 	@GetMapping(value = "/favorite-articles")
-	public ResponseEntity<Set<ArticleDTO>> getFavoriteArticles(HttpSession session) {
+	public ResponseEntity<Set<ArticleDTO>> getFavoriteArticles(
+			@RequestHeader("Authorization") String token) {
+		Long userId = null;
+		if (token != null && token != "") {
+			String jwtt = token.substring(7);
+			userId = jwt.getId(jwtt);
+		}
 
-		Set<ArticleDTO> articles = userService.getFavoriteArticles(session);
+		Set<ArticleDTO> articles = userService.getFavoriteArticles(userId);
 
 		return new ResponseEntity<>(articles, HttpStatus.OK);
 	}

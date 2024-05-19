@@ -2,7 +2,6 @@ package com.ftn.sbnz.service.controllers;
 
 import java.util.Set;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +11,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ftn.sbnz.model.users.User;
+import com.ftn.sbnz.service.config.JwtUtils;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
-import com.ftn.sbnz.service.exceptions.BadCredentialsException;
-import com.ftn.sbnz.service.exceptions.UnauthorizedException;
 import com.ftn.sbnz.service.services.IArticleService;
 
 @CrossOrigin
@@ -30,6 +27,8 @@ import com.ftn.sbnz.service.services.IArticleService;
 @RequestMapping(value = "api/articles")
 public class ArticleController {
     private IArticleService articleService;
+    @Autowired
+    private JwtUtils jwt;
 
     @Autowired
     public ArticleController(IArticleService articleService) {
@@ -49,22 +48,26 @@ public class ArticleController {
     }
 
     @PostMapping("buy/{id}")
-    public ResponseEntity<ArticleDTO> buyArticle(@PathVariable Long id, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if(user == null){
-            throw new UnauthorizedException("Please log in.");
+    public ResponseEntity<ArticleDTO> buyArticle(@PathVariable Long id,
+            @RequestHeader("Authorization") String token) {
+        Long userId = null;
+        if (token != null && token != "") {
+            String jwtt = token.substring(7);
+            userId = jwt.getId(jwtt);
         }
         return new ResponseEntity<>(this.articleService
-                .buyArticle(id, user.getId()), HttpStatus.OK);
+                .buyArticle(id, userId), HttpStatus.OK);
     }
 
     @PostMapping("rate")
-    public ResponseEntity<RateArticleDTO> rateArticle(@Valid @RequestBody RateArticleDTO articleDTO , HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if(user == null){
-            throw new UnauthorizedException("Please log in.");
+    public ResponseEntity<RateArticleDTO> rateArticle(@Valid @RequestBody RateArticleDTO articleDTO,
+            @RequestHeader("Authorization") String token) {
+        Long userId = null;
+        if (token != null && token != "") {
+            String jwtt = token.substring(7);
+            userId = jwt.getId(jwtt);
         }
-        this.articleService.rateArticle(articleDTO, user.getId());
+        this.articleService.rateArticle(articleDTO, userId);
         return new ResponseEntity<>(articleDTO, HttpStatus.OK);
     }
 }
