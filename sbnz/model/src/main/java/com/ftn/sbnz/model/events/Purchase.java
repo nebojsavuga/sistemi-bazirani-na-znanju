@@ -110,6 +110,13 @@ public class Purchase implements Serializable {
         this.executionTime = executionTime;
     }
 
+    public Purchase(User user, Article article, float price) {
+        this.user = user;
+        this.article = article;
+        this.price = price;
+        this.executionTime = new Date();
+    }
+
     public Purchase() {
     }
 

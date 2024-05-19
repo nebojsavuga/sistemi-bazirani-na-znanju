@@ -8,18 +8,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.events.Purchase;
+import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
+import com.ftn.sbnz.service.repositories.PurchaseRepository;
+import com.ftn.sbnz.service.repositories.UserRepository;
 
 @Service
 public class ArticleService implements IArticleService {
 
     private ArticleRepository articleRepository;
+    private UserRepository userRepository;
+    private PurchaseRepository purchaseRepository;
 
     @Autowired
-    public ArticleService(ArticleRepository articleRepository) {
+    public ArticleService(ArticleRepository articleRepository,
+            UserRepository userRepository,
+            PurchaseRepository purchaseRepository) {
         this.articleRepository = articleRepository;
+        this.userRepository = userRepository;
+        this.purchaseRepository = purchaseRepository;
     }
 
     @Override
@@ -61,7 +71,18 @@ public class ArticleService implements IArticleService {
 
     @Override
     public ArticleDTO buyArticle(Long id, Long userId) {
-        throw new UnsupportedOperationException("Unimplemented method 'buyArticle'");
+        Optional<Article> article = articleRepository.findById(id);
+        if (article.isEmpty()) {
+            throw new NotFoundException("Article with the given id doesn't exist.");
+        }
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new NotFoundException("User with the given id doesn't exist.");
+        }
+        Purchase purchase = new Purchase(user.get(), article.get(), article.get().getPrice());
+        purchaseRepository.save(purchase);
+        return new ArticleDTO(article.get().getId(), article.get().getName(), purchase.getPrice(),
+                article.get().getBrandName(), article.get().getClassName());
     }
 
 }

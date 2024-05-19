@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.exceptions.BadCredentialsException;
+import com.ftn.sbnz.service.exceptions.UnauthorizedException;
 import com.ftn.sbnz.service.services.IArticleService;
 
 @CrossOrigin
@@ -45,6 +47,9 @@ public class ArticleController {
     @PutMapping("/{id}")
     public ResponseEntity<ArticleDTO> buyArticle(@PathVariable Long id, HttpSession session) {
         User user = (User) session.getAttribute("user");
+        if(user == null){
+            throw new UnauthorizedException("Please log in.");
+        }
         return new ResponseEntity<>(this.articleService
                 .buyArticle(id, user.getId()), HttpStatus.OK);
     }
