@@ -1,7 +1,8 @@
 package com.ftn.sbnz.model.events;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.users.User;
 
 @Role(Role.Type.EVENT)
-@Timestamp("timestamp")
+@Timestamp("executionTime")
 @Entity
 public class Purchase implements Serializable {
 
@@ -31,7 +32,7 @@ public class Purchase implements Serializable {
     private Article article;
 
     @Column
-    private LocalDateTime timestamp;
+    private Date executionTime;
 
     @Column
     private float price;
@@ -60,14 +61,6 @@ public class Purchase implements Serializable {
         this.article = article;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
-
     public float getPrice() {
         return price;
     }
@@ -75,7 +68,7 @@ public class Purchase implements Serializable {
     public void setPrice(float price) {
         this.price = price;
     }
-
+    
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -106,7 +99,26 @@ public class Purchase implements Serializable {
         this.user = user;
         this.article = article;
         this.price = price;
-        this.timestamp = LocalDateTime.now();
+        this.executionTime = Date.from(Instant.now());
+    }
+
+    public Purchase(Long id, User user, Article article, float price, Date executionTime) {
+        this.id = id;
+        this.user = user;
+        this.article = article;
+        this.price = price;
+        this.executionTime = executionTime;
+    }
+
+    public Purchase() {
+    }
+
+    public Date getExecutionTime() {
+        return executionTime;
+    }
+
+    public void setExecutionTime(Date executionTime) {
+        this.executionTime = executionTime;
     }
 
 }

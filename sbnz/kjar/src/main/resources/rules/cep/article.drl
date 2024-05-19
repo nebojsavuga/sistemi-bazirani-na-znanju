@@ -1,0 +1,33 @@
+package cep;
+
+import com.ftn.sbnz.model.users.Injury;
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.GrassFootbalShoe;
+import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.sport.SportLevel;
+import com.ftn.sbnz.model.sport.SportTenisField;
+import com.ftn.sbnz.model.articles.Ball;
+import com.ftn.sbnz.model.articles.BallType;
+import com.ftn.sbnz.model.articles.GearTypeFootball;
+import com.ftn.sbnz.model.articles.FootballGear;
+import com.ftn.sbnz.model.articles.FootbalShoeNoCrampons;
+import com.ftn.sbnz.model.sport.SportFootballType;
+import com.ftn.sbnz.model.sport.SportLevel;
+import com.ftn.sbnz.model.events.Purchase;
+
+import java.util.Set;
+import java.util.List;
+
+global Set<RecommendedArticleDTO> recommendations;
+
+rule "Ukoliko je kupljen neki artikal u poslednjih mesec dana, ne preporucivati ga"
+salience 1000
+when
+    $article: RecommendedArticleDTO($id: id) from recommendations
+    $purchase : Purchase(article.getId() == $id) over window:time(30d)
+then
+    System.out.println($article);
+    recommendations.remove($article);
+end

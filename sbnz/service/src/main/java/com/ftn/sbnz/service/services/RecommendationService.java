@@ -17,10 +17,13 @@ import com.ftn.sbnz.model.ClassNameBackward;
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.events.Purchase;
 import com.ftn.sbnz.model.users.Injury;
+import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
 import com.ftn.sbnz.service.repositories.InjuryRepository;
+import com.ftn.sbnz.service.repositories.PurchaseRepository;
 
 @Service
 public class RecommendationService implements IRecommendationService {
@@ -28,17 +31,20 @@ public class RecommendationService implements IRecommendationService {
     private final KieContainer kieContainer;
     private ArticleRepository articleRepository;
     private InjuryRepository injuryRepository;
+    private PurchaseRepository purchaseRepository;
 
     @Autowired
     public RecommendationService(KieContainer kieContainer, ArticleRepository articleRepository,
-            InjuryRepository injuryRepository) {
+            InjuryRepository injuryRepository,
+            PurchaseRepository purchaseRepository) {
         this.kieContainer = kieContainer;
         this.articleRepository = articleRepository;
         this.injuryRepository = injuryRepository;
+        this.purchaseRepository = purchaseRepository;
     }
 
     @Override
-    public Set<RecommendedArticleDTO> getRecommendations(Filters filters) {
+    public Set<RecommendedArticleDTO> getRecommendations(Filters filters, User user) {
         Set<RecommendedArticleDTO> recommendations = new HashSet<>();
         KieSession kieSession = kieContainer.newKieSession("basicKsession");
         List<Injury> injuries = injuryRepository.findAll();
@@ -59,6 +65,18 @@ public class RecommendationService implements IRecommendationService {
         }
         kieSession.fireAllRules();
         kieSession.dispose();
+
+        KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");
+        cepKsession.setGlobal("recommendations", recommendations);
+        if(user != null){
+            Set<Purchase> purchases = purchaseRepository.findByUserId(user.getId());
+            for(Purchase purchase : purchases){
+                cepKsession.insert(purchase);
+            }
+            cepKsession.fireAllRules();
+            cepKsession.dispose();
+        }
+        
         return recommendations;
     }
 
