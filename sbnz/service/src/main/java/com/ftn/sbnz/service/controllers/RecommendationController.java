@@ -51,4 +51,9 @@ public class RecommendationController {
     public ResponseEntity<List<String>> getParents(@PathVariable Long id) {
         return new ResponseEntity<>(this.recommendationService.getParents(id), HttpStatus.OK);
     }
+    
+    @GetMapping("/based-on-article/{id}")
+    public ResponseEntity<Set<RecommendedArticleDTO>> recommendBasedOnArticle(@PathVariable Long id){
+        return new ResponseEntity<>(this.recommendationService.recommendBasedOnArticle(id), HttpStatus.OK);
+    }
 }

@@ -144,20 +144,11 @@ public class RecommendationService implements IRecommendationService {
         for (ClassNameBackward cnmb : names) {
             kbw.insert(cnmb);
         }
-        long totalArticles = articleRepository.count();
-        int j = 0;
-        for (int i = 0; i < totalArticles; i += 100) {
-            PageRequest pageRequest = PageRequest.of(j, i + 100);
-            Page<Article> allArticles = articleRepository.findAll(pageRequest);
-            j += 1;
-            for (Article article : allArticles) {
-                kbw.insert(article);
-            }
-        }
+        
         parentClasses.add(childName);
         kbw.insert(childName);
         kbw.fireAllRules();
-        kbw.dispose();
+        // kbw.dispose();
         return parentClasses;
     }
 
@@ -174,4 +165,33 @@ public class RecommendationService implements IRecommendationService {
         List<String> classes = getClassNames(kbw, parentClasses, article.get().getClassName());
         return classes;
     }
+
+    @Override
+    public Set<RecommendedArticleDTO> recommendBasedOnArticle(Long id) {
+        Optional<Article> article = articleRepository.findById(id);
+        if (article.isEmpty()) {
+            throw new NotFoundException("Article with that id does not exist.");
+        }
+        KieSession kbw = kieContainer.newKieSession("bwKsession");
+        List<String> parentClasses = new ArrayList<>();
+        Set<RecommendedArticleDTO> recommendations = new HashSet<>();
+        kbw.setGlobal("parentClasses", parentClasses);
+        kbw.setGlobal("recommendations", recommendations);
+        kbw.insert("level");
+        List<String> classes = getClassNames(kbw, parentClasses, article.get().getClassName());
+        long totalArticles = articleRepository.count();
+        int j = 0;
+        for (int i = 0; i < totalArticles; i += 100) {
+            PageRequest pageRequest = PageRequest.of(j, i + 100);
+            Page<Article> allArticles = articleRepository.findAll(pageRequest);
+            j += 1;
+            for (Article articleAll : allArticles) {
+                kbw.insert(articleAll);
+            }
+        }
+        kbw.fireAllRules();
+        return recommendations;
+    }
+
+    
 }
