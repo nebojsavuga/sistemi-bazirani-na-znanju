@@ -20,6 +20,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.ftn.sbnz.model.Code;
 import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.events.Purchase;
@@ -71,6 +72,9 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private Set<Purchase> purchases = new HashSet<Purchase>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Code> codes = new HashSet<Code>();
 
     @Override
     public String toString() {
