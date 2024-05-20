@@ -132,6 +132,8 @@ public class RecommendationService implements IRecommendationService {
         names.add(new ClassNameBackward("RacketString", "TenisArticle"));
         names.add(new ClassNameBackward("TenisGear", "TenisArticle"));
         names.add(new ClassNameBackward("TenisShoe", "TenisArticle"));
+        names.add(new ClassNameBackward("Grip", "TenisArticle"));
+
 
         names.add(new ClassNameBackward("WeightliftingArticle", "Article"));
         names.add(new ClassNameBackward("Barbel", "WeightliftingArticle"));
