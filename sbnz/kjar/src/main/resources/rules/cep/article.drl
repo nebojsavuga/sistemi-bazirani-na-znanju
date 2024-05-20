@@ -29,7 +29,7 @@ import java.util.List;
 global Set<RecommendedArticleDTO> recommendations;
 
 rule "Ukoliko je kupljen neki artikal u poslednjih mesec dana, ne preporucivati ga"
-salience 1000
+salience 1
 when
     $article: RecommendedArticleDTO($id: id) from recommendations
     $purchase : Purchase(article.getId() == $id) over window:time(30d)
@@ -39,7 +39,7 @@ then
 end
 
 rule "Ukoliko je brend ocenjen ispod 3 5 ili vise puta u poslednjih godinu dana ne preporucuj ga"
-salience 1000
+salience 1
 when
     $article: RecommendedArticleDTO($brand: brandName) from recommendations
     Number(intValue >= 5) from accumulate(
@@ -53,7 +53,7 @@ then
 end
 
 rule "Ukoliko je kupio preko 4 ploce od 20kg nudimo olimpijsku sipku"
-salience 1
+salience 1000
 when
     $article: Article()
     $proSipka: Barbel(type == BarbelType.Olimpijska) from $article
@@ -76,7 +76,7 @@ then
 end
 
 rule "Ukoliko je kupio preko 4 ploce od 20kg i olimpijsku sipku i powerlifter je, nudimo mu kais za dizanje tegova"
-salience 1
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, typeOfWeightlifting == SportWeightliftingType.Powerlifting)
     $article: Article()
@@ -102,7 +102,7 @@ then
 end
 
 rule "Ukoliko je kupio preko 4 ploce od 20kg i olimpijsku sipku i powerlifter je, nudimo mu steznike za kolena"
-salience 1
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, typeOfWeightlifting == SportWeightliftingType.Powerlifting)
     $article: Article()

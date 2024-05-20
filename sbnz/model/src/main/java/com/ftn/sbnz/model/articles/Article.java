@@ -138,4 +138,13 @@ public class Article implements Serializable {
     public String getClassName() {
         return this.getClass().getSimpleName();
     }
+
+    public String getParentClassName() {
+        Class<?> parentClass = this.getClass().getSuperclass();
+        if (parentClass != null) {
+            return parentClass.getSimpleName();
+        } else {
+            return "No superclass"; 
+        }
+    }
 }

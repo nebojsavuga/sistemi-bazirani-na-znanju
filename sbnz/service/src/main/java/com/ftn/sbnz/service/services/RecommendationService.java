@@ -144,6 +144,16 @@ public class RecommendationService implements IRecommendationService {
         for (ClassNameBackward cnmb : names) {
             kbw.insert(cnmb);
         }
+        long totalArticles = articleRepository.count();
+        int j = 0;
+        for (int i = 0; i < totalArticles; i += 100) {
+            PageRequest pageRequest = PageRequest.of(j, i + 100);
+            Page<Article> allArticles = articleRepository.findAll(pageRequest);
+            j += 1;
+            for (Article article : allArticles) {
+                kbw.insert(article);
+            }
+        }
         parentClasses.add(childName);
         kbw.insert(childName);
         kbw.fireAllRules();

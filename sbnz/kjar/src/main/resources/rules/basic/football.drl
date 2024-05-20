@@ -23,7 +23,7 @@ global List<Injury> injuries;
 
 
 rule "Preporuci mu fudbalske lopte"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null || age == 0), level == null, typeOfFootball == null)
     $article: Article()
@@ -40,7 +40,7 @@ then
 end
 
 rule "Preporuci mu fudbalske lopte za decu"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, age < 12)
     $article: Article()
@@ -57,7 +57,7 @@ then
 end
 
 rule "Izabrana opcija mali fudbal, preporuci patike bez krampona"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, typeOfFootball == SportFootballType.Mali)
     $article: Article()
@@ -74,7 +74,7 @@ then
 end
 
 rule "Mali fudbal, preko 12 godina, Preporuci mu fudbalkse lopte 4 sa tegom"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, age > 12, typeOfFootball == SportFootballType.Mali)
     $article: Article()
@@ -91,7 +91,7 @@ then
 end
 
 rule "Rekreativan, preporuci amaterske lopte"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null || age == 0), level == SportLevel.Rekreativac)
     $article: Article()
@@ -108,7 +108,7 @@ then
 end
 
 rule "Amater, preporuci amaterske i trening lopte"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null || age == 0), level == SportLevel.Amater)
     $article: Article()
@@ -125,7 +125,7 @@ then
 end
 
 rule "Profesionalac, preporuci amaterske i trening lopte"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null), level == SportLevel.Pro)
     $article: Article()
@@ -142,7 +142,7 @@ then
 end
 
 rule "Povreda skocnog zgloba, ponudi kostobran sa stitnikom za skocni zglob"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, $selectedInjuries: injuries)
     Injury(name == "Povreda skocnog zgloba", $injuryId: id) from injuries
@@ -161,7 +161,7 @@ then
 end
 
 rule "Nema povrede skocnog zgloba, ponudi kostobran bez stitnika"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, $selectedInjuries: injuries)
     Injury(name == "Povreda skocnog zgloba", $injuryId: id) from injuries
@@ -180,7 +180,7 @@ then
 end
 
 rule "Preporuci kostobrane ako je amater ili pro"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, (level == SportLevel.Pro || level == SportLevel.Amater), injuries.size() == 0 )
 
@@ -198,7 +198,7 @@ then
 end
 
 rule "Preporuci stucne ukoliko je preporucen kostobran"
-salience 100
+salience 10
 when
     $filters: Filters(sport == Sport.Fudbal, (level == SportLevel.Pro || level == SportLevel.Amater))
     $article: Article()
@@ -217,7 +217,7 @@ then
 end
 
 rule "Preporuci podvezice ukoliko su preporucene stucne i pro je"
-salience 110
+salience 9
 when
     $filters: Filters(sport == Sport.Fudbal, level == SportLevel.Pro)
     $article: Article()

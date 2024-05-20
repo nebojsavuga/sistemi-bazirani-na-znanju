@@ -2,7 +2,7 @@ package backward;
 import com.ftn.sbnz.model.articles.Ball;
 import com.ftn.sbnz.model.ClassNameBackward;
 import java.util.List;
-
+import com.ftn.sbnz.model.articles.Article;
 global List<String> parentClasses;
 
 query getParent ( String x, String y )
@@ -12,9 +12,31 @@ query getParent ( String x, String y )
 end
 
 rule "go"
+salience 100
 when
     String( $value: this)
     getParent($value, thing;)
 then
     parentClasses.add(thing);
+    System.out.println(thing);
 end
+
+rule "level1"
+salience 10
+when    
+    $a1:Article($cn:getClassName())
+    eval(parentClasses.contains($cn))
+then
+    System.out.println($cn);
+end
+
+rule "level2"
+salience 1
+when
+    $a1:Article($cn:getParentClassName())
+    eval(parentClasses.contains($cn))
+then
+    System.out.println($a1.getName());
+end
+
+

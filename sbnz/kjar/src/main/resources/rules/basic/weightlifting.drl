@@ -22,7 +22,7 @@ import java.util.Set;
 global Set<RecommendedArticleDTO> recommendations;
 
 rule "Preporuci patike sa tvrdim djonom"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova)
     $article: Article()
@@ -39,7 +39,7 @@ then
 end
 
 rule "Bavi se dizanjem tegova i ima manja od 13 godina, preporuci bucice do 5kg"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, age < 13)
     $article: Article()
@@ -56,7 +56,7 @@ then
 end
 
 rule "Bavi se dizanjem tegova i ima manja od 13 godina, preporuci el. trake do 15kg"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, age < 13)
     $article: Article()
@@ -73,7 +73,7 @@ then
 end
 
 rule "Bavi se dizanjem tegova, preporuci rukavice za dizanje"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova)
     $article: Article()
@@ -90,7 +90,7 @@ then
 end
 
 rule "Bavi se dizanjem tegova i weightlifter ili powerlifter je, ponudi mu krede kao artikle"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, typeOfWeightlifting != SportWeightliftingType.Bodybuilding)
     $article: Article()
@@ -107,7 +107,7 @@ then
 end
 
 rule "Ukoliko je zensko, ponudi el trake do 20 kg"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, gender == Gender.Zensko)
     $article: Article()
@@ -124,7 +124,7 @@ then
 end
 
 rule "Ukoliko je musko, ponudi el trake do 60 kg"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, gender == Gender.Musko)
     $article: Article()
