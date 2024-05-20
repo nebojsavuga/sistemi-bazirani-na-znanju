@@ -2,6 +2,7 @@ package com.ftn.sbnz.service.controllers;
 
 import java.util.Set;
 
+import javax.annotation.security.PermitAll;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,6 @@ import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
 import com.ftn.sbnz.service.services.IArticleService;
 
-@CrossOrigin
 @RestController
 @RequestMapping(value = "api/articles")
 public class ArticleController {
@@ -41,12 +41,14 @@ public class ArticleController {
                 .getArticle(id), HttpStatus.OK);
     }
 
+    @PermitAll
     @GetMapping("/type")
     public ResponseEntity<Set<ArticleDTO>> getArticle(@RequestParam String type) {
         return new ResponseEntity<>(this.articleService
                 .getArticlesByType(type), HttpStatus.OK);
     }
 
+    @PermitAll
     @PostMapping("buy/{id}")
     public ResponseEntity<ArticleDTO> buyArticle(@PathVariable Long id,
             @RequestHeader("Authorization") String token) {

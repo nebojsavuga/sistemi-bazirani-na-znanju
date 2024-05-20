@@ -48,6 +48,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .antMatchers("/api/auth/register").permitAll()
                 .antMatchers("/api/auth/login").permitAll()
                 .antMatchers("/api/recommendation/**").permitAll()
+                .antMatchers("/api/articles/**").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

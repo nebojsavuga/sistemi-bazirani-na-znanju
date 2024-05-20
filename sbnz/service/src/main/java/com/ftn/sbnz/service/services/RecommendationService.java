@@ -180,7 +180,7 @@ public class RecommendationService implements IRecommendationService {
         kbw.setGlobal("parentClasses", parentClasses);
         kbw.setGlobal("recommendations", recommendations);
         kbw.insert("level");
-        List<String> classes = getClassNames(kbw, parentClasses, article.get().getClassName());
+        getClassNames(kbw, parentClasses, article.get().getClassName());
         long totalArticles = articleRepository.count();
         int j = 0;
         for (int i = 0; i < totalArticles; i += 100) {

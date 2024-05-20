@@ -68,7 +68,6 @@ when
     String(this == "level")
     $a1:Article($cn:getGrandParentClassName(),$mn:getClassName(), getGrandParentClassName() != "Article")
     eval(parentClasses.contains($cn))
-    
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($a1.getName());
