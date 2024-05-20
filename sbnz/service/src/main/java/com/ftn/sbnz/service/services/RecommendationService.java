@@ -120,12 +120,12 @@ public class RecommendationService implements IRecommendationService {
         names.add(new ClassNameBackward("FootbalShoeNoCrampons", "FootbalShoe"));
         names.add(new ClassNameBackward("GrassFootbalShoe", "FootbalShoe"));
 
-        names.add(new ClassNameBackward("OrientingArticle", "Article"));
-        names.add(new ClassNameBackward("OrientingGear", "OrientingArticle"));
-        names.add(new ClassNameBackward("OrientingShoe", "OrientingArticle"));
-        names.add(new ClassNameBackward("Sweatpants", "OrientingArticle"));
-        names.add(new ClassNameBackward("BigCramponOrientiringShoe", "OrientingShoe"));
-        names.add(new ClassNameBackward("NoCramponOrientiringShoe", "OrientingShoe"));
+        names.add(new ClassNameBackward("OrientiringArticle", "Article"));
+        names.add(new ClassNameBackward("OrientiringGear", "OrientiringArticle"));
+        names.add(new ClassNameBackward("OrientiringShoe", "OrientiringArticle"));
+        names.add(new ClassNameBackward("Sweatpants", "OrientiringArticle"));
+        names.add(new ClassNameBackward("BigCramponOrientiringShoe", "OrientiringShoe"));
+        names.add(new ClassNameBackward("NoCramponOrientiringShoe", "OrientiringShoe"));
 
         names.add(new ClassNameBackward("TenisArticle", "Article"));
         names.add(new ClassNameBackward("Racket", "TenisArticle"));
