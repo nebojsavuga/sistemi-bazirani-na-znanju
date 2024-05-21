@@ -205,3 +205,26 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
+
+rule "Preporuci Wilson kackete ukoliko je preporuceno preko 4 wilson artikla"
+no-loop
+salience 8
+when
+    $filters: Filters(sport == Sport.Tenis)
+    $article: Article()
+    $kacket: TenisGear(gearType == TypeOfGear.Kacket) from $article
+    Number(intValue >= 4) from accumulate(
+        $rc : RecommendedArticleDTO(brandName == "Wilson"),
+        count($rc)
+    )
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Kacket");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+    System.out.println("dd");
+end
