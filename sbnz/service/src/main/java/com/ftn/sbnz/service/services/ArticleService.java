@@ -24,6 +24,7 @@ import com.ftn.sbnz.model.users.Injury;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
+import com.ftn.sbnz.service.exceptions.BadRequestException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
 import com.ftn.sbnz.service.repositories.CodeRepository;
@@ -93,7 +94,7 @@ public class ArticleService implements IArticleService {
     }
 
     @Override
-    public ArticleDTO buyArticle(Long id, Long userId) {
+    public ArticleDTO buyArticle(Long id, Long userId, Long codeId) {
         Optional<Article> article = articleRepository.findById(id);
         if (article.isEmpty()) {
             throw new NotFoundException("Article with the given id doesn't exist.");
@@ -102,7 +103,35 @@ public class ArticleService implements IArticleService {
         if (user.isEmpty()) {
             throw new NotFoundException("User with the given id doesn't exist.");
         }
-        Purchase purchase = new Purchase(user.get(), article.get(), article.get().getPrice());
+        float price = article.get().getPrice();
+        if (codeId!=null){
+            Optional<Code> codeToUse = codeRepository.findById(codeId);
+            if (codeToUse.isEmpty()) {
+                throw new NotFoundException("Code with the given id doesn't exist.");
+            }
+            if (codeToUse.get().getUser().getId()!= userId) {
+                throw new NotFoundException("Code with the given id doesn't exist.");
+            }
+            if (codeToUse.get().isUsed()) {
+                throw new BadRequestException("Code with the given id is already used.");
+            }
+            if (codeToUse.get().getFlag()==0){
+                if (codeToUse.get().getSport() != article.get().getSport()) {
+                    throw new BadRequestException("Code is only for " + codeToUse.get().getSport());
+                }
+            }
+            
+            if (codeToUse.isPresent()){
+                price = (price * (100 - codeToUse.get().getDiscountPercentage()))/100;
+                price = price - codeToUse.get().getDiscountPrice();
+                if (price < 0){
+                    price = 0;
+                }
+                codeToUse.get().setUsed(true);
+                codeRepository.save(codeToUse.get());
+            }
+    }
+        Purchase purchase = new Purchase(user.get(), article.get(), price);
         purchaseRepository.save(purchase);
 
 

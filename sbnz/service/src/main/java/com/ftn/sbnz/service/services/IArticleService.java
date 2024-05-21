@@ -8,6 +8,6 @@ import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
 public interface IArticleService {
     ArticleDTO getArticle(Long id);
     Set<ArticleDTO> getArticlesByType(String type);
-    ArticleDTO buyArticle(Long id, Long userId);
+    ArticleDTO buyArticle(Long id, Long userId, Long codeId);
     void rateArticle(RateArticleDTO articleDTO, Long userId);
 }

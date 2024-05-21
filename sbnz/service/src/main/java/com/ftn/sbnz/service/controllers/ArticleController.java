@@ -51,14 +51,15 @@ public class ArticleController {
     @PermitAll
     @PostMapping("buy/{id}")
     public ResponseEntity<ArticleDTO> buyArticle(@PathVariable Long id,
-            @RequestHeader("Authorization") String token) {
+            @RequestHeader("Authorization") String token,
+            @RequestParam(value = "codeId", required = false) Long codeId) {
         Long userId = null;
         if (token != null && token != "") {
             String jwtt = token.substring(7);
             userId = jwt.getId(jwtt);
         }
         return new ResponseEntity<>(this.articleService
-                .buyArticle(id, userId), HttpStatus.OK);
+                .buyArticle(id, userId, codeId), HttpStatus.OK);
     }
 
     @PostMapping("rate")

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.ftn.sbnz.service.exceptions.BadCredentialsException;
+import com.ftn.sbnz.service.exceptions.BadRequestException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.exceptions.UnauthorizedException;
 import com.ftn.sbnz.service.exceptions.UserAlreadyExistsException;
@@ -57,6 +58,15 @@ public class ValidationHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public @ResponseBody ErrorResponse
     handleBadCredentialsException(BadCredentialsException ex)
+    {
+        return new ErrorResponse(ex.getMessage());
+    }
+
+    @ExceptionHandler(value
+            = BadRequestException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public @ResponseBody ErrorResponse
+    handleBadRequestException(BadRequestException ex)
     {
         return new ErrorResponse(ex.getMessage());
     }
