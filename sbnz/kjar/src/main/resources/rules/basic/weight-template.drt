@@ -1,1 +1,47 @@
-    
+template header
+    sport
+    level
+    gender
+    maxWeight
+package basic;
+
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.WeightliftingArticle;
+import com.ftn.sbnz.model.articles.GrassFootbalShoe;
+import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.sport.SportLevel;
+import com.ftn.sbnz.model.sport.SportTenisField;
+import com.ftn.sbnz.model.articles.WeightliftingShoe;
+import com.ftn.sbnz.model.articles.ElasticBand;
+import com.ftn.sbnz.model.articles.Dumbell;
+import com.ftn.sbnz.model.articles.WeightliftingGlove;
+import com.ftn.sbnz.model.articles.WeightliftingGear;
+import com.ftn.sbnz.model.articles.WlTypeOfGear;
+import com.ftn.sbnz.model.sport.SportWeightliftingType;
+import com.ftn.sbnz.model.users.Gender;
+import com.ftn.sbnz.model.articles.Weight;
+
+import java.util.Set;
+
+global Set<RecommendedArticleDTO> recommendations;
+
+template "weight-rules"
+
+rule "Ukoliko je @{level} i @{gender} je, ponnudi bucice do @{maxWeight}"
+when
+    $filter: Filters(sport == Sport.DizanjeTegova, gender == Gender.@{gender}, level == SportLevel.@{level})
+    $article: Article()
+    Dumbell(weight <= @{maxWeight}) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Dumbell");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+end template

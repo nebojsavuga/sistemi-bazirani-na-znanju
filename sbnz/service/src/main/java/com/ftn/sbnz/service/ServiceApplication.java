@@ -61,12 +61,12 @@ public class ServiceApplication {
 
         InputStream weightStream = this.getClass().getResourceAsStream("/basic/weight-template.drt");
         DataProvider dataProviderWeight = new ArrayDataProvider(new String[][]{
-                {"DizanjeTegova", "Rekreativac", "Musko", "0.0", "15.0"},
-                {"DizanjeTegova", "Amater", "Musko", "0.0", "45.0"},
-                {"DizanjeTegova", "Pro", "Musko", "0.0", "60.0"},
-                {"DizanjeTegova", "Rekreativac", "Zensko", "0.0", "10.0"},
-                {"DizanjeTegova", "Amater", "Zensko", "0.0", "30.0"},
-                {"DizanjeTegova", "Pro", "Zensko", "0.0", "45.0"},
+                {"DizanjeTegova", "Rekreativac", "Musko", "15.0"},
+                {"DizanjeTegova", "Amater", "Musko", "45.0"},
+                {"DizanjeTegova", "Pro", "Musko", "60.0"},
+                {"DizanjeTegova", "Rekreativac", "Zensko", "10.0"},
+                {"DizanjeTegova", "Amater", "Zensko", "30.0"},
+                {"DizanjeTegova", "Pro", "Zensko", "45.0"},
                 
         });
         String weightDrl = converter.compile(dataProviderWeight, weightStream);
