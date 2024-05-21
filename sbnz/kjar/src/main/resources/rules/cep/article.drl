@@ -22,6 +22,11 @@ import com.ftn.sbnz.model.articles.Weight;
 import com.ftn.sbnz.model.articles.WlTypeOfGear;
 import com.ftn.sbnz.model.articles.WeightliftingGear;
 import com.ftn.sbnz.model.sport.SportWeightliftingType;
+import com.ftn.sbnz.model.articles.OrientiringGear;
+import com.ftn.sbnz.model.articles.TypeOfOrientiringGear;
+import com.ftn.sbnz.model.articles.Sweatpants;
+import com.ftn.sbnz.model.articles.SweatpantsType;
+
 
 import java.util.Set;
 import java.util.List;
@@ -124,4 +129,49 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
+
+rule "Ukoliko se bavi orijentiringom i kupio je poludugacku trenerku u poslednjih 6 meseci preporucuju mu se kamasne"
+salience 100
+when
+    $filters: Filters(sport == Sport.Orijentiring)
+    $article: Article()
+    $kamasne: OrientiringGear(type == TypeOfOrientiringGear.Kamasne) from $article
+    Sweatpants($idPoludugacke:id, type == SweatpantsType.Poludugacko)
+    Purchase(article.getId() == $idPoludugacke)
+    over window: time(182d)
+
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Kamasne");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+    
+end
+
+rule "Ukoliko se bavi orijentiringom i kupio je kamasne uposlednjih 6 meseci kratke carape"
+salience 99
+when
+    $filters: Filters(sport == Sport.Orijentiring)
+    $article: Article()
+    $carape: OrientiringGear(type == TypeOfOrientiringGear.KratkeCarape) from $article
+    OrientiringGear($idKamasne:id, type == TypeOfOrientiringGear.Kamasne)
+    Purchase(article.getId() == $idKamasne)
+    over window: time(182d)
+
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Short socks");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+    
+end
+
 

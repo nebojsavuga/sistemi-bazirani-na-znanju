@@ -9,7 +9,8 @@ import com.ftn.sbnz.model.articles.BigCramponOrientiringShoe;
 import com.ftn.sbnz.model.articles.TypeOfOrientiringGear;
 import com.ftn.sbnz.model.articles.OrientiringGear;
 import com.ftn.sbnz.model.sport.SportLevel;
-
+import com.ftn.sbnz.model.articles.Sweatpants;
+import com.ftn.sbnz.model.articles.SweatpantsType;
 import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
@@ -48,6 +49,7 @@ then
     insert(recommendedArticle);
 end
 
+
 rule "Preporuci patike sa velikim kramponima ako se bavi orijentiringom i trka je sumska duga"
 salience 100
 when
@@ -65,6 +67,91 @@ then
     insert(recommendedArticle);
 end
 
+rule "Preporuci sorc ako se bavi orijentiringom i trka je gradska"
+salience 100
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.GradskaSprint)
+    $article: Article()
+    $Sweatpants: Sweatpants(type == SweatpantsType.Sorc) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Shorts");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci poludugacke ako se bavi orijentiringom i trka je sumska dugacka"
+salience 100
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaDuga)
+    $article: Article()
+    $Sweatpants: Sweatpants(type == SweatpantsType.Poludugacko) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Half sweatpants");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci dugacke ako se bavi orijentiringom i trka je sumska dugacka"
+salience 100
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaDuga)
+    $article: Article()
+    $Sweatpants: Sweatpants(type == SweatpantsType.Dugacko) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Sweatpants");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci poludugacke ako se bavi orijentiringom i trka je sumska sprint"
+salience 100
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaSprint)
+    $article: Article()
+    $Sweatpants: Sweatpants(type == SweatpantsType.Poludugacko) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Half sweatpants");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci dugacke ako se bavi orijentiringom i trka je sumska sprint"
+salience 100
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaSprint)
+    $article: Article()
+    $Sweatpants: Sweatpants(type == SweatpantsType.Dugacko) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Sweatpants");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
 rule "Preporuci kamasne ako se bavi orijentiringom i trka je sumska sprint"
 salience 100
 when
@@ -77,7 +164,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("gaiters");
+    recommendedArticle.setArticleType("Gaiters");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -94,7 +181,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("gaiters");
+    recommendedArticle.setArticleType("Gaiters");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
