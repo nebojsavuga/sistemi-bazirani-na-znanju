@@ -93,7 +93,7 @@ public class ArticleService implements IArticleService {
                 .collect(Collectors.toSet());
     }
 
-    public float applyCode(Long codeId, Long userId, Article article, float price){
+    private float applyCode(Long codeId, Long userId, Article article, float price){
         if (codeId!=null){
             Optional<Code> codeToUse = codeRepository.findById(codeId);
             if (codeToUse.isEmpty()) {
@@ -124,6 +124,25 @@ public class ArticleService implements IArticleService {
     return price;
     }
 
+    private void saveCodeAfter5Purchases(Code code, List<Purchase> purchases){
+    for (Purchase purch : purchases){
+        Optional<Purchase> purchaseToChange = purchaseRepository.findById(purch.getId());
+        if(code.getFlag() == 0){
+            purchaseToChange.get().setProcessedForSportCode(true);
+        }
+        purchaseRepository.save(purchaseToChange.get());
+    }
+    codeRepository.save(code);
+    }
+
+    private void saveCodeAfter4UsedCodes(Code codePriceDiscount, List<Code> usedCodes){
+        for (Code usCode : usedCodes){
+            Optional<Code> codeToChange = codeRepository.findById(usCode.getId());
+            codeRepository.delete(codeToChange.get());
+        }
+        codeRepository.save(codePriceDiscount);
+    }
+
     @Override
     public ArticleDTO buyArticle(Long id, Long userId, Long codeId) {
         Optional<Article> article = articleRepository.findById(id);
@@ -138,8 +157,6 @@ public class ArticleService implements IArticleService {
         price = applyCode(codeId, userId, article.get(), price);
         Purchase purchase = new Purchase(user.get(), article.get(), price);
         purchaseRepository.save(purchase);
-
-
         List<Purchase> purchases = new ArrayList<>();
         Code code = new Code();
         List<Code> usedCodes = new ArrayList<>();
@@ -162,25 +179,11 @@ public class ArticleService implements IArticleService {
         cepKsession.insert("cepKupovina");
         cepKsession.fireAllRules();
         if(code.getName()!=null){
-            for (Purchase purch : purchases){
-                Optional<Purchase> purchaseToChange = purchaseRepository.findById(purch.getId());
-                if(code.getFlag() == 0){
-                    purchaseToChange.get().setProcessedForSportCode(true);
-                }
-                purchaseRepository.save(purchaseToChange.get());
-            }
-        codeRepository.save(code);
+            saveCodeAfter5Purchases(code, purchases);
         }
-
         if(codePriceDiscount.getName()!=null){
-            for (Code usCode : usedCodes){
-                Optional<Code> codeToChange = codeRepository.findById(usCode.getId());
-                codeRepository.delete(codeToChange.get());
-            }
-            codeRepository.save(codePriceDiscount);
-        
+            saveCodeAfter4UsedCodes(codePriceDiscount, usedCodes);
         }
-        
         return new ArticleDTO(article.get().getId(), article.get().getName(), purchase.getPrice(),
                 article.get().getBrandName(), article.get().getClassName());
     }
