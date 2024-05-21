@@ -5,17 +5,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
 import org.hibernate.validator.constraints.Range;
-
-import com.ftn.sbnz.model.articles.Article;
-import com.ftn.sbnz.model.sport.Sport;
 import com.ftn.sbnz.model.users.User;
 
 @Entity
@@ -49,18 +43,15 @@ public class Code implements Serializable {
     @Column
     private int flag;
 
-    @Enumerated(EnumType.STRING)
-    private Sport sport;
-
-    @ManyToOne
-    private Article article;
+    
+    private String sport;
 
     @Column
     private Date executionTime;
 
     public Code(String name, @Range(min = 0, max = 100) float discountPercentage,
             @Range(min = 0, max = 10000) float discountPrice, boolean isUsed, User user,
-            @Range(min = 0, max = 2) int flag, Sport sport, Article article) {
+            @Range(min = 0, max = 2) int flag, String sport) {
         this.name = name;
         this.discountPercentage = discountPercentage;
         this.discountPrice = discountPrice;
@@ -68,8 +59,12 @@ public class Code implements Serializable {
         this.user = user;
         this.flag = flag;
         this.sport = sport;
-        this.article = article;
     }
+    
+
+    public Code() {
+    }
+
 
     @Override
     public int hashCode() {
@@ -95,6 +90,8 @@ public class Code implements Serializable {
             return false;
         return true;
     }
+
+
 
     public Long getId() {
         return id;
@@ -152,20 +149,12 @@ public class Code implements Serializable {
         this.flag = flag;
     }
 
-    public Sport getSport() {
+    public String getSport() {
         return sport;
     }
 
-    public void setSport(Sport sport) {
+    public void setSport(String sport) {
         this.sport = sport;
-    }
-
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
     }
 
     public Date getExecutionTime() {

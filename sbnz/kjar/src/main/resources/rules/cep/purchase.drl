@@ -1,0 +1,31 @@
+package cep;
+
+import com.ftn.sbnz.model.events.Purchase;
+import java.util.List;
+import com.ftn.sbnz.model.Code;
+global List<Purchase> purchases;
+global Code code;
+
+rule "Ukoliko je kupio preko 5 artikala za odredjeni sport u poslednjih godinu dana, daj mu kod za popust na taj sport"
+salience -100
+when
+    String(this == "cepKupovina")
+    $purchase: Purchase($user:user, $article:article, isProcessedForSportCode() == false)
+    Number(intValue >= 4) from accumulate(
+    $p2:Purchase(this!= $purchase, user == $user, article.getSport() == $article.getSport(), isProcessedForSportCode() == false)
+    over window: time(365d),
+    count($p2)
+)
+
+then
+    code.setSport($article.getSport());
+    code.setDiscountPercentage(10.0f);
+    code.setDiscountPrice(0.0f);
+    code.setUsed(false);
+    code.setUser($user);
+    code.setFlag(0);
+    code.setName("10% popusta za sport: " + $article.getSport());
+    purchases.add($purchase);
+   
+
+end

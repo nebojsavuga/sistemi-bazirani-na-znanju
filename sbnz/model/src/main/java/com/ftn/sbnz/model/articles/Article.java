@@ -40,7 +40,12 @@ public class Article implements Serializable {
     private ArticleGenderType gender;
 
     @Column
+    private String sport;
+
+    @Column
     private String brandName;
+
+    
 
     public Long getId() {
         return id;
@@ -155,5 +160,21 @@ public class Article implements Serializable {
         } else {
             return "No superclass"; 
         }
+    }
+
+    public Set<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(Set<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
+    public String getSport() {
+        return sport;
+    }
+
+    public void setSport(String sport) {
+        this.sport = sport;
     }
 }

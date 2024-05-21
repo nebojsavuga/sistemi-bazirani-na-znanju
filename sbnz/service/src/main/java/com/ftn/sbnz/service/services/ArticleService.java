@@ -1,42 +1,58 @@
 package com.ftn.sbnz.service.services;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.ftn.sbnz.model.Code;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.events.Purchase;
+import com.ftn.sbnz.model.users.Injury;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
+import com.ftn.sbnz.service.repositories.CodeRepository;
 import com.ftn.sbnz.service.repositories.PurchaseRepository;
 import com.ftn.sbnz.service.repositories.RatingRepository;
 import com.ftn.sbnz.service.repositories.UserRepository;
 
 @Service
 public class ArticleService implements IArticleService {
-
+    private final KieContainer kieContainer;
     private ArticleRepository articleRepository;
     private UserRepository userRepository;
     private PurchaseRepository purchaseRepository;
     private RatingRepository ratingRepository;
+    private CodeRepository codeRepository;
 
     @Autowired
-    public ArticleService(ArticleRepository articleRepository,
+    public ArticleService(KieContainer kieContainer,
+    ArticleRepository articleRepository,
             UserRepository userRepository,
             PurchaseRepository purchaseRepository,
-            RatingRepository ratingRepository) {
+            RatingRepository ratingRepository,
+            CodeRepository codeRepository) {
+                this.kieContainer = kieContainer;
         this.articleRepository = articleRepository;
         this.userRepository = userRepository;
         this.purchaseRepository = purchaseRepository;
         this.ratingRepository = ratingRepository;
+        this.codeRepository = codeRepository;
     }
 
     @Override
@@ -88,6 +104,31 @@ public class ArticleService implements IArticleService {
         }
         Purchase purchase = new Purchase(user.get(), article.get(), article.get().getPrice());
         purchaseRepository.save(purchase);
+
+
+        List<Purchase> purchases = new ArrayList<>();
+        Code code = new Code();
+        KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");
+        cepKsession.setGlobal("purchases", purchases);
+        cepKsession.setGlobal("code", code);
+
+        Set<Purchase> purchases2 = user.get().getPurchases();
+        for (Purchase purchase2 : purchases2) {
+            cepKsession.insert(purchase2);
+        }
+        cepKsession.insert("cepKupovina");
+        cepKsession.fireAllRules();
+        if(code.getName()!=null){
+        for (Purchase purch : purchases){
+            Optional<Purchase> purchaseToChange = purchaseRepository.findById(purch.getId());
+            if(code.getFlag() == 0){
+                purchaseToChange.get().setProcessedForSportCode(true);
+            }
+            purchaseRepository.save(purchaseToChange.get());
+        }
+        codeRepository.save(code);
+    }
+        
         return new ArticleDTO(article.get().getId(), article.get().getName(), purchase.getPrice(),
                 article.get().getBrandName(), article.get().getClassName());
     }

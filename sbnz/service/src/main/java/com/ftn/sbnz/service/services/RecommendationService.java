@@ -85,6 +85,7 @@ public class RecommendationService implements IRecommendationService {
         if(user.isEmpty()){
             return recommendations;
         }
+        cepKsession.insert(user);
         cepKsession.insert(filters);
         j = 0;
         for (int i = 0; i < totalArticles; i += 100) {

@@ -32,6 +32,12 @@ public class Purchase implements Serializable {
     private Article article;
 
     @Column
+    private boolean isProcessedForSportCode;
+
+    @Column
+    private boolean isProcessedForFavoriteCode;
+
+    @Column
     private Date executionTime;
 
     @Column
@@ -100,6 +106,8 @@ public class Purchase implements Serializable {
         this.article = article;
         this.price = price;
         this.executionTime = Date.from(Instant.now());
+        this.isProcessedForSportCode = false;
+        this.isProcessedForFavoriteCode = false;
     }
 
     public Purchase(Long id, User user, Article article, float price, Date executionTime) {
@@ -108,6 +116,8 @@ public class Purchase implements Serializable {
         this.article = article;
         this.price = price;
         this.executionTime = executionTime;
+        this.isProcessedForSportCode = false;
+        this.isProcessedForFavoriteCode = false;
     }
 
     public Purchase(User user, Article article, float price) {
@@ -115,6 +125,8 @@ public class Purchase implements Serializable {
         this.article = article;
         this.price = price;
         this.executionTime = new Date();
+        this.isProcessedForSportCode = false;
+        this.isProcessedForFavoriteCode = false;
     }
 
     public Purchase() {
@@ -126,6 +138,22 @@ public class Purchase implements Serializable {
 
     public void setExecutionTime(Date executionTime) {
         this.executionTime = executionTime;
+    }
+
+    public boolean isProcessedForSportCode() {
+        return isProcessedForSportCode;
+    }
+
+    public void setProcessedForSportCode(boolean isProcessedForSportCode) {
+        this.isProcessedForSportCode = isProcessedForSportCode;
+    }
+
+    public boolean isProcessedForFavoriteCode() {
+        return isProcessedForFavoriteCode;
+    }
+
+    public void setProcessedForFavoriteCode(boolean isProcessedForFavoriteCode) {
+        this.isProcessedForFavoriteCode = isProcessedForFavoriteCode;
     }
 
 }
