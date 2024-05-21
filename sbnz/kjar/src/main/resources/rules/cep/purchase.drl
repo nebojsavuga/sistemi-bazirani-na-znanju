@@ -1,6 +1,10 @@
 package cep;
 
 import com.ftn.sbnz.model.events.Purchase;
+import com.ftn.sbnz.model.articles.FootbalShoeCrampons;
+import com.ftn.sbnz.model.articles.FootballGear;
+import com.ftn.sbnz.model.articles.GearTypeFootball;
+import com.ftn.sbnz.model.articles.Article;
 import java.util.List;
 import com.ftn.sbnz.model.Code;
 global List<Purchase> purchases;
@@ -48,4 +52,40 @@ then
     codePriceDiscount.setFlag(0);
     codePriceDiscount.setName("10e popusta za sport: " + $sport);
     usedCodes.add($code);
+end
+
+rule "Ako je kupljena kopacka sa 6 krampona nude mu se rezervni kramponi"
+salience -50
+when
+    $article: Article()
+    $kopacka: FootbalShoeCrampons(numberOfCrampons == 6, $kopackaId: id) from $article
+    Purchase(article.getId() == $kopackaId)
+    $krampon: FootballGear(type == GearTypeFootball.Krampon)
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($krampon.getName());
+    recommendedArticle.setPrice($krampon.getPrice());
+    recommendedArticle.setId($krampon.getId());
+    recommendedArticle.setBrandName($krampon.getBrandName());
+    recommendedArticle.setArticleType("Crampons");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Ako su kupljeni kramponi nudi se kljuc za odvrtanje i zavrtanje krampona"
+salience -30
+when
+    $article: Article()
+    $kramponi: FootballGear(type == GearTypeFootball.Krampon, $kramponiId: id) from $article
+    Purchase(article.getId() == $kramponiId)
+    $kljuc: FootballGear(type == GearTypeFootball.KljucZaKrampone)
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($kljuc.getName());
+    recommendedArticle.setPrice($kljuc.getPrice());
+    recommendedArticle.setId($kljuc.getId());
+    recommendedArticle.setBrandName($kljuc.getBrandName());
+    recommendedArticle.setArticleType("Crampon key");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
 end

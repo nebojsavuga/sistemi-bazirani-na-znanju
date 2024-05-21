@@ -123,6 +123,5 @@ then
     recommendedArticle.setArticleType("KneeWrap");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
-    
 end
 

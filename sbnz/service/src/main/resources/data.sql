@@ -154,9 +154,9 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport)
 VALUES ('Rapid PRO', 24.99, 'Unisex', 'Adidas', 'Ball', 'Profesionalna', 'fudbal');
 
 -- patike
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, numberOfCrampons) 
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, number_of_crampons) 
 VALUES ('Venum Max Shoe 6 Crampson', 82.99, 'Male', 'Adidas', 'FootbalShoeCrampons', 'fudbal', 6);
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, numberOfCrampons) 
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, number_of_crampons) 
 VALUES ('Venum Max Shoe 7 Crampson', 85.99, 'Male', 'Adidas', 'FootbalShoeCrampons', 'fudbal', 7);
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport) 
 VALUES ('Venum Max Sprint', 84.99, 'Male', 'Adidas', 'FootbalShoeNoCrampons', 'fudbal');

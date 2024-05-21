@@ -12,8 +12,10 @@ import com.ftn.sbnz.model.articles.BallType;
 import com.ftn.sbnz.model.articles.GearTypeFootball;
 import com.ftn.sbnz.model.articles.FootballGear;
 import com.ftn.sbnz.model.articles.FootbalShoeNoCrampons;
+import com.ftn.sbnz.model.articles.FootbalShoeCrampons;
 import com.ftn.sbnz.model.sport.SportFootballType;
 import com.ftn.sbnz.model.sport.SportLevel;
+import com.ftn.sbnz.model.sport.SportFootballPlayer;
 
 import java.util.Set;
 import java.util.List;
@@ -231,4 +233,21 @@ then
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("sock garters");
     recommendations.add(recommendedArticle);
+end
+
+rule "Ukoiko je golman nudi kopacku sa 6 krampona"
+salience 100
+when
+    $filters: Filters(sport == Sport.Fudbal, typeOfFotballPlayer == SportFootballPlayer.Golman)
+    $article: Article()
+    $shoe: FootbalShoeCrampons(numberOfCrampons == 6) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Shoes");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
 end
