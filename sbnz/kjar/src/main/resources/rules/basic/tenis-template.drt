@@ -28,15 +28,15 @@ template "tenis-rules"
 
 rule "Ako je visina ispod @{maxHeight} preporuci rekete velicine @{racketSize}"
 when
-    $filter: Filters(height > @{minHeight}, height <= @{maxHeight}, sport == Sport.Tenis)
-    $article: Article()
-    $racket: Racket(size == @{racketSize}) from $article
+    $$filter: Filters(height > @{minHeight}, height <= @{maxHeight}, sport == Sport.Tenis)
+    $$article: Article()
+    Racket(size == @{racketSize}) from $$article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
-    recommendedArticle.setName($article.getName());
-    recommendedArticle.setPrice($article.getPrice());
-    recommendedArticle.setId($article.getId());
-    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setName($$article.getName());
+    recommendedArticle.setPrice($$article.getPrice());
+    recommendedArticle.setId($$article.getId());
+    recommendedArticle.setBrandName($$article.getBrandName());
     recommendedArticle.setArticleType("Racket");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);

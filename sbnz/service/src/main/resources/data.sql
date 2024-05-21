@@ -62,6 +62,17 @@ VALUES ('Wilson Clash 100', 220.00, 'Unisex', 'Wilson', 295.0,'Profesionalni','M
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
 VALUES ('Wilson Tour Slam Lite', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',27.0, 'Racket', 'tenis');
 
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
+VALUES ('Wilson 19', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',19.0, 'Racket', 'tenis');
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
+VALUES ('Wilson 21', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',21.0, 'Racket', 'tenis');
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
+VALUES ('Wilson 23', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',23.0, 'Racket', 'tenis');
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
+VALUES ('Wilson 25', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',25.0, 'Racket', 'tenis');
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
+VALUES ('Wilson 27.5', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',27.5, 'Racket', 'tenis');
+
 INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport) 
 VALUES ('NikeCourt Air Zoom Zero HC Grass', 150.00, 'Unisex', 'Nike', 'Kramponi', 'TenisShoe', 'tenis');
 INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport) 
@@ -94,6 +105,12 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport)
 VALUES ('Dumbell 15kg', 16.99, 'Unisex', 'Nike', 'Dumbell', 15.0, 'dizanjeTegova');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
 VALUES ('Dumbell 20kg', 18.99, 'Unisex', 'Nike', 'Dumbell', 20.0, 'dizanjeTegova');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
+VALUES ('Dumbell 45kg', 18.99, 'Unisex', 'Nike', 'Dumbell', 45.0, 'dizanjeTegova');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
+VALUES ('Dumbell 60kg', 18.99, 'Unisex', 'Nike', 'Dumbell', 60.0, 'dizanjeTegova');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
+VALUES ('Dumbell 80kg', 18.99, 'Unisex', 'Nike', 'Dumbell', 80.0, 'dizanjeTegova');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport) 
 VALUES ('Elastic Band 15kg', 7.99, 'Unisex', 'Nike', 'ElasticBand', 15.0, 'dizanjeTegova');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport) 

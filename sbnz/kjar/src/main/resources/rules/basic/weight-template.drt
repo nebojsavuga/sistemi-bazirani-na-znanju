@@ -28,17 +28,17 @@ global Set<RecommendedArticleDTO> recommendations;
 
 template "weight-rules"
 
-rule "Ukoliko je @{level} i "@{gender}" je, ponnudi bucice do @{maxWeight}"
+rule "Ukoliko je @{level} i @{gender} je, ponnudi bucice do @{maxWeight}"
 when
-    $filter: Filters(sport == Sport.DizanjeTegova, gender == Gender.@{gender}, level == SportLevel.@{level})
-    $article: Article()
-    Dumbell(weight <= @{maxWeight}) from $article
+    $$filter: Filters(sport == Sport.DizanjeTegova, gender == Gender.@{gender}, level == SportLevel.@{level})
+    $$article: Article()
+    Dumbell(weight <= @{maxWeight}) from $$article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
-    recommendedArticle.setName($article.getName());
-    recommendedArticle.setPrice($article.getPrice());
-    recommendedArticle.setId($article.getId());
-    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setName($$article.getName());
+    recommendedArticle.setPrice($$article.getPrice());
+    recommendedArticle.setId($$article.getId());
+    recommendedArticle.setBrandName($$article.getBrandName());
     recommendedArticle.setArticleType("Dumbell");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
