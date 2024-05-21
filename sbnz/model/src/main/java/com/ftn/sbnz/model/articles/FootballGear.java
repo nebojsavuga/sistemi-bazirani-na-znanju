@@ -19,9 +19,4 @@ public class FootballGear extends FootballArticle{
     public void setType(GearTypeFootball type) {
         this.type = type;
     }
-
-    
-
-
-
 }
