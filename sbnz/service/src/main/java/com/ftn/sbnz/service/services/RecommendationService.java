@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.kie.api.KieBase;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,8 @@ public class RecommendationService implements IRecommendationService {
     private PurchaseRepository purchaseRepository;
     private RatingRepository ratingRepository;
     private UserRepository userRepository;
+    @Autowired
+    private KieBase templateKieBase;
 
     @Autowired
     public RecommendationService(KieContainer kieContainer, ArticleRepository articleRepository,
@@ -56,11 +59,15 @@ public class RecommendationService implements IRecommendationService {
     public Set<RecommendedArticleDTO> getRecommendations(Filters filters, Long userId) {
         Set<RecommendedArticleDTO> recommendations = new HashSet<>();
         KieSession kieSession = kieContainer.newKieSession("basicKsession");
+        KieSession templateKsession = templateKieBase.newKieSession();
         List<Injury> injuries = injuryRepository.findAll();
 
         kieSession.setGlobal("recommendations", recommendations);
+        templateKsession.setGlobal("recommendations", recommendations);
         kieSession.setGlobal("injuries", injuries);
+        templateKsession.setGlobal("injuries", injuries);
         kieSession.insert(filters);
+        templateKsession.insert(filters);
 
         long totalArticles = articleRepository.count();
         int j = 0;
@@ -70,10 +77,13 @@ public class RecommendationService implements IRecommendationService {
             j += 1;
             for (Article article : allArticles) {
                 kieSession.insert(article);
+                templateKsession.insert(article);
             }
         }
         kieSession.fireAllRules();
+        templateKsession.fireAllRules();
         kieSession.dispose();
+        templateKsession.dispose();
 
         KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");
         cepKsession.setGlobal("recommendations", recommendations);

@@ -30,7 +30,7 @@ global Set<RecommendedArticleDTO> recommendations;
 
 template "weight-rules"
 
-rule "Ukoliko je @{level} i @{gender} je, ponnudi bucice do @{maxWeight}"
+rule "Sport @{sport} Ukoliko je @{level} i @{gender} je, ponnudi bucice do @{maxWeight}"
 when
     $filter: Filters(sport == Sport.DizanjeTegova, gender == Gender.@{gender}, level == SportLevel.@{level})
     $article: Article()
@@ -45,4 +45,5 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
+
 end template

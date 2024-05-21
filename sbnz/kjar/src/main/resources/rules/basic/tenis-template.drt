@@ -27,7 +27,7 @@ global Set<RecommendedArticleDTO> recommendations;
 
 template "tenis-rules"
 
-rule "Ako je visina ispod @{maxHeight} preporuci rekete velicine @{racketSize}"
+rule "Sport @{sport} Ako je visina ispod @{maxHeight} preporuci rekete velicine @{racketSize}"
 when
     $filter: Filters(height > @{minHeight}, height <= @{maxHeight}, sport == Sport.Tenis)
     $article: Article()
@@ -42,4 +42,5 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
+
 end template

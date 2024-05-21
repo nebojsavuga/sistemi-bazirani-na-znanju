@@ -43,7 +43,7 @@ public class ServiceApplication {
 
 	@Bean
     public KieBase templateKieBase() {
-        InputStream tenisStream = this.getClass().getResourceAsStream("/basic/tenis-template.drt");
+        InputStream tenisStream = this.getClass().getResourceAsStream("/rules/basic/tenis-template.drt");
         DataProvider dataProviderTenis = new ArrayDataProvider(new String[][]{
                 {"Tenis", "0", "100", "17.0"},
                 {"Tenis", "100", "108", "19.0"},
@@ -59,7 +59,7 @@ public class ServiceApplication {
         DataProviderCompiler converter = new DataProviderCompiler();
         String tenisDrl = converter.compile(dataProviderTenis, tenisStream);
 
-        InputStream weightStream = this.getClass().getResourceAsStream("/basic/weight-template.drt");
+        InputStream weightStream = this.getClass().getResourceAsStream("/rules/basic/weight-template.drt");
         DataProvider dataProviderWeight = new ArrayDataProvider(new String[][]{
                 {"DizanjeTegova", "Rekreativac", "Musko", "15.0"},
                 {"DizanjeTegova", "Amater", "Musko", "45.0"},
@@ -76,7 +76,7 @@ public class ServiceApplication {
         kieHelper.addContent(weightDrl, ResourceType.DRL);
 
         KieServices kieServices = KieServices.Factory.get();
-        kieHelper.addResource(kieServices.getResources().newClassPathResource("basic/templates.drl"), ResourceType.DRL);
+        kieHelper.addResource(kieServices.getResources().newClassPathResource("rules/basic/templates.drl"), ResourceType.DRL);
 
         KieBase kieBase = kieHelper.build();
         return kieBase;

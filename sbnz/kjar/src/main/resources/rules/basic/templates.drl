@@ -30,3 +30,10 @@ import com.ftn.sbnz.model.articles.Weight;
 import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
+
+rule "Basic"
+when
+    String()
+then
+    System.out.print("");
+end
