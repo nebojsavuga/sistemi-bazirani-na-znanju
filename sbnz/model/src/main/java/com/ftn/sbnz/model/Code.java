@@ -10,8 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import org.hibernate.validator.constraints.Range;
+import org.kie.api.definition.type.Role;
+import org.kie.api.definition.type.Timestamp;
+
 import com.ftn.sbnz.model.users.User;
 
+@Role(Role.Type.EVENT)
+@Timestamp("executionTime")
 @Entity
 public class Code implements Serializable {
 
@@ -43,7 +48,7 @@ public class Code implements Serializable {
     @Column
     private int flag;
 
-    
+    @Column
     private String sport;
 
     @Column
@@ -149,13 +154,7 @@ public class Code implements Serializable {
         this.flag = flag;
     }
 
-    public String getSport() {
-        return sport;
-    }
-
-    public void setSport(String sport) {
-        this.sport = sport;
-    }
+    
 
     public Date getExecutionTime() {
         return executionTime;
@@ -163,5 +162,13 @@ public class Code implements Serializable {
 
     public void setExecutionTime(Date executionTime) {
         this.executionTime = executionTime;
+    }
+
+    public String getSport() {
+        return sport;
+    }
+
+    public void setSport(String sport) {
+        this.sport = sport;
     }
 }

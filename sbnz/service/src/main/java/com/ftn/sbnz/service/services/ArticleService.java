@@ -117,6 +117,7 @@ public class ArticleService implements IArticleService {
                     price = 0;
                 }
                 codeToUse.get().setUsed(true);
+                codeToUse.get().setExecutionTime(new Date());
                 codeRepository.save(codeToUse.get());
             }
         }
@@ -141,26 +142,44 @@ public class ArticleService implements IArticleService {
 
         List<Purchase> purchases = new ArrayList<>();
         Code code = new Code();
+        List<Code> usedCodes = new ArrayList<>();
+        Code codePriceDiscount = new Code();
         KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");
         cepKsession.setGlobal("purchases", purchases);
         cepKsession.setGlobal("code", code);
+        cepKsession.setGlobal("usedCodes", usedCodes);
+        cepKsession.setGlobal("codePriceDiscount", codePriceDiscount);
 
         Set<Purchase> purchases2 = user.get().getPurchases();
         for (Purchase purchase2 : purchases2) {
             cepKsession.insert(purchase2);
         }
+        Set<Code> codesToInsert = user.get().getCodes();
+        for (Code codeToInsert : codesToInsert) {
+            if(codeToInsert.getExecutionTime()!=null)
+                cepKsession.insert(codeToInsert);
+        }
         cepKsession.insert("cepKupovina");
         cepKsession.fireAllRules();
         if(code.getName()!=null){
-        for (Purchase purch : purchases){
-            Optional<Purchase> purchaseToChange = purchaseRepository.findById(purch.getId());
-            if(code.getFlag() == 0){
-                purchaseToChange.get().setProcessedForSportCode(true);
+            for (Purchase purch : purchases){
+                Optional<Purchase> purchaseToChange = purchaseRepository.findById(purch.getId());
+                if(code.getFlag() == 0){
+                    purchaseToChange.get().setProcessedForSportCode(true);
+                }
+                purchaseRepository.save(purchaseToChange.get());
             }
-            purchaseRepository.save(purchaseToChange.get());
-        }
         codeRepository.save(code);
-    }
+        }
+
+        if(codePriceDiscount.getName()!=null){
+            for (Code usCode : usedCodes){
+                Optional<Code> codeToChange = codeRepository.findById(usCode.getId());
+                codeRepository.delete(codeToChange.get());
+            }
+            codeRepository.save(codePriceDiscount);
+        
+        }
         
         return new ArticleDTO(article.get().getId(), article.get().getName(), purchase.getPrice(),
                 article.get().getBrandName(), article.get().getClassName());
