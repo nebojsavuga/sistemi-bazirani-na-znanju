@@ -57,6 +57,7 @@ end
 rule "Ako je kupljena kopacka sa 6 krampona nude mu se rezervni kramponi"
 salience -50
 when
+    Filters(sport == Sport.Fudbal)
     $article: Article()
     $kopacka: FootbalShoeCrampons(numberOfCrampons == 6, $kopackaId: id) from $article
     Purchase(article.getId() == $kopackaId)
@@ -75,6 +76,7 @@ end
 rule "Ako su kupljeni kramponi nudi se kljuc za odvrtanje i zavrtanje krampona"
 salience -30
 when
+    Filters(sport == Sport.Fudbal)
     $article: Article()
     $kramponi: FootballGear(type == GearTypeFootball.Krampon, $kramponiId: id) from $article
     Purchase(article.getId() == $kramponiId)
