@@ -37,6 +37,12 @@ INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport)
 VALUES ('Trimtex Basic O-Pants', 60.99, 'Unisex', 'Trimtex', 'Poludugacko', 'Sweatpants', 'orijentiring');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
+VALUES ('Trimtex Basic Short Orienteering Pants', 33.99, 'Unisex', 'Trimtex', 'Sorc', 'Sweatpants', 'orijentiring');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
+VALUES ('Trimtex Trainer 2.0 Training Pants', 69.99, 'Unisex', 'Trimtex', 'Dugacko', 'Sweatpants', 'orijentiring');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
 VALUES ('Suunto M-3 Global Compass', 59.99, 'Unisex', 'Suunto', 'Busola', 'OrientiringGear', 'orijentiring');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
