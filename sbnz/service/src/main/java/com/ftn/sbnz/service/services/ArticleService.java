@@ -43,12 +43,12 @@ public class ArticleService implements IArticleService {
 
     @Autowired
     public ArticleService(KieContainer kieContainer,
-    ArticleRepository articleRepository,
+            ArticleRepository articleRepository,
             UserRepository userRepository,
             PurchaseRepository purchaseRepository,
             RatingRepository ratingRepository,
             CodeRepository codeRepository) {
-                this.kieContainer = kieContainer;
+        this.kieContainer = kieContainer;
         this.articleRepository = articleRepository;
         this.userRepository = userRepository;
         this.purchaseRepository = purchaseRepository;
@@ -93,50 +93,51 @@ public class ArticleService implements IArticleService {
                 .collect(Collectors.toSet());
     }
 
-    private float applyCode(Long codeId, Long userId, Article article, float price){
-        if (codeId!=null){
-            Optional<Code> codeToUse = codeRepository.findById(codeId);
-            if (codeToUse.isEmpty()) {
-                throw new NotFoundException("Code with the given id doesn't exist.");
-            }
-            if (codeToUse.get().getUser().getId()!= userId) {
-                throw new NotFoundException("Code with the given id doesn't exist.");
-            }
-            if (codeToUse.get().isUsed()) {
-                throw new BadRequestException("Code with the given id is already used.");
-            }
-            if (codeToUse.get().getFlag()==0){
-                if (codeToUse.get().getSport() != article.getSport()) {
-                    throw new BadRequestException("Code is only for " + codeToUse.get().getSport());
-                }
-            }
-            if (codeToUse.isPresent()){
-                price = (price * (100 - codeToUse.get().getDiscountPercentage()))/100;
-                price = price - codeToUse.get().getDiscountPrice();
-                if (price < 0){
-                    price = 0;
-                }
-                codeToUse.get().setUsed(true);
-                codeToUse.get().setExecutionTime(new Date());
-                codeRepository.save(codeToUse.get());
+    private float applyCode(Long codeId, Long userId, Article article, float price) {
+        if (codeId == null) {
+            return price;
+        }
+        Optional<Code> codeToUse = codeRepository.findById(codeId);
+        if (codeToUse.isEmpty()) {
+            throw new NotFoundException("Code with the given id doesn't exist.");
+        }
+        if (codeToUse.get().getUser().getId() != userId) {
+            throw new NotFoundException("Code with the given id doesn't exist.");
+        }
+        if (codeToUse.get().isUsed()) {
+            throw new BadRequestException("Code with the given id is already used.");
+        }
+        if (codeToUse.get().getFlag() == 0) {
+            if (codeToUse.get().getSport() != article.getSport()) {
+                throw new BadRequestException("Code is only for " + codeToUse.get().getSport());
             }
         }
-    return price;
-    }
 
-    private void saveCodeAfter5Purchases(Code code, List<Purchase> purchases){
-    for (Purchase purch : purchases){
-        Optional<Purchase> purchaseToChange = purchaseRepository.findById(purch.getId());
-        if(code.getFlag() == 0){
-            purchaseToChange.get().setProcessedForSportCode(true);
+        price = (price * (100 - codeToUse.get().getDiscountPercentage())) / 100;
+        price = price - codeToUse.get().getDiscountPrice();
+        if (price < 0) {
+            price = 0;
         }
-        purchaseRepository.save(purchaseToChange.get());
-    }
-    codeRepository.save(code);
+        codeToUse.get().setUsed(true);
+        codeToUse.get().setExecutionTime(new Date());
+        codeRepository.save(codeToUse.get());
+
+        return price;
     }
 
-    private void saveCodeAfter4UsedCodes(Code codePriceDiscount, List<Code> usedCodes){
-        for (Code usCode : usedCodes){
+    private void saveCodeAfter5Purchases(Code code, List<Purchase> purchases) {
+        for (Purchase purch : purchases) {
+            Optional<Purchase> purchaseToChange = purchaseRepository.findById(purch.getId());
+            if (code.getFlag() == 0) {
+                purchaseToChange.get().setProcessedForSportCode(true);
+            }
+            purchaseRepository.save(purchaseToChange.get());
+        }
+        codeRepository.save(code);
+    }
+
+    private void saveCodeAfter4UsedCodes(Code codePriceDiscount, List<Code> usedCodes) {
+        for (Code usCode : usedCodes) {
             Optional<Code> codeToChange = codeRepository.findById(usCode.getId());
             codeRepository.delete(codeToChange.get());
         }
@@ -173,15 +174,15 @@ public class ArticleService implements IArticleService {
         }
         Set<Code> codesToInsert = user.get().getCodes();
         for (Code codeToInsert : codesToInsert) {
-            if(codeToInsert.getExecutionTime()!=null)
+            if (codeToInsert.getExecutionTime() != null)
                 cepKsession.insert(codeToInsert);
         }
         cepKsession.insert("cepKupovina");
         cepKsession.fireAllRules();
-        if(code.getName()!=null){
+        if (code.getName() != null) {
             saveCodeAfter5Purchases(code, purchases);
         }
-        if(codePriceDiscount.getName()!=null){
+        if (codePriceDiscount.getName() != null) {
             saveCodeAfter4UsedCodes(codePriceDiscount, usedCodes);
         }
         return new ArticleDTO(article.get().getId(), article.get().getName(), purchase.getPrice(),

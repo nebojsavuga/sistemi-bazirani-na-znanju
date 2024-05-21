@@ -18,7 +18,6 @@ when
     over window: time(365d),
     count($p2)
 )
-
 then
     code.setSport($article.getSport());
     code.setDiscountPercentage(10.0f);
@@ -28,8 +27,6 @@ then
     code.setFlag(0);
     code.setName("10% popusta za sport: " + $article.getSport());
     purchases.add($purchase);
-   
-
 end
 
 rule "Ukoliko je korisnik Iskoristio 4 koda za neki sport u poslednje 2 godine dobija kod od 10e popusta na artikal iz tog sporta"
@@ -42,7 +39,6 @@ when
     over window: time(700d),
     count($code2)
 )
-
 then
     codePriceDiscount.setSport($sport);
     codePriceDiscount.setDiscountPercentage(0.0f);
@@ -52,6 +48,4 @@ then
     codePriceDiscount.setFlag(0);
     codePriceDiscount.setName("10e popusta za sport: " + $sport);
     usedCodes.add($code);
-   
-
 end
