@@ -153,4 +153,26 @@ then
     
 end
 
+rule "Ukoliko se bavi orijentiringom i kupio je kamasne uposlednjih 6 meseci kratke carape"
+salience 99
+when
+    $filters: Filters(sport == Sport.Orijentiring)
+    $article: Article()
+    $carape: OrientiringGear(type == TypeOfOrientiringGear.KratkeCarape) from $article
+    OrientiringGear($idKamasne:id, type == TypeOfOrientiringGear.Kamasne)
+    Purchase(article.getId() == $idKamasne)
+    over window: time(182d)
+
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Short socks");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+    
+end
+
 

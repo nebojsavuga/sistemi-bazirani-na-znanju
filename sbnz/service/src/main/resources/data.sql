@@ -28,6 +28,9 @@ INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport)
 VALUES ('Silva kamasne za orijentiring', 29.99, 'Unisex', 'Silva', 'Kamasne', 'OrientiringGear', 'orijentiring');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
+VALUES ('Balega Hidden Comfort No-Show Running Socks', 15.99, 'Unisex', 'Balega', 'KratkeCarape', 'OrientiringGear', 'orijentiring');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
 VALUES ('Silva Race Jet Compass Glasses', 89.99, 'Unisex', 'Silva', 'Naocare', 'OrientiringGear', 'orijentiring');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
