@@ -10,4 +10,14 @@ import javax.persistence.Enumerated;
 public class Sweatpants extends OrientiringArticle{
     @Enumerated(EnumType.STRING)
     private SweatpantsType type;
+
+    public SweatpantsType getType() {
+        return type;
+    }
+
+    public void setType(SweatpantsType type) {
+        this.type = type;
+    }
+
+    
 }

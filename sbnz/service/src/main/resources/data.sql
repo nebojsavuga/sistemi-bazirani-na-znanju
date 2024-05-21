@@ -31,6 +31,9 @@ INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport)
 VALUES ('Silva Race Jet Compass Glasses', 89.99, 'Unisex', 'Silva', 'Naocare', 'OrientiringGear', 'orijentiring');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
+VALUES ('Trimtex Basic O-Pants', 60.99, 'Unisex', 'Trimtex', 'Poludugacko', 'Sweatpants', 'orijentiring');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
 VALUES ('Suunto M-3 Global Compass', 59.99, 'Unisex', 'Suunto', 'Busola', 'OrientiringGear', 'orijentiring');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
