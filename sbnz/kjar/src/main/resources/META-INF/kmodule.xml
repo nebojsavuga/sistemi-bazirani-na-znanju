@@ -9,4 +9,7 @@
     <kbase name="basic" packages="basic">
         <ksession name="basicKsession"/>
     </kbase>
+     <kbase name="templateKbase" eventProcessingMode="stream" packages="basic">
+        <ksession name="templatesKsession"/>
+    </kbase>
 </kmodule>

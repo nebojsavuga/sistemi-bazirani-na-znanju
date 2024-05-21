@@ -4,6 +4,7 @@ template header
     maxHeight
     racketSize
 
+package basic;
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
@@ -19,15 +20,13 @@ import com.ftn.sbnz.model.articles.TenisShoe;
 import com.ftn.sbnz.model.articles.Sole;
 import com.ftn.sbnz.model.articles.RacketString;
 import com.ftn.sbnz.model.articles.Grip;
-
-
 import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
 
 template "tenis-rules"
 
-rule "Sport @{sport} Ako je visina ispod @{maxHeight} preporuci rekete velicine @{racketSize}"
+rule "Ako je visina ispod @{maxHeight} preporuci rekete velicine @{racketSize}"
 when
     $filter: Filters(height > @{minHeight}, height <= @{maxHeight}, sport == Sport.Tenis)
     $article: Article()
@@ -42,5 +41,4 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
-
 end template

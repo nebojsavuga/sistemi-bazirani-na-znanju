@@ -65,7 +65,6 @@ public class RecommendationService implements IRecommendationService {
         kieSession.setGlobal("recommendations", recommendations);
         templateKsession.setGlobal("recommendations", recommendations);
         kieSession.setGlobal("injuries", injuries);
-        templateKsession.setGlobal("injuries", injuries);
         kieSession.insert(filters);
         templateKsession.insert(filters);
 
@@ -81,8 +80,8 @@ public class RecommendationService implements IRecommendationService {
             }
         }
         kieSession.fireAllRules();
-        templateKsession.fireAllRules();
         kieSession.dispose();
+        templateKsession.fireAllRules();
         templateKsession.dispose();
 
         KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");

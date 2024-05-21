@@ -45,14 +45,14 @@ public class ServiceApplication {
     public KieBase templateKieBase() {
         InputStream tenisStream = this.getClass().getResourceAsStream("/rules/basic/tenis-template.drt");
         DataProvider dataProviderTenis = new ArrayDataProvider(new String[][]{
-                {"Tenis", "0", "100", "17.0"},
-                {"Tenis", "100", "108", "19.0"},
-                {"Tenis", "109", "115", "21.0"},
-                {"Tenis", "116", "125", "23.0"},
-                {"Tenis", "126", "140", "25.0"},
-                {"Tenis", "141", "155", "26.0"},
-                {"Tenis", "156", "190", "27.0"},
-                {"Tenis", "191", "250", "27.5"},
+                {"Tenis", "0.0", "100.0", "17.0"},
+                {"Tenis", "100.0", "108.0", "19.0"},
+                {"Tenis", "109.0", "115.0", "21.0"},
+                {"Tenis", "116.0", "125.0", "23.0"},
+                {"Tenis", "126.0", "140.0", "25.0"},
+                {"Tenis", "141.0", "155.0", "26.0"},
+                {"Tenis", "156.0", "190.0", "27.0"},
+                {"Tenis", "191.0", "250.0", "27.5"},
                 
                 
         });

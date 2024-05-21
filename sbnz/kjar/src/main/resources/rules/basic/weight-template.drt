@@ -5,7 +5,6 @@ template header
     maxWeight
 
 package basic;
-
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
@@ -23,14 +22,13 @@ import com.ftn.sbnz.model.articles.WlTypeOfGear;
 import com.ftn.sbnz.model.sport.SportWeightliftingType;
 import com.ftn.sbnz.model.users.Gender;
 import com.ftn.sbnz.model.articles.Weight;
-
 import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
 
 template "weight-rules"
 
-rule "Sport @{sport} Ukoliko je @{level} i @{gender} je, ponnudi bucice do @{maxWeight}"
+rule "Ukoliko je @{level} i "@{gender}" je, ponnudi bucice do @{maxWeight}"
 when
     $filter: Filters(sport == Sport.DizanjeTegova, gender == Gender.@{gender}, level == SportLevel.@{level})
     $article: Article()
@@ -45,5 +43,4 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
-
 end template
