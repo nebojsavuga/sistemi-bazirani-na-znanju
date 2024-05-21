@@ -93,17 +93,7 @@ public class ArticleService implements IArticleService {
                 .collect(Collectors.toSet());
     }
 
-    @Override
-    public ArticleDTO buyArticle(Long id, Long userId, Long codeId) {
-        Optional<Article> article = articleRepository.findById(id);
-        if (article.isEmpty()) {
-            throw new NotFoundException("Article with the given id doesn't exist.");
-        }
-        Optional<User> user = userRepository.findById(userId);
-        if (user.isEmpty()) {
-            throw new NotFoundException("User with the given id doesn't exist.");
-        }
-        float price = article.get().getPrice();
+    public float applyCode(Long codeId, Long userId, Article article, float price){
         if (codeId!=null){
             Optional<Code> codeToUse = codeRepository.findById(codeId);
             if (codeToUse.isEmpty()) {
@@ -116,11 +106,10 @@ public class ArticleService implements IArticleService {
                 throw new BadRequestException("Code with the given id is already used.");
             }
             if (codeToUse.get().getFlag()==0){
-                if (codeToUse.get().getSport() != article.get().getSport()) {
+                if (codeToUse.get().getSport() != article.getSport()) {
                     throw new BadRequestException("Code is only for " + codeToUse.get().getSport());
                 }
             }
-            
             if (codeToUse.isPresent()){
                 price = (price * (100 - codeToUse.get().getDiscountPercentage()))/100;
                 price = price - codeToUse.get().getDiscountPrice();
@@ -130,7 +119,22 @@ public class ArticleService implements IArticleService {
                 codeToUse.get().setUsed(true);
                 codeRepository.save(codeToUse.get());
             }
+        }
+    return price;
     }
+
+    @Override
+    public ArticleDTO buyArticle(Long id, Long userId, Long codeId) {
+        Optional<Article> article = articleRepository.findById(id);
+        if (article.isEmpty()) {
+            throw new NotFoundException("Article with the given id doesn't exist.");
+        }
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new NotFoundException("User with the given id doesn't exist.");
+        }
+        float price = article.get().getPrice();
+        price = applyCode(codeId, userId, article.get(), price);
         Purchase purchase = new Purchase(user.get(), article.get(), price);
         purchaseRepository.save(purchase);
 
