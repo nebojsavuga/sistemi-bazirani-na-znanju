@@ -53,6 +53,9 @@ INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport)
 VALUES ('Babolat Custom Damp', 7.99, 'Unisex', 'Babolat', 'Vibrastop', 'TenisGear', 'tenis');
 
 INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport) 
+VALUES ('Wilson Ultralight II', 32.99, 'Unisex', 'Wilson', 'Kacket', 'TenisGear', 'tenis');
+
+INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport) 
 VALUES ('Wilson oprema US Open 3tball', 9.00, 'Unisex', 'Wilson', 'Loptice', 'TenisGear','tenis');
 
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
@@ -61,6 +64,15 @@ INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_typ
 VALUES ('Wilson Clash 100', 220.00, 'Unisex', 'Wilson', 295.0,'Profesionalni','Meko',27.0, 'Racket', 'tenis');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
 VALUES ('Wilson Tour Slam Lite', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',27.0, 'Racket', 'tenis');
+
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
+VALUES ('Wilson Ultra 26 V4 Tennis Racket', 129.00, 'Unisex', 'Wilson', 270.0,'Klasik','Meko',26.0, 'Racket', 'tenis');
+
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
+VALUES ('Wilson Ultra 25 V4 Tennis Racket', 129.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',25.0, 'Racket', 'tenis');
+
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
+VALUES ('Wilson Pro Staff Precision Jr 19', 38.99, 'Unisex', 'Wilson', 170.0,'Klasik','Meko',19.0, 'Racket', 'tenis');
 
 INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport) 
 VALUES ('NikeCourt Air Zoom Zero HC Grass', 150.00, 'Unisex', 'Nike', 'Kramponi', 'TenisShoe', 'tenis');
