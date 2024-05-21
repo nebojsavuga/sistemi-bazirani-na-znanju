@@ -41,8 +41,8 @@ public class ServiceApplication {
 		return kContainer;
 	}
 
-	 @Bean
-    public KieBase forwardKieBase() {
+	@Bean
+    public KieBase templateKieBase() {
         InputStream tenisStream = this.getClass().getResourceAsStream("/basic/tenis-template.drt");
         DataProvider dataProviderTenis = new ArrayDataProvider(new String[][]{
                 {"Tenis", "0", "100", "17.0"},
@@ -84,6 +84,6 @@ public class ServiceApplication {
 
     @Bean
     public KieSession templateKsession() {
-        return forwardKieBase().newKieSession();
+        return templateKieBase().newKieSession();
     }
 }

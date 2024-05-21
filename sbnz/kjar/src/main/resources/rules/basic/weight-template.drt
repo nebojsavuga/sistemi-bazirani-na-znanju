@@ -3,6 +3,7 @@ template header
     level
     gender
     maxWeight
+
 package basic;
 
 import com.ftn.sbnz.model.Filters;
