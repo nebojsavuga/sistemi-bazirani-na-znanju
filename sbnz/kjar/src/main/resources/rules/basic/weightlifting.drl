@@ -16,6 +16,7 @@ import com.ftn.sbnz.model.articles.WeightliftingGear;
 import com.ftn.sbnz.model.articles.WlTypeOfGear;
 import com.ftn.sbnz.model.sport.SportWeightliftingType;
 import com.ftn.sbnz.model.users.Gender;
+import com.ftn.sbnz.model.articles.Weight;
 
 import java.util.Set;
 
@@ -85,6 +86,23 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Weightlifting Gloves");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Bavi se dizanjem tegova i pro je, preporuci ploce od 20 kg"
+salience 100
+when
+    $filters: Filters(sport == Sport.DizanjeTegova, level == SportLevel.Pro)
+    $article: Article()
+    Weight(weight > 19.9) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Weight");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end

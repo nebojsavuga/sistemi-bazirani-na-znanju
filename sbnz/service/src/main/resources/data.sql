@@ -161,7 +161,7 @@ VALUES (2, 45, '2022-05-15', 2);
 
 -- tegovi
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
-VALUES ('Titan Fitness Gumirane Olimpijske Ploče', 59.99, 'Unisex', 'Titan Fitness', 'Weight', 20.0, 'dizanjeTegova');
+VALUES ('Titan Fitness Gumirane Olimpijske Ploce', 59.99, 'Unisex', 'Titan Fitness', 'Weight', 20.0, 'dizanjeTegova');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, type, sport) 
 VALUES ('Titan Fitness', 159.99, 'Unisex', 'Titan Fitness', 'Barbel', 20.0, 'Olimpijska', 'dizanjeTegova');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
