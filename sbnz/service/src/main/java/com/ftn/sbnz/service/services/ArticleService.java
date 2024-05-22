@@ -136,6 +136,17 @@ public class ArticleService implements IArticleService {
         codeRepository.save(code);
     }
 
+    private void saveCodeAfter500ePurchased(Code code, List<Purchase> purchases) {
+        for (Purchase purch : purchases) {
+            Optional<Purchase> purchaseToChange = purchaseRepository.findById(purch.getId());
+            if (code.getFlag() == 2) {
+                purchaseToChange.get().setProcessedForFavoriteCode(true);
+            }
+            purchaseRepository.save(purchaseToChange.get());
+        }
+        codeRepository.save(code);
+    }
+
     private void saveCodeAfter4UsedCodes(Code codePriceDiscount, List<Code> usedCodes) {
         for (Code usCode : usedCodes) {
             Optional<Code> codeToChange = codeRepository.findById(usCode.getId());
@@ -159,12 +170,17 @@ public class ArticleService implements IArticleService {
         Purchase purchase = new Purchase(user.get(), article.get(), price);
         purchaseRepository.save(purchase);
         List<Purchase> purchases = new ArrayList<>();
+        List<Purchase> purchasesLoyal = new ArrayList<>();
+
         Code code = new Code();
+        Code codeLoyal = new Code();
         List<Code> usedCodes = new ArrayList<>();
         Code codePriceDiscount = new Code();
         KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");
         cepKsession.setGlobal("purchases", purchases);
         cepKsession.setGlobal("code", code);
+        cepKsession.setGlobal("purchasesLoyal", purchasesLoyal);
+        cepKsession.setGlobal("codeLoyal", codeLoyal);
         cepKsession.setGlobal("usedCodes", usedCodes);
         cepKsession.setGlobal("codePriceDiscount", codePriceDiscount);
 
@@ -181,6 +197,9 @@ public class ArticleService implements IArticleService {
         cepKsession.fireAllRules();
         if (code.getName() != null) {
             saveCodeAfter5Purchases(code, purchases);
+        }
+        if (codeLoyal.getName() != null) {
+            saveCodeAfter500ePurchased(codeLoyal, purchasesLoyal);
         }
         if (codePriceDiscount.getName() != null) {
             saveCodeAfter4UsedCodes(codePriceDiscount, usedCodes);

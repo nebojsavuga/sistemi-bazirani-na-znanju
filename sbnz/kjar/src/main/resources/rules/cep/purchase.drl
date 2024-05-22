@@ -8,9 +8,11 @@ import com.ftn.sbnz.model.articles.Article;
 import java.util.List;
 import com.ftn.sbnz.model.Code;
 global List<Purchase> purchases;
+global List<Purchase> purchasesLoyal;
 global List<Code> usedCodes;
 global Code code;
-global Code codePriceDiscount
+global Code codeLoyal;
+global Code codePriceDiscount;
 
 rule "Ukoliko je kupio preko 5 artikala za odredjeni sport u poslednjih godinu dana, daj mu kod za popust na taj sport"
 salience -100
@@ -31,6 +33,27 @@ then
     code.setFlag(0);
     code.setName("10% popusta za sport: " + $article.getSport());
     purchases.add($purchase);
+end
+
+rule "Ukoliko je potrosio preko 500e dodeli mu kod na bilo koji artikal"
+salience -100
+when
+    String(this == "cepKupovina")
+    $purchase: Purchase($user:user, $article:article, isProcessedForFavoriteCode() == false)
+    Number(floatValue >= 500) from accumulate(
+    $p2:Purchase($price:price, user == $user, isProcessedForFavoriteCode() == false)
+    over window: time(365d),
+    sum($price)
+)
+then
+    codeLoyal.setSport("");
+    codeLoyal.setDiscountPercentage(10.0f);
+    codeLoyal.setDiscountPrice(0.0f);
+    codeLoyal.setUsed(false);
+    codeLoyal.setUser($user);
+    codeLoyal.setFlag(2);
+    codeLoyal.setName("10% popusta na bilo koji artikal");
+    purchasesLoyal.add($purchase);
 end
 
 rule "Ukoliko je korisnik Iskoristio 4 koda za neki sport u poslednje 2 godine dobija kod od 10e popusta na artikal iz tog sporta"
