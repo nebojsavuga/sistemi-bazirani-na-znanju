@@ -155,6 +155,14 @@ public class ArticleService implements IArticleService {
         codeRepository.save(codePriceDiscount);
     }
 
+    private void saveCodeAfter3UsedLoyalCodes(Code codePriceDiscount, List<Code> usedCodes) {
+        for (Code usCode : usedCodes) {
+            Optional<Code> codeToChange = codeRepository.findById(usCode.getId());
+            codeRepository.delete(codeToChange.get());
+        }
+        codeRepository.save(codePriceDiscount);
+    }
+
     @Override
     public ArticleDTO buyArticle(Long id, Long userId, Long codeId) {
         Optional<Article> article = articleRepository.findById(id);
@@ -171,11 +179,12 @@ public class ArticleService implements IArticleService {
         purchaseRepository.save(purchase);
         List<Purchase> purchases = new ArrayList<>();
         List<Purchase> purchasesLoyal = new ArrayList<>();
-
         Code code = new Code();
         Code codeLoyal = new Code();
         List<Code> usedCodes = new ArrayList<>();
+        List<Code> usedLoyalCodes = new ArrayList<>();
         Code codePriceDiscount = new Code();
+        Code codeLoyalPriceDiscount = new Code();
         KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");
         cepKsession.setGlobal("purchases", purchases);
         cepKsession.setGlobal("code", code);
@@ -183,6 +192,8 @@ public class ArticleService implements IArticleService {
         cepKsession.setGlobal("codeLoyal", codeLoyal);
         cepKsession.setGlobal("usedCodes", usedCodes);
         cepKsession.setGlobal("codePriceDiscount", codePriceDiscount);
+        cepKsession.setGlobal("codeLoyalPriceDiscount", codeLoyalPriceDiscount);
+        cepKsession.setGlobal("usedLoyalCodes", usedLoyalCodes);
 
         Set<Purchase> purchases2 = user.get().getPurchases();
         for (Purchase purchase2 : purchases2) {
@@ -203,6 +214,9 @@ public class ArticleService implements IArticleService {
         }
         if (codePriceDiscount.getName() != null) {
             saveCodeAfter4UsedCodes(codePriceDiscount, usedCodes);
+        }
+        if (codeLoyalPriceDiscount.getName() != null) {
+            saveCodeAfter4UsedCodes(codeLoyalPriceDiscount, usedLoyalCodes);
         }
         return new ArticleDTO(article.get().getId(), article.get().getName(), purchase.getPrice(),
                 article.get().getBrandName(), article.get().getClassName());

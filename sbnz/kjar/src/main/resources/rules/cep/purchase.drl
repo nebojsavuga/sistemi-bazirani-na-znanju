@@ -10,9 +10,11 @@ import com.ftn.sbnz.model.Code;
 global List<Purchase> purchases;
 global List<Purchase> purchasesLoyal;
 global List<Code> usedCodes;
+global List<Code> usedLoyalCodes;
 global Code code;
 global Code codeLoyal;
 global Code codePriceDiscount;
+global Code codeLoyalPriceDiscount;
 
 rule "Ukoliko je kupio preko 5 artikala za odredjeni sport u poslednjih godinu dana, daj mu kod za popust na taj sport"
 salience -100
@@ -60,10 +62,10 @@ rule "Ukoliko je korisnik Iskoristio 4 koda za neki sport u poslednje 2 godine d
 salience -100
 when
     String(this == "cepKupovina")
-    $code: Code($user:user, $sport: sport, isUsed() == true)
+    $code: Code($user:user, $sport: sport,getFlag() == 0, isUsed() == true)
     Number(intValue >= 3) from accumulate(
-    $code2:Code(this!= $code, user == $user, sport == $sport, isUsed() == true)
-    over window: time(700d),
+    $code2:Code(this!= $code, user == $user,getFlag()==0, sport == $sport, isUsed() == true)
+    over window: time(730d),
     count($code2)
 )
 then
@@ -75,6 +77,27 @@ then
     codePriceDiscount.setFlag(0);
     codePriceDiscount.setName("10e popusta za sport: " + $sport);
     usedCodes.add($code);
+end
+
+rule "Ukoliko je korisnik Iskoristio 3 loyal koda u poslednje 2 godine dobija kod od 20e popusta na bilo koji artikal"
+salience -100
+when
+    String(this == "cepKupovina")
+    $code: Code($user:user, $sport: sport,getFlag()==2, isUsed() == true)
+    Number(intValue >= 2) from accumulate(
+    $code2:Code(this!= $code, user == $user,getFlag()==2, isUsed() == true)
+    over window: time(730d),
+    count($code2)
+)
+then
+    codeLoyalPriceDiscount.setSport("");
+    codeLoyalPriceDiscount.setDiscountPercentage(0.0f);
+    codeLoyalPriceDiscount.setDiscountPrice(20.0f);
+    codeLoyalPriceDiscount.setUsed(false);
+    codeLoyalPriceDiscount.setUser($user);
+    codeLoyalPriceDiscount.setFlag(2);
+    codeLoyalPriceDiscount.setName("20e popusta za bilo koji artikal");
+    usedLoyalCodes.add($code);
 end
 
 rule "Ako je kupljena kopacka sa 6 krampona nude mu se rezervni kramponi"
