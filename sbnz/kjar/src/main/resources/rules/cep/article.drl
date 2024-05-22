@@ -34,7 +34,7 @@ import java.util.List;
 global Set<RecommendedArticleDTO> recommendations;
 
 rule "Ukoliko je kupljen neki artikal u poslednjih mesec dana, ne preporucivati ga"
-salience 1
+salience -1000
 when
     $article: RecommendedArticleDTO($id: id) from recommendations
     $purchase : Purchase(article.getId() == $id) over window:time(30d)
@@ -43,7 +43,7 @@ then
 end
 
 rule "Ukoliko je brend ocenjen ispod 3 5 ili vise puta u poslednjih godinu dana ne preporucuj ga"
-salience 1
+salience -100
 when
     $article: RecommendedArticleDTO($brand: brandName) from recommendations
     Number(intValue >= 5) from accumulate(
@@ -128,6 +128,7 @@ then
     recommendedArticle.setArticleType("KneeWrap");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
+    
 end
 
 rule "Ukoliko se bavi orijentiringom i kupio je poludugacku trenerku u poslednjih 6 meseci preporucuju mu se kamasne"
@@ -146,7 +147,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Kamasne");
+    recommendedArticle.setArticleType("Gaiters");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
     
