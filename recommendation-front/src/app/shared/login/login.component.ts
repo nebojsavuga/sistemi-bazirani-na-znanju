@@ -42,7 +42,7 @@ export class LoginComponent {
           localStorage.setItem('role', this.tokenDecoderService.getDecodedAccesToken()['role']);
           localStorage.setItem('userId', this.tokenDecoderService.getDecodedAccesToken()['id']);
           localStorage.setItem('userEmail', this.tokenDecoderService.getDecodedAccesToken()['email']);
-          this.router.navigate(['home']);
+          this.router.navigate(['']);
           this.authenticationService.userLoggedIn$.next(true);
         }
       },
