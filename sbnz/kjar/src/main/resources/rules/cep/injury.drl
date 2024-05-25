@@ -28,7 +28,9 @@ import com.ftn.sbnz.model.articles.Sweatpants;
 import com.ftn.sbnz.model.articles.SweatpantsType;
 import com.ftn.sbnz.model.users.Injury;
 import com.ftn.sbnz.model.users.ConcreteInjury;
-
+import com.ftn.sbnz.model.articles.Racket;
+import com.ftn.sbnz.model.articles.TypeOfRacket;
+import com.ftn.sbnz.model.articles.TypeOfRacketSpanning;
 
 import java.util.Set;
 import java.util.List;
@@ -55,6 +57,50 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Knee Wrap");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Ukoliko je u poslednje 3 godine, 2 povrede lakta i bavi se tenisom reket laksi od 300g"
+when
+    Filters(sport == Sport.Tenis)
+    $article: Article()
+    $reket: Racket(weight <= 300.0) from $article
+    Injury(name == "Povreda lakta", $injuryId: id) from injuries
+    Number(intValue >= 2) from accumulate(
+        $p: ConcreteInjury(injury.getId() == $injuryId)
+        over window: time(1095d),
+        count($p)
+    )
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Ukoliko je u poslednjih 5 godina 2 povrede rucnog zgloba i bavi se tenisom, mekse spanovanje reketa I reket laksi od 300g"
+when
+    Filters(sport == Sport.Tenis)
+    $article: Article()
+    $reket: Racket(weight <= 300.0,spanningType == TypeOfRacketSpanning.Meko) from $article
+    Injury(name == "Povreda rucnog zgloba", $injuryId: id) from injuries
+    Number(intValue >= 2) from accumulate(
+        $p: ConcreteInjury(injury.getId() == $injuryId)
+        over window: time(1825d),
+        count($p)
+    )
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
