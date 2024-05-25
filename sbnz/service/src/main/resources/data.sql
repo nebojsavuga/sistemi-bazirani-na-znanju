@@ -17,6 +17,15 @@ VALUES ('Povreda lakta');
 INSERT INTO Injury (name) 
 VALUES ('Povreda rucnog zgloba');
 
+-- Povrede
+insert into Concrete_Injury(user_id, injury_id, execution_time)
+values(1, 1, '2023-05-18');
+insert into Concrete_Injury(user_id, injury_id, execution_time)
+values(1, 2, '2023-05-18');
+insert into Concrete_Injury(user_id, injury_id, execution_time)
+values(2, 3, '2023-05-18');
+insert into Concrete_Injury(user_id, injury_id, execution_time)
+values(2, 4, '2023-05-18');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport) 
 VALUES ('Wilson Pro Overgrip', 5.99, 'Unisex', 'Wilson', 'Grip', 'Tenis');
