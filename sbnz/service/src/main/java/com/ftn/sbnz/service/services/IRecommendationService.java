@@ -13,5 +13,5 @@ public interface IRecommendationService {
 
     Set<RecommendedArticleDTO> recommendBasedOnArticle(Long id);
 
-    void insertTemplate();
+    void insertTemplate(List<String> brandNames);
 }

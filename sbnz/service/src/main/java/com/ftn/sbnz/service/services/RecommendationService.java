@@ -240,13 +240,14 @@ public class RecommendationService implements IRecommendationService {
         return recommendations;
     }
 
-    private KieBase generateFootballKieBase() {
+    private KieBase generateFootballKieBase(List<String> brandNames) {
         DataProviderCompiler converter = new DataProviderCompiler();
         InputStream footballStream = this.getClass().getResourceAsStream("/rules/basic/football-template.drt");
-        DataProvider dataProviderFootball = new ArrayDataProvider(new String[][]{
-                {"Nike"},
-                {"Adidas"},
-        });
+        String[][] brandNamesArray = new String[brandNames.size()][1];
+        for (int i = 0; i < brandNames.size(); i++) {
+            brandNamesArray[i][0] = brandNames.get(i);
+        }
+        DataProvider dataProviderFootball = new ArrayDataProvider(brandNamesArray);
         String footballDrl = converter.compile(dataProviderFootball, footballStream);
 
         KieHelper kieHelper = new KieHelper();
@@ -264,8 +265,8 @@ public class RecommendationService implements IRecommendationService {
     }
 
     @Override
-    public void insertTemplate() {
-      this.footballKieBase = generateFootballKieBase();
+    public void insertTemplate(List<String> brandNames) {
+      this.footballKieBase = generateFootballKieBase(brandNames);
     }
     
 }

@@ -21,7 +21,6 @@ when
     $$article: Article(brandName == "@{brand}")
     FootballGear(type == GearTypeFootball.Dres) from $$article
 then
-    System.out.println("usao??");
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($$article.getName());
     recommendedArticle.setPrice($$article.getPrice());

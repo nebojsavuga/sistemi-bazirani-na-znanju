@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.service.config.JwtUtils;
+import com.ftn.sbnz.service.controllers.dtos.BrandNamesDTO;
 import com.ftn.sbnz.service.services.IRecommendationService;
 
 @RestController
@@ -56,6 +57,7 @@ public class RecommendationController {
 
     @PutMapping("template")
     public ResponseEntity<Set<RecommendedArticleDTO>> insertTemplate(
+            @RequestBody BrandNamesDTO brandNames,
             @RequestHeader("Authorization") String token) {
         if (token != null && token != "") {
             String jwtt = token.substring(7);
@@ -66,7 +68,7 @@ public class RecommendationController {
         }else{
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        this.recommendationService.insertTemplate();
+        this.recommendationService.insertTemplate(brandNames.getBrandNames());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
