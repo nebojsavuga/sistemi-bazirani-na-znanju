@@ -200,6 +200,17 @@ VALUES ('Kramponi x5', 5.99, 'Unisex', 'Nike', 'FootballGear', 'Krampon', 'fudba
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
 VALUES ('Kjuc za odvrtanje i zavrtanje krampona', 12.99, 'Unisex', 'Owasp', 'FootballGear', 'KljucZaKrampone', 'fudbal');
 
+-- dresovi
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
+VALUES ('Ronaldinho Milan', 20.99, 'Unisex', 'Nike', 'FootballGear', 'Dres', 'fudbal');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
+VALUES ('Ronaldo Real Madrid 7', 20.99, 'Unisex', 'Nike', 'FootballGear', 'Dres', 'fudbal');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
+VALUES ('Messi PSG', 24.99, 'Unisex', 'Adidas', 'FootballGear', 'Dres', 'fudbal');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
+VALUES ('Ibrahimovic LA Galaxy', 24.99, 'Unisex', 'Puma', 'FootballGear', 'Dres', 'fudbal');
+
 -- kupovine
 INSERT INTO Purchase (user_id, article_id, execution_time,is_processed_for_sport_code,is_processed_for_favorite_code, price) 
 VALUES (2, 1, '2024-05-18', false, false, 5.99);
