@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { RecomendationService } from '../../core/services/recomendation.service';
 
 @Component({
   selector: 'app-store-home',
@@ -8,7 +9,14 @@ import { FormGroup } from '@angular/forms';
 })
 export class StoreHomeComponent {
 
+  constructor(private recomendationService: RecomendationService) { }
+
   handleFilterSubmit(event: any) {
-    console.log(event);
+    
+    this.recomendationService.recommend(event).subscribe(
+      res =>{
+        console.log(res);
+      }
+    )
   }
 }

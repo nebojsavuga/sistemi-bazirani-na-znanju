@@ -1,14 +1,14 @@
 export interface Filter {
-    gender?: Gender,
+    gender?: string,
     height: number,
     age?: number,
-    level?: SportLevel,
+    level?: string,
     injuries?: number[],
-    typeOfFotballPlayer: SportFootballPlayer,
-    typeOfFootball: SportFootballType,
-    typeOfRace: SportOrientiringType,
-    typeOfField: SportTenisField,
-    typeOfWeightlifting: SportWeightliftingType
+    typeOfFotballPlayer: string,
+    typeOfFootball: string,
+    typeOfRace: string,
+    typeOfField: string,
+    typeOfWeightlifting: string
 }
 
 export enum Gender {
