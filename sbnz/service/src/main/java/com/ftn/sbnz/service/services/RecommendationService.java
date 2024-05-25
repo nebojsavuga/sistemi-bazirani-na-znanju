@@ -20,10 +20,12 @@ import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.events.Purchase;
+import com.ftn.sbnz.model.users.ConcreteInjury;
 import com.ftn.sbnz.model.users.Injury;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
+import com.ftn.sbnz.service.repositories.ConcreteInjuryRepository;
 import com.ftn.sbnz.service.repositories.InjuryRepository;
 import com.ftn.sbnz.service.repositories.PurchaseRepository;
 import com.ftn.sbnz.service.repositories.RatingRepository;
@@ -38,6 +40,7 @@ public class RecommendationService implements IRecommendationService {
     private PurchaseRepository purchaseRepository;
     private RatingRepository ratingRepository;
     private UserRepository userRepository;
+    private ConcreteInjuryRepository concreteInjuryRepository;
     @Autowired
     private KieBase templateKieBase;
 
@@ -46,13 +49,15 @@ public class RecommendationService implements IRecommendationService {
             InjuryRepository injuryRepository,
             PurchaseRepository purchaseRepository,
             RatingRepository ratingRepository,
-            UserRepository userRepository) {
+            UserRepository userRepository,
+            ConcreteInjuryRepository concreteInjuryRepository) {
         this.kieContainer = kieContainer;
         this.articleRepository = articleRepository;
         this.injuryRepository = injuryRepository;
         this.purchaseRepository = purchaseRepository;
         this.ratingRepository = ratingRepository;
         this.userRepository = userRepository;
+        this.concreteInjuryRepository = concreteInjuryRepository;
     }
 
     @Override
@@ -94,6 +99,9 @@ public class RecommendationService implements IRecommendationService {
         if(user.isEmpty()){
             return recommendations;
         }
+        List<ConcreteInjury> concreteInjuries = concreteInjuryRepository.findByUserId(userId);
+        cepKsession.setGlobal("concreteInjuries", concreteInjuries);
+        cepKsession.setGlobal("injuries", injuries);
         cepKsession.insert(user);
         cepKsession.insert(filters);
         j = 0;
