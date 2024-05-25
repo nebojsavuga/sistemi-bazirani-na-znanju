@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { RecommendedArticle } from '../../shared/models/articles';
 
 @Component({
   selector: 'app-article-list-item',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './article-list-item.component.css'
 })
 export class ArticleListItemComponent {
+  @Input() article: RecommendedArticle;
 
 }

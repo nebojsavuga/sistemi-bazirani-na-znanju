@@ -1,2 +1,8 @@
-<app-filters (searchFilter)="handleFilterSubmit($event)"></app-filters>
-<app-articles [filters]="null"></app-articles>
+<div class="row">
+    <div class="col-12">
+        <app-filters (searchFilter)="handleFilterSubmit($event)"></app-filters>
+    </div>
+    <div class="col-12">
+        <app-articles [articles]="articles"></app-articles>
+    </div>
+</div>

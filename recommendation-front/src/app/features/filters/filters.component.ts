@@ -22,7 +22,7 @@ export class FiltersComponent implements OnInit {
   sportTenisFields: string[] = ['Trava', 'Beton', 'Sljaka'];
   sportWeightliftingTypes: string[] = ['Powerlifting', 'Weightlifting', 'Bodybuilding']
   selectedInjuries: number[] = [];
-
+  hasError = false;
   filterForm = new FormGroup(
     {
       sport: new FormControl('', [Validators.required]),
@@ -58,10 +58,14 @@ export class FiltersComponent implements OnInit {
       injuries: this.selectedInjuries
     })
     if (this.filterForm.valid) {
+      this.hasError = false;
       this.searchFilter.emit(this.filterForm.value);
+    }else{
+      this.hasError = true;
+
     }
   }
-  
+
   onInjuryChange(event: any, injuryId: number): void {
     if (event.target.checked) {
       this.selectedInjuries.push(injuryId);

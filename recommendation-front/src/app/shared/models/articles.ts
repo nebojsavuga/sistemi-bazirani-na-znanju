@@ -3,5 +3,6 @@ export interface RecommendedArticle{
     name: string,
     price: number,
     brandName: string,
-    articleType: string
+    articleType: string,
+    imagePath?: string
 }

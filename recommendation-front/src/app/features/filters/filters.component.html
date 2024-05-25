@@ -1,5 +1,12 @@
 <form [formGroup]="filterForm" (ngSubmit)="filterSubmitted()">
     <div class="row">
+        <div class="col-12">
+            <div class="alert alert-danger" role="alert" *ngIf="hasError">
+                Please select a sport.
+              </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="form-group">
             <label for="sport">Sport</label>
             <select formControlName="sport" id="sport">

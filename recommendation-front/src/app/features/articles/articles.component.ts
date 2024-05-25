@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Filter } from '../../shared/models/filter';
+import { RecommendedArticle } from '../../shared/models/articles';
 
 @Component({
   selector: 'app-articles',
@@ -7,5 +7,5 @@ import { Filter } from '../../shared/models/filter';
   styleUrl: './articles.component.css'
 })
 export class ArticlesComponent {
-  @Input() filters: Filter;
+  @Input() articles: RecommendedArticle[] = [];
 }
