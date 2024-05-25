@@ -15,7 +15,7 @@
                 <div class="form-group col-md-3 col-12 mt-2">
                     <label for="sport">Sport</label>
                     <select formControlName="sport" id="sport" class="form-control">
-                        <option value="" disabled selected>Odaberite sport</option>
+                        <option value="" disabled selected>Izaberite sport</option>
                         <option *ngFor="let sport of sports" [value]="sport">{{ sport | camelCase }}</option>
                     </select>
                 </div>

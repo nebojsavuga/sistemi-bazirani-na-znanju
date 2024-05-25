@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RecommendedArticle } from '../../shared/models/articles';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article-list-item',
@@ -8,8 +9,9 @@ import { RecommendedArticle } from '../../shared/models/articles';
 })
 export class ArticleListItemComponent {
   @Input() article: RecommendedArticle;
+  constructor(private router: Router) { }
 
-  showArticle(id: number){
-    
+  showArticle(id: number) {
+    this.router.navigate([id + '/article']);
   }
 }
