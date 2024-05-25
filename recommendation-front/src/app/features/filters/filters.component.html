@@ -1,1 +1,89 @@
-<p>filters works!</p>
+<form [formGroup]="filterForm" (ngSubmit)="filterSubmitted()">
+    <div class="row">
+        <div class="form-group">
+            <label for="sport">Sport</label>
+            <select formControlName="sport" id="sport">
+                <option *ngFor="let sport of sports" [value]="sport">{{ sport | camelCase }}</option>
+            </select>
+        </div>
+        <div class="form-group" *ngIf="filterForm.get('sport').value === 'Fudbal'">
+            <div class="form-group">
+                <label for="typeOfFootball">Tip igre</label>
+                <select formControlName="typeOfFootball" id="typeOfFootball">
+                    <option *ngFor="let sport of sportFootballTypes" [value]="sport">{{ sport | camelCase }}</option>
+                </select>
+
+            </div>
+            <div class="form-group">
+                <label for="typeOfFotballPlayer">Tip igraca</label>
+                <select formControlName="typeOfFotballPlayer" id="typeOfFotballPlayer">
+                    <option *ngFor="let sport of typeOfFootballPlayers" [value]="sport">{{ sport | camelCase }}</option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="form-group" *ngIf="filterForm.get('sport').value === 'Tenis'">
+            <div class="form-group">
+                <label for="typeOfField">Teren</label>
+                <select formControlName="typeOfField" id="typeOfField">
+                    <option *ngFor="let sport of sportTenisFields" [value]="sport">{{ sport | camelCase }}</option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="form-group" *ngIf="filterForm.get('sport').value === 'Orijentiring'">
+            <div class="form-group">
+                <label for="typeOfRace">Tip Trke</label>
+                <select formControlName="typeOfRace" id="typeOfRace">
+                    <option *ngFor="let sport of sportOrientiringTypes" [value]="sport">{{ sport | camelCase }}</option>
+                </select>
+
+            </div>
+        </div>
+
+        <div class="form-group" *ngIf="filterForm.get('sport').value === 'DizanjeTegova'">
+            <div class="form-group">
+                <label for="typeOfWeightlifting">Tip dizača</label>
+                <select formControlName="typeOfWeightlifting" id="typeOfWeightlifting">
+                    <option *ngFor="let sport of sportWeightliftingTypes" [value]="sport">{{ sport | camelCase }}
+                    </option>
+                </select>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="level">Level</label>
+            <select formControlName="level" id="level">
+                <option *ngFor="let level of levels" [value]="level">{{ level | camelCase }}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="gender">Pol</label>
+            <select formControlName="gender" id="gender">
+                <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label for="height">Visina (cm)</label>
+            <input type="number" formControlName="height" id="height" min="90" max="300">
+        </div>
+
+        <div class="form-group">
+            <label for="age">Godine</label>
+            <input type="number" formControlName="age" id="age" min="3" max="120">
+        </div>
+        <div class="form-group">
+            <label>Povrede</label>
+            <div *ngFor="let injury of injuries" class="form-check">
+                <input type="checkbox" [id]="'injury_' + injury.id" [value]="injury.id"
+                    (change)="onInjuryChange($event, injury.id)" class="form-check-input">
+                <label [for]="'injury_' + injury.id" class="form-check-label">{{ injury.name }}</label>
+            </div>
+        </div>
+    </div>
+    <button type="submit">Primeni</button>
+</form>

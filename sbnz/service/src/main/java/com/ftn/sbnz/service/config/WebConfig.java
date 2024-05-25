@@ -48,6 +48,7 @@ public class WebConfig {
                 .antMatchers("/api/auth/login").permitAll()
                 .antMatchers("/api/recommendation/**").permitAll()
                 .antMatchers("/api/articles/**").permitAll()
+                .antMatchers("/api/injuries/**").permitAll()
                 .antMatchers("/api/**").authenticated()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

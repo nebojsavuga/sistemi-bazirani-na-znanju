@@ -6,6 +6,10 @@ import { FiltersComponent } from './filters/filters.component';
 import { ArticlesComponent } from './articles/articles.component';
 import { ArticleListItemComponent } from './article-list-item/article-list-item.component';
 import { ArticleDisplayComponent } from './article-display/article-display.component';
+import { StoreHomeComponent } from './store-home/store-home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { CamelCasePipe } from './pipes/camel-case.pipe';
 
 
 @NgModule({
@@ -13,11 +17,18 @@ import { ArticleDisplayComponent } from './article-display/article-display.compo
     FiltersComponent,
     ArticlesComponent,
     ArticleListItemComponent,
-    ArticleDisplayComponent
+    ArticleDisplayComponent,
+    StoreHomeComponent,
+    CamelCasePipe
   ],
   imports: [
     CommonModule,
-    FeaturesRoutingModule
+    FeaturesRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatSnackBarModule
+  ],
+  exports:[
   ]
 })
 export class FeaturesModule { }

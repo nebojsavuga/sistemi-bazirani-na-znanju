@@ -7,6 +7,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Interceptor } from './core/security/interceptor';
+import { FeaturesModule } from './features/features.module';
 
 
 @NgModule({
@@ -20,8 +21,8 @@ import { Interceptor } from './core/security/interceptor';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
-
+    MatSnackBarModule,
+    FeaturesModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true

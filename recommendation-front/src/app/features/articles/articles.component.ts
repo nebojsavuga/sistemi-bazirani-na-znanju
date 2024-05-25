@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Filter } from '../../shared/models/filter';
 
 @Component({
   selector: 'app-articles',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './articles.component.css'
 })
 export class ArticlesComponent {
-
+  @Input() filters: Filter;
 }
