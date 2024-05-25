@@ -7,7 +7,7 @@
             <p class="reesen-big-lead-text join-us center-text text-shadow text-light">Good to see you again</p>
           </div>
           <div class="col-md-6 col-12">
-            <img src="../../../../assets/home.png" alt="Car Logo" class="logo-image">
+            <img src="../../../assets/home.png" alt="Home Logo" class="logo-image">
           </div>
         </div>
   
@@ -20,17 +20,17 @@
           (ngSubmit)="login()"
         >
           <div class="alert alert-danger" role="alert" *ngIf="hasError">
-            Username or password are incorrect. Both fields must be atleast 4 characters long!
+            Email or password are incorrect. Both fields must be atleast 4 characters long!
           </div>
           <div class="mb-3">
-            <label for="email" class="col-form-label dark-blue-color align-text-left">Enter Email or Username
+            <label for="email" class="col-form-label dark-blue-color align-text-left">Enter Email
             </label>
-            <input  type="text" class="form-control" name="email" id="email" placeholder="markoni" formControlName="email">
+            <input  type="text" class="form-control" name="email" id="email" placeholder="marko@gmail.com" formControlName="email">
             <div *ngIf="loginForm.get('email').hasError('required') && loginForm.get('email').touched" class="red-dot">
-              Email or username is required.
+              Email  is required.
             </div>
             <div *ngIf="loginForm.get('email').hasError('minlength') && loginForm.get('email').touched" class="red-dot">
-              Email or username must be at least 5 characters.
+              Email must be at least 5 characters.
             </div>
           </div>
   

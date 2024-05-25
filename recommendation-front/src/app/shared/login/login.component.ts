@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from '../../services/authentication.service';
-import { TokenDecoderService } from '../../services/token-decoder.service';
+import { AuthenticationService } from '../../core/services/authentication.service';
+import { TokenDecoderService } from '../../core/services/token-decoder.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -12,7 +12,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent {
   loginForm = new FormGroup(
     {
-      email: new FormControl('', [Validators.required, Validators.minLength(5)]),
+      email: new FormControl('', [Validators.required, Validators.minLength(5), Validators.email]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     }
   );
