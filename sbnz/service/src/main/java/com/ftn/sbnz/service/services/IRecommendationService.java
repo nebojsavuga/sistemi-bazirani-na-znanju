@@ -12,4 +12,6 @@ public interface IRecommendationService {
     List<String> getParents(Long id);
 
     Set<RecommendedArticleDTO> recommendBasedOnArticle(Long id);
+
+    void insertTemplate();
 }

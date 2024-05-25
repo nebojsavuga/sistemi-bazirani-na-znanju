@@ -1,15 +1,23 @@
 package com.ftn.sbnz.service.services;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import org.drools.template.DataProvider;
+import org.drools.template.DataProviderCompiler;
+import org.drools.template.objects.ArrayDataProvider;
 import org.kie.api.KieBase;
+import org.kie.api.KieServices;
+import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.internal.utils.KieHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -44,6 +52,8 @@ public class RecommendationService implements IRecommendationService {
     @Autowired
     private KieBase templateKieBase;
 
+    private KieBase footballKieBase = null;
+
     @Autowired
     public RecommendationService(KieContainer kieContainer, ArticleRepository articleRepository,
             InjuryRepository injuryRepository,
@@ -67,12 +77,20 @@ public class RecommendationService implements IRecommendationService {
         KieSession templateKsession = templateKieBase.newKieSession();
         List<Injury> injuries = injuryRepository.findAll();
 
+        KieSession footballKsession = null;
+        if(footballKieBase != null){
+            footballKsession = footballKsession();
+        }
+
         kieSession.setGlobal("recommendations", recommendations);
         templateKsession.setGlobal("recommendations", recommendations);
         kieSession.setGlobal("injuries", injuries);
         kieSession.insert(filters);
         templateKsession.insert(filters);
-
+        if(footballKieBase != null){
+            footballKsession.setGlobal("recommendations", recommendations);
+            footballKsession.insert(filters);
+        }
         long totalArticles = articleRepository.count();
         int j = 0;
         for (int i = 0; i < totalArticles; i += 100) {
@@ -82,12 +100,19 @@ public class RecommendationService implements IRecommendationService {
             for (Article article : allArticles) {
                 kieSession.insert(article);
                 templateKsession.insert(article);
+                if(this.footballKieBase != null){
+                    footballKsession.insert(article);
+                }
             }
         }
         kieSession.fireAllRules();
         kieSession.dispose();
         templateKsession.fireAllRules();
         templateKsession.dispose();
+        if(this.footballKieBase != null){
+            footballKsession.fireAllRules();
+            footballKsession.dispose();
+        }
 
         KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");
         cepKsession.setGlobal("recommendations", recommendations);
@@ -215,5 +240,32 @@ public class RecommendationService implements IRecommendationService {
         return recommendations;
     }
 
+    private KieBase generateFootballKieBase() {
+        DataProviderCompiler converter = new DataProviderCompiler();
+        InputStream footballStream = this.getClass().getResourceAsStream("/rules/basic/football-template.drt");
+        DataProvider dataProviderFootball = new ArrayDataProvider(new String[][]{
+                {"Nike"},
+                {"Adidas"},
+        });
+        String footballDrl = converter.compile(dataProviderFootball, footballStream);
+
+        KieHelper kieHelper = new KieHelper();
+        kieHelper.addContent(footballDrl, ResourceType.DRL);
+
+        KieServices kieServices = KieServices.Factory.get();
+        kieHelper.addResource(kieServices.getResources().newClassPathResource("rules/basic/ftb-templates.drl"), ResourceType.DRL);
+
+        KieBase kieBase = kieHelper.build();
+        return kieBase;
+    }
+
+    private KieSession footballKsession() {
+        return this.footballKieBase.newKieSession();
+    }
+
+    @Override
+    public void insertTemplate() {
+      this.footballKieBase = generateFootballKieBase();
+    }
     
 }

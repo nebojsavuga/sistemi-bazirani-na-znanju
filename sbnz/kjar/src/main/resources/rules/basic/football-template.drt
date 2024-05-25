@@ -18,9 +18,10 @@ template "football-rules"
 rule "Ako je brend @{brand} preporuci dresove tog brenda"
 when
     $$filter: Filters(sport == Sport.Fudbal)
-    $$article: Article( brandName == "@{brand}")
+    $$article: Article(brandName == "@{brand}")
     FootballGear(type == GearTypeFootball.Dres) from $$article
 then
+    System.out.println("usao??");
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($$article.getName());
     recommendedArticle.setPrice($$article.getPrice());

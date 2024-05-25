@@ -53,4 +53,20 @@ public class RecommendationController {
     public ResponseEntity<Set<RecommendedArticleDTO>> recommendBasedOnArticle(@PathVariable Long id){
         return new ResponseEntity<>(this.recommendationService.recommendBasedOnArticle(id), HttpStatus.OK);
     }
+
+    @PutMapping("template")
+    public ResponseEntity<Set<RecommendedArticleDTO>> insertTemplate(
+            @RequestHeader("Authorization") String token) {
+        if (token != null && token != "") {
+            String jwtt = token.substring(7);
+            String role = jwt.getRole(jwtt);
+            if(!role.toLowerCase().contains("admin")){
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+        }else{
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        this.recommendationService.insertTemplate();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

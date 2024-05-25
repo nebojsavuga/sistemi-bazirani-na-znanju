@@ -70,20 +70,9 @@ public class ServiceApplication {
                 
         });
         String weightDrl = converter.compile(dataProviderWeight, weightStream);
-
-
-        InputStream footballStream = this.getClass().getResourceAsStream("/rules/basic/football-template.drt");
-        DataProvider dataProviderFootball = new ArrayDataProvider(new String[][]{
-                {"Nike"},
-                {"Adidas"},
-                
-        });
-        String footballDrl = converter.compile(dataProviderFootball, footballStream);
-
         KieHelper kieHelper = new KieHelper();
         kieHelper.addContent(tenisDrl, ResourceType.DRL);
         kieHelper.addContent(weightDrl, ResourceType.DRL);
-        kieHelper.addContent(footballDrl, ResourceType.DRL);
 
         KieServices kieServices = KieServices.Factory.get();
         kieHelper.addResource(kieServices.getResources().newClassPathResource("rules/basic/templates.drl"), ResourceType.DRL);

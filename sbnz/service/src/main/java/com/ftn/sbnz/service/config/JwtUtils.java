@@ -50,6 +50,11 @@ public class JwtUtils {
         return id.longValue();
     }
 
+    public String getRole(String jwt) {
+        String role = (String) getAllClaims(jwt).get("role");
+        return role;
+    }
+
     private Claims getAllClaims(String jwt) {
         return Jwts.parser()
         .setSigningKey("bogdanjanosevicnebojsavuga")
