@@ -46,6 +46,26 @@ export class RecomendationService {
     if(filters.gender === ""){
       filters.gender = undefined;
     }
+    if(filters.sport === 'Fudbal'){
+      filters.typeOfField = undefined;
+      filters.typeOfWeightlifting = undefined;
+      filters.typeOfRace = undefined;
+    } else if(filters.sport === 'Tenis'){
+      filters.typeOfFootball = undefined;
+      filters.typeOfFotballPlayer = undefined;
+      filters.typeOfWeightlifting = undefined;
+      filters.typeOfRace = undefined;
+    }else if(filters.sport === 'Orijentiring'){
+      filters.typeOfFootball = undefined;
+      filters.typeOfFotballPlayer = undefined;
+      filters.typeOfWeightlifting = undefined;
+      filters.typeOfField = undefined;
+    }else if(filters.sport === 'DizanjeTegova'){
+      filters.typeOfFootball = undefined;
+      filters.typeOfFotballPlayer = undefined;
+      filters.typeOfField = undefined;
+      filters.typeOfRace = undefined;
+    }
     return this.http.put<RecommendedArticle[]>(environment.apiHost + 'recommendation', filters);
   }
 }

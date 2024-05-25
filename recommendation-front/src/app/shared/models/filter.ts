@@ -8,7 +8,8 @@ export interface Filter {
     typeOfFootball: string,
     typeOfRace: string,
     typeOfField: string,
-    typeOfWeightlifting: string
+    typeOfWeightlifting: string,
+    sport: string
 }
 
 export enum Gender {

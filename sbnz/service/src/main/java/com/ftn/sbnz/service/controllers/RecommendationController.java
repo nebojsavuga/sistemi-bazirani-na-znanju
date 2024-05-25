@@ -36,14 +36,13 @@ public class RecommendationController {
 
     @PutMapping()
     public ResponseEntity<Set<RecommendedArticleDTO>> recommend(@RequestBody Filters filters,
-            @RequestHeader("Authorization") String token) {
+            @RequestHeader(value = "Authorization", required = false) String token) {
         Long userId = null;
-        if (token != null && token != "") {
+        if (token != null && !token.isEmpty()) {
             String jwtt = token.substring(7);
             userId = jwt.getId(jwtt);
         }
         return new ResponseEntity<>(this.recommendationService.getRecommendations(filters, userId), HttpStatus.OK);
-
     }
 
     @GetMapping("/{id}")

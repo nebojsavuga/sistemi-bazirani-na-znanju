@@ -5,8 +5,8 @@
                 <div class="col-md-4 col-12 center dark-blue-background p-5">
                     <div class="row text-center">
                         <div class="col center reesen-big-lead-text join-us mb-3">
-                            Come,<br>
-                            Join us!
+                            Pridružite<br>
+                            nam se!
                         </div>
                         <div class="col center">
                             <img src="../../../assets/sport.png" alt="Home logo" class="logo-image">
@@ -15,7 +15,7 @@
                 </div>
 
                 <div class="col-md-8 col-12 reg-side">
-                    <h1 class="reg-lbl">Registration</h1>
+                    <h1 class="reg-lbl">Registracija</h1>
                     <div class="alert alert-danger" role="alert" *ngIf="hasError">
                         {{errorValue}}
                     </div>
@@ -26,108 +26,108 @@
 
                         <div class="col">
                             <div class="mb-3 space">
-                                <label for="firstName" class="label-reg">First Name</label>
+                                <label for="firstName" class="label-reg">Ime</label>
                                 <input type="text" formControlName="name" class="form-control" id="firstName"
                                     placeholder="Marko">
                                 <div *ngIf="registerForm.get('name').hasError('required') 
               && registerForm.get('name').touched" class="red-dot">
-                                    First Name is required.
+                                    Ime je obavezno.
                                 </div>
                                 <div *ngIf="registerForm.get('name').hasError('minlength')
               && registerForm.get('name').touched" class="red-dot">
-                                    First Name should be atleast 3 characters long.
+                                    Ime treba da ima bar 3 slova.
                                 </div>
                             </div>
                             <div class="mb-3 space">
-                                <label for="lastName" class="label-reg">Last Name</label>
+                                <label for="lastName" class="label-reg">Prezime</label>
                                 <input type="text" formControlName="lastName" class="form-control" id="lastName"
                                     placeholder="Markovic">
                                 <div *ngIf="registerForm.get('lastName').hasError('required') 
               && registerForm.get('lastName').touched" class="red-dot">
-                                    Last Name is required.
+                                    Prezime je obavezno.
                                 </div>
                                 <div *ngIf="registerForm.get('lastName').hasError('minlength')
               && registerForm.get('lastName').touched" class="red-dot">
-                                    Last Name should be atleast 3 characters long.
+                                    Prezime treba da ima bar 3 slova.
                                 </div>
                             </div>
                             <div class="mb-3 space">
-                                <label for="height" class="label-reg">Height (cm)</label>
+                                <label for="height" class="label-reg">Visina (cm)</label>
                                 <input type="number" formControlName="height" class="form-control" id="height"
                                     placeholder="170" min="90" max="300">
                                 <div *ngIf="(registerForm.get('height').hasError('min') || registerForm.get('height').hasError('max')) 
               && registerForm.get('height').touched" class="red-dot">
-                                    Height should be between 90 cm and 300 cm.
+                                   Visina treba da bude između 90 i 300 cm.
                                 </div>
                             </div>
                             <div class="mb-3 space">
-                                <label for="age" class="label-reg">Age</label>
+                                <label for="age" class="label-reg">Godine</label>
                                 <input type="number" formControlName="age" class="form-control" id="age"
                                     placeholder="18" min="3" max="120">
                                 <div *ngIf="(registerForm.get('age').hasError('min') || registerForm.get('age').hasError('max')) 
               && registerForm.get('age').touched" class="red-dot">
-                                    Age should be between 3 and 120 years.
+                                    Godine treba da budu između 3 i 120.
                                 </div>
                             </div>
                         </div>
 
                         <div class="col">
                             <div class="mb-3 space">
-                                <label for="gender" class="label-reg">Gender</label>
+                                <label for="gender" class="label-reg">Pol</label>
                                 <select formControlName="gender" class="form-control" id="gender">
-                                    <option value="" disabled selected>Select your gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
+                                    <option value="" disabled selected>Izaberite pol</option>
+                                    <option value="Musko">Musko</option>
+                                    <option value="Zensko">Zensko</option>
                                 </select>
                                 <div *ngIf="registerForm.get('gender').hasError('required') && registerForm.get('gender').touched"
                                     class="red-dot">
-                                    Gender is required.
+                                    Pol je obavezan.
                                 </div>
                             </div>
                             <div class="mb-3 space">
-                                <label for="email" class="label-reg">Email Address</label>
+                                <label for="email" class="label-reg">Email adresa</label>
                                 <input type="text" formControlName="email" class="form-control" id="email"
                                     placeholder="marko@gmail.com">
                                 <div *ngIf="registerForm.get('email').hasError('required') 
                                     && registerForm.get('email').touched" class="red-dot">
-                                    Email is required.
+                                    Email je obavezan.
                                 </div>
                                 <div *ngIf="registerForm.get('email').hasError('email')
                     && registerForm.get('email').touched" class="red-dot">
-                                    Email not in correct format.
+                                    Email nije u dobrom formatu.
                                 </div>
                             </div>
                             <div class="mb-3 space">
-                                <label for="password" class="label-reg ">Password</label>
+                                <label for="password" class="label-reg ">Lozinka</label>
                                 <input type="password" formControlName="password" class="form-control" id="password"
-                                    placeholder="Password123!">
+                                    placeholder="Lozinka123">
                                 <div *ngIf="registerForm.get('password').hasError('required') 
                                     && registerForm.get('password').touched" class="red-dot">
-                                    Password is required.
+                                    Lozinka je obavezna.
                                 </div>
                                 <div *ngIf="registerForm.get('password').hasError('minlength')
                     && registerForm.get('password').touched" class="red-dot">
-                                    Password should be atleast 6 characters long.
+                                    Lozinka bi trebalo da ima bar 6 slova.
                                 </div>
                             </div>
                             <div class="mb-3 space">
-                                <label for="passwordRepeat" class="label-reg ">Repeat password</label>
+                                <label for="passwordRepeat" class="label-reg ">Unesite ponovo lozinku</label>
                                 <input type="password" formControlName="repeatedPassword" class="form-control"
-                                    id="passwordRepeat" placeholder="Password123!">
+                                    id="passwordRepeat" placeholder="Lozinka123">
                                 <div *ngIf="registerForm.get('repeatedPassword').hasError('required') 
                                     && registerForm.get('repeatedPassword').touched" class="red-dot">
-                                    Repeat Password is required.
+                                    Ponovljena lozinka je obavezna.
                                 </div>
                                 <div *ngIf="registerForm.get('repeatedPassword').hasError('minlength')
                     && registerForm.get('repeatedPassword').touched" class="red-dot">
-                                    Repeat Password should be atleast 6 characters long.
+                                    Ponovljena lozinka bi trebalo da ima bar 6 slova.
                                 </div>
                             </div>
                         </div>
 
 
                         <div class="mb-3 text-center">
-                            <button type="submit" class="button-style">Sign up</button>
+                            <button type="submit" class="button-style">Registrujte se</button>
                         </div>
 
 

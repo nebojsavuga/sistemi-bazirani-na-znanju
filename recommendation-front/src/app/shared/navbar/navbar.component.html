@@ -11,13 +11,13 @@
             </li>
 
             <li class="nav-item active">
-                <a class="nav-button" [routerLink]="['register']" *ngIf="!isLoggedIn">Register</a>
+                <a class="nav-button" [routerLink]="['register']" *ngIf="!isLoggedIn">Registracija</a>
             </li>
             <li class="nav-item">
-              <a class="nav-button" [routerLink]="['manage/profile']" *ngIf="isLoggedIn">Profile</a>
+              <a class="nav-button" [routerLink]="['manage/profile']" *ngIf="isLoggedIn">Profil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-button" id="logout" (click)="logout()" *ngIf="isLoggedIn">Log Out</a>
+                <a class="nav-button" id="logout" (click)="logout()" *ngIf="isLoggedIn">Izlogujte se</a>
             </li>
 
           </ul>
