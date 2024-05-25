@@ -9,4 +9,7 @@ import { RecommendedArticle } from '../../shared/models/articles';
 export class ArticleListItemComponent {
   @Input() article: RecommendedArticle;
 
+  showArticle(id: number){
+    
+  }
 }

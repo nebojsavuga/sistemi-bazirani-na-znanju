@@ -1,1 +1,13 @@
-<p>article-list-item works!</p>
+<div class="article-card dark-border px-3 pt-2">
+    <div class="image-container">
+      <img src="../../../assets/sport.png" alt="Article Image">
+    </div>
+    <div class="details">
+      <h2 class="name">{{ article.name }}</h2>
+      <p class="brand">Brend: {{ article.brandName }}</p>
+      <p class="type">Tip: {{ article.articleType }}</p>
+      <p class="price">Cena: ${{ article.price }}</p>
+      <p><button type="button" class="button-style" (click)="showArticle(article.id)">Prikaži</button></p>
+    </div>
+  </div>
+  

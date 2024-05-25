@@ -39,18 +39,17 @@ export class FiltersComponent implements OnInit {
     }
   );
 
-  constructor(private authService: AuthenticationService,
-    private injuryService: InjuryService
+  constructor(private injuryService: InjuryService
   ) { }
 
   ngOnInit(): void {
-    if (this.authService.isLoggedIn()) {
-      this.injuryService.getAll().subscribe(
-        res => {
-          this.injuries = res;
-        }
-      )
-    }
+
+    this.injuryService.getAll().subscribe(
+      res => {
+        this.injuries = res;
+      }
+    )
+
   }
 
   filterSubmitted() {
