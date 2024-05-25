@@ -21,33 +21,6 @@ import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
 
-// public Gender gender;
-//     public float height;
-//     public int age;
-//     public Set<Long> injuries = new HashSet<>();
-//     public SportLevel level;
-//     public Sport sport;
-//     public SportFootballPlayer typeOfFotballPlayer;
-//     public SportFootballType typeOfFootball;
-//     public SportOrientiringType typeOfRace;
-//     public SportTenisField typeOfField;
-//     public SportWeightliftingType typeOfWeightlifting;
-rule "Preporuci znojnicu ako se bavi tenisom"
-salience 100
-when
-    $filters: Filters(sport == Sport.Tenis)
-    $article: Article()
-    $znojnica: TenisGear(gearType == TypeOfGear.Znojnica) from $article
-then
-    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
-    recommendedArticle.setName($article.getName());
-    recommendedArticle.setPrice($article.getPrice());
-    recommendedArticle.setId($article.getId());
-    recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Sweatband");
-    recommendations.add(recommendedArticle);
-    insert(recommendedArticle);
-end
 
 rule "Preporuci loptice ako se bavi tenisom"
 salience 100

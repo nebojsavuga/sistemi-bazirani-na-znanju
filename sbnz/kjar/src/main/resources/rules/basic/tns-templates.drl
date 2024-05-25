@@ -1,0 +1,29 @@
+package basic;
+
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.articles.TenisGear;
+import com.ftn.sbnz.model.articles.Racket;
+import com.ftn.sbnz.model.articles.TypeOfRacket;
+import com.ftn.sbnz.model.articles.TypeOfRacketSpanning;
+import com.ftn.sbnz.model.articles.TenisShoe;
+import com.ftn.sbnz.model.articles.Sole;
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.WeightliftingArticle;
+import com.ftn.sbnz.model.articles.GrassFootbalShoe;
+import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.sport.SportLevel;
+import com.ftn.sbnz.model.sport.SportTenisField;
+import com.ftn.sbnz.model.users.Gender;
+import com.ftn.sbnz.model.articles.TypeOfGear;
+
+import java.util.Set;
+
+global Set<RecommendedArticleDTO> recommendations;
+
+rule "Basic rule tns"
+when
+    String()
+then
+    System.out.print("");
+end

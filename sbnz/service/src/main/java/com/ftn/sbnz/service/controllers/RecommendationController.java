@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.sport.Sport;
 import com.ftn.sbnz.service.config.JwtUtils;
 import com.ftn.sbnz.service.controllers.dtos.BrandNamesDTO;
 import com.ftn.sbnz.service.services.IRecommendationService;
@@ -55,8 +56,8 @@ public class RecommendationController {
         return new ResponseEntity<>(this.recommendationService.recommendBasedOnArticle(id), HttpStatus.OK);
     }
 
-    @PutMapping("template")
-    public ResponseEntity<Set<RecommendedArticleDTO>> insertTemplate(
+    @PutMapping("football-template")
+    public ResponseEntity<Set<RecommendedArticleDTO>> insertFootballTemplate(
             @RequestBody BrandNamesDTO brandNames,
             @RequestHeader("Authorization") String token) {
         if (token != null && token != "") {
@@ -68,7 +69,24 @@ public class RecommendationController {
         }else{
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        this.recommendationService.insertTemplate(brandNames.getBrandNames());
+        this.recommendationService.insertTemplate(brandNames.getBrandNames(), Sport.Fudbal.toString());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PutMapping("tenis-template")
+    public ResponseEntity<Set<RecommendedArticleDTO>> insertTenisTemplate(
+            @RequestBody BrandNamesDTO brandNames,
+            @RequestHeader("Authorization") String token) {
+        if (token != null && token != "") {
+            String jwtt = token.substring(7);
+            String role = jwt.getRole(jwtt);
+            if(!role.toLowerCase().contains("admin")){
+                return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            }
+        }else{
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+        this.recommendationService.insertTemplate(brandNames.getBrandNames(), Sport.Tenis.toString());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

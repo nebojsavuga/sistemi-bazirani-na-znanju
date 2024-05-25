@@ -53,6 +53,7 @@ public class RecommendationService implements IRecommendationService {
     private KieBase templateKieBase;
 
     private KieBase footballKieBase = null;
+    private KieBase tenisKieBase = null;
 
     @Autowired
     public RecommendationService(KieContainer kieContainer, ArticleRepository articleRepository,
@@ -78,8 +79,12 @@ public class RecommendationService implements IRecommendationService {
         List<Injury> injuries = injuryRepository.findAll();
 
         KieSession footballKsession = null;
-        if(footballKieBase != null){
+        KieSession tenisKsession = null;
+        if (this.footballKieBase != null) {
             footballKsession = footballKsession();
+        }
+        if (this.tenisKieBase != null) {
+            tenisKsession = tenisKsession();
         }
 
         kieSession.setGlobal("recommendations", recommendations);
@@ -87,9 +92,13 @@ public class RecommendationService implements IRecommendationService {
         kieSession.setGlobal("injuries", injuries);
         kieSession.insert(filters);
         templateKsession.insert(filters);
-        if(footballKieBase != null){
+        if (this.footballKieBase != null) {
             footballKsession.setGlobal("recommendations", recommendations);
             footballKsession.insert(filters);
+        }
+        if (this.tenisKieBase != null) {
+            tenisKsession.setGlobal("recommendations", recommendations);
+            tenisKsession.insert(filters);
         }
         long totalArticles = articleRepository.count();
         int j = 0;
@@ -100,8 +109,11 @@ public class RecommendationService implements IRecommendationService {
             for (Article article : allArticles) {
                 kieSession.insert(article);
                 templateKsession.insert(article);
-                if(this.footballKieBase != null){
+                if (this.footballKieBase != null) {
                     footballKsession.insert(article);
+                }
+                if (this.tenisKieBase != null) {
+                    tenisKsession.insert(article);
                 }
             }
         }
@@ -109,19 +121,22 @@ public class RecommendationService implements IRecommendationService {
         kieSession.dispose();
         templateKsession.fireAllRules();
         templateKsession.dispose();
-        if(this.footballKieBase != null){
+        if (this.footballKieBase != null) {
             footballKsession.fireAllRules();
             footballKsession.dispose();
         }
-
+        if (this.tenisKieBase != null) {
+            tenisKsession.fireAllRules();
+            tenisKsession.dispose();
+        }
         KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");
         cepKsession.setGlobal("recommendations", recommendations);
-        
+
         if (userId == null) {
             return recommendations;
         }
         Optional<User> user = userRepository.findById(userId);
-        if(user.isEmpty()){
+        if (user.isEmpty()) {
             return recommendations;
         }
         List<ConcreteInjury> concreteInjuries = concreteInjuryRepository.findByUserId(userId);
@@ -179,7 +194,6 @@ public class RecommendationService implements IRecommendationService {
         names.add(new ClassNameBackward("TenisShoe", "TenisArticle"));
         names.add(new ClassNameBackward("Grip", "TenisArticle"));
 
-
         names.add(new ClassNameBackward("WeightliftingArticle", "Article"));
         names.add(new ClassNameBackward("Barbel", "WeightliftingArticle"));
         names.add(new ClassNameBackward("Dumbell", "WeightliftingArticle"));
@@ -191,7 +205,7 @@ public class RecommendationService implements IRecommendationService {
         for (ClassNameBackward cnmb : names) {
             kbw.insert(cnmb);
         }
-        
+
         parentClasses.add(childName);
         kbw.insert(childName);
         kbw.fireAllRules();
@@ -254,7 +268,8 @@ public class RecommendationService implements IRecommendationService {
         kieHelper.addContent(footballDrl, ResourceType.DRL);
 
         KieServices kieServices = KieServices.Factory.get();
-        kieHelper.addResource(kieServices.getResources().newClassPathResource("rules/basic/ftb-templates.drl"), ResourceType.DRL);
+        kieHelper.addResource(kieServices.getResources().newClassPathResource("rules/basic/ftb-templates.drl"),
+                ResourceType.DRL);
 
         KieBase kieBase = kieHelper.build();
         return kieBase;
@@ -264,9 +279,38 @@ public class RecommendationService implements IRecommendationService {
         return this.footballKieBase.newKieSession();
     }
 
-    @Override
-    public void insertTemplate(List<String> brandNames) {
-      this.footballKieBase = generateFootballKieBase(brandNames);
+    private KieSession tenisKsession() {
+        return this.tenisKieBase.newKieSession();
     }
-    
+
+    @Override
+    public void insertTemplate(List<String> brandNames, String sport) {
+        if (sport.toLowerCase().equals("fudbal")) {
+            this.footballKieBase = generateFootballKieBase(brandNames);
+        } else {
+            this.tenisKieBase = generateTenisKieBase(brandNames);
+        }
+    }
+
+    private KieBase generateTenisKieBase(List<String> brandNames) {
+        DataProviderCompiler converter = new DataProviderCompiler();
+        InputStream tenisStream = this.getClass().getResourceAsStream("/rules/basic/template-tenis-template.drt");
+        String[][] brandNamesArray = new String[brandNames.size()][1];
+        for (int i = 0; i < brandNames.size(); i++) {
+            brandNamesArray[i][0] = brandNames.get(i);
+        }
+        DataProvider dataProviderTenis = new ArrayDataProvider(brandNamesArray);
+        String tenisDrl = converter.compile(dataProviderTenis, tenisStream);
+
+        KieHelper kieHelper = new KieHelper();
+        kieHelper.addContent(tenisDrl, ResourceType.DRL);
+
+        KieServices kieServices = KieServices.Factory.get();
+        kieHelper.addResource(kieServices.getResources().newClassPathResource("rules/basic/tns-templates.drl"),
+                ResourceType.DRL);
+
+        KieBase kieBase = kieHelper.build();
+        return kieBase;
+    }
+
 }
