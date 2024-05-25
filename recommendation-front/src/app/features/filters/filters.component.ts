@@ -60,7 +60,7 @@ export class FiltersComponent implements OnInit {
     if (this.filterForm.valid) {
       this.hasError = false;
       this.searchFilter.emit(this.filterForm.value);
-    }else{
+    } else {
       this.hasError = true;
 
     }

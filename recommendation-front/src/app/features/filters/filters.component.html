@@ -1,96 +1,134 @@
-<form [formGroup]="filterForm" (ngSubmit)="filterSubmitted()">
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-danger" role="alert" *ngIf="hasError">
-                Please select a sport.
-              </div>
-        </div>
+<div class="row dark-border mx-3 my-2 p-2">
+    <div class="col-12 text-center">
+        <h1>Filteri</h1>
     </div>
-    <div class="row">
-        <div class="form-group">
-            <label for="sport">Sport</label>
-            <select formControlName="sport" id="sport">
-                <option *ngFor="let sport of sports" [value]="sport">{{ sport | camelCase }}</option>
-            </select>
-        </div>
-        <div class="form-group" *ngIf="filterForm.get('sport').value === 'Fudbal'">
-            <div class="form-group">
-                <label for="typeOfFootball">Tip igre</label>
-                <select formControlName="typeOfFootball" id="typeOfFootball">
-                    <option *ngFor="let sport of sportFootballTypes" [value]="sport">{{ sport | camelCase }}</option>
-                </select>
-
+    <div class="col-12">
+        <form [formGroup]="filterForm" (ngSubmit)="filterSubmitted()" class="">
+            <div class="row">
+                <div class="col-6">
+                    <div class="alert alert-warning" role="alert" *ngIf="hasError">
+                        Izaberite sport.
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="typeOfFotballPlayer">Tip igraca</label>
-                <select formControlName="typeOfFotballPlayer" id="typeOfFotballPlayer">
-                    <option *ngFor="let sport of typeOfFootballPlayers" [value]="sport">{{ sport | camelCase }}</option>
-                </select>
+            <div class="row">
+                <div class="form-group col-md-3 col-12 mt-2">
+                    <label for="sport">Sport</label>
+                    <select formControlName="sport" id="sport" class="form-control">
+                        <option value="" disabled selected>Odaberite sport</option>
+                        <option *ngFor="let sport of sports" [value]="sport">{{ sport | camelCase }}</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6 col-12 mt-2" *ngIf="filterForm.get('sport').value === 'Fudbal'">
+                    <div class="row">
+                    <div class="form-group col-6">
+                        <label for="typeOfFootball">Tip igre</label>
+                        <select formControlName="typeOfFootball" id="typeOfFootball" class="form-control">
+                            <option value="" disabled selected>Izaberite tip igre</option>
+                            <option *ngFor="let sport of sportFootballTypes" [value]="sport">{{ sport | camelCase }}
+                            </option>
+                        </select>
 
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="typeOfFotballPlayer">Tip igrača</label>
+                        <select formControlName="typeOfFotballPlayer" id="typeOfFotballPlayer" class="form-control">
+                            <option value="" disabled selected>Izaberite tip igrača</option>
+                            <option *ngFor="let sport of typeOfFootballPlayers" [value]="sport">{{ sport | camelCase }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                </div>
+
+                <div class="form-group col-md-3 col-12 mt-2" *ngIf="filterForm.get('sport').value === 'Tenis'">
+                    <div class="form-group">
+                        <label for="typeOfField">Teren</label>
+                        <select formControlName="typeOfField" id="typeOfField" class="form-control">
+                            <option value="" disabled selected>Izaberite teren</option>
+                            <option *ngFor="let sport of sportTenisFields" [value]="sport">{{ sport | camelCase }}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3 col-12 mt-2" *ngIf="filterForm.get('sport').value === 'Orijentiring'">
+                    <div class="form-group">
+                        <label for="typeOfRace">Tip Trke</label>
+                        <select formControlName="typeOfRace" id="typeOfRace" class="form-control">
+                            <option value="" disabled selected>Izaberite tip trke</option>
+                            <option *ngFor="let sport of sportOrientiringTypes" [value]="sport">{{ sport | camelCase }}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="form-group col-md-3 col-12 mt-2" *ngIf="filterForm.get('sport').value === 'DizanjeTegova'">
+                    <div class="form-group">
+                        <label for="typeOfWeightlifting">Tip dizača</label>
+                        <select formControlName="typeOfWeightlifting" id="typeOfWeightlifting" class="form-control">
+                            <option value="" disabled selected>Izaberite tip dizača tegova</option>
+
+                            <option *ngFor="let sport of sportWeightliftingTypes" [value]="sport">{{ sport | camelCase
+                                }}
+                            </option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-12 my-2">
+                    <div class="row">
+                        <div class="form-group col-md-3 col-12 mt-2">
+                            <label for="level">Level</label>
+                            <select formControlName="level" id="level" class="form-control">
+                                <option value="" disabled selected>Izaberite nivo bavljenja sportom</option>
+
+                                <option *ngFor="let level of levels" [value]="level">{{ level | camelCase }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3 col-12 mt-2">
+                            <label for="gender">Pol</label>
+                            <select formControlName="gender" id="gender" class="form-control">
+                                <option value="" disabled selected>Izaberite pol</option>
+                                <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+                            </select>
+
+                        </div>
+
+                        <div class="form-group col-md-3 col-12 mt-2">
+                            <label for="height">Visina (cm)</label>
+                            <input type="number" formControlName="height" id="height" min="90" max="300"
+                                class="form-control" placeholder="170">
+                        </div>
+
+                        <div class="form-group col-md-3 col-12 mt-2">
+                            <label for="age">Godine</label>
+                            <input type="number" formControlName="age" id="age" min="3" max="120" class="form-control"
+                                placeholder="18">
+                        </div>
+                    
+                    </div>
+                    <div class="row mt-2">
+                        <div class="form-group mt-3 col-md-6 col-12">
+                            <label><h3>Povrede</h3></label>
+                            <div class="row p-3">
+                                <div *ngFor="let injury of injuries" class="form-check col-3">
+                                    <input type="checkbox" [id]="'injury_' + injury.id" [value]="injury.id"
+                                        (change)="onInjuryChange($event, injury.id)" class="form-check-input">
+                                    <label [for]="'injury_' + injury.id" class="form-check-label">{{ injury.name
+                                        }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-12 mt-5">
+                            <button type="submit" class="button-style">Primeni</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group" *ngIf="filterForm.get('sport').value === 'Tenis'">
-            <div class="form-group">
-                <label for="typeOfField">Teren</label>
-                <select formControlName="typeOfField" id="typeOfField">
-                    <option *ngFor="let sport of sportTenisFields" [value]="sport">{{ sport | camelCase }}</option>
-                </select>
-
-            </div>
-        </div>
-
-        <div class="form-group" *ngIf="filterForm.get('sport').value === 'Orijentiring'">
-            <div class="form-group">
-                <label for="typeOfRace">Tip Trke</label>
-                <select formControlName="typeOfRace" id="typeOfRace">
-                    <option *ngFor="let sport of sportOrientiringTypes" [value]="sport">{{ sport | camelCase }}</option>
-                </select>
-
-            </div>
-        </div>
-
-        <div class="form-group" *ngIf="filterForm.get('sport').value === 'DizanjeTegova'">
-            <div class="form-group">
-                <label for="typeOfWeightlifting">Tip dizača</label>
-                <select formControlName="typeOfWeightlifting" id="typeOfWeightlifting">
-                    <option *ngFor="let sport of sportWeightliftingTypes" [value]="sport">{{ sport | camelCase }}
-                    </option>
-                </select>
-
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="level">Level</label>
-            <select formControlName="level" id="level">
-                <option *ngFor="let level of levels" [value]="level">{{ level | camelCase }}</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="gender">Pol</label>
-            <select formControlName="gender" id="gender">
-                <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
-            </select>
-
-        </div>
-
-        <div class="form-group">
-            <label for="height">Visina (cm)</label>
-            <input type="number" formControlName="height" id="height" min="90" max="300">
-        </div>
-
-        <div class="form-group">
-            <label for="age">Godine</label>
-            <input type="number" formControlName="age" id="age" min="3" max="120">
-        </div>
-        <div class="form-group">
-            <label>Povrede</label>
-            <div *ngFor="let injury of injuries" class="form-check">
-                <input type="checkbox" [id]="'injury_' + injury.id" [value]="injury.id"
-                    (change)="onInjuryChange($event, injury.id)" class="form-check-input">
-                <label [for]="'injury_' + injury.id" class="form-check-label">{{ injury.name }}</label>
-            </div>
-        </div>
+            
+        </form>
     </div>
-    <button type="submit">Primeni</button>
-</form>
+</div>
