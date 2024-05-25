@@ -104,3 +104,26 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
+
+rule "Sport fudbal, povreda skocnog zgloba u poslednje 2 godine, preporuci kostobran sa stitnikom za skocni zglob"
+salience 100
+when
+    Filters(sport == Sport.Fudbal)
+    $article: Article()
+    $shinProtector: FootballGear(type == GearTypeFootball.KostobranSaStitnikomZaSkocniZglob) from $article
+    Injury(name == "Povreda skocnog zgloba", $injuryId: id) from injuries
+    Number(intValue >= 1) from accumulate(
+        $p: ConcreteInjury(injury.getId() == $injuryId)
+        over window: time(730d),
+        count($p)
+    )
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Shin protector");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
