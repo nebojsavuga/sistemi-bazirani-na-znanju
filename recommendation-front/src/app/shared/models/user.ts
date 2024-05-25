@@ -5,8 +5,6 @@ export interface User {
     lastName: string,
     password: string,
     repeatPassword: string,
-    image: string
-    imageType: string
 }
 
 export interface UserProfileDTO {

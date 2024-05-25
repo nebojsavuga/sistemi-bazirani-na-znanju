@@ -1,42 +1,17 @@
 .register-section{
     width: 60%;
     margin: 40px auto;
+    
 }
 
-.register-container{
-    box-shadow: 3px 5px 15px rgb(129, 129, 129);
-    border-radius: 15px;
-    padding-right: 11px;
+.reg-side{
+    border: 5px solid rgb(88, 94, 150);
 }
 
 input[type="file"] {
     display: none;
 }
 
-
-.custom-file-upload {
-    cursor: pointer;
-    color:white;
-    background-color:#48786d;
-    border:2px solid transparent;
-
-    height: 50px;
-    margin-top: 7px;
-    padding:10px 20px;
-    border-radius: 8px;
-    border: 2px solid transparent;
-    font-weight: 500;
-    font-size: 15px;
-    box-shadow: 2px 2px 5px rgb(129, 129, 129);
-    transition: .3s ease-in-out;
-}
-
-.custom-file-upload:hover{
-    background-color: white;
-    border:2px solid black;
-    color: #48786d;
-    transition: .3s ease-in-out;
-}
 
 .spec{
     background-color:#48786d;

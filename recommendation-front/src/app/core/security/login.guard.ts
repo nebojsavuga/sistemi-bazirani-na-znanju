@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivateFn, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { TokenDecoderService } from '../services/token-decoder.service';
 import { Observable } from 'rxjs';
 
 
@@ -11,8 +10,7 @@ import { Observable } from 'rxjs';
 export class LoginGuard {
 
   constructor(private authenticationService: AuthenticationService,
-    private router: Router,
-    private decodeService: TokenDecoderService) {}
+    private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,

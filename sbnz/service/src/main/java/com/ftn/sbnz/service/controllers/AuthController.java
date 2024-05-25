@@ -14,6 +14,7 @@ import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.config.JwtUtils;
 import com.ftn.sbnz.service.controllers.dtos.LoginDTO;
 import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
+import com.ftn.sbnz.service.controllers.dtos.TokenDTO;
 import com.ftn.sbnz.service.services.IUserService;
 
 @RestController
@@ -31,26 +32,21 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @PostMapping(value = "/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDTO) {
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
         try {
-            // UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(loginDTO.email,
-            //         loginDTO.password);
-            // Authentication auth = authenticationManager.authenticate(authToken);
-            // SecurityContextHolder.getContext().setAuthentication(auth);
-
             User user = userService.getByEmail(loginDTO.email);
             if (!passwordEncoder.matches(loginDTO.password, user.getPassword())) {
                 return new ResponseEntity<>("Invalid credentials", HttpStatus.BAD_REQUEST);
             }
             String jwtToken = jwt.generate(user.getUsername(), user.getId(), user.getRole().toString());
-            return new ResponseEntity<>(jwtToken, HttpStatus.OK);
+            return new ResponseEntity<>(new TokenDTO(jwtToken), HttpStatus.OK);
         } catch (AuthenticationException ex) {
             throw ex;
         }
     }
 
-    @PostMapping(value = "/register")
+    @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody RegisterDTO registerDTO) {
         User user = userService.register(registerDTO);
         return new ResponseEntity<>(user, HttpStatus.OK);

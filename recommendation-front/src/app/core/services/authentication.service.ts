@@ -26,7 +26,7 @@ export class AuthenticationService {
 
   }
   login(email: string, password: string): Observable<Token> {
-    return this.http.post<Token>(environment.apiHost + 'users', { email, password });
+    return this.http.post<Token>(environment.apiHost + 'auth/login', { email, password });
   }
 
   logoutUser(): void {
@@ -35,11 +35,7 @@ export class AuthenticationService {
   }
 
   registration(newUser: User): Observable<RegisteredUser> {
-    return this.http.post<RegisteredUser>(environment.apiHost + "users/register", newUser);
-  }
-
-  admineRgistration(newUser: User): Observable<RegisteredUser> {
-    return this.http.post<RegisteredUser>(environment.apiHost + "users/register-admin", newUser);
+    return this.http.post<RegisteredUser>(environment.apiHost + "auth/register", newUser);
   }
 
   getProfile(): Observable<UserProfileDTO> {
@@ -54,7 +50,7 @@ export class AuthenticationService {
     return this.http.get('http://localhost/' + imagePath, {
       headers: headers,
       responseType: 'blob',
-      withCredentials: true  // Ensure credentials are sent with the request
+      withCredentials: true
     });
   }
 

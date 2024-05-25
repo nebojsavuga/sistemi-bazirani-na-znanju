@@ -37,7 +37,6 @@ export class LoginComponent {
     this.authenticationService.login(email, password).subscribe({
       next: token => {
         this.hasError = false;
-
         if (token.token) {
           localStorage.setItem("token", token.token);
           localStorage.setItem('role', this.tokenDecoderService.getDecodedAccesToken()['role']);
@@ -48,6 +47,7 @@ export class LoginComponent {
         }
       },
       error: err => {
+        console.log(err);
         this.hasError = true;
       }
     })

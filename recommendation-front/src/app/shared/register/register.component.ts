@@ -10,22 +10,19 @@ import { User } from '../models/user';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  protected readonly document = document;
-  imageSrcDisplay: string
 
   registerForm = new FormGroup({
-    imageType: new FormControl('', [Validators.required]),
-    image: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     lastName: new FormControl('', [Validators.required, Validators.minLength(3)]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),
     repeatedPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    height: new FormControl('', [Validators.min(90), Validators.max(300)]),
+    age: new FormControl('', [Validators.min(3), Validators.max(120)]),
+    gender: new FormControl('', [Validators.required])
   });
 
-  constructor(private authenticationService: AuthenticationService, protected decodeService: TokenDecoderService) {
-    this.imageSrcDisplay = "";
-  }
+  constructor(private authenticationService: AuthenticationService, protected decodeService: TokenDecoderService) {  }
 
   get password() { return this.registerForm.get('password'); }
   get repeatedPassword() { return this.registerForm.get('repeatedPassword'); }
@@ -48,8 +45,6 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       const user: User = {
         email: this.registerForm.value.email,
-        image: this.registerForm.value.image,
-        imageType: this.registerForm.value.imageType,
         lastName: this.registerForm.value.lastName,
         name: this.registerForm.value.name,
         password: this.registerForm.value.password,
@@ -73,37 +68,4 @@ export class RegisterComponent {
     }
   }
 
-
-  onFileChange($event: Event) {
-    const target = event.target as HTMLInputElement;
-    if (target.files && target.files[0]) {
-
-      const file = target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-
-        if (typeof reader.result === "string") {
-          const substrings = reader.result.split(",");
-
-
-          if (!(reader.result.includes("image/jpeg") || reader.result.includes("image/jpg") || reader.result.includes("image/png"))) {
-            this.hasError = true;
-            this.errorValue = "You can only upload jpg, or png files";
-            return;
-          }
-
-          this.imageSrcDisplay = reader.result;
-
-          const parts = substrings[0].split(":");
-          const mediaType = parts[1].split(";")[0];
-          let fileExtension = mediaType.split("/")[1];
-          if (fileExtension == "jpeg") fileExtension = "jpg"
-
-          this.registerForm.patchValue({ image: substrings[1], imageType: fileExtension })
-        }
-
-      };
-    }
-  }
 }
