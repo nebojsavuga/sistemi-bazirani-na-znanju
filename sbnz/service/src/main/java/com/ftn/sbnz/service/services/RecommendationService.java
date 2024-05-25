@@ -100,7 +100,9 @@ public class RecommendationService implements IRecommendationService {
             return recommendations;
         }
         List<ConcreteInjury> concreteInjuries = concreteInjuryRepository.findByUserId(userId);
-        cepKsession.setGlobal("concreteInjuries", concreteInjuries);
+        for (ConcreteInjury concreteInjury : concreteInjuries) {
+            cepKsession.insert(concreteInjury);
+        }
         cepKsession.setGlobal("injuries", injuries);
         cepKsession.insert(user);
         cepKsession.insert(filters);

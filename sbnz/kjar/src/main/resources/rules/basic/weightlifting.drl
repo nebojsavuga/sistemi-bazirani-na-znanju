@@ -17,10 +17,12 @@ import com.ftn.sbnz.model.articles.WlTypeOfGear;
 import com.ftn.sbnz.model.sport.SportWeightliftingType;
 import com.ftn.sbnz.model.users.Gender;
 import com.ftn.sbnz.model.articles.Weight;
+import com.ftn.sbnz.model.users.Injury;
 
 import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
+global List<Injury> injuries;
 
 rule "Preporuci patike sa tvrdim djonom"
 salience 100
@@ -154,6 +156,24 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Elastic Band");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Ukoliko ima povredu kolena I bavi se dizanjem tegova preporuci steznike za kolena"
+when
+    Filters(sport == Sport.DizanjeTegova, $addedInjuries: injuries)
+    $article: Article()
+    $steznik: WeightliftingGear(type == WlTypeOfGear.KneeWrap) from $article
+    Injury(name == "Povreda kolena", $injuryId: id) from injuries
+    eval($addedInjuries.contains($injuryId))
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Knee Wrap");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end

@@ -35,4 +35,26 @@ import java.util.List;
 
 global Set<RecommendedArticleDTO> recommendations;
 global List<Injury> injuries;
-global List<ConcreteInjury> concreteInjuries;
+
+rule "Ukoliko je u poslednjih godinu dana imao povredu kolena I bavi se dizanjem tegova preporuci steznike za kolena"
+when
+    Filters(sport == Sport.DizanjeTegova)
+    $article: Article()
+    $steznik: WeightliftingGear(type == WlTypeOfGear.KneeWrap) from $article
+    Injury(name == "Povreda kolena", $injuryId: id) from injuries
+    Number(intValue >= 1) from accumulate(
+        $p: ConcreteInjury(injury.getId() == $injuryId)
+        over window: time(365d),
+        count($p)
+    )
+
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Knee Wrap");
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end

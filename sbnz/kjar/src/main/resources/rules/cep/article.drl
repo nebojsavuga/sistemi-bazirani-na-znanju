@@ -1,6 +1,5 @@
 package cep;
 
-import com.ftn.sbnz.model.users.Injury;
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
