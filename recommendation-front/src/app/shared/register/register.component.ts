@@ -55,7 +55,7 @@ export class RegisterComponent {
         next: _ => {
           this.hasError = false;
           this.successfullyRegistered = true;
-          this.successMessage = "Successfully registered! Confirmation mail has been sent to " + this.registerForm.value.email;
+          this.successMessage = "Successfully registered.";
         }, error: err => {
           this.hasError = true;
           this.errorValue = 'All fields must be filled correctly';

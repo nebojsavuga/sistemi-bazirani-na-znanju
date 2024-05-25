@@ -16,7 +16,7 @@
     <div class="col-12 col-md-4 p-5 login-section-input">
       <form login [formGroup]="loginForm" (ngSubmit)="login()">
         <div class="alert alert-danger" role="alert" *ngIf="hasError">
-          Email or password are incorrect. Both fields must be atleast 4 characters long!
+          Email or password are incorrect.
         </div>
         <div class="mb-3">
           <label for="email" class="col-form-label dark-blue-color align-text-left">Enter Email
