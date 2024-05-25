@@ -86,10 +86,14 @@ VALUES ('Wilson oprema US Open 3tball', 9.00, 'Unisex', 'Wilson', 'Loptice', 'Te
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
 VALUES ('Pure Areo 2023', 250.00, 'Unisex', 'Babolat', 300.0,'Profesionalni','Tvrdo',27.0, 'Racket', 'tenis');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
+VALUES ('Babolat Pure Drive', 200.00, 'Unisex', 'Babolat', 315.0,'Profesionalni','Tvrdo',27.0, 'Racket', 'tenis');
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
 VALUES ('Wilson Clash 100', 220.00, 'Unisex', 'Wilson', 295.0,'Profesionalni','Meko',27.0, 'Racket', 'tenis');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
 VALUES ('Wilson Tour Slam Lite', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',27.0, 'Racket', 'tenis');
 
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
+VALUES ('Wilson Pro Staff RF97 Autograph', 250.99, 'Unisex', 'Wilson', 340.0,'Profesionalni','Tvrdo',27.0, 'Racket', 'tenis');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
 VALUES ('Wilson 19', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',19.0, 'Racket', 'tenis');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
@@ -218,6 +222,11 @@ INSERT INTO Purchase (user_id, article_id, execution_time,is_processed_for_sport
 VALUES (2, 2, '2024-05-17',false, false, 139.99);
 INSERT INTO Purchase (user_id, article_id, execution_time,is_processed_for_sport_code,is_processed_for_favorite_code, price) 
 VALUES (2, 3, '2024-02-16',false, false, 29.99);
+
+INSERT INTO Purchase (user_id, article_id, execution_time,is_processed_for_sport_code,is_processed_for_favorite_code, price) 
+VALUES (1, 21, '2022-02-16',false, false, 38.99);
+INSERT INTO Purchase (user_id, article_id, execution_time,is_processed_for_sport_code,is_processed_for_favorite_code, price) 
+VALUES (1, 21, '2022-02-16',false, false, 38.99);
 
 -- rejtinzi
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 

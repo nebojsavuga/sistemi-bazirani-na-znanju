@@ -25,6 +25,8 @@ import com.ftn.sbnz.model.articles.OrientiringGear;
 import com.ftn.sbnz.model.articles.TypeOfOrientiringGear;
 import com.ftn.sbnz.model.articles.Sweatpants;
 import com.ftn.sbnz.model.articles.SweatpantsType;
+import com.ftn.sbnz.model.articles.Racket;
+
 
 
 import java.util.Set;
@@ -172,6 +174,47 @@ then
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
     
+end
+
+rule "Ukoliko je prosecna tezina kupljenih reketa veca nego u poslednje 3 godine, izbaci iz preporucenih rekete lakse od najlakseg reketa kupljenog pre 3 godine"
+salience -50
+when
+    $filters: Filters(sport == Sport.Tenis)
+    
+    $avgLastYear:Number() from accumulate(
+    $purchase : Purchase(article instanceof Racket, $racket: article)
+    over window: time(365d),
+    average(((Racket) $purchase.getArticle()).getWeight())
+)
+    $avgLast3Year:Number() from accumulate(
+    $purchase : Purchase(article instanceof Racket, $racket: article)
+    over window: time(1095d),
+      average(((Racket) $purchase.getArticle()).getWeight())
+)   
+    eval($avgLastYear.doubleValue() > ($avgLast3Year.doubleValue()))
+
+    $minLast3Year:Number() from accumulate(
+    $purchase : Purchase(article instanceof Racket, $racket: article)
+    over window: time(1095d),
+    min(((Racket) $purchase.getArticle()).getWeight()))
+
+    Number(intValue >= 1) from accumulate(
+    $purchase : Purchase(article instanceof Racket, $racket: article)
+    over window: time(365d),
+    count($purchase)
+    )
+    Number(intValue >= 3) from accumulate(
+    $purchase : Purchase(article instanceof Racket, $racket: article)
+    over window: time(1095d),
+    count($purchase)
+    )
+    Racket($id: id, getWeight() < $minLast3Year.floatValue())
+    $articleRec: RecommendedArticleDTO(id == $id) from recommendations
+
+
+then
+     recommendations.remove($articleRec);
+     
 end
 
 
