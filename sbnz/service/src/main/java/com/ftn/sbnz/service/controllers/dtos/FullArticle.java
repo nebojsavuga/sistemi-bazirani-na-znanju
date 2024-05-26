@@ -12,23 +12,25 @@ public class FullArticle {
     private String articleGenderType;
     private List<ArticleRatingDTO> ratings;
     private String ballType;
-    private float barbellWeight;
+    private String barbellWeight;
     private String barbelType;
-    private float dumbellWeight;
-    private float elasticBandWeight;
+    private String dumbellWeight;
+    private String elasticBandWeight;
     private String typeOfFootballGear;
-    private Integer numberOfCramponsFootballShoeCrampons;
-    private Integer numberOfCramponsGrassFootballShoe;
+    private String numberOfCramponsFootballShoeCrampons;
+    private String numberOfCramponsGrassFootballShoe;
     private String typeOfOrientiringGear;
-    private float racketWeight;
+    private String racketWeight;
     private String racketType;
+    private String racketSize;
     private String racketSpanning;
     private String sweatpantsType;
     private String typeOfTenisGear;
     private String tenisShoeSole;
-    private float weightliftingWeight;
+    private String weightliftingWeight;
     private String weightliftingTypeOfGear;
     private String weightliftingGloveSize;
+
 
     public Long getId() {
         return id;
@@ -102,11 +104,11 @@ public class FullArticle {
         this.ballType = ballType;
     }
 
-    public float getBarbellWeight() {
+    public String getBarbellWeight() {
         return barbellWeight;
     }
 
-    public void setBarbellWeight(float barbellWeight) {
+    public void setBarbellWeight(String barbellWeight) {
         this.barbellWeight = barbellWeight;
     }
 
@@ -118,19 +120,19 @@ public class FullArticle {
         this.barbelType = barbelType;
     }
 
-    public float getDumbellWeight() {
+    public String getDumbellWeight() {
         return dumbellWeight;
     }
 
-    public void setDumbellWeight(float dumbellWeight) {
+    public void setDumbellWeight(String dumbellWeight) {
         this.dumbellWeight = dumbellWeight;
     }
 
-    public float getElasticBandWeight() {
+    public String getElasticBandWeight() {
         return elasticBandWeight;
     }
 
-    public void setElasticBandWeight(float elasticBandWeight) {
+    public void setElasticBandWeight(String elasticBandWeight) {
         this.elasticBandWeight = elasticBandWeight;
     }
 
@@ -142,19 +144,19 @@ public class FullArticle {
         this.typeOfFootballGear = typeOfFootballGear;
     }
 
-    public Integer getNumberOfCramponsFootballShoeCrampons() {
+    public String getNumberOfCramponsFootballShoeCrampons() {
         return numberOfCramponsFootballShoeCrampons;
     }
 
-    public void setNumberOfCramponsFootballShoeCrampons(Integer numberOfCramponsFootballShoeCrampons) {
+    public void setNumberOfCramponsFootballShoeCrampons(String numberOfCramponsFootballShoeCrampons) {
         this.numberOfCramponsFootballShoeCrampons = numberOfCramponsFootballShoeCrampons;
     }
 
-    public Integer getNumberOfCramponsGrassFootballShoe() {
+    public String getNumberOfCramponsGrassFootballShoe() {
         return numberOfCramponsGrassFootballShoe;
     }
 
-    public void setNumberOfCramponsGrassFootballShoe(Integer numberOfCramponsGrassFootballShoe) {
+    public void setNumberOfCramponsGrassFootballShoe(String numberOfCramponsGrassFootballShoe) {
         this.numberOfCramponsGrassFootballShoe = numberOfCramponsGrassFootballShoe;
     }
 
@@ -166,11 +168,11 @@ public class FullArticle {
         this.typeOfOrientiringGear = typeOfOrientiringGear;
     }
 
-    public float getRacketWeight() {
+    public String getRacketWeight() {
         return racketWeight;
     }
 
-    public void setRacketWeight(float racketWeight) {
+    public void setRacketWeight(String racketWeight) {
         this.racketWeight = racketWeight;
     }
 
@@ -214,11 +216,11 @@ public class FullArticle {
         this.tenisShoeSole = tenisShoeSole;
     }
 
-    public float getWeightliftingWeight() {
+    public String getWeightliftingWeight() {
         return weightliftingWeight;
     }
 
-    public void setWeightliftingWeight(float weightliftingWeight) {
+    public void setWeightliftingWeight(String weightliftingWeight) {
         this.weightliftingWeight = weightliftingWeight;
     }
 
@@ -242,11 +244,11 @@ public class FullArticle {
     }
 
     public FullArticle(Long id, String name, float price, String brandName, String articleType, String imagePath,
-            String articleGenderType, List<ArticleRatingDTO> ratings, String ballType, float barbellWeight, String barbelType,
-            float dumbellWeight, float elasticBandWeight, String typeOfFootballGear,
-            Integer numberOfCramponsFootballShoeCrampons, Integer numberOfCramponsGrassFootballShoe,
-            String typeOfOrientiringGear, float racketWeight, String racketType, String racketSpanning,
-            String sweatpantsType, String typeOfTenisGear, String tenisShoeSole, float weightliftingWeight,
+            String articleGenderType, List<ArticleRatingDTO> ratings, String ballType, String barbellWeight, String barbelType,
+            String dumbellWeight, String elasticBandWeight, String typeOfFootballGear,
+            String numberOfCramponsFootballShoeCrampons, String numberOfCramponsGrassFootballShoe,
+            String typeOfOrientiringGear, String racketWeight, String racketType, String racketSpanning,
+            String sweatpantsType, String typeOfTenisGear, String tenisShoeSole, String weightliftingWeight,
             String weightliftingTypeOfGear, String weightliftingGloveSize) {
         this.id = id;
         this.name = name;
@@ -286,5 +288,13 @@ public class FullArticle {
         this.imagePath = imagePath;
         this.articleGenderType = articleGenderType;
         this.ratings = ratings;
+    }
+
+    public String getRacketSize() {
+        return racketSize;
+    }
+
+    public void setRacketSize(String racketSize) {
+        this.racketSize = racketSize;
     }
 }

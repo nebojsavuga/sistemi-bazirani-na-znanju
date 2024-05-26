@@ -16,7 +16,20 @@ import com.ftn.sbnz.model.Code;
 import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.articles.Ball;
 import com.ftn.sbnz.model.articles.Barbel;
+import com.ftn.sbnz.model.articles.Dumbell;
+import com.ftn.sbnz.model.articles.ElasticBand;
+import com.ftn.sbnz.model.articles.FootbalShoeCrampons;
+import com.ftn.sbnz.model.articles.FootballGear;
+import com.ftn.sbnz.model.articles.GrassFootbalShoe;
+import com.ftn.sbnz.model.articles.OrientiringGear;
+import com.ftn.sbnz.model.articles.Racket;
 import com.ftn.sbnz.model.articles.Rating;
+import com.ftn.sbnz.model.articles.Sweatpants;
+import com.ftn.sbnz.model.articles.TenisGear;
+import com.ftn.sbnz.model.articles.TenisShoe;
+import com.ftn.sbnz.model.articles.Weight;
+import com.ftn.sbnz.model.articles.WeightliftingGear;
+import com.ftn.sbnz.model.articles.WeightliftingGlove;
 import com.ftn.sbnz.model.events.Purchase;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
@@ -77,13 +90,53 @@ public class ArticleService implements IArticleService {
         if (opt instanceof Ball) {
             Ball item = (Ball) opt;
             fullArticle.setBallType("Tip lopte: " + item.getType().toString());
-        } else if(opt instanceof Barbel){
+        } else if (opt instanceof Barbel) {
             Barbel item = (Barbel) opt;
             fullArticle.setBarbelType("Tip sipke: " + item.getType().toString());
             fullArticle.setBarbelType("Tezina sipke: " + item.getWeight());
+        } else if (opt instanceof Dumbell) {
+            Dumbell item = (Dumbell) opt;
+            fullArticle.setDumbellWeight("Tezina bucice: " + item.getWeight());
+        } else if (opt instanceof ElasticBand) {
+            ElasticBand item = (ElasticBand) opt;
+            fullArticle.setElasticBandWeight("Tezina elasticne trake: " + item.getEbWeight());
+        } else if (opt instanceof FootballGear) {
+            FootballGear item = (FootballGear) opt;
+            fullArticle.setTypeOfFootballGear("Tip opreme: " + item.getType().toString());
+        } else if (opt instanceof FootbalShoeCrampons) {
+            FootbalShoeCrampons item = (FootbalShoeCrampons) opt;
+            fullArticle.setNumberOfCramponsFootballShoeCrampons("Broj krampona: " + item.getNumberOfCrampons());
+        } else if (opt instanceof GrassFootbalShoe) {
+            GrassFootbalShoe item = (GrassFootbalShoe) opt;
+            fullArticle.setNumberOfCramponsGrassFootballShoe("Broj krampona: " + item.getNumberOfCrampsons());
+        } else if (opt instanceof OrientiringGear) {
+            OrientiringGear item = (OrientiringGear) opt;
+            fullArticle.setTypeOfOrientiringGear("Tip opreme: " + item.getType().toString());
+        } else if (opt instanceof Racket) {
+            Racket item = (Racket) opt;
+            fullArticle.setRacketSpanning("Spanovanje: " + item.getSpanningType().toString());
+            fullArticle.setRacketType("Tip reketa: " + item.getType().toString());
+            fullArticle.setRacketWeight("Tezina reketa: " + item.getWeight());
+            fullArticle.setRacketSize("Velicina reketa (in): " + item.getSize());
+        } else if (opt instanceof Sweatpants) {
+            Sweatpants item = (Sweatpants) opt;
+            fullArticle.setSweatpantsType("Tip trenerke: " + item.getType().toString());
+        } else if (opt instanceof TenisGear) {
+            TenisGear item = (TenisGear) opt;
+            fullArticle.setTypeOfTenisGear("Tip opreme: " + item.getGearType().toString());
+        } else if (opt instanceof TenisShoe) {
+            TenisShoe item = (TenisShoe) opt;
+            fullArticle.setTenisShoeSole("Tip djona: " + item.getSole().toString());
+        } else if (opt instanceof Weight) {
+            Weight item = (Weight) opt;
+            fullArticle.setWeightliftingWeight("Tezina tega: " + item.getWeight());
+        } else if (opt instanceof WeightliftingGear) {
+            WeightliftingGear item = (WeightliftingGear) opt;
+            fullArticle.setWeightliftingTypeOfGear("Tip opreme: " + item.getType().toString());
+        } else if (opt instanceof WeightliftingGlove) {
+            WeightliftingGlove item = (WeightliftingGlove) opt;
+            fullArticle.setWeightliftingGloveSize("Velicina rukavice: " + item.getGloveSize());
         }
-
-
         return fullArticle;
     }
 
