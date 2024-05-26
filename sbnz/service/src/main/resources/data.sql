@@ -95,112 +95,112 @@ VALUES ('Wilson Tour Slam Lite', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
 VALUES ('Wilson Pro Staff RF97 Autograph', 250.99, 'Unisex', 'Wilson', 340.0,'Profesionalni','Tvrdo',27.0, 'Racket', 'tenis', '23.jpg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
-VALUES ('Wilson 19', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',19.0, 'Racket', 'tenis', '24.jpg');
+VALUES ('Wilson 19', 79.99, 'Unisex', 'Wilson', 200.0,'Klasik','Meko',19.0, 'Racket', 'tenis', '24.jpg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
-VALUES ('Wilson 21', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',21.0, 'Racket', 'tenis', '25.jpg');
+VALUES ('Wilson 21', 79.99, 'Unisex', 'Wilson', 220.0,'Klasik','Meko',21.0, 'Racket', 'tenis', '25.jpg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
-VALUES ('Wilson 23', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',23.0, 'Racket', 'tenis', '26.jpg');
+VALUES ('Wilson 23', 79.99, 'Unisex', 'Wilson', 240.0,'Klasik','Meko',23.0, 'Racket', 'tenis', '26.jpg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
 VALUES ('Wilson 25', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',25.0, 'Racket', 'tenis', '27.jpeg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
-VALUES ('Wilson 27.5', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',27.5, 'Racket', 'tenis', '28.jpg');
+VALUES ('Wilson 27.5', 79.99, 'Unisex', 'Wilson', 300.0,'Klasik','Meko',27.5, 'Racket', 'tenis', '28.jpg');
 
-INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Wilson Ultra 25 V4 Tennis Racket', 129.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',25.0, 'Racket', 'tenis');
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
+VALUES ('Wilson Ultra 25 V4 Tennis Racket', 129.99, 'Unisex', 'Wilson', 250.0,'Klasik','Meko',25.0, 'Racket', 'tenis', '29.png');
 
-INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Wilson Pro Staff Precision Jr 19', 38.99, 'Unisex', 'Wilson', 170.0,'Klasik','Meko',19.0, 'Racket', 'tenis');
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
+VALUES ('Wilson Pro Staff Precision Jr 19', 38.99, 'Unisex', 'Wilson', 170.0,'Klasik','Meko',19.0, 'Racket', 'tenis', '30.jpg');
 
-INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport) 
-VALUES ('NikeCourt Air Zoom Zero HC Grass', 150.00, 'Unisex', 'Nike', 'Kramponi', 'TenisShoe', 'tenis');
-INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport) 
-VALUES ('NikeCourt Air Zoom Vapor X Clay', 135.00, 'Unisex', 'Nike', 'RibljaKost', 'TenisShoe', 'tenis');
-INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport) 
-VALUES ('NikeCourt Lite 2', 65.00, 'Unisex', 'Nike', 'Ravan', 'TenisShoe', 'tenis');
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('NikeCourt Air Zoom Zero HC Grass', 150.00, 'Unisex', 'Nike', 'Kramponi', 'TenisShoe', 'tenis', '31.jpg');
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('NikeCourt Air Zoom Vapor X Clay', 135.00, 'Unisex', 'Nike', 'RibljaKost', 'TenisShoe', 'tenis', '32.jpg');
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('NikeCourt Lite 2', 65.00, 'Unisex', 'Nike', 'Ravan', 'TenisShoe', 'tenis', '33.jpg');
 
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport) 
-VALUES ('Luxilon ALU Power Rough', 23.99, 'Unisex', 'Luxilon', 'RacketString', 'tenis');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Luxilon ALU Power Rough', 23.99, 'Unisex', 'Luxilon', 'RacketString', 'tenis', '34.jpg');
 
-INSERT INTO Article (name, price, gender, brand_name, eb_weight, DTYPE, sport) 
-VALUES ('Elasticna Traka', 40.00, 'Unisex', 'Joga', 25.0, 'ElasticBand', 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, number_Of_Crampsons, DTYPE, sport) 
-VALUES ('Kramponi x6', 10.00, 'Unisex', 'Nike', 6, 'GrassFootbalShoe', 'fudbal');
+INSERT INTO Article (name, price, gender, brand_name, eb_weight, DTYPE, sport, path_to_image) 
+VALUES ('Elasticna Traka', 40.00, 'Unisex', 'Joga', 25.0, 'ElasticBand', 'dizanjeTegova', '35.jpg');
+INSERT INTO Article (name, price, gender, brand_name, number_Of_Crampsons, DTYPE, sport, path_to_image) 
+VALUES ('Kramponi x6', 10.00, 'Unisex', 'Nike', 6, 'GrassFootbalShoe', 'fudbal', '36.jpg');
 
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport) 
-VALUES ('Hard padding shoes M', 49.99, 'Male', 'Nike', 'WeightliftingShoe', 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport) 
-VALUES ('Hard padding shoes F', 47.99, 'Female', 'Nike', 'WeightliftingShoe', 'dizanjeTegova');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Nike Savaleos Weightlifting Shoes', 125.99, 'Male', 'Nike', 'WeightliftingShoe', 'dizanjeTegova', '37.jpeg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Weightlifting Shoes Nike Romaleos 4', 199.99, 'Female', 'Nike', 'WeightliftingShoe', 'dizanjeTegova', '38.png');
 
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
-VALUES ('Dumbell 5kg', 10.99, 'Unisex', 'Nike', 'Dumbell', 5.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
-VALUES ('Dumbell 3kg', 8.99, 'Unisex', 'Nike', 'Dumbell', 3.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
-VALUES ('Dumbell 2kg', 7.99, 'Unisex', 'Nike', 'Dumbell', 2.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
-VALUES ('Dumbell 10kg', 13.99, 'Unisex', 'Nike', 'Dumbell', 10.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
-VALUES ('Dumbell 15kg', 16.99, 'Unisex', 'Nike', 'Dumbell', 15.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
-VALUES ('Dumbell 20kg', 18.99, 'Unisex', 'Nike', 'Dumbell', 20.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
-VALUES ('Dumbell 45kg', 18.99, 'Unisex', 'Nike', 'Dumbell', 45.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
-VALUES ('Dumbell 60kg', 18.99, 'Unisex', 'Nike', 'Dumbell', 60.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
-VALUES ('Dumbell 80kg', 18.99, 'Unisex', 'Nike', 'Dumbell', 80.0, 'dizanjeTegova');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Dumbell 5kg', 31.99, 'Unisex', 'NC FITNESS', 'Dumbell', 5.0, 'dizanjeTegova', '39.jpeg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Dumbell 3kg', 21.99, 'Unisex', 'NC FITNESS', 'Dumbell', 3.0, 'dizanjeTegova', '40.jpeg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Dumbell 2kg', 14.99, 'Unisex', 'NC FITNESS', 'Dumbell', 2.0, 'dizanjeTegova', '41.jpeg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Dumbell 10kg', 120.99, 'Unisex', 'NC FITNESS', 'Dumbell', 10.0, 'dizanjeTegova', '42.jpeg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Dumbell 15kg', 169.99, 'Unisex', 'NC FITNESS', 'Dumbell', 15.0, 'dizanjeTegova', '43.jpeg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Dumbell 20kg', 200.99, 'Unisex', 'Cyberfit', 'Dumbell', 20.0, 'dizanjeTegova', '44.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Dumbell 45kg', 700.00, 'Unisex', 'Pulse fitness', 'Dumbell', 45.0, 'dizanjeTegova', '45.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Dumbell 60kg', 900.00, 'Unisex', 'NC FITNESS', 'Dumbell', 60.0, 'dizanjeTegova', '46.jpeg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Dumbell 80kg', 822.99, 'Unisex', 'Fitness power', 'Dumbell', 80.0, 'dizanjeTegova', '47.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport, path_to_image) 
+VALUES ('Elastic Band 15kg', 7.99, 'Unisex', 'Decathlon', 'ElasticBand', 15.0, 'dizanjeTegova', '48.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport, path_to_image) 
+VALUES ('Elastic Band 20kg', 17.99, 'Unisex', 'Sveltus', 'ElasticBand', 20.0, 'dizanjeTegova', '49.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport, path_to_image) 
+VALUES ('Elastic Band 30kg', 29.99, 'Unisex', 'Sveltus', 'ElasticBand', 30.0, 'dizanjeTegova', '50.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport, path_to_image) 
+VALUES ('Elastic Band 45kg', 64.99, 'Unisex', 'Y&Y', 'ElasticBand', 45.0, 'dizanjeTegova', '51.jpg');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport) 
-VALUES ('Elastic Band 15kg', 7.99, 'Unisex', 'Nike', 'ElasticBand', 15.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport) 
-VALUES ('Elastic Band 20kg', 8.99, 'Unisex', 'Nike', 'ElasticBand', 20.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport) 
-VALUES ('Elastic Band 30kg', 9.99, 'Unisex', 'Nike', 'ElasticBand', 30.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport) 
-VALUES ('Elastic Band 45kg', 11.99, 'Unisex', 'Nike', 'ElasticBand', 45.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport) 
-VALUES ('Elastic Band 60kg', 13.99, 'Unisex', 'Nike', 'ElasticBand', 60.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, glove_size, sport) 
-VALUES ('WL Gloves M', 12.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'M', 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, glove_size, sport) 
-VALUES ('WL Gloves XL', 14.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'XL', 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, glove_size, sport) 
-VALUES ('WL GLoves L', 13.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'L', 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Chalk 200g', 5.99, 'Unisex', 'Thor', 'WeightliftingGear', 'Chalk', 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Chalk 500g', 5.99, 'Unisex', 'T hor', 'WeightliftingGear', 'Chalk', 'dizanjeTegova');
+VALUES ('Elastic Band 60kg', 22.99, 'Unisex', 'Decathlon', 'ElasticBand', 60.0, 'dizanjeTegova', '52.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, glove_size, sport, path_to_image) 
+VALUES ('WL Gloves M', 20.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'M', 'dizanjeTegova', '53.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, glove_size, sport, path_to_image) 
+VALUES ('Nike Premium Training Gloves XL', 32.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'XL', 'dizanjeTegova', '54.jpeg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, glove_size, sport, path_to_image) 
+VALUES ('Nike Extreme Fitness Gloves Black', 29.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'L', 'dizanjeTegova', '55.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Chalk 200g', 10.99, 'Unisex', 'Black diamond', 'WeightliftingGear', 'Chalk', 'dizanjeTegova', '56.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Chalk 500g', 12.99, 'Unisex', 'Power system', 'WeightliftingGear', 'Chalk', 'dizanjeTegova', '57.jpg');
 
 -- lopte
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Venum X TG', 24.99, 'Unisex', 'Adidas', 'Ball', 'CetiriSaTegom', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Rapid', 14.99, 'Unisex', 'Adidas', 'Ball', 'Decija', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Rapid AM', 15.99, 'Unisex', 'Adidas', 'Ball', 'Amaterska', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Rapid TR', 19.99, 'Unisex', 'Adidas', 'Ball', 'Trening', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Rapid PRO', 24.99, 'Unisex', 'Adidas', 'Ball', 'Profesionalna', 'fudbal');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Forza weighted football', 24.99, 'Unisex', 'Forza', 'Ball', 'CetiriSaTegom', 'fudbal', '58.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Picador kids ball', 17.99, 'Unisex', 'Picador', 'Ball', 'Decija', 'fudbal', '59.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Nike Nk Academy', 40.99, 'Unisex', 'Nike', 'Ball', 'Amaterska', 'fudbal', '60.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Nike Flight Soccer Ball', 160.99, 'Unisex', 'Nike', 'Ball', 'Profesionalna', 'fudbal', '61.png');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Adidas tango rosario', 27.99, 'Unisex', 'Adidas', 'Ball', 'Trening', 'fudbal', '62.png');
 
 -- patike
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, number_of_crampons) 
-VALUES ('Venum Max Shoe 6 Crampson', 82.99, 'Male', 'Adidas', 'FootbalShoeCrampons', 'fudbal', 6);
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, number_of_crampons) 
-VALUES ('Venum Max Shoe 7 Crampson', 85.99, 'Male', 'Adidas', 'FootbalShoeCrampons', 'fudbal', 7);
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport) 
-VALUES ('Venum Max Sprint', 84.99, 'Male', 'Adidas', 'FootbalShoeNoCrampons', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Kostobran SK ZGL', 45.99, 'Unisex', 'Adidas', 'FootballGear', 'KostobranSaStitnikomZaSkocniZglob', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Kostobran Bez SSZ', 45.99, 'Unisex', 'Adidas', 'FootballGear', 'KostobranBezStitnika', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Nike MatchFit Crew Socks', 25.99, 'Unisex', 'Nike', 'FootballGear', 'Stucne', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Nike Guard Stay II', 8.99, 'Unisex', 'Nike', 'FootballGear', 'Podvezice', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Kramponi x3', 3.99, 'Unisex', 'Nike', 'FootballGear', 'Krampon', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Kramponi x5', 5.99, 'Unisex', 'Nike', 'FootballGear', 'Krampon', 'fudbal');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, number_of_crampons, path_to_image) 
+VALUES ('Nike Phantom GX 2 Elite', 270.99, 'Male', 'Nike', 'FootbalShoeCrampons', 'fudbal', 6, '63.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, number_of_crampons, path_to_image) 
+VALUES ('Adidas PREDATOR LEAGUE SG', 85.99, 'Male', 'Adidas', 'FootbalShoeCrampons', 'fudbal', 7, '64.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Nike Mercurial Superfly 8 Elite TF', 79.99, 'Male', 'Nike', 'FootbalShoeNoCrampons', 'fudbal', '65.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Nike Mercurial Flylite Superlock SSZ', 29.99, 'Unisex', 'Nike', 'FootballGear', 'KostobranSaStitnikomZaSkocniZglob', 'fudbal', '66.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Nike Protegga Pro No SSZ', 35.99, 'Unisex', 'Nike', 'FootballGear', 'KostobranBezStitnika', 'fudbal', '67.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Nike Stadium Over-the-Calf Football Socks', 15.99, 'Unisex', 'Nike', 'FootballGear', 'Stucne', 'fudbal','68.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Nike Guard Stay II', 10.99, 'Unisex', 'Nike', 'FootballGear', 'Podvezice', 'fudbal', '69.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Adidas kramponi TPU STUDS', 20.99, 'Unisex', 'Adidas', 'FootballGear', 'Krampon', 'fudbal', '70.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Adidas kramponi SOFT GROUND', 21.99, 'Unisex', 'Adidas', 'FootballGear', 'Krampon', 'fudbal', '71.jpg');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
 VALUES ('Kjuc za odvrtanje i zavrtanje krampona', 12.99, 'Unisex', 'Owasp', 'FootballGear', 'KljucZaKrampone', 'fudbal');
 
