@@ -94,6 +94,7 @@ public class ArticleService implements IArticleService {
         fullArticle.setArticleType(opt.getClassName());
         fullArticle.setArticleGenderType(opt.getGender().toString());
         fullArticle.setRatings(ratings);
+        fullArticle.setImagePath(opt.getPathToImage());
         if (opt instanceof Ball) {
             Ball item = (Ball) opt;
             fullArticle.setBallType("Tip lopte: " + item.getType().toString());

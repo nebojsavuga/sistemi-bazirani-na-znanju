@@ -4,7 +4,7 @@ export interface RecommendedArticle {
     price: number,
     brandName: string,
     articleType: string,
-    imagePath?: string
+    pathToImage?: string
 }
 
 export interface FullArticle {
