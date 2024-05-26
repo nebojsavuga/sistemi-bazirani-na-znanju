@@ -24,7 +24,7 @@ export class ArticleDisplayComponent implements OnInit {
     this.articleService.getById(this.id).subscribe(
       res => {
         this.article = res;
-        this.authService.getPicture('images/1.png').subscribe(result =>{
+        this.authService.getPicture('images/' + this.article.imagePath).subscribe(result =>{
           const url = URL.createObjectURL(result);
           (document.getElementById(this.article.id.toString()) as HTMLImageElement).src = url;
       }); 
