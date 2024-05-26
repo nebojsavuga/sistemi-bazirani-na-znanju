@@ -7,6 +7,13 @@ export interface User {
     repeatPassword: string,
 }
 
+export interface UserDTO{
+    id: number,
+    age: number,
+    height: number,
+    gender: string
+}
+
 export interface UserProfileDTO {
     email: string,
     name: string,

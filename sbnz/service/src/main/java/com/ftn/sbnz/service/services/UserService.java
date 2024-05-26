@@ -15,6 +15,7 @@ import com.ftn.sbnz.model.users.Role;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
+import com.ftn.sbnz.service.controllers.dtos.UserDTO;
 import com.ftn.sbnz.service.exceptions.BadCredentialsException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.exceptions.UnauthorizedException;
@@ -103,5 +104,18 @@ public class UserService implements IUserService {
     public User getByEmail(String email) {
         User user = userRepository.findByEmail(email);
         return user;
+    }
+
+    @Override
+    public UserDTO getById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new NotFoundException("User with that id does not exist.");
+        }
+        UserDTO userDTO = new UserDTO();
+        userDTO.setAge(user.get().getAge());
+        userDTO.setGender(user.get().getGender());
+        userDTO.setHeight(user.get().getHeight());
+        return userDTO;
     }
 }

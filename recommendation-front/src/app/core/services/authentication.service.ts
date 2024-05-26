@@ -3,7 +3,7 @@ import { environment } from '../../../environment/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Token } from "../../shared/models/token";
-import { UserProfileDTO, User, RegisteredUser, EditUserDTO, ChangePasswordDTO } from "../../shared/models/user";
+import { UserProfileDTO, User, RegisteredUser, EditUserDTO, ChangePasswordDTO, UserDTO } from "../../shared/models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -68,5 +68,9 @@ export class AuthenticationService {
 
   isPasswordNotChanged(): boolean {
     return localStorage.getItem('passwordChanged') != null;
+  }
+
+  getById(id: number): Observable<UserDTO> {
+    return this.http.get<UserDTO>(environment.apiHost + "users/" + id);
   }
 }

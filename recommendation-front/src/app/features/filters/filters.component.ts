@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Injury } from '../../shared/models/injury';
 import { InjuryService } from '../../core/services/injury.service';
+import { TokenDecoderService } from '../../core/services/token-decoder.service';
 
 @Component({
   selector: 'app-filters',
@@ -39,11 +40,24 @@ export class FiltersComponent implements OnInit {
     }
   );
 
-  constructor(private injuryService: InjuryService
+  constructor(private injuryService: InjuryService,
+    private authService: AuthenticationService,
+    private jwtService: TokenDecoderService
   ) { }
 
   ngOnInit(): void {
-
+    if(this.authService.isLoggedIn()){
+      const id = this.jwtService.getDecodedAccesToken()['id']
+      this.authService.getById(id).subscribe(
+        res =>{
+          this.filterForm.patchValue({
+            age: res.age.toString(),
+            height: res.height.toString(),
+            gender: res.gender
+          })
+        }
+      )
+    }
     this.injuryService.getAll().subscribe(
       res => {
         this.injuries = res;
