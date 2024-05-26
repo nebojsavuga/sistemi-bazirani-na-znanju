@@ -157,7 +157,7 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport, p
 VALUES ('Elastic Band 30kg', 29.99, 'Unisex', 'Sveltus', 'ElasticBand', 30.0, 'dizanjeTegova', '50.jpg');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport, path_to_image) 
 VALUES ('Elastic Band 45kg', 64.99, 'Unisex', 'Y&Y', 'ElasticBand', 45.0, 'dizanjeTegova', '51.jpg');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport) 
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport, path_to_image) 
 VALUES ('Elastic Band 60kg', 22.99, 'Unisex', 'Decathlon', 'ElasticBand', 60.0, 'dizanjeTegova', '52.jpg');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, glove_size, sport, path_to_image) 
 VALUES ('WL Gloves M', 20.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'M', 'dizanjeTegova', '53.jpg');
@@ -201,19 +201,19 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_t
 VALUES ('Adidas kramponi TPU STUDS', 20.99, 'Unisex', 'Adidas', 'FootballGear', 'Krampon', 'fudbal', '70.jpg');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
 VALUES ('Adidas kramponi SOFT GROUND', 21.99, 'Unisex', 'Adidas', 'FootballGear', 'Krampon', 'fudbal', '71.jpg');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Kjuc za odvrtanje i zavrtanje krampona', 12.99, 'Unisex', 'Owasp', 'FootballGear', 'KljucZaKrampone', 'fudbal');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Kjuc za odvrtanje i zavrtanje krampona', 8.99, 'Unisex', 'Standard', 'FootballGear', 'KljucZaKrampone', 'fudbal', '72.jpg');
 
 -- dresovi
 
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Ronaldinho Milan', 20.99, 'Unisex', 'Nike', 'FootballGear', 'Dres', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Ronaldo Real Madrid 7', 20.99, 'Unisex', 'Nike', 'FootballGear', 'Dres', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Messi PSG', 24.99, 'Unisex', 'Adidas', 'FootballGear', 'Dres', 'fudbal');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Ibrahimovic LA Galaxy', 24.99, 'Unisex', 'Puma', 'FootballGear', 'Dres', 'fudbal');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Nike Practice football jersey', 21.99, 'Unisex', 'Nike', 'FootballGear', 'Dres', 'fudbal', '73.jpeg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('NIKE DRI FOOTBALL CLUB F.C. SOCCER TRAINING JERSEY', 59.99, 'Unisex', 'Nike', 'FootballGear', 'Dres', 'fudbal', '74.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Adidas Soccer Juventus FC Home Jersey', 79.99, 'Unisex', 'Adidas', 'FootballGear', 'Dres', 'fudbal', '75.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Puma Team Glory Jersey', 35.99, 'Unisex', 'Puma', 'FootballGear', 'Dres', 'fudbal', '76.jpeg');
 
 -- kupovine
 INSERT INTO Purchase (user_id, article_id, execution_time,is_processed_for_sport_code,is_processed_for_favorite_code, price) 
@@ -241,11 +241,11 @@ INSERT INTO Rating (user_id, article_id, execution_time, rating)
 VALUES (2, 45, '2022-05-15', 2);
 
 -- tegovi
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport) 
-VALUES ('Titan Fitness Gumirane Olimpijske Ploce', 59.99, 'Unisex', 'Titan Fitness', 'Weight', 20.0, 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, type, sport) 
-VALUES ('Titan Fitness', 159.99, 'Unisex', 'Titan Fitness', 'Barbel', 20.0, 'Olimpijska', 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('Rogue Fitness Ohio Lifting Belt', 119.99, 'Unisex', 'Rogue Fitness', 'WeightliftingGear', 'Belt', 'dizanjeTegova');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport) 
-VALUES ('SBD Knee Sleeves', 89.99, 'Unisex', 'SBD', 'WeightliftingGear', 'KneeWrap', 'dizanjeTegova');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('20KG Olympic Weight plates 5cm Rubber Coated', 79.99, 'Unisex', 'Power Gym', 'Weight', 20.0, 'dizanjeTegova', '77.jpeg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, type, sport, path_to_image) 
+VALUES ('Olympic Bar 20Kg', 159.99, 'Unisex', 'BOOMFIT', 'Barbel', 20.0, 'Olimpijska', 'dizanjeTegova', '78.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Weightlifting Belt Shaped', 119.99, 'Unisex', 'GYMSTICK', 'WeightliftingGear', 'Belt', 'dizanjeTegova','79.jpg');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Iron Bull Strength Knee Wraps', 29.99, 'Unisex', 'SBD', 'WeightliftingGear', 'KneeWrap', 'dizanjeTegova','80.jpg');
