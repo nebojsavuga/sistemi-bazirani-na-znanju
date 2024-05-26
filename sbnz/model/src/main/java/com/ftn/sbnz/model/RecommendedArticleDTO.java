@@ -6,7 +6,8 @@ public class RecommendedArticleDTO {
     public float price;
     public String brandName;
     public String articleType;
-
+    public String pathToImage;
+    
     public Long getId() {
         return id;
     }
@@ -72,8 +73,11 @@ public class RecommendedArticleDTO {
         return true;
     }
 
-    
+    public String getPathToImage() {
+        return pathToImage;
+    }
 
-
-
+    public void setPathToImage(String pathToImage) {
+        this.pathToImage = pathToImage;
+    }
 }

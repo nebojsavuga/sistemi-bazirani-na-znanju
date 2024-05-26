@@ -37,6 +37,7 @@ then
     recommendedArticle.setId($a1.getId());
     recommendedArticle.setBrandName($a1.getBrandName());
     recommendedArticle.setArticleType($cn);
+    recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     if (recommendations.size() >= 10) {
         drools.halt();
@@ -56,6 +57,7 @@ then
     recommendedArticle.setId($a1.getId());
     recommendedArticle.setBrandName($a1.getBrandName());
     recommendedArticle.setArticleType($mn);
+    recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     if (recommendations.size() >= 15) {
         drools.halt();
@@ -75,6 +77,7 @@ then
     recommendedArticle.setId($a1.getId());
     recommendedArticle.setBrandName($a1.getBrandName());
     recommendedArticle.setArticleType($mn);
+    recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     if (recommendations.size() >= 20) {
         drools.halt();

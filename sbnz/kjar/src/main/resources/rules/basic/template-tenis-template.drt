@@ -30,6 +30,7 @@ then
     recommendedArticle.setId($$article.getId());
     recommendedArticle.setBrandName($$article.getBrandName());
     recommendedArticle.setArticleType("Sweatband");
+    recommendedArticle.setPathToImage($$article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end

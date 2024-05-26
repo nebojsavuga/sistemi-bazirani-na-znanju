@@ -27,6 +27,7 @@ then
     recommendedArticle.setId($$article.getId());
     recommendedArticle.setBrandName($$article.getBrandName());
     recommendedArticle.setArticleType("Jersey");
+    recommendedArticle.setPathToImage($$article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
