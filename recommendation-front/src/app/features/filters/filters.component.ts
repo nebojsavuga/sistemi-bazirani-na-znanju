@@ -25,6 +25,7 @@ export class FiltersComponent implements OnInit {
   selectedInjuries: number[] = [];
   hasError = false;
   id: number = -1;
+  isLoggedIn = false;
   filterForm = new FormGroup(
     {
       sport: new FormControl('', [Validators.required]),
@@ -48,6 +49,7 @@ export class FiltersComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
+      this.isLoggedIn = true;
       this.id = this.jwtService.getDecodedAccesToken()['id']
     }
     this.injuryService.getAll().subscribe(
