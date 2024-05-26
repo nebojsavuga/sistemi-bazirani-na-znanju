@@ -132,10 +132,10 @@ then
     insert(recommendedArticle);
 end
 
-rule "Profesionalac, preporuci amaterske i trening lopte"
+rule "Profesionalac, preporuci pro i trening lopte"
 salience 100
 when
-    $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null), level == SportLevel.Pro)
+    $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null || age == 0), level == SportLevel.Pro)
     $article: Article()
     $ball: Ball(type == BallType.Profesionalna || type == BallType.Trening) from $article
 then
