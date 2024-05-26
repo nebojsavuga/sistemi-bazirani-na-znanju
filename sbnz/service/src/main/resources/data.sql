@@ -32,78 +32,78 @@ insert into Concrete_Injury(user_id, injury_id, execution_time)
 values(2, 3, '2023-07-18');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
-VALUES ('Wilson Pro Overgrip', 5.99, 'Unisex', 'Wilson', 'Grip', 'Tenis', '1.png');
+VALUES ('Wilson Pro Overgrip', 5.99, 'Unisex', 'Wilson', 'Grip', 'Tenis', '1.jpeg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport) 
-VALUES ('Icebug Acceleritas8 RB9X', 139.99, 'Unisex', 'Icebug', 'BigCramponOrientiringShoe', 'orijentiring');
+VALUES ('Icebug Acceleritas8 RB9X', 139.99, 'Unisex', 'Icebug', 'BigCramponOrientiringShoe', 'orijentiring', '2.jpeg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('Silva kamasne za orijentiring', 29.99, 'Unisex', 'Silva', 'Kamasne', 'OrientiringGear', 'orijentiring');
+VALUES ('Silva kamasne za orijentiring', 29.99, 'Unisex', 'Silva', 'Kamasne', 'OrientiringGear', 'orijentiring', '3.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('Balega Hidden Comfort No-Show Running Socks', 15.99, 'Unisex', 'Balega', 'KratkeCarape', 'OrientiringGear', 'orijentiring');
+VALUES ('Balega Hidden Comfort No-Show Running Socks', 15.99, 'Unisex', 'Balega', 'KratkeCarape', 'OrientiringGear', 'orijentiring', '4.jpeg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('Silva Race Jet Compass Glasses', 89.99, 'Unisex', 'Silva', 'Naocare', 'OrientiringGear', 'orijentiring');
+VALUES ('Vapro Sport Reading Glasses SRG-13', 37.99, 'Unisex', 'Vapro', 'Naocare', 'OrientiringGear', 'orijentiring', '5.jpeg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('Trimtex Basic O-Pants', 60.99, 'Unisex', 'Trimtex', 'Poludugacko', 'Sweatpants', 'orijentiring');
+VALUES ('Trimtex Basic O-Pants', 60.99, 'Unisex', 'Trimtex', 'Poludugacko', 'Sweatpants', 'orijentiring', '6.jpeg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('Trimtex Basic Short Orienteering Pants', 33.99, 'Unisex', 'Trimtex', 'Sorc', 'Sweatpants', 'orijentiring');
+VALUES ('Trimtex Basic Short Orienteering Pants', 33.99, 'Unisex', 'Trimtex', 'Sorc', 'Sweatpants', 'orijentiring', '7.jpeg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('Trimtex Trainer 2.0 Training Pants', 69.99, 'Unisex', 'Trimtex', 'Dugacko', 'Sweatpants', 'orijentiring');
+VALUES ('Trimtex Trainer 2.0 Training Pants', 69.99, 'Unisex', 'Trimtex', 'Dugacko', 'Sweatpants', 'orijentiring', '8.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('Suunto M-3 Global Compass', 59.99, 'Unisex', 'Suunto', 'Busola', 'OrientiringGear', 'orijentiring');
+VALUES ('Suunto M-3 Global Compass', 59.99, 'Unisex', 'Suunto', 'Busola', 'OrientiringGear', 'orijentiring', '9.jpeg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('SportIdent 6', 109.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring');
+VALUES ('SportIdent 6', 109.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '10.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('SportIdent 7', 139.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring');
+VALUES ('SportIdent 7', 139.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '11.png');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('SportIdent 8', 189.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring');
+VALUES ('SportIdent 8', 189.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '12.jpg');
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('SportIdent 9', 199.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring');
+VALUES ('SportIdent 9', 199.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '13.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport) 
-VALUES ('SportIdent Elastic Finger Strap', 4.99, 'Unisex', 'SportIdent', 'KanapZaCip', 'OrientiringGear', 'orijentiring');
+VALUES ('SportIdent Elastic Finger Strap', 4.99, 'Unisex', 'SportIdent', 'KanapZaCip', 'OrientiringGear', 'orijentiring', '14.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport) 
-VALUES ('Znojnica 1', 5.00, 'Unisex', 'Nike', 'Znojnica', 'TenisGear', 'tenis');
+VALUES ('Znojnica 1', 5.00, 'Unisex', 'Nike', 'Znojnica', 'TenisGear', 'tenis', '15.jpeg');
 INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport) 
-VALUES ('Babolat Custom Damp', 7.99, 'Unisex', 'Babolat', 'Vibrastop', 'TenisGear', 'tenis');
-
-INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport) 
-VALUES ('Wilson Ultralight II', 32.99, 'Unisex', 'Wilson', 'Kacket', 'TenisGear', 'tenis');
+VALUES ('Babolat Custom Damp', 7.99, 'Unisex', 'Babolat', 'Vibrastop', 'TenisGear', 'tenis', '16.png');
 
 INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport) 
-VALUES ('Wilson oprema US Open 3tball', 9.00, 'Unisex', 'Wilson', 'Loptice', 'TenisGear','tenis');
+VALUES ('Wilson Ultralight II', 32.99, 'Unisex', 'Wilson', 'Kacket', 'TenisGear', 'tenis', '17.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport) 
+VALUES ('Wilson oprema US Open 3tball', 9.00, 'Unisex', 'Wilson', 'Loptice', 'TenisGear','tenis', '18.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Pure Areo 2023', 250.00, 'Unisex', 'Babolat', 300.0,'Profesionalni','Tvrdo',27.0, 'Racket', 'tenis');
+VALUES ('Pure Areo 2023', 250.00, 'Unisex', 'Babolat', 300.0,'Profesionalni','Tvrdo',27.0, 'Racket', 'tenis', '19.png');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Babolat Pure Drive', 200.00, 'Unisex', 'Babolat', 315.0,'Profesionalni','Tvrdo',27.0, 'Racket', 'tenis');
+VALUES ('Babolat Pure Drive', 200.00, 'Unisex', 'Babolat', 315.0,'Profesionalni','Tvrdo',27.0, 'Racket', 'tenis', '20.jpg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Wilson Clash 100', 220.00, 'Unisex', 'Wilson', 295.0,'Profesionalni','Meko',27.0, 'Racket', 'tenis');
+VALUES ('Wilson Clash 100', 220.00, 'Unisex', 'Wilson', 295.0,'Profesionalni','Meko',27.0, 'Racket', 'tenis', '21.jpg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Wilson Tour Slam Lite', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',27.0, 'Racket', 'tenis');
+VALUES ('Wilson Tour Slam Lite', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',27.0, 'Racket', 'tenis', '22.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Wilson Pro Staff RF97 Autograph', 250.99, 'Unisex', 'Wilson', 340.0,'Profesionalni','Tvrdo',27.0, 'Racket', 'tenis');
+VALUES ('Wilson Pro Staff RF97 Autograph', 250.99, 'Unisex', 'Wilson', 340.0,'Profesionalni','Tvrdo',27.0, 'Racket', 'tenis', '23.jpg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Wilson 19', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',19.0, 'Racket', 'tenis');
+VALUES ('Wilson 19', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',19.0, 'Racket', 'tenis', '24.jpg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Wilson 21', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',21.0, 'Racket', 'tenis');
+VALUES ('Wilson 21', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',21.0, 'Racket', 'tenis', '25.jpg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Wilson 23', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',23.0, 'Racket', 'tenis');
+VALUES ('Wilson 23', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',23.0, 'Racket', 'tenis', '26.jpg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Wilson 25', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',25.0, 'Racket', 'tenis');
+VALUES ('Wilson 25', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',25.0, 'Racket', 'tenis', '27.jpeg');
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
-VALUES ('Wilson 27.5', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',27.5, 'Racket', 'tenis');
+VALUES ('Wilson 27.5', 79.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',27.5, 'Racket', 'tenis', '28.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport) 
 VALUES ('Wilson Ultra 25 V4 Tennis Racket', 129.99, 'Unisex', 'Wilson', 280.0,'Klasik','Meko',25.0, 'Racket', 'tenis');
