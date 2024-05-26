@@ -157,7 +157,7 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport, p
 VALUES ('Elastic Band 30kg', 29.99, 'Unisex', 'Sveltus', 'ElasticBand', 30.0, 'dizanjeTegova', '50.jpg');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport, path_to_image) 
 VALUES ('Elastic Band 45kg', 64.99, 'Unisex', 'Y&Y', 'ElasticBand', 45.0, 'dizanjeTegova', '51.jpg');
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport) 
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, eb_weight, sport, path_to_image) 
 VALUES ('Elastic Band 60kg', 22.99, 'Unisex', 'Decathlon', 'ElasticBand', 60.0, 'dizanjeTegova', '52.jpg');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, glove_size, sport, path_to_image) 
 VALUES ('WL Gloves M', 20.99, 'Unisex', 'Nike', 'WeightliftingGlove', 'M', 'dizanjeTegova', '53.jpg');
