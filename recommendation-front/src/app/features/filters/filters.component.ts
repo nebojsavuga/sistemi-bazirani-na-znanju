@@ -40,7 +40,7 @@ export class FiltersComponent implements OnInit {
       injuries: new FormControl([])
     }
   );
-  
+
   constructor(private injuryService: InjuryService,
     private authService: AuthenticationService,
     private jwtService: TokenDecoderService
@@ -84,12 +84,26 @@ export class FiltersComponent implements OnInit {
 
   prefill() {
     this.authService.getById(this.id).subscribe(
-      res =>{
+      res => {
         this.filterForm.patchValue({
           age: res.age.toString(),
           height: res.height.toString(),
           gender: res.gender
         })
       });
+  }
+
+  removeFilters() {
+    this.filterForm.reset();
+    this.filterForm.patchValue({
+      gender: '',
+      sport: '',
+      level: '',
+      typeOfField: '',
+      typeOfFootball: '',
+      typeOfFotballPlayer: '',
+      typeOfRace: '',
+      typeOfWeightlifting: ''
+    })
   }
 }
