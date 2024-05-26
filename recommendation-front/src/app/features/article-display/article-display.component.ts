@@ -12,7 +12,7 @@ import { ArticleService } from '../../core/services/article.service';
 export class ArticleDisplayComponent implements OnInit {
 
   id: number;
-  article: FullArticle;
+  article: FullArticle = null;
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
     private route: ActivatedRoute) { }
@@ -23,7 +23,7 @@ export class ArticleDisplayComponent implements OnInit {
     });
     this.articleService.getById(this.id).subscribe(
       res => {
-        console.log(res);
+        this.article = res;
       }
     )
   }
