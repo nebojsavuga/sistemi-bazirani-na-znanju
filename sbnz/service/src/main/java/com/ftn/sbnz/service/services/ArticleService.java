@@ -2,7 +2,6 @@ package com.ftn.sbnz.service.services;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -11,18 +10,18 @@ import java.util.stream.Collectors;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.ftn.sbnz.model.Code;
-import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.Ball;
+import com.ftn.sbnz.model.articles.Barbel;
 import com.ftn.sbnz.model.articles.Rating;
 import com.ftn.sbnz.model.events.Purchase;
-import com.ftn.sbnz.model.users.Injury;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.ArticleRatingDTO;
+import com.ftn.sbnz.service.controllers.dtos.FullArticle;
 import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
 import com.ftn.sbnz.service.exceptions.BadRequestException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
@@ -57,17 +56,35 @@ public class ArticleService implements IArticleService {
     }
 
     @Override
-    public ArticleDTO getArticle(Long id) {
+    public FullArticle getArticle(Long id) {
         Optional<Article> article = articleRepository.findById(id);
         if (article.isEmpty()) {
             throw new NotFoundException("Article with that id does not exist.");
         }
-        return new ArticleDTO(
-                article.get().getId(),
-                article.get().getName(),
-                article.get().getPrice(),
-                article.get().getBrandName(),
-                article.get().getClassName());
+        List<ArticleRatingDTO> ratings = new ArrayList<>();
+        for (Rating rating : article.get().getRatings()) {
+            ratings.add(new ArticleRatingDTO(article.get().getId(), rating.getRating(), rating.getExecutionTime()));
+        }
+        Article opt = article.get();
+        FullArticle fullArticle = new FullArticle();
+        fullArticle.setId(opt.getId());
+        fullArticle.setName(opt.getName());
+        fullArticle.setBrandName(opt.getBrandName());
+        fullArticle.setPrice(opt.getPrice());
+        fullArticle.setArticleType(opt.getClassName());
+        fullArticle.setArticleGenderType(opt.getGender().toString());
+        fullArticle.setRatings(ratings);
+        if (opt instanceof Ball) {
+            Ball item = (Ball) opt;
+            fullArticle.setBallType("Tip lopte: " + item.getType().toString());
+        } else if(opt instanceof Barbel){
+            Barbel item = (Barbel) opt;
+            fullArticle.setBarbelType("Tip sipke: " + item.getType().toString());
+            fullArticle.setBarbelType("Tezina sipke: " + item.getWeight());
+        }
+
+
+        return fullArticle;
     }
 
     @Override

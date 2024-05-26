@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.sbnz.service.config.JwtUtils;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.FullArticle;
 import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
 import com.ftn.sbnz.service.services.IArticleService;
 
@@ -35,7 +36,7 @@ public class ArticleController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ArticleDTO> getArticle(@PathVariable Long id) {
+    public ResponseEntity<FullArticle> getArticle(@PathVariable Long id) {
         return new ResponseEntity<>(this.articleService
                 .getArticle(id), HttpStatus.OK);
     }

@@ -14,16 +14,16 @@ export interface FullArticle {
     brandName: string,
     articleType?: string,
     imagePath?: string,
-    articleGenderType?: ArticleGenderType,
-    ratings: Rating[],
+    articleGenderType?: string,
+    ratings: ArticleRatingDTO[],
     ballType?: string,
     barbellWeight?: number,
     barbelType?: string,
     dumbellWeight?: number,
     elasticBandWeight?: number,
     typeOfFootballGear?: string,
-    numberOfCramponsFootballShoeCrampons?:number,
-    numberOfCramponsGrassFootballShoe?:number,
+    numberOfCramponsFootballShoeCrampons?: number,
+    numberOfCramponsGrassFootballShoe?: number,
     typeOfOrientiringGear?: string,
     racketWeight?: number,
     racketType?: string,
@@ -35,7 +35,8 @@ export interface FullArticle {
     weightliftingTypeOfGear?: string,
     weightliftingGloveSize?: string,
 }
-export interface Rating{
+
+export interface ArticleRatingDTO {
     id?: number,
     rating: number,
     executionTime: Date
