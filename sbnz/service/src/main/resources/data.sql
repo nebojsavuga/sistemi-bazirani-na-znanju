@@ -59,15 +59,15 @@ INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_t
 VALUES ('Suunto M-3 Global Compass', 59.99, 'Unisex', 'Suunto', 'Busola', 'OrientiringGear', 'orijentiring', '9.jpeg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
-VALUES ('SportIdent 6', 109.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '10.jpg');
+VALUES ('Sportident Active Card SIAC Red', 59.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '10.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
-VALUES ('SportIdent 7', 139.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '11.png');
+VALUES ('Sportident Active Card SIAC Lynx', 58.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '11.png');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
-VALUES ('SportIdent 8', 189.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '12.jpg');
+VALUES ('SportIdent Card 8', 27.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '12.jpg');
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
-VALUES ('SportIdent 9', 199.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '13.jpg');
+VALUES ('SportIdent Card 9', 35.99, 'Unisex', 'SportIdent', 'Cip', 'OrientiringGear', 'orijentiring', '13.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
 VALUES ('SportIdent Elastic Finger Strap', 4.99, 'Unisex', 'SportIdent', 'KanapZaCip', 'OrientiringGear', 'orijentiring', '14.jpg');
@@ -249,3 +249,43 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_t
 VALUES ('Weightlifting Belt Shaped', 119.99, 'Unisex', 'GYMSTICK', 'WeightliftingGear', 'Belt', 'dizanjeTegova','79.jpg');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
 VALUES ('Iron Bull Strength Knee Wraps', 29.99, 'Unisex', 'SBD', 'WeightliftingGear', 'KneeWrap', 'dizanjeTegova','80.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
+VALUES ('SILVA ARC JET S Thumb Compass', 62.99, 'Unisex', 'Silva', 'Busola', 'OrientiringGear', 'orijentiring', '81.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
+VALUES ('Trimtex Extreme O-Pants Navy', 40.99, 'Unisex', 'Trimtex', 'Poludugacko', 'Sweatpants', 'orijentiring', '82.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('INOV8 Oroc Ultra 290 Orienteering Shoes', 124.99, 'Unisex', 'INOV8', 'BigCramponOrientiringShoe', 'orijentiring', '83.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('INOV8 Oroc 280 V3 Shoes', 107.99, 'Unisex', 'INOV8', 'BigCramponOrientiringShoe', 'orijentiring', '84.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
+VALUES ('Kampela Short Tights', 15.99, 'Unisex', 'Kampela', 'Sorc', 'Sweatpants', 'orijentiring', '85.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Nano Cyber Power 1.25 Mm', 4.99, 'Unisex', 'Pros pro', 'RacketString', 'tenis', '86.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Nike Downshifter 13', 70.99, 'Male', 'Nike', 'NoCramponOrientiringShoe', 'orijentiring', '87.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Nike Revolution 7', 65.99, 'Male', 'Nike', 'NoCramponOrientiringShoe', 'orijentiring', '88.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Nike Vomero 17', 150.99, 'Male', 'Nike', 'NoCramponOrientiringShoe', 'orijentiring', '89.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Nike React Pegasus Trail 4', 99.99, 'Male', 'Nike', 'NoCramponOrientiringShoe', 'orijentiring', '90.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('VJ Integrator 18 Orienteering Shoes', 99.99, 'Unisex', 'VJ', 'BigCramponOrientiringShoe', 'orijentiring', '91.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport, path_to_image) 
+VALUES ('Head Znojnice Bele', 10.00, 'Unisex', 'Head', 'Znojnica', 'TenisGear', 'tenis', '92.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport, path_to_image) 
+VALUES ('Head Znojnice Crne', 10.00, 'Unisex', 'Head', 'Znojnica', 'TenisGear', 'tenis', '93.jpg');
+
