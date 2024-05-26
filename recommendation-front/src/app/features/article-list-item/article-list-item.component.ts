@@ -12,7 +12,7 @@ export class ArticleListItemComponent implements OnInit{
   @Input() article: RecommendedArticle;
   constructor(private router: Router, private authService: AuthenticationService) { }
   ngOnInit(): void {
-    this.authService.getPicture('images/1.png').subscribe(result =>{
+    this.authService.getPicture('images/' + this.article.imagePath).subscribe(result =>{
       const url = URL.createObjectURL(result);
       (document.getElementById(this.article.id.toString()) as HTMLImageElement).src = url;
   });  }
