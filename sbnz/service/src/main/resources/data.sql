@@ -31,8 +31,8 @@ values(2, 3, '2023-08-18');
 insert into Concrete_Injury(user_id, injury_id, execution_time)
 values(2, 3, '2023-07-18');
 
-INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport) 
-VALUES ('Wilson Pro Overgrip', 5.99, 'Unisex', 'Wilson', 'Grip', 'Tenis');
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Wilson Pro Overgrip', 5.99, 'Unisex', 'Wilson', 'Grip', 'Tenis', '1.png');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport) 
 VALUES ('Icebug Acceleritas8 RB9X', 139.99, 'Unisex', 'Icebug', 'BigCramponOrientiringShoe', 'orijentiring');

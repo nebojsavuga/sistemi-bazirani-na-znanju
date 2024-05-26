@@ -43,14 +43,8 @@ export class AuthenticationService {
   }
 
   getPicture(imagePath: string): Observable<Blob> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${localStorage.getItem('token')}`
-    });
-
     return this.http.get('http://localhost/' + imagePath, {
-      headers: headers,
-      responseType: 'blob',
-      withCredentials: true
+      responseType: 'blob'
     });
   }
 

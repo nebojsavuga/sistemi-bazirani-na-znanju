@@ -45,6 +45,8 @@ public class Article implements Serializable {
     @Column
     private String brandName;
 
+    @Column
+    private String pathToImage;
     
 
     public Long getId() {
@@ -176,5 +178,13 @@ public class Article implements Serializable {
 
     public void setSport(String sport) {
         this.sport = sport;
+    }
+
+    public String getPathToImage() {
+        return pathToImage;
+    }
+
+    public void setPathToImage(String pathToImage) {
+        this.pathToImage = pathToImage;
     }
 }

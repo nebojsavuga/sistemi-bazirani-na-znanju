@@ -1,6 +1,6 @@
 <div class="article-card dark-border px-3 pt-2" (click)="showArticle(article.id)">
     <div class="image-container">
-        <img src="../../../assets/sport.png" alt="Article Image">
+        <img src="../../../assets/sport.png" alt="Article Image" [id]="article.id.toString()">
     </div>
     <div class="details">
         <h2 class="name">{{ article.name }}</h2>
