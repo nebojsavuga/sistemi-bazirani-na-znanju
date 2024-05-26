@@ -199,5 +199,4 @@ then
     recommendedArticle.setArticleType("Kacket");
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
-    System.out.println("dd");
 end

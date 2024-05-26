@@ -73,4 +73,18 @@ public class ArticleController {
         this.articleService.rateArticle(articleDTO, userId);
         return new ResponseEntity<>(articleDTO, HttpStatus.OK);
     }
+
+    @PostMapping()
+    public ResponseEntity<?> addArticle(@Valid @RequestBody FullArticle articleDTO,
+            @RequestHeader("Authorization") String token) {
+        if (token != null && !token.isEmpty()) {
+            String jwtt = token.substring(7);
+            String role = jwt.getRole(jwtt);
+            if(!role.toLowerCase().contains("admin")){
+                return new ResponseEntity<>("Nemate pravo za kreiranje artikala.", HttpStatus.BAD_REQUEST);
+            }
+        }
+        this.articleService.addArticle(articleDTO);
+        return new ResponseEntity<>(articleDTO, HttpStatus.OK);
+    }
 }

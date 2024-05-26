@@ -1,7 +1,5 @@
 package com.ftn.sbnz.service.controllers.dtos;
 
-import java.util.List;
-
 import com.ftn.sbnz.model.users.Gender;
 
 public class UserDTO {

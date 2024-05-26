@@ -11,4 +11,5 @@ public interface IArticleService {
     Set<ArticleDTO> getArticlesByType(String type);
     ArticleDTO buyArticle(Long id, Long userId, Long codeId);
     void rateArticle(RateArticleDTO articleDTO, Long userId);
+    FullArticle addArticle(FullArticle article);
 }

@@ -1,12 +1,17 @@
 package com.ftn.sbnz.service.services;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+import java.util.Base64;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.ftn.sbnz.model.Code;
 import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.ArticleGenderType;
 import com.ftn.sbnz.model.articles.Ball;
 import com.ftn.sbnz.model.articles.Barbel;
 import com.ftn.sbnz.model.articles.Dumbell;
@@ -52,6 +58,7 @@ public class ArticleService implements IArticleService {
     private PurchaseRepository purchaseRepository;
     private RatingRepository ratingRepository;
     private CodeRepository codeRepository;
+    private static final Pattern BASE64_IMAGE_PATTERN = Pattern.compile("^data:image/(\\w+);base64,");
 
     @Autowired
     public ArticleService(KieContainer kieContainer,
@@ -286,7 +293,7 @@ public class ArticleService implements IArticleService {
             saveCodeAfter4UsedCodes(codePriceDiscount, usedCodes);
         }
         if (codeLoyalPriceDiscount.getName() != null) {
-            saveCodeAfter4UsedCodes(codeLoyalPriceDiscount, usedLoyalCodes);
+            saveCodeAfter3UsedLoyalCodes(codeLoyalPriceDiscount, usedLoyalCodes);
         }
         return new ArticleDTO(article.get().getId(), article.get().getName(), purchase.getPrice(),
                 article.get().getBrandName(), article.get().getClassName());
@@ -312,6 +319,50 @@ public class ArticleService implements IArticleService {
         }
         Rating rating = new Rating(user.get(), article.get(), articleDTO.getRating());
         ratingRepository.save(rating);
+    }
+
+    @Override
+    public FullArticle addArticle(FullArticle article) {
+        Article art = new Article();
+        art.setBrandName(article.getBrandName());
+        art.setName(article.getName());
+        art.setGender(ArticleGenderType.valueOf(article.getArticleGenderType()));
+        art.setPrice(article.getPrice());
+
+        art = articleRepository.save(art);
+        article.setId(art.getId());
+        String image = article.getImage();
+        try {
+            // Extract the image file type from the Base64 string
+            Matcher matcher = BASE64_IMAGE_PATTERN.matcher(image);
+            if (!matcher.find()) {
+                throw new BadRequestException("Los format slike.");
+            }
+            String fileType = matcher.group(1); // Extracts the file type (e.g., png, jpg)
+
+            // Decode the Base64 image string
+            String base64Image = image.substring(image.indexOf(",") + 1);
+            byte[] imageBytes = Base64.getDecoder().decode(base64Image);
+
+            // Define the path where the image will be saved
+            String directoryPath = "service/images";
+            File directory = new File(directoryPath);
+            if (!directory.exists()) {
+                directory.mkdirs(); // Create the directory if it doesn't exist
+            }
+    
+            File imageFile = new File(directoryPath + "/" + article.getId() + "." + fileType);
+            art.setPathToImage(article.getId() + "." + fileType);
+            articleRepository.save(art);
+            // Save the image to the file system
+            try (FileOutputStream fos = new FileOutputStream(imageFile)) {
+                fos.write(imageBytes);
+            }
+
+        } catch (IOException e) {
+            throw new BadRequestException(e.getLocalizedMessage());    
+        }
+        return article;
     }
 
 }

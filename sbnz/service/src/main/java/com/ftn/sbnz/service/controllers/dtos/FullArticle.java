@@ -30,6 +30,7 @@ public class FullArticle {
     private String weightliftingWeight;
     private String weightliftingTypeOfGear;
     private String weightliftingGloveSize;
+    private String image;
 
 
     public Long getId() {
@@ -296,5 +297,13 @@ public class FullArticle {
 
     public void setRacketSize(String racketSize) {
         this.racketSize = racketSize;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }
