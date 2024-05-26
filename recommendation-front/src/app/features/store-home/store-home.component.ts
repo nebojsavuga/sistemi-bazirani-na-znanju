@@ -13,9 +13,9 @@ export class StoreHomeComponent {
   constructor(private recomendationService: RecomendationService) { }
   articles: RecommendedArticle[] = [];
   handleFilterSubmit(event: any) {
-    
+
     this.recomendationService.recommend(event).subscribe(
-      res =>{
+      res => {
         this.articles = res;
       }
     )

@@ -24,6 +24,7 @@ export class FiltersComponent implements OnInit {
   sportWeightliftingTypes: string[] = ['Powerlifting', 'Weightlifting', 'Bodybuilding']
   selectedInjuries: number[] = [];
   hasError = false;
+  id: number = -1;
   filterForm = new FormGroup(
     {
       sport: new FormControl('', [Validators.required]),
@@ -39,24 +40,15 @@ export class FiltersComponent implements OnInit {
       injuries: new FormControl([])
     }
   );
-
+  
   constructor(private injuryService: InjuryService,
     private authService: AuthenticationService,
     private jwtService: TokenDecoderService
   ) { }
 
   ngOnInit(): void {
-    if(this.authService.isLoggedIn()){
-      const id = this.jwtService.getDecodedAccesToken()['id']
-      this.authService.getById(id).subscribe(
-        res =>{
-          this.filterForm.patchValue({
-            age: res.age.toString(),
-            height: res.height.toString(),
-            gender: res.gender
-          })
-        }
-      )
+    if (this.authService.isLoggedIn()) {
+      this.id = this.jwtService.getDecodedAccesToken()['id']
     }
     this.injuryService.getAll().subscribe(
       res => {
@@ -88,5 +80,16 @@ export class FiltersComponent implements OnInit {
         this.selectedInjuries.splice(index, 1);
       }
     }
+  }
+
+  prefill() {
+    this.authService.getById(this.id).subscribe(
+      res =>{
+        this.filterForm.patchValue({
+          age: res.age.toString(),
+          height: res.height.toString(),
+          gender: res.gender
+        })
+      });
   }
 }

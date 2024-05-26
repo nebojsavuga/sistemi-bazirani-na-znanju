@@ -122,7 +122,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 col-12 mt-5">
+                        <div class="col-md-3 col-12 mt-5" *ngIf="id !== -1">
+                            <button type="button" class="button-style" (click)="prefill()">Popuni moje karakteristike</button>
+                        </div>
+                        <div class="col-md-3 col-12 mt-5">
                             <button type="submit" class="button-style">Primeni</button>
                         </div>
                     </div>
