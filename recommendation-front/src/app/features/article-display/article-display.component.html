@@ -1,37 +1,40 @@
-<div class="main-section" *ngIf="article">
+<section class="main-section dark-border text-center" *ngIf="article">
     <div class="row">
         <div class="col-md-6 col-12 p-3">
             <img src="../../../assets/sport.png" alt="Article Image">
-        </div>
-        <div class="col-md-6 col-12">
             <h2 class="name">{{ article.name }}</h2>
-            <p class="brand">Brend: {{ article.brandName }}</p>
-            <p class="type">Tip: {{ article.articleType }}</p>
-            <p class="price">Cena: ${{ article.price }}</p>
-            <p class="price">Pol: {{ article.articleGenderType == 'Male' ? 'Musko' : 'Zensko' }}</p>
+
+        </div>
+        <div class="col-md-6 col-12 p-5" style="text-align: left;">
+            <h4 class="brand">Brend: {{ article.brandName }}</h4>
+            <h4 class="type">Tip: {{ article.articleType | camelCase }}</h4>
+            <h4 class="price">Cena: ${{ article.price }}</h4>
+            <h4 class="price">Pol: {{ article.articleGenderType == 'Male' ? 'Musko' : 'Zensko' }}</h4>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row my-3">
         <h3>Dodatne informacije</h3>
-        <div class="row" *ngIf="article.ballType"> {{article.ballType | camelCase}}</div>
-        <div class="row" *ngIf="article.barbelType"> {{article.barbelType | camelCase}}</div>
-        <div class="row" *ngIf="article.barbellWeight"> {{article.barbellWeight | camelCase}}</div>
-        <div class="row" *ngIf="article.dumbellWeight"> {{article.dumbellWeight | camelCase}}</div>
-        <div class="row" *ngIf="article.elasticBandWeight"> {{article.elasticBandWeight | camelCase}}</div>
-        <div class="row" *ngIf="article.numberOfCramponsFootballShoeCrampons"> {{article.numberOfCramponsFootballShoeCrampons | camelCase}}</div>
-        <div class="row" *ngIf="article.numberOfCramponsGrassFootballShoe"> {{article.numberOfCramponsGrassFootballShoe | camelCase}}</div>
-        <div class="row" *ngIf="article.racketSize"> {{article.racketSize | camelCase}}</div>
-        <div class="row" *ngIf="article.racketSpanning"> {{article.racketSpanning | camelCase}}</div>
-        <div class="row" *ngIf="article.racketType"> {{article.racketType | camelCase}}</div>
-        <div class="row" *ngIf="article.racketWeight"> {{article.racketWeight | camelCase}}</div>
-        <div class="row" *ngIf="article.sweatpantsType"> {{article.sweatpantsType | camelCase}}</div>
-        <div class="row" *ngIf="article.tenisShoeSole"> {{article.tenisShoeSole | camelCase}}</div>
-        <div class="row" *ngIf="article.typeOfFootballGear"> {{article.typeOfFootballGear | camelCase}}</div>
-        <div class="row" *ngIf="article.typeOfOrientiringGear"> {{article.typeOfOrientiringGear | camelCase}}</div>
-        <div class="row" *ngIf="article.typeOfTenisGear"> {{article.typeOfTenisGear | camelCase}}</div>
-        <div class="row" *ngIf="article.weightliftingGloveSize"> {{article.weightliftingGloveSize | camelCase}}</div>
-        <div class="row" *ngIf="article.weightliftingTypeOfGear"> {{article.weightliftingTypeOfGear | camelCase}}</div>
-        <div class="row" *ngIf="article.weightliftingWeight"> {{article.weightliftingWeight | camelCase}}</div>
+        <div class="col-12" *ngIf="article.ballType"> {{article.ballType | camelCase}}</div>
+        <div class="col-12" *ngIf="article.barbelType"> {{article.barbelType | camelCase}}</div>
+        <div class="col-12" *ngIf="article.barbellWeight"> {{article.barbellWeight | camelCase}}</div>
+        <div class="col-12" *ngIf="article.dumbellWeight"> {{article.dumbellWeight | camelCase}}</div>
+        <div class="col-12" *ngIf="article.elasticBandWeight"> {{article.elasticBandWeight | camelCase}}</div>
+        <div class="col-12" *ngIf="article.numberOfCramponsFootballShoeCrampons">
+            {{article.numberOfCramponsFootballShoeCrampons | camelCase}}</div>
+        <div class="col-12" *ngIf="article.numberOfCramponsGrassFootballShoe"> {{article.numberOfCramponsGrassFootballShoe
+            | camelCase}}</div>
+        <div class="col-12" *ngIf="article.racketSize"> {{article.racketSize | camelCase}}</div>
+        <div class="col-12" *ngIf="article.racketSpanning"> {{article.racketSpanning | camelCase}}</div>
+        <div class="col-12" *ngIf="article.racketType"> {{article.racketType | camelCase}}</div>
+        <div class="col-12" *ngIf="article.racketWeight"> {{article.racketWeight | camelCase}}</div>
+        <div class="col-12" *ngIf="article.sweatpantsType"> {{article.sweatpantsType | camelCase}}</div>
+        <div class="col-12" *ngIf="article.tenisShoeSole"> {{article.tenisShoeSole | camelCase}}</div>
+        <div class="col-12" *ngIf="article.typeOfFootballGear"> {{article.typeOfFootballGear | camelCase}}</div>
+        <div class="col-12" *ngIf="article.typeOfOrientiringGear"> {{article.typeOfOrientiringGear | camelCase}}</div>
+        <div class="col-12" *ngIf="article.typeOfTenisGear"> {{article.typeOfTenisGear | camelCase}}</div>
+        <div class="col-12" *ngIf="article.weightliftingGloveSize"> {{article.weightliftingGloveSize | camelCase}}</div>
+        <div class="col-12" *ngIf="article.weightliftingTypeOfGear"> {{article.weightliftingTypeOfGear | camelCase}}</div>
+        <div class="col-12" *ngIf="article.weightliftingWeight"> {{article.weightliftingWeight | camelCase}}</div>
     </div>
-</div>
+</section>
