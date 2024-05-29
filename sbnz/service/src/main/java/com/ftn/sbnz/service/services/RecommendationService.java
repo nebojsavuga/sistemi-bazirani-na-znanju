@@ -253,12 +253,13 @@ public class RecommendationService implements IRecommendationService {
         return recommendations;
     }
 
-    private KieBase generateFootballKieBase(List<String> brandNames) {
+    private KieBase generateFootballKieBase(List<List<String>> brandNames) {
         DataProviderCompiler converter = new DataProviderCompiler();
         InputStream footballStream = this.getClass().getResourceAsStream("/rules/basic/football-template.drt");
-        String[][] brandNamesArray = new String[brandNames.size()][1];
+        String[][] brandNamesArray = new String[brandNames.size()][2];
         for (int i = 0; i < brandNames.size(); i++) {
-            brandNamesArray[i][0] = brandNames.get(i);
+            brandNamesArray[i][0] = brandNames.get(i).get(0);
+            brandNamesArray[i][1] = brandNames.get(i).get(1);
         }
         DataProvider dataProviderFootball = new ArrayDataProvider(brandNamesArray);
         String footballDrl = converter.compile(dataProviderFootball, footballStream);
@@ -274,29 +275,13 @@ public class RecommendationService implements IRecommendationService {
         return kieBase;
     }
 
-    private KieSession footballKsession() {
-        return this.footballKieBase.newKieSession();
-    }
-
-    private KieSession tenisKsession() {
-        return this.tenisKieBase.newKieSession();
-    }
-
-    @Override
-    public void insertTemplate(List<String> brandNames, String sport) {
-        if (sport.toLowerCase().equals("fudbal")) {
-            this.footballKieBase = generateFootballKieBase(brandNames);
-        } else {
-            this.tenisKieBase = generateTenisKieBase(brandNames);
-        }
-    }
-
-    private KieBase generateTenisKieBase(List<String> brandNames) {
+    private KieBase generateTenisKieBase(List<List<String>> brandNames) {
         DataProviderCompiler converter = new DataProviderCompiler();
         InputStream tenisStream = this.getClass().getResourceAsStream("/rules/basic/template-tenis-template.drt");
-        String[][] brandNamesArray = new String[brandNames.size()][1];
+        String[][] brandNamesArray = new String[brandNames.size()][2];
         for (int i = 0; i < brandNames.size(); i++) {
-            brandNamesArray[i][0] = brandNames.get(i);
+            brandNamesArray[i][0] = brandNames.get(i).get(0);
+            brandNamesArray[i][1] = brandNames.get(i).get(1);
         }
         DataProvider dataProviderTenis = new ArrayDataProvider(brandNamesArray);
         String tenisDrl = converter.compile(dataProviderTenis, tenisStream);
@@ -312,4 +297,20 @@ public class RecommendationService implements IRecommendationService {
         return kieBase;
     }
 
+    private KieSession footballKsession() {
+        return this.footballKieBase.newKieSession();
+    }
+
+    private KieSession tenisKsession() {
+        return this.tenisKieBase.newKieSession();
+    }
+
+    @Override
+    public void insertTemplate(List<List<String>> brandNames, String sport) {
+        if (sport.toLowerCase().equals("fudbal")) {
+            this.footballKieBase = generateFootballKieBase(brandNames);
+        } else {
+            this.tenisKieBase = generateTenisKieBase(brandNames);
+        }
+    }
 }

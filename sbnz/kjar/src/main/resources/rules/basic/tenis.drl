@@ -61,7 +61,7 @@ end
 rule "Preporuci rekete sa mekim spanovanjem koji su klasik ako se bavi tenisom i amater ili rekreativac je"
 salience 100
 when
-    $filters: Filters(sport == Sport.Tenis, level != SportLevel.Pro)
+    $filters: Filters(sport == Sport.Tenis, level != SportLevel.Pro, height == null || height == 0)
     $article: Article()
     $reket: Racket(spanningType == TypeOfRacketSpanning.Meko, type== TypeOfRacket.Klasik) from $article
 then

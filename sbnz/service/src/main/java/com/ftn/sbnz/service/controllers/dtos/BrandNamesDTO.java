@@ -4,19 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BrandNamesDTO {
-    public List<String> brandNames;
+    public List<List<String>> brandNames;
 
     public BrandNamesDTO() {
         this.brandNames = new ArrayList<>();
     }
 
-    public List<String> getBrandNames() {
+    public List<List<String>> getBrandNames() {
         return brandNames;
     }
 
-    public void setBrandNames(List<String> brandNames) {
+    public void setBrandNames(List<List<String>> brandNames) {
         this.brandNames = brandNames;
     }
-    
-
 }

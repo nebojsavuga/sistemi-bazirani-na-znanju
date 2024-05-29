@@ -1,5 +1,6 @@
 template header
     brand
+    maxPrice
 
 package basic;
 import com.ftn.sbnz.model.Filters;
@@ -15,10 +16,10 @@ global Set<RecommendedArticleDTO> recommendations;
 
 template "football-rules"
 
-rule "Ako je brend @{brand} preporuci dresove tog brenda"
+rule "Ako je brend @{brand} preporuci dresove tog brenda sa cenom ispod @{maxPrice}"
 when
     $$filter: Filters(sport == Sport.Fudbal)
-    $$article: Article(brandName == "@{brand}")
+    $$article: Article(brandName == "@{brand}", price <= @{maxPrice})
     FootballGear(type == GearTypeFootball.Dres) from $$article
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
