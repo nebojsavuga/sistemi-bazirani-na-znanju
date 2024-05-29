@@ -289,3 +289,32 @@ VALUES ('Head Znojnice Bele', 10.00, 'Unisex', 'Head', 'Znojnica', 'TenisGear', 
 INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport, path_to_image) 
 VALUES ('Head Znojnice Crne', 10.00, 'Unisex', 'Head', 'Znojnica', 'TenisGear', 'tenis', '93.jpg');
 
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('Challenge Pro Clay Black', 110.00, 'Unisex', 'Nike', 'RibljaKost', 'TenisShoe', 'tenis', '94.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, type, sport, path_to_image) 
+VALUES ('Duga šipka za tegove 13kg', 60.99, 'Unisex', 'Gorilla', 'Barbel', 13.0, 'Klasik', 'dizanjeTegova', '95.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Nike Women Soccer Norway Home Jersey', 80.99, 'Female', 'Nike', 'FootballGear', 'Dres', 'fudbal', '96.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('adidas Argentina 22 Home Jersey Women', 80.99, 'Female', 'Nike', 'FootballGear', 'Dres', 'fudbal', '97.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('PUMA Santiago TG Women Jersey', 55.99, 'Female', 'Nike', 'FootballGear', 'Dres', 'fudbal', '98.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport, path_to_image) 
+VALUES ('Wilson Rg Dampeners vibrastop', 2.99, 'Unisex', 'Wilson', 'Vibrastop', 'TenisGear', 'tenis', '99.png');
+
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('Adizero Ubersonic 4 Grass Court Shoe Men', 130.00, 'Male', 'Adidas', 'Kramponi', 'TenisShoe', 'tenis', '100.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('RPM Blast String Reel 200m', 134.99, 'Unisex', 'Babolat', 'RacketString', 'tenis', '101.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('Court FF 3 Clay Court Shoe Men', 165.00, 'Male', 'ASICS', 'RibljaKost', 'TenisShoe', 'tenis', '102.jpg');
+
+
+
