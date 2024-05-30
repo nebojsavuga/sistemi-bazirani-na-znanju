@@ -26,6 +26,8 @@ import com.ftn.sbnz.model.articles.TypeOfOrientiringGear;
 import com.ftn.sbnz.model.articles.Sweatpants;
 import com.ftn.sbnz.model.articles.SweatpantsType;
 import com.ftn.sbnz.model.articles.Racket;
+import com.ftn.sbnz.model.users.Gender;
+import com.ftn.sbnz.model.articles.ArticleGenderType;
 
 
 
@@ -52,6 +54,17 @@ when
     over window: time(365d),
     count($rating)
 )
+then
+    System.out.println($article);
+    recommendations.remove($article);
+end
+
+rule "Ukoliko je korisnik musko izbaci zenske artikle iz preporuke"
+salience -100
+when
+    Filters(getGender() == Gender.Musko)
+    $recommendedArticle: RecommendedArticleDTO($id: id) from recommendations
+    $article: Article(id==$id, gender == ArticleGenderType.Female)
 then
     System.out.println($article);
     recommendations.remove($article);
