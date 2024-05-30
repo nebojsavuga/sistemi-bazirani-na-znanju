@@ -8,7 +8,7 @@ import java.util.List;
 
 global List<String> parentClasses;
 global Set<RecommendedArticleDTO> recommendations;
-
+global Long articleId;
 
 query getParent ( String x, String y )
     ClassNameBackward (x, y; )
@@ -29,7 +29,7 @@ rule "backward level 1"
 salience 10
 when    
     String(this == "level")
-    $a1:Article($cn:getClassName())
+    $a1:Article($cn:getClassName(), id != articleId)
     eval(parentClasses.contains($cn))
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
@@ -49,7 +49,7 @@ rule "backward level 2"
 salience 4
 when
     String(this == "level")
-    $a1:Article($cn:getParentClassName(), $mn:getClassName())
+    $a1:Article($cn:getParentClassName(), $mn:getClassName(), id != articleId)
     eval(parentClasses.contains($cn))
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
@@ -69,7 +69,7 @@ rule "backward level 3"
 salience 1
 when
     String(this == "level")
-    $a1:Article($cn:getGrandParentClassName(),$mn:getClassName(), getGrandParentClassName() != "Article")
+    $a1:Article($cn:getGrandParentClassName(),$mn:getClassName(), getGrandParentClassName() != "Article", id != articleId)
     eval(parentClasses.contains($cn))
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
