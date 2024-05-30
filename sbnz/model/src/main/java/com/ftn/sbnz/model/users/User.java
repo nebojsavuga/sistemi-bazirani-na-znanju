@@ -120,13 +120,15 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public User(String email, String password, String firstName, String lastName, Role role, Gender gender) {
+    public User(String email, String password, String firstName, String lastName, Role role, Gender gender, int age, float height) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.gender = gender;
+        this.age = age;
+        this.height = height;
     }
     
 
