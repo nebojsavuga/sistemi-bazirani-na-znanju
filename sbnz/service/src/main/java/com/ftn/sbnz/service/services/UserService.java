@@ -9,15 +9,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.users.ConcreteInjury;
+import com.ftn.sbnz.model.users.Injury;
 import com.ftn.sbnz.model.users.Role;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.ConcreteInjuryDTO;
 import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
 import com.ftn.sbnz.service.controllers.dtos.UserDTO;
 import com.ftn.sbnz.service.exceptions.BadCredentialsException;
+import com.ftn.sbnz.service.exceptions.BadRequestException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.exceptions.UnauthorizedException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
+import com.ftn.sbnz.service.repositories.ConcreteInjuryRepository;
+import com.ftn.sbnz.service.repositories.InjuryRepository;
 import com.ftn.sbnz.service.repositories.UserRepository;
 
 @Service
@@ -25,14 +31,18 @@ public class UserService implements IUserService {
 
     private UserRepository userRepository;
     private ArticleRepository articleRepository;
+    private InjuryRepository injuryRepository;
     private PasswordEncoder passwordEncoder;
+    private ConcreteInjuryRepository concreteInjuryRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository, ArticleRepository articleRepository,
-            PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, ArticleRepository articleRepository, InjuryRepository injuryRepository,
+            PasswordEncoder passwordEncoder, ConcreteInjuryRepository concreteInjuryRepository) {
         this.userRepository = userRepository;
         this.articleRepository = articleRepository;
+        this.injuryRepository = injuryRepository;
         this.passwordEncoder = passwordEncoder;
+        this.concreteInjuryRepository = concreteInjuryRepository;
     }
 
     @Override
@@ -140,5 +150,21 @@ public class UserService implements IUserService {
         
         User user = userRepository.save(existingUser.get());
         return user;
+    }
+
+    @Override
+    public String addInjury(ConcreteInjuryDTO injuryDTO, Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        Injury injury = injuryRepository.findByName(injuryDTO.getInjury());
+        if(injury == null){
+            throw new BadRequestException("Injury with that name does not exist");
+        }
+        ConcreteInjury concreteInjury= new ConcreteInjury();
+        concreteInjury.setExecutionTime(injuryDTO.getExecutionTime());
+        concreteInjury.setUser(user.get());
+        concreteInjury.setInjury(injury);
+        this.concreteInjuryRepository.save(concreteInjury);
+
+        return "Concrete injury added.";
     }
 }

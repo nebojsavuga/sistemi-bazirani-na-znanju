@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.config.JwtUtils;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.ConcreteInjuryDTO;
 import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
 import com.ftn.sbnz.service.controllers.dtos.UserDTO;
 import com.ftn.sbnz.service.services.IUserService;
@@ -69,7 +70,7 @@ public class UserController {
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 
-	@PostMapping("/edit-profile")
+	@PutMapping("/edit-profile")
     public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO,
 	 @RequestHeader("Authorization") String token) {
 		Long userId = null;
@@ -79,5 +80,17 @@ public class UserController {
 		}
         User user = userService.edit(registerDTO, userId);
         return new ResponseEntity<>("Edited profile.", HttpStatus.OK);
+    }
+
+	@PostMapping("/add-injury")
+    public ResponseEntity<String> addInjury(@RequestBody ConcreteInjuryDTO injuryDTO,
+	 @RequestHeader("Authorization") String token) {
+		Long userId = null;
+		if (token != null && token != "") {
+			String jwtt = token.substring(7);
+			userId = jwt.getId(jwtt);
+		}
+        String injuryText = userService.addInjury(injuryDTO, userId);
+        return new ResponseEntity<>(injuryText, HttpStatus.OK);
     }
 }
