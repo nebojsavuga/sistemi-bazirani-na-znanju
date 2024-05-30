@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RecommendedArticle } from '../../shared/models/articles';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../core/services/authentication.service';
@@ -11,6 +11,8 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 export class ArticleListItemComponent implements OnInit{
   @Input() article: RecommendedArticle;
   constructor(private router: Router, private authService: AuthenticationService) { }
+  @Output() articleId: EventEmitter<any> = new EventEmitter<number>();
+
   ngOnInit(): void {
     this.authService.getPicture('images/' + this.article.pathToImage).subscribe(result =>{
       const url = URL.createObjectURL(result);
@@ -19,5 +21,6 @@ export class ArticleListItemComponent implements OnInit{
 
   showArticle(id: number) {
     this.router.navigate([id + '/article']);
+    this.articleId.emit(this.article.id);
   }
 }

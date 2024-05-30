@@ -60,7 +60,7 @@
             <h2>Slični artikli</h2>
         </div>
         <div class="col-3" *ngFor="let sim of similarArticles">
-            <app-article-list-item [article]="sim"></app-article-list-item>
+            <app-article-list-item [article]="sim" (articleId)="changeArticle($event)"></app-article-list-item>
         </div>
     </div>
 </section>

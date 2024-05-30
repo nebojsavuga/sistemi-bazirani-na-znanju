@@ -16,6 +16,7 @@ export class ArticleDisplayComponent implements OnInit {
   article: FullArticle = null;
   backwardTypes: string[] = []
   similarArticles: RecommendedArticle[] = [];
+
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
     private recomendationService : RecomendationService,
@@ -25,21 +26,25 @@ export class ArticleDisplayComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-    this.articleService.getById(this.id).subscribe(
+    this.getAllItems(this.id);
+  }
+
+  private getAllItems(id: number) {
+    this.articleService.getById(id).subscribe(
       res => {
         this.article = res;
-        this.authService.getPicture('images/' + this.article.imagePath).subscribe(result =>{
+        this.authService.getPicture('images/' + this.article.imagePath).subscribe(result => {
           const url = URL.createObjectURL(result);
           (document.getElementById(this.article.id.toString()) as HTMLImageElement).src = url;
-      }); 
+        });
       }
     );
-    this.recomendationService.getParents(this.id).subscribe(
-      res =>{
+    this.recomendationService.getParents(id).subscribe(
+      res => {
         this.backwardTypes = res.reverse();
       }
     );
-    this.recomendationService.getSimilar(this.id).subscribe(
+    this.recomendationService.getSimilar(id).subscribe(
       res => {
         this.similarArticles = res;
       }
@@ -48,6 +53,10 @@ export class ArticleDisplayComponent implements OnInit {
 
   onBackwardClick(value){
     alert(value);
+  }
+
+  changeArticle(id: number){
+    this.getAllItems(id);
   }
 
 } 
