@@ -7,8 +7,14 @@
     </div>
     <div class="row">
         <div class="col-md-6 col-12 p-3 picture-div" style="text-align: left;">
-            <img src="../../../assets/sport.png" alt="Article Image" [id]="article.id.toString()">
-            <h2 class="name">{{ article.name }}</h2>
+            <div class="row" style="text-align: center;">
+                <div class="col-12">
+                    <img src="../../../assets/sport.png" alt="Article Image" [id]="article.id.toString()">
+                </div>
+                <div class="col-12">
+                    <h2 class="name">{{ article.name }}</h2>
+                </div>
+            </div>
 
         </div>
         <div class="col-md-6 col-12 p-5 info-div" style="text-align: left;">
@@ -22,7 +28,7 @@
         </div>
     </div>
 
-    <div class="row my-1 additional-info-div" style="text-align: left;">
+    <div class="row my-1 additional-info-div py-3 px-1" style="text-align: left;">
         <h3>Dodatne informacije</h3>
         <div class="col-12" *ngIf="article.ballType"> {{article.ballType | camelCase}}</div>
         <div class="col-12" *ngIf="article.barbelType"> {{article.barbelType | camelCase}}</div>

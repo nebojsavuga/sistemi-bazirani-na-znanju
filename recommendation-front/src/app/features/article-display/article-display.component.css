@@ -4,8 +4,8 @@
 }
 
 img {
-    width: 100%;
-    height: auto;
+    width: auto;
+    max-height: 300px;
 }
 
 .link-style {
@@ -32,11 +32,12 @@ img {
 }
 
 .info-div {
-    background-color: rgba(121, 121, 121, 0.2);
-
+    background-color: rgba(219, 213, 213, 0.2);
+    border: 1px solid rgb(188, 182, 182);
+    border-left: none;
 }
 
 .picture-div {
-    background-color: rgba(160, 160, 160, 0.2);
-    max-width: 40%;
+    background-color: rgba(249, 238, 238, 0.1);
+    border: 1px solid rgb(181, 177, 177);
 }
