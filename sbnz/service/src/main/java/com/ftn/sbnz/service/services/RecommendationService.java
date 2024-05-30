@@ -116,8 +116,7 @@ public class RecommendationService implements IRecommendationService {
                 }
             }
         }
-        kieSession.fireAllRules();
-        kieSession.dispose();
+       
         templateKsession.fireAllRules();
         templateKsession.dispose();
         if (this.footballKieBase != null) {
@@ -128,6 +127,8 @@ public class RecommendationService implements IRecommendationService {
             tenisKsession.fireAllRules();
             tenisKsession.dispose();
         }
+        kieSession.fireAllRules();
+        kieSession.dispose();
         KieSession cepKsession = kieContainer.newKieSession("cepKsessionRealtime");
         cepKsession.setGlobal("recommendations", recommendations);
 
