@@ -15,7 +15,8 @@ import com.ftn.sbnz.model.articles.TenisShoe;
 import com.ftn.sbnz.model.articles.Sole;
 import com.ftn.sbnz.model.articles.RacketString;
 import com.ftn.sbnz.model.articles.Grip;
-
+import com.ftn.sbnz.model.users.Gender;
+import com.ftn.sbnz.model.articles.ArticleGenderType;
 
 import java.util.Set;
 
@@ -209,4 +210,24 @@ then
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
+end
+
+rule "Ukoliko je korisnik musko izbaci zenske artikle iz preporuke"
+salience -200
+when
+    Filters(getGender() == Gender.Musko)
+    $recommendedArticle: RecommendedArticleDTO($id: id) from recommendations
+    $article: Article(id==$id, gender == ArticleGenderType.Female)
+then
+    recommendations.remove($recommendedArticle);
+end
+
+rule "Ukoliko je korisnik zensko izbaci muske artikle iz preporuke"
+salience -200
+when
+    Filters(getGender() == Gender.Zensko)
+    $recommendedArticle: RecommendedArticleDTO($id: id) from recommendations
+    $article: Article(id==$id, gender == ArticleGenderType.Male)
+then
+    recommendations.remove($recommendedArticle);
 end
