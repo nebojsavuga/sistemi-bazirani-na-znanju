@@ -21,7 +21,7 @@ export class ArticleDisplayComponent implements OnInit {
   disableShowMore = false;
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
-    private recomendationService : RecomendationService,
+    private recomendationService: RecomendationService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -54,24 +54,26 @@ export class ArticleDisplayComponent implements OnInit {
     );
   }
 
-  showMore(){
+  showMore() {
     this.sliceIndex += 1;
     this.disableShowMore = false;
-    if(this.totalSimilarArticles.length === this.similarArticles.length){
+    if (this.totalSimilarArticles.length >= this.similarArticles.length - 4) {
       this.disableShowMore = true;
     }
-
     this.totalSimilarArticles = this.similarArticles.slice(0, 4 * (this.sliceIndex + 1));
   }
 
-  onBackwardClick(value){
+  onBackwardClick(value) {
     alert(value);
   }
 
-  changeArticle(id: number){
-    this.getAllItems(id);
+  changeArticle(id: number) {
     this.sliceIndex = 0;
-    window.scrollTo({top: 10, behavior: 'smooth'});
+    this.getAllItems(id);
+    this.disableShowMore = false;
+    setTimeout(() => {
+      window.scrollTo({ top: 10, behavior: 'smooth' });
+    }, 0);
   }
 
 } 

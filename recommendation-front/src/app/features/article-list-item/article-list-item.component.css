@@ -4,6 +4,7 @@
   overflow: hidden;
   margin: 10px;
   width: 250px;
+  min-height: 400px;
 }
 
 .article-card :hover {
