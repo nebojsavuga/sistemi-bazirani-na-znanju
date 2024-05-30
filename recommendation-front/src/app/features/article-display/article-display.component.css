@@ -4,7 +4,7 @@
 }
 
 img {
-    width: 350px;
+    width: 100%;
     height: auto;
 }
 
@@ -19,4 +19,24 @@ img {
     cursor: pointer;
     text-decoration: underline;
     color: rgb(108, 76, 222);
+}
+
+
+.name{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.additional-info-div {
+    background-color: rgba(181, 164, 164, 0.2);
+}
+
+.info-div {
+    background-color: rgba(121, 121, 121, 0.2);
+
+}
+
+.picture-div {
+    background-color: rgba(160, 160, 160, 0.2);
+    max-width: 40%;
 }

@@ -1,17 +1,17 @@
-<div class="row m-5">
-    <div class="col-md-4 col-12">
-        <span *ngFor="let bw of backwardTypes; index as i"><a (click)="onBackwardClick('hello');" class="link-style">{{bw | camelCase}}</a> <span *ngIf="i < backwardTypes.length - 1"> -> </span> </span>
-    </div>
-</div>
-
 <section class="main-section text-center" *ngIf="article">
+    <div class="row my-5" style="text-align: left;">
+        <div class="col-md-4 col-12">
+            <span *ngFor="let bw of backwardTypes; index as i"><a (click)="onBackwardClick(bw);"
+                    class="link-style">{{bw | camelCase}}</a> <span *ngIf="i < backwardTypes.length - 1"> -> </span> </span>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-md-6 col-12 p-3">
+        <div class="col-md-6 col-12 p-3 picture-div" style="text-align: left;">
             <img src="../../../assets/sport.png" alt="Article Image" [id]="article.id.toString()">
             <h2 class="name">{{ article.name }}</h2>
 
         </div>
-        <div class="col-md-6 col-12 p-5" style="text-align: left;">
+        <div class="col-md-6 col-12 p-5 info-div" style="text-align: left;">
             <h4 class="brand">Brend: {{ article.brandName }}</h4>
             <h4 class="type">Tip: {{ article.articleType | camelCase }}</h4>
             <h4 class="price">Cena: ${{ article.price }}</h4>
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="row my-3" style="text-align: left;">
+    <div class="row my-1 additional-info-div" style="text-align: left;">
         <h3>Dodatne informacije</h3>
         <div class="col-12" *ngIf="article.ballType"> {{article.ballType | camelCase}}</div>
         <div class="col-12" *ngIf="article.barbelType"> {{article.barbelType | camelCase}}</div>
