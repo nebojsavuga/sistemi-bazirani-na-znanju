@@ -16,7 +16,9 @@ export class ArticleDisplayComponent implements OnInit {
   article: FullArticle = null;
   backwardTypes: string[] = []
   similarArticles: RecommendedArticle[] = [];
-
+  totalSimilarArticles: RecommendedArticle[] = [];
+  sliceIndex = 0;
+  disableShowMore = false;
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
     private recomendationService : RecomendationService,
@@ -47,8 +49,19 @@ export class ArticleDisplayComponent implements OnInit {
     this.recomendationService.getSimilar(id).subscribe(
       res => {
         this.similarArticles = res;
+        this.totalSimilarArticles = this.similarArticles.slice(0, 5 * (this.sliceIndex + 1));
       }
     );
+  }
+
+  showMore(){
+    this.sliceIndex += 1;
+    this.disableShowMore = false;
+    if(this.sliceIndex >= 3){
+      this.disableShowMore = true;
+    }
+
+    this.totalSimilarArticles = this.similarArticles.slice(0, 5 * (this.sliceIndex + 1));
   }
 
   onBackwardClick(value){
