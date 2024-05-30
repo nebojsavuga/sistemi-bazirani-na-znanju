@@ -17,6 +17,10 @@ export class RecomendationService {
     return this.http.get<string[]>(environment.apiHost + 'recommendation/' + String(id));
   }
 
+  getSimilar(id: number): Observable<RecommendedArticle[]>{
+    return this.http.get<RecommendedArticle[]>(environment.apiHost + 'recommendation/based-on-article/' + String(id));
+  }
+
   recommend(filters: Filter): Observable<RecommendedArticle[]> {
     filters.age = Number(filters.age);
     filters.height = Number(filters.height);

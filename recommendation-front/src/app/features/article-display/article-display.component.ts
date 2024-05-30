@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { ActivatedRoute } from '@angular/router';
-import { FullArticle } from '../../shared/models/articles';
+import { FullArticle, RecommendedArticle } from '../../shared/models/articles';
 import { ArticleService } from '../../core/services/article.service';
 import { RecomendationService } from '../../core/services/recomendation.service';
 
@@ -15,6 +15,7 @@ export class ArticleDisplayComponent implements OnInit {
   id: number;
   article: FullArticle = null;
   backwardTypes: string[] = []
+  similarArticles: RecommendedArticle[] = [];
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
     private recomendationService : RecomendationService,
@@ -37,7 +38,12 @@ export class ArticleDisplayComponent implements OnInit {
       res =>{
         this.backwardTypes = res.reverse();
       }
-    )
+    );
+    this.recomendationService.getSimilar(this.id).subscribe(
+      res => {
+        this.similarArticles = res;
+      }
+    );
   }
 
   onBackwardClick(value){
