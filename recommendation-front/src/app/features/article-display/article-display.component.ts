@@ -14,6 +14,7 @@ export class ArticleDisplayComponent implements OnInit {
 
   id: number;
   article: FullArticle = null;
+  backwardTypes: string[] = []
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
     private recomendationService : RecomendationService,
@@ -34,10 +35,13 @@ export class ArticleDisplayComponent implements OnInit {
     );
     this.recomendationService.getParents(this.id).subscribe(
       res =>{
-        console.log(res);
+        this.backwardTypes = res.reverse();
       }
     )
   }
 
+  onBackwardClick(value){
+    alert(value);
+  }
 
 } 

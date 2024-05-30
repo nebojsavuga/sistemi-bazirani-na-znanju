@@ -1,7 +1,6 @@
-
 <div class="row m-5">
     <div class="col-md-4 col-12">
-asdas
+        <span *ngFor="let bw of backwardTypes; index as i"><a (click)="onBackwardClick('hello');" class="link-style">{{bw | camelCase}}</a> <span *ngIf="i < backwardTypes.length - 1"> -> </span> </span>
     </div>
 </div>
 
@@ -21,7 +20,7 @@ asdas
             <h4 class="price" *ngIf="article.articleGenderType == 'Unisex'">Pol: Unisex</h4>
 
         </div>
-    </div> 
+    </div>
 
     <div class="row my-3" style="text-align: left;">
         <h3>Dodatne informacije</h3>
@@ -32,7 +31,8 @@ asdas
         <div class="col-12" *ngIf="article.elasticBandWeight"> {{article.elasticBandWeight | camelCase}}</div>
         <div class="col-12" *ngIf="article.numberOfCramponsFootballShoeCrampons">
             {{article.numberOfCramponsFootballShoeCrampons | camelCase}}</div>
-        <div class="col-12" *ngIf="article.numberOfCramponsGrassFootballShoe"> {{article.numberOfCramponsGrassFootballShoe
+        <div class="col-12" *ngIf="article.numberOfCramponsGrassFootballShoe">
+            {{article.numberOfCramponsGrassFootballShoe
             | camelCase}}</div>
         <div class="col-12" *ngIf="article.racketSize"> {{article.racketSize | camelCase}}</div>
         <div class="col-12" *ngIf="article.racketSpanning"> {{article.racketSpanning | camelCase}}</div>
@@ -44,7 +44,8 @@ asdas
         <div class="col-12" *ngIf="article.typeOfOrientiringGear"> {{article.typeOfOrientiringGear | camelCase}}</div>
         <div class="col-12" *ngIf="article.typeOfTenisGear"> {{article.typeOfTenisGear | camelCase}}</div>
         <div class="col-12" *ngIf="article.weightliftingGloveSize"> {{article.weightliftingGloveSize | camelCase}}</div>
-        <div class="col-12" *ngIf="article.weightliftingTypeOfGear"> {{article.weightliftingTypeOfGear | camelCase}}</div>
+        <div class="col-12" *ngIf="article.weightliftingTypeOfGear"> {{article.weightliftingTypeOfGear | camelCase}}
+        </div>
         <div class="col-12" *ngIf="article.weightliftingWeight"> {{article.weightliftingWeight | camelCase}}</div>
     </div>
 </section>
