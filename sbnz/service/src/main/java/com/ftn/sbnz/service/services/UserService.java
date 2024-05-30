@@ -1,5 +1,6 @@
 package com.ftn.sbnz.service.services;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
@@ -159,8 +160,14 @@ public class UserService implements IUserService {
         if(injury == null){
             throw new BadRequestException("Injury with that name does not exist");
         }
+        Date executionTime = injuryDTO.getExecutionTime();
+        Date currentTime = new Date();
+
+    if (executionTime.after(currentTime)) {
+        throw new BadRequestException("Execution time cannot be in the future");
+    }
         ConcreteInjury concreteInjury= new ConcreteInjury();
-        concreteInjury.setExecutionTime(injuryDTO.getExecutionTime());
+        concreteInjury.setExecutionTime(executionTime);
         concreteInjury.setUser(user.get());
         concreteInjury.setInjury(injury);
         this.concreteInjuryRepository.save(concreteInjury);
