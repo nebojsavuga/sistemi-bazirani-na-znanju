@@ -3,6 +3,7 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 import { ActivatedRoute } from '@angular/router';
 import { FullArticle } from '../../shared/models/articles';
 import { ArticleService } from '../../core/services/article.service';
+import { RecomendationService } from '../../core/services/recomendation.service';
 
 @Component({
   selector: 'app-article-display',
@@ -15,6 +16,7 @@ export class ArticleDisplayComponent implements OnInit {
   article: FullArticle = null;
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
+    private recomendationService : RecomendationService,
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -28,6 +30,11 @@ export class ArticleDisplayComponent implements OnInit {
           const url = URL.createObjectURL(result);
           (document.getElementById(this.article.id.toString()) as HTMLImageElement).src = url;
       }); 
+      }
+    );
+    this.recomendationService.getParents(this.id).subscribe(
+      res =>{
+        console.log(res);
       }
     )
   }

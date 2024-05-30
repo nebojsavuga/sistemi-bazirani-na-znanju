@@ -13,6 +13,10 @@ export class RecomendationService {
   constructor(private http: HttpClient) {
   }
 
+  getParents(id: number): Observable<string[]>{
+    return this.http.get<string[]>(environment.apiHost + 'recommendation/' + String(id));
+  }
+
   recommend(filters: Filter): Observable<RecommendedArticle[]> {
     filters.age = Number(filters.age);
     filters.height = Number(filters.height);

@@ -1,4 +1,11 @@
-<section class="main-section dark-border text-center" *ngIf="article">
+
+<div class="row m-5">
+    <div class="col-md-4 col-12">
+asdas
+    </div>
+</div>
+
+<section class="main-section text-center" *ngIf="article">
     <div class="row">
         <div class="col-md-6 col-12 p-3">
             <img src="../../../assets/sport.png" alt="Article Image" [id]="article.id.toString()">
@@ -16,7 +23,7 @@
         </div>
     </div> 
 
-    <div class="row my-3">
+    <div class="row my-3" style="text-align: left;">
         <h3>Dodatne informacije</h3>
         <div class="col-12" *ngIf="article.ballType"> {{article.ballType | camelCase}}</div>
         <div class="col-12" *ngIf="article.barbelType"> {{article.barbelType | camelCase}}</div>

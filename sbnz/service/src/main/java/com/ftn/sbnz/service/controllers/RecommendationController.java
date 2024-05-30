@@ -46,7 +46,8 @@ public class RecommendationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<List<String>> getParents(@PathVariable Long id) {
+    public ResponseEntity<List<String>> getParents(@PathVariable Long id,
+    @RequestHeader(value = "Authorization", required = false) String token) {
         return new ResponseEntity<>(this.recommendationService.getParents(id), HttpStatus.OK);
     }
     
