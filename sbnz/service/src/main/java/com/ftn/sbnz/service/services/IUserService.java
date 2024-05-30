@@ -19,4 +19,6 @@ public interface IUserService {
     String addFavoriteArticle(Long id, Long userId);
 
     Set<ArticleDTO> getFavoriteArticles(Long userId);
+
+    User edit(RegisterDTO registerDTO, long userId);
 }

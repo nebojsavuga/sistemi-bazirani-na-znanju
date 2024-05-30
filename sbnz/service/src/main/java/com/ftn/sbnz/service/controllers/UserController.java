@@ -8,13 +8,17 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.config.JwtUtils;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
 import com.ftn.sbnz.service.controllers.dtos.UserDTO;
 import com.ftn.sbnz.service.services.IUserService;
 
@@ -64,4 +68,16 @@ public class UserController {
 		UserDTO user = userService.getById(id);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
+
+	@PostMapping("/edit-profile")
+    public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO,
+	 @RequestHeader("Authorization") String token) {
+		Long userId = null;
+		if (token != null && token != "") {
+			String jwtt = token.substring(7);
+			userId = jwt.getId(jwtt);
+		}
+        User user = userService.edit(registerDTO, userId);
+        return new ResponseEntity<>("Edited profile.", HttpStatus.OK);
+    }
 }

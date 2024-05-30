@@ -47,12 +47,17 @@ public class UserService implements IUserService {
         if (existingUser != null) {
             throw new BadCredentialsException("User with the given email address exists.");
         }
+        if (!registerDTO.password.equals(registerDTO.repeatPassword) ) {
+            throw new BadCredentialsException("Password and repeat password must be same.");
+        }
         User user = new User(registerDTO.email,
                 this.passwordEncoder.encode(registerDTO.password),
                 registerDTO.firstName,
                 registerDTO.lastName,
                 Role.User,
-                registerDTO.gender);
+                registerDTO.gender,
+                registerDTO.age,
+                registerDTO.height);
         user = userRepository.save(user);
         return user;
     }
@@ -115,5 +120,25 @@ public class UserService implements IUserService {
         userDTO.setGender(user.get().getGender());
         userDTO.setHeight(user.get().getHeight());
         return userDTO;
+    }
+
+    @Override
+    public User edit(RegisterDTO registerDTO, long userId) {
+        
+        Optional<User> existingUser = userRepository.findById(userId);
+        
+        if (!registerDTO.password.equals(registerDTO.repeatPassword) ) {
+            throw new BadCredentialsException("Password and repeat password must be same.");
+        }
+        existingUser.get().setFirstName(registerDTO.firstName);
+        existingUser.get().setHeight(registerDTO.height);
+        existingUser.get().setLastName(registerDTO.lastName);
+        existingUser.get().setAge(registerDTO.age);
+        existingUser.get().setGender(registerDTO.gender);
+        existingUser.get().setPassword(this.passwordEncoder.encode(registerDTO.password));
+        
+        
+        User user = userRepository.save(existingUser.get());
+        return user;
     }
 }
