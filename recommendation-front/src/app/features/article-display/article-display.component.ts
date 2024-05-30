@@ -49,7 +49,7 @@ export class ArticleDisplayComponent implements OnInit {
     this.recomendationService.getSimilar(id).subscribe(
       res => {
         this.similarArticles = res;
-        this.totalSimilarArticles = this.similarArticles.slice(0, 5 * (this.sliceIndex + 1));
+        this.totalSimilarArticles = this.similarArticles.slice(0, 4 * (this.sliceIndex + 1));
       }
     );
   }
@@ -57,11 +57,11 @@ export class ArticleDisplayComponent implements OnInit {
   showMore(){
     this.sliceIndex += 1;
     this.disableShowMore = false;
-    if(this.sliceIndex >= 3){
+    if(this.totalSimilarArticles.length === this.similarArticles.length){
       this.disableShowMore = true;
     }
 
-    this.totalSimilarArticles = this.similarArticles.slice(0, 5 * (this.sliceIndex + 1));
+    this.totalSimilarArticles = this.similarArticles.slice(0, 4 * (this.sliceIndex + 1));
   }
 
   onBackwardClick(value){
@@ -70,6 +70,8 @@ export class ArticleDisplayComponent implements OnInit {
 
   changeArticle(id: number){
     this.getAllItems(id);
+    this.sliceIndex = 0;
+    window.scrollTo({top: 10, behavior: 'smooth'});
   }
 
 } 

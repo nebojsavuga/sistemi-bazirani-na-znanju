@@ -59,7 +59,7 @@
         <div class="col-12">
             <h2>Slični artikli</h2>
         </div>
-        <div class="col-3" *ngFor="let sim of totalSimilarArticles">
+        <div class="col-lg-3 col-md-6 col-12" *ngFor="let sim of totalSimilarArticles">
             <app-article-list-item [article]="sim" (articleId)="changeArticle($event)"></app-article-list-item>
         </div>
         <div class="col-12">
