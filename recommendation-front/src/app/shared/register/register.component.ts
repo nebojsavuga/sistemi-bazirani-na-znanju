@@ -34,11 +34,11 @@ export class RegisterComponent {
   register(): void {
     if (!this.registerForm.valid) {
       this.hasError = true;
-      this.errorValue = "Please fulfill all the fields correctly.";
+      this.errorValue = "Nisu sva polja ispravno uneta.";
     }
     if (this.password.value !== this.repeatedPassword.value) {
       this.hasError = true;
-      this.errorValue = "Passwords don't match";
+      this.errorValue = "Lozinke se ne podudaraju";
       return;
     }
 
@@ -46,9 +46,12 @@ export class RegisterComponent {
       const user: User = {
         email: this.registerForm.value.email,
         lastName: this.registerForm.value.lastName,
-        name: this.registerForm.value.name,
+        firstName: this.registerForm.value.name,
         password: this.registerForm.value.password,
-        repeatPassword: this.registerForm.value.repeatedPassword
+        repeatPassword: this.registerForm.value.repeatedPassword,
+        height: Number.parseFloat(this.registerForm.value.height),
+        age: Number.parseInt(this.registerForm.value.age),
+        gender: this.registerForm.value.gender
       }
 
       this.authenticationService.registration(user).subscribe({

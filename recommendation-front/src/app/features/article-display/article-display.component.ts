@@ -69,11 +69,12 @@ export class ArticleDisplayComponent implements OnInit {
 
   changeArticle(id: number) {
     this.sliceIndex = 0;
-    this.getAllItems(id);
-    this.disableShowMore = false;
     setTimeout(() => {
       window.scrollTo({ top: 10, behavior: 'smooth' });
     }, 0);
+    this.getAllItems(id);
+    this.disableShowMore = false;
+
   }
 
 } 
