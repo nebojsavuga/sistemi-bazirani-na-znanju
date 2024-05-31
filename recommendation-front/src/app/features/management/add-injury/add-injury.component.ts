@@ -22,10 +22,35 @@ export class AddInjuryComponent implements OnInit{
     }
   );
   isLoaded = true;
- 
+  injuries = [];
   goBack(){
     
     this.router.navigate(['manage/profile']);
+  }
+
+  deleteInjury(injuryId: number): void {
+    this.service.deleteUserInjury(injuryId).subscribe({
+      next: (result) => {
+        this.loadInjuries()
+        this.snackBar.showSnackBar('Successfully registered new licence plate.', "Ok");
+      },
+      error: (err) => {
+        this.loadInjuries()
+        this.snackBar.showSnackBar('Successfully deleted licence plate.', "Ok");
+        console.log(err)
+      }
+    })
+  }
+
+  private loadInjuries(): void {
+    this.service.getLoggedUserInjuries().subscribe({
+      next: (result) => {
+        this.injuries = (result);
+      },
+      error: (err) => {
+        // Handle error
+      }
+    });
   }
 
   dateInPastValidator() {
@@ -70,6 +95,7 @@ export class AddInjuryComponent implements OnInit{
 
   }
   ngOnInit(): void {
+    this.loadInjuries();
     this.povredaForm.patchValue({
       povreda: 'Povreda skocnog zgloba'
     });

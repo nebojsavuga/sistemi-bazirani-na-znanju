@@ -1,7 +1,9 @@
 package com.ftn.sbnz.service.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -17,6 +19,7 @@ import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.ConcreteInjuryDTO;
 import com.ftn.sbnz.service.controllers.dtos.LoggedUserDTO;
+import com.ftn.sbnz.service.controllers.dtos.LoggedUserInjuryDTO;
 import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
 import com.ftn.sbnz.service.controllers.dtos.UserDTO;
 import com.ftn.sbnz.service.exceptions.BadCredentialsException;
@@ -190,5 +193,40 @@ public class UserService implements IUserService {
         userDTO.setFirstName(user.get().getFirstName());
         userDTO.setLastName(user.get().getLastName());
         return userDTO;
+    }
+
+    @Override
+    public List<LoggedUserInjuryDTO> getLoggedUserInjuries(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new UnauthorizedException("Not authorized.");
+        }
+        List<ConcreteInjury> injuries = concreteInjuryRepository.findByUserId(userId);
+        List<LoggedUserInjuryDTO> injuriesDTO = new ArrayList<>();
+        for(ConcreteInjury injury: injuries){
+            LoggedUserInjuryDTO newInjury = new LoggedUserInjuryDTO();
+            newInjury.setExecutionTime(injury.getExecutionTime());
+            newInjury.setId(injury.getId());
+            newInjury.setInjury(injury.getInjury().getName());
+            injuriesDTO.add(newInjury);
+        }
+        return injuriesDTO;
+    }
+
+    @Override
+    public ConcreteInjury deleteUserInjury(Long injuryId, Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new UnauthorizedException("Not authorized.");
+        }
+        Optional<ConcreteInjury> injury = concreteInjuryRepository.findById(injuryId);
+        if (injury.isEmpty()){
+            throw new NotFoundException("Injury with that id does not exist.");
+        }
+        if (!injury.get().getUser().getId().equals(userId)){
+            throw new NotFoundException("Injury with that id does not exist.");
+        }
+        concreteInjuryRepository.delete(injury.get());
+        return injury.get();
     }
 }

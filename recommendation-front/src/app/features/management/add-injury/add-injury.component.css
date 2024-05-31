@@ -2,7 +2,7 @@ img{
     width:200px;border-radius: 50%;height:auto;
 }
 section{
-    width: 60%;
+    width: 70%;
     margin: 20px auto;
 }
 
@@ -13,6 +13,15 @@ section{
     font-size: 22px;
     padding: 14px;
 }
+.table-container {
+    max-height: 240px; /* Set the desired fixed height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.table-text-white {
+    color: white;
+  }
+  
 @media only screen and (max-width: 800px) {
     section{
         width: 90%;

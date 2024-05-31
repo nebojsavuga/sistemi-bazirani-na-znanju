@@ -22,4 +22,17 @@ export class InjuryService {
       responseType: 'text' as 'json'
     });
   }
+
+  deleteUserInjury(injuryId: number): Observable<string> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    return this.http.delete<string>(`${environment.apiHost}users/injury/${injuryId}`, { headers: headers, responseType: 'text' as 'json' });
+  }
+
+  getLoggedUserInjuries(): Observable<Injury[]> {
+    return this.http.get<Injury[]>(environment.apiHost + 'users/injuries');
+  }
 }
+
