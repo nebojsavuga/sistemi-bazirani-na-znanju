@@ -22,7 +22,7 @@ export class RegisterComponent {
     gender: new FormControl('', [Validators.required])
   });
 
-  constructor(private authenticationService: AuthenticationService, protected decodeService: TokenDecoderService) {  }
+  constructor(private authenticationService: AuthenticationService, protected decodeService: TokenDecoderService) { }
 
   get password() { return this.registerForm.get('password'); }
   get repeatedPassword() { return this.registerForm.get('repeatedPassword'); }
@@ -58,16 +58,15 @@ export class RegisterComponent {
         next: _ => {
           this.hasError = false;
           this.successfullyRegistered = true;
-          this.successMessage = "Successfully registered.";
+          this.successMessage = "Uspešna registracija.";
         }, error: err => {
           this.hasError = true;
-          this.errorValue = 'All fields must be filled correctly';
+          this.errorValue = 'Nisu sva polja ispravno uneta.';
         }
       })
     } else {
       this.hasError = true;
-      this.errorValue = 'All fields must be filled correctly';
-
+      this.errorValue = 'Nisu sva polja ispravno uneta.';
     }
   }
 

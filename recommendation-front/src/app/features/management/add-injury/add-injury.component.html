@@ -7,7 +7,7 @@
     <div class="col-md-6 col-12">
         <form (ngSubmit)="Submit()" [formGroup]="povredaForm">
             <h2 class="reg-lbl text-light">Unos povrede</h2>
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" class="col-lg-6 col-12">
                 <mat-label>Datum</mat-label>
                 <input matInput [matDatepicker]="picker" placeholder="Unesite datum" id="datepicker" formControlName="date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
