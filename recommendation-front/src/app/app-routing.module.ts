@@ -8,6 +8,7 @@ import { HomeComponent } from './shared/home/home.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent, canActivate: [LoginGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [LoginGuard] },
+  {path: 'manage', loadChildren: () => import('./features/management/management.module').then(m => m.ManagementModule)},
   { path: '', loadChildren: () => import('./features/features.module').then(m => m.FeaturesModule) },
   { path: '**', component: HomeComponent },
 ];

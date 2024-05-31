@@ -16,6 +16,7 @@ import com.ftn.sbnz.model.users.Role;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.ConcreteInjuryDTO;
+import com.ftn.sbnz.service.controllers.dtos.LoggedUserDTO;
 import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
 import com.ftn.sbnz.service.controllers.dtos.UserDTO;
 import com.ftn.sbnz.service.exceptions.BadCredentialsException;
@@ -173,5 +174,21 @@ public class UserService implements IUserService {
         this.concreteInjuryRepository.save(concreteInjury);
 
         return "Concrete injury added.";
+    }
+
+    @Override
+    public LoggedUserDTO getLoggedUserById(Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new NotFoundException("User with that id does not exist.");
+        }
+        LoggedUserDTO userDTO = new LoggedUserDTO();
+        userDTO.setAge(user.get().getAge());
+        userDTO.setGender(user.get().getGender());
+        userDTO.setHeight(user.get().getHeight());
+        userDTO.setEmail(user.get().getEmail());
+        userDTO.setFirstName(user.get().getFirstName());
+        userDTO.setLastName(user.get().getLastName());
+        return userDTO;
     }
 }

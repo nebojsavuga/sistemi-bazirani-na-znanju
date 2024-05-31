@@ -6,6 +6,7 @@ import java.util.Set;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.ConcreteInjuryDTO;
+import com.ftn.sbnz.service.controllers.dtos.LoggedUserDTO;
 import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
 import com.ftn.sbnz.service.controllers.dtos.UserDTO;
 
@@ -24,4 +25,6 @@ public interface IUserService {
     User edit(RegisterDTO registerDTO, long userId);
 
     String addInjury(ConcreteInjuryDTO injuryDTO, Long userId);
+
+    LoggedUserDTO getLoggedUserById(Long userId);
 }
