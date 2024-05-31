@@ -212,4 +212,21 @@ public class UserService implements IUserService {
         }
         return injuriesDTO;
     }
+
+    @Override
+    public ConcreteInjury deleteUserInjury(Long injuryId, Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new UnauthorizedException("Not authorized.");
+        }
+        Optional<ConcreteInjury> injury = concreteInjuryRepository.findById(injuryId);
+        if (injury.isEmpty()){
+            throw new NotFoundException("Injury with that id does not exist.");
+        }
+        if (!injury.get().getUser().getId().equals(userId)){
+            throw new NotFoundException("Injury with that id does not exist.");
+        }
+        concreteInjuryRepository.delete(injury.get());
+        return injury.get();
+    }
 }

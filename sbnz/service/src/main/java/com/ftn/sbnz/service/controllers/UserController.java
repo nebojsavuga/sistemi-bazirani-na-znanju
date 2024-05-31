@@ -6,7 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ftn.sbnz.model.users.ConcreteInjury;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.config.JwtUtils;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
@@ -120,4 +121,16 @@ public class UserController {
         return new ResponseEntity<>(injuries,
                 HttpStatus.OK);
     }
+
+	@DeleteMapping("/injury/{id}")
+	public ResponseEntity<String> deleteUserInjury(@PathVariable("id") Long injuryId,
+			@RequestHeader("Authorization") String token) {
+				Long userId = null;
+		if (token != null && token != "") {
+			String jwtt = token.substring(7);
+			userId = jwt.getId(jwtt);
+		}
+		ConcreteInjury injury = userService.deleteUserInjury(injuryId, userId);
+		return new ResponseEntity<>("Successfully deleted concrete injury", HttpStatus.OK);
+	}
 }

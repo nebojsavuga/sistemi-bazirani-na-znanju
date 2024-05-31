@@ -3,7 +3,7 @@ package com.ftn.sbnz.service.services;
 import java.util.List;
 import java.util.Set;
 
-
+import com.ftn.sbnz.model.users.ConcreteInjury;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.ConcreteInjuryDTO;
@@ -31,4 +31,6 @@ public interface IUserService {
     LoggedUserDTO getLoggedUserById(Long userId);
 
     List<LoggedUserInjuryDTO> getLoggedUserInjuries(Long userId);
+
+    ConcreteInjury deleteUserInjury(Long injuryId, Long userId);
 }
