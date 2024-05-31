@@ -77,4 +77,21 @@ export class ArticleDisplayComponent implements OnInit {
 
   }
 
+  buy() {
+    this.articleService.buy(this.article.id).subscribe(
+      {
+        next: res => {
+          console.log(res);
+        },
+        error: err => {
+          alert(err);
+        }
+      }
+    )
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
+
 } 

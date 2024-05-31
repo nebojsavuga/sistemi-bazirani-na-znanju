@@ -24,7 +24,11 @@
             <h4 class="price" *ngIf="article.articleGenderType == 'Male'">Pol: Musko</h4>
             <h4 class="price" *ngIf="article.articleGenderType == 'Female'">Pol: Žensko</h4>
             <h4 class="price" *ngIf="article.articleGenderType == 'Unisex'">Pol: Unisex</h4>
-
+            <div class="row" *ngIf="isLoggedIn()">
+                <div class="col-6">
+                    <button type="button" class="button-style" (click)="buy()" [hidden]="disableShowMore">Kupi</button>
+                </div>
+            </div>
         </div>
     </div>
 

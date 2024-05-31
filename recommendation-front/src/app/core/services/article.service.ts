@@ -11,7 +11,11 @@ export class ArticleService {
 
   constructor(private http: HttpClient) { }
 
-  getById(id: number): Observable<FullArticle>{
+  getById(id: number): Observable<FullArticle> {
     return this.http.get<FullArticle>(environment.apiHost + 'articles/' + String(id));
+  }
+
+  buy(id: number): Observable<FullArticle> {
+    return this.http.post<FullArticle>(environment.apiHost + 'articles/buy/' + String(id), {});
   }
 }
