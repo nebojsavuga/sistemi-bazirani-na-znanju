@@ -1,13 +1,7 @@
 <section class="p-5 dark-blue-background text-light" *ngIf="isLoaded">
     <div class="row">
-        <div class="col-md-3 col-12">
-            <div class="row text-center">
-                
-            </div>
-            
-
-        </div>
-        <div class="col-md-8 col-12 p-2">
+        
+        <div class="col-md-6 col-12 p-2">
             <div class="col-12">
                 <h2>{{profile.firstName}} {{profile.lastName}}</h2>
             </div>
@@ -34,6 +28,30 @@
                 <div class="col-6">
                     <button type="button" class="button-style button-font" id="change password" (click)="editProfile()">Izmeni profil</button>
                 </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="col-12">
+                <h2>Povrede</h2>
+            </div>
+            <div class="table-container mt-3">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-text-white">#</th>
+                            <th scope="col" class="table-text-white">Naziv</th>
+                            <th scope="col" class="table-text-white">Vreme</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let injury of injuries; index as i ">
+                            <td class="small-cell table-text-white">{{i + 1}}</td>
+                            <td class="small-cell table-text-white">{{injury.injury}}</td>
+                            <td class="small-cell table-text-white">{{injury.executionTime | date:'yyyy/MM/dd'}}</td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

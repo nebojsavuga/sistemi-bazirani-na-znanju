@@ -43,11 +43,9 @@ export class AddInjuryComponent implements OnInit{
   }
 
   private loadInjuries(): void {
-    console.log("cc")
     this.service.getLoggedUserInjuries().subscribe({
       next: (result) => {
         this.injuries = (result);
-        console.log(result);
       },
       error: (err) => {
         // Handle error
