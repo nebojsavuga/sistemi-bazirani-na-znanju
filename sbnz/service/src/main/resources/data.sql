@@ -172,7 +172,7 @@ VALUES ('Chalk 500g', 12.99, 'Unisex', 'Power system', 'WeightliftingGear', 'Cha
 
 -- lopte
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
-VALUES ('Forza weighted football', 24.99, 'Unisex', 'Forza', 'Ball', 'CetiriSaTegom', 'fudbal', '58.jpg');
+VALUES ('Futsal ball, veličina 4, sa tegom', 34.99, 'Unisex', 'erima', 'Ball', 'CetiriSaTegom', 'fudbal', '58.jpg');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
 VALUES ('Picador kids ball', 17.99, 'Unisex', 'Picador', 'Ball', 'Decija', 'fudbal', '59.jpg');
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
@@ -313,8 +313,23 @@ VALUES ('Adizero Ubersonic 4 Grass Court Shoe Men', 130.00, 'Male', 'Adidas', 'K
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
 VALUES ('RPM Blast String Reel 200m', 134.99, 'Unisex', 'Babolat', 'RacketString', 'tenis', '101.jpg');
 
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Nike patike za fudbal MERCURIAL VAPOR 14 CLUB', 100.99, 'Male', 'Nike', 'FootbalShoeNoCrampons', 'fudbal', '102.jpg');
+
 INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
-VALUES ('Court FF 3 Clay Court Shoe Men', 165.00, 'Male', 'ASICS', 'RibljaKost', 'TenisShoe', 'tenis', '102.jpg');
+VALUES ('Court FF 3 Clay Court Shoe Men', 165.00, 'Male', 'ASICS', 'RibljaKost', 'TenisShoe', 'tenis', '103.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Nike Patike Legend 9 Academy Ic 42.5', 99.99, 'Male', 'Nike', 'FootbalShoeNoCrampons', 'fudbal', '104.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('REEBOK LEGACY LIFTER III Men’s Weightlifting Shoe', 139.99, 'Male', 'Nike', 'WeightliftingShoe', 'dizanjeTegova', '105.jpeg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, type, sport, path_to_image) 
+VALUES ('M3 7ft 20kg Olympic Barbell Weight Bar Black Orange', 199.99, 'Unisex', 'Mirafit', 'Barbel', 20.0, 'Olimpijska', 'dizanjeTegova', '106.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('RIOT CAST IRON PLATES 10KG', 32.99, 'Unisex', 'Strength', 'Weight', 20.0, 'dizanjeTegova', '107.jpg');
 
 
 
