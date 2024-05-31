@@ -22,7 +22,7 @@ export class RegisterComponent {
     gender: new FormControl('', [Validators.required])
   });
 
-  constructor(private authenticationService: AuthenticationService, protected decodeService: TokenDecoderService) {  }
+  constructor(private authenticationService: AuthenticationService, protected decodeService: TokenDecoderService) { }
 
   get password() { return this.registerForm.get('password'); }
   get repeatedPassword() { return this.registerForm.get('repeatedPassword'); }
@@ -34,11 +34,11 @@ export class RegisterComponent {
   register(): void {
     if (!this.registerForm.valid) {
       this.hasError = true;
-      this.errorValue = "Please fulfill all the fields correctly.";
+      this.errorValue = "Nisu sva polja ispravno uneta.";
     }
     if (this.password.value !== this.repeatedPassword.value) {
       this.hasError = true;
-      this.errorValue = "Passwords don't match";
+      this.errorValue = "Lozinke se ne podudaraju";
       return;
     }
 
@@ -46,25 +46,27 @@ export class RegisterComponent {
       const user: User = {
         email: this.registerForm.value.email,
         lastName: this.registerForm.value.lastName,
-        name: this.registerForm.value.name,
+        firstName: this.registerForm.value.name,
         password: this.registerForm.value.password,
-        repeatPassword: this.registerForm.value.repeatedPassword
+        repeatPassword: this.registerForm.value.repeatedPassword,
+        height: Number.parseFloat(this.registerForm.value.height),
+        age: Number.parseInt(this.registerForm.value.age),
+        gender: this.registerForm.value.gender
       }
 
       this.authenticationService.registration(user).subscribe({
         next: _ => {
           this.hasError = false;
           this.successfullyRegistered = true;
-          this.successMessage = "Successfully registered.";
+          this.successMessage = "Uspešna registracija.";
         }, error: err => {
           this.hasError = true;
-          this.errorValue = 'All fields must be filled correctly';
+          this.errorValue = 'Nisu sva polja ispravno uneta.';
         }
       })
     } else {
       this.hasError = true;
-      this.errorValue = 'All fields must be filled correctly';
-
+      this.errorValue = 'Nisu sva polja ispravno uneta.';
     }
   }
 

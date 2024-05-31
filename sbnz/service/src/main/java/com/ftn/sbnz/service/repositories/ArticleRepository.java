@@ -19,10 +19,4 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     Page<Article> findAll(Pageable pageable);
 
     long count();
-
-    @Query("SELECT a FROM Article a WHERE TYPE(a) = :type")
-    Set<Article> findArticlesByType(Class<?> type);
-
-    @Query("SELECT a.purchases FROM Article a WHERE TYPE(a) = :type")
-    Set<Purchase> findByArticleType(Class<?> type);
 }

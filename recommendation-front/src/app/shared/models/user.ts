@@ -1,10 +1,13 @@
 export interface User {
     id?: number,
     email: string,
-    name: string,
+    firstName: string,
     lastName: string,
     password: string,
     repeatPassword: string,
+    age?: number,
+    height?: number,
+    gender: string
 }
 
 export interface UserDTO{

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../core/services/authentication.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FullArticle, RecommendedArticle } from '../../shared/models/articles';
 import { ArticleService } from '../../core/services/article.service';
 import { RecomendationService } from '../../core/services/recomendation.service';
@@ -22,7 +22,8 @@ export class ArticleDisplayComponent implements OnInit {
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
     private recomendationService: RecomendationService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -63,17 +64,35 @@ export class ArticleDisplayComponent implements OnInit {
     this.totalSimilarArticles = this.similarArticles.slice(0, 4 * (this.sliceIndex + 1));
   }
 
-  onBackwardClick(value) {
-    alert(value);
+  onBackwardClick(value: string) {
+    this.router.navigate([value, 'articles']);
   }
 
   changeArticle(id: number) {
     this.sliceIndex = 0;
-    this.getAllItems(id);
-    this.disableShowMore = false;
     setTimeout(() => {
       window.scrollTo({ top: 10, behavior: 'smooth' });
     }, 0);
+    this.getAllItems(id);
+    this.disableShowMore = false;
+
+  }
+
+  buy() {
+    this.articleService.buy(this.article.id).subscribe(
+      {
+        next: res => {
+          console.log(res);
+        },
+        error: err => {
+          alert(err);
+        }
+      }
+    )
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
   }
 
 } 
