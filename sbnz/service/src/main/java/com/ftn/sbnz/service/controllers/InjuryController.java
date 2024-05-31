@@ -27,4 +27,6 @@ public class InjuryController {
         return new ResponseEntity<>(this.injuryRepository.findAll(),
                 HttpStatus.OK);
     }
+
+    
 }

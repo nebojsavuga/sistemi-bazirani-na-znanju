@@ -1,5 +1,6 @@
 package com.ftn.sbnz.service.controllers;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.ftn.sbnz.service.config.JwtUtils;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.ConcreteInjuryDTO;
 import com.ftn.sbnz.service.controllers.dtos.LoggedUserDTO;
+import com.ftn.sbnz.service.controllers.dtos.LoggedUserInjuryDTO;
 import com.ftn.sbnz.service.controllers.dtos.RegisterDTO;
 import com.ftn.sbnz.service.controllers.dtos.UserDTO;
 import com.ftn.sbnz.service.services.IUserService;
@@ -106,4 +108,16 @@ public class UserController {
 		LoggedUserDTO loggedUser = userService.getLoggedUserById(userId);
 		return new ResponseEntity<>(loggedUser, HttpStatus.OK);
 	}
+
+	@GetMapping("/injuries")
+    public ResponseEntity<List<LoggedUserInjuryDTO>> getLoggedUserAll(@RequestHeader("Authorization") String token) {
+        Long userId = null;
+		if (token != null && token != "") {
+			String jwtt = token.substring(7);
+			userId = jwt.getId(jwtt);
+		}
+		List<LoggedUserInjuryDTO> injuries = userService.getLoggedUserInjuries(userId);
+        return new ResponseEntity<>(injuries,
+                HttpStatus.OK);
+    }
 }

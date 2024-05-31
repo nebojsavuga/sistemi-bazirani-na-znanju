@@ -11,4 +11,6 @@ import com.ftn.sbnz.model.users.ConcreteInjury;
 public interface ConcreteInjuryRepository extends JpaRepository<ConcreteInjury, Long> {
 
     public List<ConcreteInjury> findByUserId(Long userId);
+
+    
 }
