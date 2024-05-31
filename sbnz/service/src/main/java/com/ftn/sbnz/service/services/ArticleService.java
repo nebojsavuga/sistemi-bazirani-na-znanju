@@ -175,7 +175,8 @@ public class ArticleService implements IArticleService {
                         article.getName(),
                         article.getPrice(),
                         article.getBrandName(),
-                        type))
+                        type,
+                        article.getPathToImage()))
                 .collect(Collectors.toSet());
     }
 

@@ -6,6 +6,17 @@ public class ArticleDTO {
     public float price;
     public String brandName;
     public String articleType;
+    public String pathToImage;
+
+    
+    public ArticleDTO(Long id, String name, float price, String brandName, String articleType, String pathToImage) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.brandName = brandName;
+        this.articleType = articleType;
+        this.pathToImage = pathToImage;
+    }
 
     public Long getId() {
         return id;
@@ -53,5 +64,13 @@ public class ArticleDTO {
         this.price = price;
         this.brandName = brandName;
         this.articleType = articleType;
+    }
+
+    public String getPathToImage() {
+        return pathToImage;
+    }
+
+    public void setPathToImage(String pathToImage) {
+        this.pathToImage = pathToImage;
     }
 }

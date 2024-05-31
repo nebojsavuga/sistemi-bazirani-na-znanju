@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../core/services/authentication.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FullArticle, RecommendedArticle } from '../../shared/models/articles';
 import { ArticleService } from '../../core/services/article.service';
 import { RecomendationService } from '../../core/services/recomendation.service';
@@ -22,7 +22,8 @@ export class ArticleDisplayComponent implements OnInit {
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
     private recomendationService: RecomendationService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -64,11 +65,7 @@ export class ArticleDisplayComponent implements OnInit {
   }
 
   onBackwardClick(value: string) {
-    this.articleService.getByType(value).subscribe(
-      res => {
-        console.log(res);
-      }
-    );
+    this.router.navigate([value, 'articles']);
   }
 
   changeArticle(id: number) {

@@ -10,6 +10,7 @@ import { StoreHomeComponent } from './store-home/store-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CamelCasePipe } from './pipes/camel-case.pipe';
+import { ArticlesTypeDisplayComponent } from './articles-type-display/articles-type-display.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { CamelCasePipe } from './pipes/camel-case.pipe';
     ArticleListItemComponent,
     ArticleDisplayComponent,
     StoreHomeComponent,
-    CamelCasePipe
+    CamelCasePipe,
+    ArticlesTypeDisplayComponent
   ],
   imports: [
     CommonModule,
