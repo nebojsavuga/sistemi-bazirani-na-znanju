@@ -9,6 +9,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Interceptor } from './core/security/interceptor';
 import { FeaturesModule } from './features/features.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 
 
@@ -29,7 +30,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true
-  },],
+  }, provideAnimationsAsync(),],
   exports: [
 
   ],

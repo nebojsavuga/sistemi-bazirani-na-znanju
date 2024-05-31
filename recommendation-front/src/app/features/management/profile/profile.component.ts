@@ -25,6 +25,11 @@ export class ProfileComponent implements OnInit{
 
   }
 
+  addInjury(){
+    this.router.navigate(['add-injury'], {relativeTo : this.activatedRoute});
+
+  }
+
   private GetProfile() {
     this.service.getProfile().subscribe({
       next: (profile) => {
