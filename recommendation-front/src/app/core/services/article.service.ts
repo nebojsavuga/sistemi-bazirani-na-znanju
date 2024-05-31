@@ -15,6 +15,10 @@ export class ArticleService {
     return this.http.get<FullArticle>(environment.apiHost + 'articles/' + String(id));
   }
 
+  getByType(typeOfArticle: string): Observable<FullArticle[]> {
+    return this.http.get<FullArticle[]>(environment.apiHost + 'articles/type?type=' + typeOfArticle);
+  }
+
   buy(id: number): Observable<FullArticle> {
     return this.http.post<FullArticle>(environment.apiHost + 'articles/buy/' + String(id), {});
   }

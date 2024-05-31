@@ -63,8 +63,12 @@ export class ArticleDisplayComponent implements OnInit {
     this.totalSimilarArticles = this.similarArticles.slice(0, 4 * (this.sliceIndex + 1));
   }
 
-  onBackwardClick(value) {
-    alert(value);
+  onBackwardClick(value: string) {
+    this.articleService.getByType(value).subscribe(
+      res => {
+        console.log(res);
+      }
+    );
   }
 
   changeArticle(id: number) {

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -157,7 +158,14 @@ public class ArticleService implements IArticleService {
             throw new NotFoundException("No articles of type " + type + " found.");
 
         }
-        Set<Article> articles = articleRepository.findArticlesByType(classType);
+        List<Article> allArticles = articleRepository.findAll();
+
+        Set<Article> articles = new HashSet<>();
+        for (Article article : allArticles) {
+            if (classType.isInstance(article)) {
+                articles.add(article);
+            }
+        }
         if (articles.isEmpty()) {
             throw new NotFoundException("No articles of type " + classType.getSimpleName() + " found.");
         }
@@ -351,7 +359,7 @@ public class ArticleService implements IArticleService {
             if (!directory.exists()) {
                 directory.mkdirs(); // Create the directory if it doesn't exist
             }
-    
+
             File imageFile = new File(directoryPath + "/" + article.getId() + "." + fileType);
             art.setPathToImage(article.getId() + "." + fileType);
             articleRepository.save(art);
@@ -361,7 +369,7 @@ public class ArticleService implements IArticleService {
             }
 
         } catch (IOException e) {
-            throw new BadRequestException(e.getLocalizedMessage());    
+            throw new BadRequestException(e.getLocalizedMessage());
         }
         return article;
     }
