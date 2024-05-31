@@ -5,62 +5,62 @@
         </div>
     </div>
     <div class="row">
-    <div class="col-md-6 col-12">
-        <form (ngSubmit)="Submit()" [formGroup]="povredaForm">
-            <h2 class="reg-lbl text-light">Unos povrede</h2>
-            <mat-form-field appearance="fill">
-                <mat-label>Datum</mat-label>
-                <input matInput [matDatepicker]="picker" placeholder="Unesite datum" id="datepicker"
-                    formControlName="date">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+        <div class="col-md-6 col-12">
+            <form (ngSubmit)="Submit()" [formGroup]="povredaForm">
+                <h2 class="reg-lbl text-light">Unos povrede</h2>
+                <mat-form-field appearance="fill">
+                    <mat-label>Datum</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Unesite datum" id="datepicker"
+                        formControlName="date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
 
-            </mat-form-field>
-            <div *ngIf="errorMessage!=null" class="red-dot">
+                </mat-form-field>
+                <div *ngIf="errorMessage!=null" class="red-dot">
 
-                {{errorMessage}}
+                    {{errorMessage}}
+                </div>
+
+                <div class="mb-3">
+                    <label for="povreda" class="col-form-label text-light">Vrsta povrede</label>
+                    <select class="form-control" name="povreda" id="povreda" formControlName="povreda">
+                        <option selected value="Povreda skocnog zgloba">Povreda skocnog zgloba</option>
+                        <option value="Povreda kolena">Povreda kolena</option>
+                        <option value="Povreda lakta">Povreda lakta</option>
+                        <option value="Povreda rucnog zgloba">Povreda rucnog zgloba</option>
+                    </select>
+
+                </div>
+                <div class="mt-2 text-center">
+                    <button type="submit" class="button-style" id="confirmRegistration">Unesi</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="table-container mt-3">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="table-text-white">#</th>
+                            <th scope="col" class="table-text-white">Naziv</th>
+                            <th scope="col" class="table-text-white">Vreme</th>
+                            <th scope="col" class="table-text-white">Akcija</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let injury of injuries; index as i ">
+                            <td class="small-cell table-text-white">{{i + 1}}</td>
+                            <td class="small-cell table-text-white">{{injury.injury}}</td>
+                            <td class="small-cell table-text-white">{{injury.executionTime | date:'yyyy/MM/dd'}}</td>
+                            <td class="small">
+                                <button class="btn btn-danger" (click)="deleteInjury(injury.id)">Obrisi</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
-            <div class="mb-3">
-                <label for="povreda" class="col-form-label text-light">Vrsta povrede</label>
-                <select class="form-control" name="povreda" id="povreda" formControlName="povreda">
-                    <option selected value="Povreda skocnog zgloba">Povreda skocnog zgloba</option>
-                    <option value="Povreda kolena">Povreda kolena</option>
-                    <option value="Povreda lakta">Povreda lakta</option>
-                    <option value="Povreda rucnog zgloba">Povreda rucnog zgloba</option>
-                </select>
-
-            </div>
-            <div class="mt-2 text-center">
-                <button type="submit" class="button-style" id="confirmRegistration">Unesi</button>
-            </div>
-        </form>
-    </div>
-    <div class="col-md-6 col-12">
-        <div class="table-container mt-3">
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Naziv</th>
-                        <th scope="col">Vreme</th>
-                        <th scope="col">Akcija</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let injury of injuries; index as i ">
-                        <td class="small-cell">{{i + 1}}</td>
-                        <td class="small-cell">{{injury.injury}}</td>
-                        <td class="small-cell">{{injury.executionTime}}</td>
-                        <td class="small">
-                            <button class="btn btn-danger" (click)="deleteInjury(injury.id)">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
-</div>
 
 
 
