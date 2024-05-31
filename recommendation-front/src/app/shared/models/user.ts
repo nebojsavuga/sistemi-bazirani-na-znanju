@@ -23,6 +23,16 @@ export interface UserProfileDTO {
     role: Role
 }
 
+export interface LoggedUserProfileDTO {
+    email: string,
+    firstName: string,
+    lastName: string,
+    age: number
+    height: number
+    gender: string
+}
+
+
 export interface EditUserDTO {
     name: string,
     lastName: string,

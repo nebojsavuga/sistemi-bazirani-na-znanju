@@ -1,10 +1,35 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '../../../core/services/user.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LoggedUserProfileDTO } from '../../../shared/models/user';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit{
+
+  constructor(private service: UserService, private router: Router, private activatedRoute: ActivatedRoute){}
+
+  profile: LoggedUserProfileDTO;
+  isLoaded = false;
+  ngOnInit(): void {
+    this.GetProfile();
+
+  }
+
+  private GetProfile() {
+    this.service.getProfile().subscribe({
+      next: (profile) => {
+        this.profile = profile;
+
+          this.isLoaded = true;
+      },
+      error: (err) => {
+      }
+    });
+  }
 
 }
