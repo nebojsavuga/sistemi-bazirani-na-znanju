@@ -31,7 +31,7 @@ export class ArticlesTypeDisplayComponent implements OnInit {
   showMore() {
     this.sliceIndex += 1;
     this.disableShowMore = false;
-    if (this.totalArticles.length >= this.articles.length - 8) {
+    if (this.totalArticles.length >= this.articles.length) {
       this.disableShowMore = true;
     }
     this.totalArticles = this.articles.slice(0, 8 * (this.sliceIndex + 1));
