@@ -4,18 +4,20 @@
             <button (click)="goBack()" class="button-style button-font">Nazad</button>
         </div>
     </div>
+    <div class="row">
     <div class="col-md-6 col-12">
         <form (ngSubmit)="Submit()" [formGroup]="povredaForm">
             <h2 class="reg-lbl text-light">Unos povrede</h2>
             <mat-form-field appearance="fill">
                 <mat-label>Datum</mat-label>
-                <input matInput [matDatepicker]="picker" placeholder="Unesite datum" id="datepicker" formControlName="date">
+                <input matInput [matDatepicker]="picker" placeholder="Unesite datum" id="datepicker"
+                    formControlName="date">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
-                
+
             </mat-form-field>
             <div *ngIf="errorMessage!=null" class="red-dot">
-                
+
                 {{errorMessage}}
             </div>
 
@@ -34,26 +36,31 @@
             </div>
         </form>
     </div>
-    <div class="table-container mt-3">
-        <table class="table table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let plate of validPlates; index as i ">
-                    <td class="small-cell">{{i + 1}}</td>
-                    <td class="small-cell">{{plate}}</td>
-                    <td class="small">
-                        <button class="btn btn-danger" (click)="deleteLicencePlate(plate)">Delete</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="col-md-6 col-12">
+        <div class="table-container mt-3">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Naziv</th>
+                        <th scope="col">Vreme</th>
+                        <th scope="col">Akcija</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let injury of injuries; index as i ">
+                        <td class="small-cell">{{i + 1}}</td>
+                        <td class="small-cell">{{injury.injury}}</td>
+                        <td class="small-cell">{{injury.executionTime}}</td>
+                        <td class="small">
+                            <button class="btn btn-danger" (click)="deleteInjury(injury.id)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+</div>
 
 
 
