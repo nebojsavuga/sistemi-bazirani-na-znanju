@@ -138,18 +138,18 @@ public class UserService implements IUserService {
     public User edit(RegisterDTO registerDTO, long userId) {
         
         Optional<User> existingUser = userRepository.findById(userId);
-        
-        if (!registerDTO.password.equals(registerDTO.repeatPassword) ) {
-            throw new BadCredentialsException("Password and repeat password must be same.");
+        if (registerDTO.password != null){
+            if (!registerDTO.password.equals(registerDTO.repeatPassword) ) {
+                throw new BadCredentialsException("Password and repeat password must be same.");
+            }
+            existingUser.get().setPassword(this.passwordEncoder.encode(registerDTO.password));
+            
         }
         existingUser.get().setFirstName(registerDTO.firstName);
         existingUser.get().setHeight(registerDTO.height);
         existingUser.get().setLastName(registerDTO.lastName);
         existingUser.get().setAge(registerDTO.age);
         existingUser.get().setGender(registerDTO.gender);
-        existingUser.get().setPassword(this.passwordEncoder.encode(registerDTO.password));
-        
-        
         User user = userRepository.save(existingUser.get());
         return user;
     }

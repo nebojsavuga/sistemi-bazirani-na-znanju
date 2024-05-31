@@ -19,6 +19,11 @@ export class ProfileComponent implements OnInit{
     this.GetProfile();
 
   }
+  editProfile(){
+    localStorage.setItem('userInfo', JSON.stringify(this.profile));
+    this.router.navigate(['edit'], {relativeTo : this.activatedRoute});
+
+  }
 
   private GetProfile() {
     this.service.getProfile().subscribe({

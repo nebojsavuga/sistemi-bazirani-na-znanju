@@ -3,7 +3,7 @@ import { environment } from '../../../environment/environment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Token } from "../../shared/models/token";
-import { UserProfileDTO, User, RegisteredUser, EditUserDTO, ChangePasswordDTO, UserDTO } from "../../shared/models/user";
+import { UserProfileDTO, User, RegisteredUser, EditUserDTO, ChangePasswordDTO, UserDTO, LoggedUserProfileDTO } from "../../shared/models/user";
 
 @Injectable({
   providedIn: 'root'
@@ -49,8 +49,15 @@ export class AuthenticationService {
   }
 
 
-  editProfile(userInfo: EditUserDTO): Observable<EditUserDTO> {
-    return this.http.put<EditUserDTO>(environment.apiHost + "users/edit-profile", userInfo);
+  editProfile(userInfo: LoggedUserProfileDTO): Observable<string> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+  
+    return this.http.put(environment.apiHost + "users/edit-profile", userInfo, {
+      headers: headers,
+      responseType: 'text'
+    });
   }
   editPassword(passwordInfo: ChangePasswordDTO): Observable<boolean> {
     return this.http.put<boolean>(environment.apiHost + "users/edit-password", passwordInfo);

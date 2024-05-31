@@ -24,7 +24,7 @@ export interface UserProfileDTO {
 }
 
 export interface LoggedUserProfileDTO {
-    email: string,
+    email?: string,
     firstName: string,
     lastName: string,
     age: number

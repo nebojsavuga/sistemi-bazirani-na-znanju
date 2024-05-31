@@ -8,6 +8,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { Interceptor } from './core/security/interceptor';
 import { FeaturesModule } from './features/features.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -22,7 +24,8 @@ import { FeaturesModule } from './features/features.module';
     FormsModule,
     ReactiveFormsModule,
     MatSnackBarModule,
-    FeaturesModule
+    FeaturesModule,
+    BrowserAnimationsModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true
