@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { RecommendedArticle } from '../../shared/models/articles';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../core/services/authentication.service';
@@ -13,8 +13,11 @@ export class ArticleListItemComponent implements OnInit {
   @Input() article: RecommendedArticle;
   @Input() isFavorite: boolean | undefined = false;
   @Input() isAdmin: boolean | undefined = false;
+  @ViewChild('articleImage') articleImage: ElementRef<HTMLImageElement>;
+
   constructor(private router: Router, private authService: AuthenticationService,
-    private articleService: ArticleService
+    private articleService: ArticleService,
+    private renderer: Renderer2
   ) { }
   @Output() articleId: EventEmitter<any> = new EventEmitter<number>();
   @Output() deleted: EventEmitter<any> = new EventEmitter<boolean>();
@@ -23,7 +26,7 @@ export class ArticleListItemComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getPicture('images/' + this.article.pathToImage).subscribe(result => {
       const url = URL.createObjectURL(result);
-      (document.getElementById(this.article.id.toString()) as HTMLImageElement).src = url;
+      this.renderer.setAttribute(this.articleImage.nativeElement, 'src', url);
     });
   }
 
