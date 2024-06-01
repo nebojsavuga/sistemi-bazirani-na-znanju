@@ -26,6 +26,7 @@ export class ArticleDisplayComponent implements OnInit {
   isLoggedIn = false;
   codes: CodeDTO[] = [];
   selectedCodeId: number = 0;
+  oldPrice = '';
 
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
@@ -49,12 +50,14 @@ export class ArticleDisplayComponent implements OnInit {
   }
 
   private getAllItems(id: number) {
+    this.selectedCodeId = 0;
     this.articleService.getById(id).subscribe(
       res => {
         this.article = res;
         this.authService.getPicture('images/' + this.article.imagePath).subscribe(result => {
           const url = URL.createObjectURL(result);
           (document.getElementById(this.article.id.toString()) as HTMLImageElement).src = url;
+          this.oldPrice = this.article.price;
         });
         this.getCodes();
       }
@@ -133,6 +136,7 @@ export class ArticleDisplayComponent implements OnInit {
           this.snackbar.showSnackBar(`Uspešno ste kupili artiklal ${this.article.name} sa cenom ${price} eur`, 'Ok');
           this.selectedCodeId = 0;
           this.getCodes();
+          this.article.price = this.oldPrice;
         },
         error: _ => {
           this.snackbar.showSnackBar(`Došlo je do greške prilikom kupovine artikla ${this.article.name}`, 'Ok');
@@ -161,6 +165,22 @@ export class ArticleDisplayComponent implements OnInit {
   onCodeChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedCodeId = Number(selectElement.value);
+    if(this.selectedCodeId === 0){
+      this.article.price = this.oldPrice;
+      return;
+    }
+    const code = this.codes.find(c => c.id === this.selectedCodeId);
+    if(code.discountPrice > 0){
+      this.article.price = String(Number.parseFloat(this.article.price) - code.discountPrice);
+    }else{
+      this.article.price = String(Number.parseFloat(this.article.price) - Number.parseFloat(this.article.price) * (code.discountPercentage / 100));
+    }
+    if(Number.parseFloat(this.article.price) < 0){
+      this.article.price = '0';
+      return;
+    }
+    this.article.price = String(Number.parseFloat(this.article.price).toFixed(2));
+
   }
 
   ratedArticle($event: any) {
