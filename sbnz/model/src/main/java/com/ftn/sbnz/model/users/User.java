@@ -13,6 +13,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -64,7 +65,7 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private Set<Rating> ratings = new HashSet<Rating>();
 
-    @OneToMany
+    @ManyToMany
     private Set<Article> favoriteArticles = new HashSet<Article>();
 
     @OneToMany

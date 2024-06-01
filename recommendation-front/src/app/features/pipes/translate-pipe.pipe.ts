@@ -7,6 +7,10 @@ export class TranslationPipe implements PipeTransform {
         this.initializeTranslations();
     }
 
+    transform(value: string): string {
+        return this.translations.get(value) || value;
+    }
+
     initializeTranslations(): void {
         this.translations.set("FootballArticle", "Fudbalski artikal");
         this.translations.set("Article", "Artikal");
@@ -39,9 +43,5 @@ export class TranslationPipe implements PipeTransform {
         this.translations.set("WeightliftingGear", "Oprema za dizanje tegova");
         this.translations.set("WeightliftingShoe", "Patike za dizanje tegova");
         this.translations.set("WeightliftingGlove", "Rukavice za dizanje tegova");
-    }
-
-    transform(value: string): string {
-        return this.translations.get(value) || value;
     }
 }
