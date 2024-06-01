@@ -59,7 +59,14 @@ export class TemplatesComponent {
   }
 
   addField() {
-    this.fields.push({ brand: '', price: 0 });
+    const lastField = this.fields[this.fields.length - 1];
+    if (lastField && this.fields.some((field, idx) => field.brand === lastField.brand && field.price === lastField.price && idx !== this.fields.length - 1)) {
+      this.snackbar.showSnackBar('Duplirani brend i cena. Unesite jedinstvene vrednosti.', 'Ok');
+      lastField.brand = '';
+      lastField.price = 0;
+    } else {
+      this.fields.push({ brand: '', price: 0 });
+    }
   }
   removeField(index: number) {
     this.fields.splice(index, 1);
