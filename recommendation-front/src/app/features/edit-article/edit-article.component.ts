@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../../core/services/article.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FullArticle } from '../../shared/models/articles';
 
 @Component({
   selector: 'app-edit-article',
@@ -10,6 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EditArticleComponent implements OnInit {
 
   id: number | undefined;
+  article: FullArticle;
   constructor(private articleService: ArticleService, private route: ActivatedRoute,
     private router: Router
   ) {
@@ -19,7 +21,13 @@ export class EditArticleComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
-
+    if(this.id){
+      this.articleService.getById(this.id).subscribe(
+        res =>{
+          this.article = res;
+        }
+      )
+    }
   }
 
 }
