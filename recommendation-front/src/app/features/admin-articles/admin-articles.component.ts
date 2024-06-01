@@ -47,5 +47,7 @@ export class AdminArticlesComponent implements OnInit {
   editArticle(id: number) {
     alert(id);
   }
-
+  add(){
+    
+  }
 }
