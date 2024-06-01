@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FullArticle, RecommendedArticle } from '../../shared/models/articles';
+import { ArticleRatingDTO, FullArticle, RecommendedArticle } from '../../shared/models/articles';
 import { environment } from '../../../environment/environment';
 
 @Injectable({
@@ -38,5 +38,9 @@ export class ArticleService {
 
   getAll(): Observable<RecommendedArticle[]> {
     return this.http.get<RecommendedArticle[]>(environment.apiHost + 'articles');
+  }
+
+  getRatings(id: number): Observable<ArticleRatingDTO[]> {
+    return this.http.get<ArticleRatingDTO[]>(environment.apiHost + 'articles/rate/' + String(id));
   }
 }

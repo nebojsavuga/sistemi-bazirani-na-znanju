@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../core/services/authentication.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FullArticle, RecommendedArticle } from '../../shared/models/articles';
+import { ArticleRatingDTO, FullArticle, RecommendedArticle } from '../../shared/models/articles';
 import { ArticleService } from '../../core/services/article.service';
 import { RecomendationService } from '../../core/services/recomendation.service';
 import { SnackbarService } from '../../core/services/snackbar.service';
@@ -20,6 +20,7 @@ export class ArticleDisplayComponent implements OnInit {
   totalSimilarArticles: RecommendedArticle[] = [];
   sliceIndex = 0;
   disableShowMore = false;
+  ratings: ArticleRatingDTO[] = [];
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
     private recomendationService: RecomendationService,
@@ -32,6 +33,11 @@ export class ArticleDisplayComponent implements OnInit {
       this.id = params['id'];
     });
     this.getAllItems(this.id);
+    this.articleService.getRatings(this.id).subscribe(
+      res =>{
+        this.ratings = this.ratings;
+      }
+    );
   }
 
   private getAllItems(id: number) {

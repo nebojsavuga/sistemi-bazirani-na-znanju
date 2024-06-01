@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.ArticleRatingDTO;
 import com.ftn.sbnz.service.controllers.dtos.FullArticle;
 import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
 
@@ -15,4 +16,5 @@ public interface IArticleService {
     FullArticle addArticle(FullArticle article);
     List<ArticleDTO> getAll();
     boolean deleteArticle(Long id);
+    Set<ArticleRatingDTO> getRatings(Long id);
 }

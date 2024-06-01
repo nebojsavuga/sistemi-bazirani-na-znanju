@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ftn.sbnz.service.config.JwtUtils;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.ArticleRatingDTO;
 import com.ftn.sbnz.service.controllers.dtos.FullArticle;
 import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
 import com.ftn.sbnz.service.services.IArticleService;
@@ -88,6 +89,12 @@ public class ArticleController {
         }
         this.articleService.rateArticle(articleDTO, userId);
         return new ResponseEntity<>(articleDTO, HttpStatus.OK);
+    }
+
+    @GetMapping("rate/{id}")
+    public ResponseEntity<Set<ArticleRatingDTO>> getRating(@PathVariable Long id,
+            @RequestHeader(value="Authorization", required = false) String token) {
+        return new ResponseEntity<>(this.articleService.getRatings(id), HttpStatus.OK);
     }
 
     @PostMapping()

@@ -338,7 +338,7 @@ public class ArticleService implements IArticleService {
         art.setName(article.getName());
         art.setGender(ArticleGenderType.valueOf(article.getArticleGenderType()));
         art.setPrice(article.getPrice());
-        
+
         art = articleRepository.save(art);
         article.setId(art.getId());
         String image = article.getImage();
@@ -399,4 +399,19 @@ public class ArticleService implements IArticleService {
         return true;
     }
 
+    @Override
+    public Set<ArticleRatingDTO> getRatings(Long id) {
+        Optional<Article> article = articleRepository.findById(id);
+        if (article.isEmpty()) {
+            throw new NotFoundException("Article with that id does not exist.");
+        }
+        Set<Rating> ratings = article.get().getRatings();
+
+        return ratings.stream()
+                .map(rating -> new ArticleRatingDTO(
+                        rating.getId(),
+                        rating.getRating(),
+                        rating.getExecutionTime()))
+                .collect(Collectors.toSet());
+    }
 }
