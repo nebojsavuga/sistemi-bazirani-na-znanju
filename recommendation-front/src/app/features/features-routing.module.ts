@@ -6,6 +6,7 @@ import { ArticlesTypeDisplayComponent } from './articles-type-display/articles-t
 import { FavoriteDisplayComponent } from './favorite-display/favorite-display.component';
 import { AdminArticlesComponent } from './admin-articles/admin-articles.component';
 import { EditArticleComponent } from './edit-article/edit-article.component';
+import { TemplatesComponent } from './templates/templates.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,9 @@ const routes: Routes = [
   },
   {
     path: 'edit-article/:id', component: EditArticleComponent
+  },
+  {
+    path: 'templates', component: TemplatesComponent
   }
 ];
 
