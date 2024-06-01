@@ -27,6 +27,16 @@
             <div class="col-12 my-3 text-center">
                 <app-rating-display [id]="id" [ratings]="ratings"></app-rating-display>
             </div>
+            <div class="col-12">
+                <div class="form-group col-12 mt-2">
+                    <label for="code">Kodovi</label>
+                    <select id="code" class="form-control" [(ngModel)]="selectedCodeId" (change)="onCodeChange($event)">
+                        <option value="0" disabled selected>Izaberite kod</option>
+                        <option *ngFor="let code of codes" [value]="code.id">{{ code.name }}</option>
+                    </select>
+
+                </div>
+            </div>
             <div class="row mt-2" *ngIf="isLoggedIn">
                 <div class="col-lg-6 col-12 mt-1">
                     <button type="button" class="button-style" style="min-width: 150px;" (click)="buy()">Kupi</button>

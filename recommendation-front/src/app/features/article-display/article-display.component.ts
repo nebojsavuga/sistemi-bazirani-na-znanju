@@ -6,6 +6,7 @@ import { ArticleService } from '../../core/services/article.service';
 import { RecomendationService } from '../../core/services/recomendation.service';
 import { SnackbarService } from '../../core/services/snackbar.service';
 import { UserService } from '../../core/services/user.service';
+import { CodeDTO } from '../../shared/models/code';
 
 @Component({
   selector: 'app-article-display',
@@ -23,6 +24,8 @@ export class ArticleDisplayComponent implements OnInit {
   sliceIndex = 0;
   disableShowMore = false;
   isLoggedIn = false;
+  codes: CodeDTO[] = [];
+  selectedCodeId: number = 0;
 
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
@@ -53,6 +56,7 @@ export class ArticleDisplayComponent implements OnInit {
           const url = URL.createObjectURL(result);
           (document.getElementById(this.article.id.toString()) as HTMLImageElement).src = url;
         });
+        this.getCodes();
       }
     );
     this.recomendationService.getParents(id).subscribe(
@@ -71,11 +75,29 @@ export class ArticleDisplayComponent implements OnInit {
         this.ratings = res;
       }
     );
+
+  }
+
+  private getCodes() {
     this.userService.getCodes().subscribe(
-      res =>{
-        console.log(res);
+      res => {
+
+        this.codes = [];
+        for (const code of res) {
+          switch (code.flag) {
+            case 0:
+              const articleType = this.articleService.getTypeOfArticle(this.article);
+              if (articleType.toLocaleLowerCase().includes(code.sport.toLocaleLowerCase())) {
+                this.codes.push(code);
+              }
+              break;
+            default:
+              this.codes.push(code);
+              break;
+          }
+        }
       }
-    )
+    );
   }
 
   showMore() {
@@ -104,10 +126,13 @@ export class ArticleDisplayComponent implements OnInit {
   }
 
   buy() {
-    this.articleService.buy(this.article.id).subscribe(
+    this.articleService.buy(this.article.id, this.selectedCodeId).subscribe(
       {
-        next: _ => {
-          this.snackbar.showSnackBar(`Uspešno ste kupili artiklal ${this.article.name}`, 'Ok');
+        next: (res) => {
+          const price = parseFloat(Number.parseFloat(res.price).toFixed(2));
+          this.snackbar.showSnackBar(`Uspešno ste kupili artiklal ${this.article.name} sa cenom ${price} eur`, 'Ok');
+          this.selectedCodeId = 0;
+          this.getCodes();
         },
         error: _ => {
           this.snackbar.showSnackBar(`Došlo je do greške prilikom kupovine artikla ${this.article.name}`, 'Ok');
@@ -133,7 +158,10 @@ export class ArticleDisplayComponent implements OnInit {
     );
   }
 
-
+  onCodeChange(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedCodeId = Number(selectElement.value);
+  }
 
   ratedArticle($event: any) {
     this.getAllItems(this.id);

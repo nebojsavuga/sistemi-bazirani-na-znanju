@@ -9,6 +9,19 @@ import { environment } from '../../../environment/environment';
 })
 export class ArticleService {
 
+  getTypeOfArticle(article: FullArticle): string {
+    if (article.ballType || article.typeOfFootballGear || article.numberOfCramponsFootballShoeCrampons || article.numberOfCramponsGrassFootballShoe) {
+      return 'fudbal';
+    }
+    if (article.barbelType || article.barbellWeight || article.dumbellWeight || article.elasticBandWeight || article.weightliftingGloveSize || article.weightliftingTypeOfGear || article.weightliftingWeight) {
+      return 'dizanjeTegova';
+    }
+    if (article.sweatpantsType || article.typeOfOrientiringGear) {
+      return 'orijentiring';
+    }
+    return 'tenis';
+  }
+
   constructor(private http: HttpClient) { }
 
   getById(id: number): Observable<FullArticle> {
@@ -19,8 +32,12 @@ export class ArticleService {
     return this.http.get<RecommendedArticle[]>(environment.apiHost + 'articles/type?type=' + typeOfArticle);
   }
 
-  buy(id: number): Observable<FullArticle> {
-    return this.http.post<FullArticle>(environment.apiHost + 'articles/buy/' + String(id), {});
+  buy(id: number, codeId: number | undefined): Observable<FullArticle> {
+    let requestParam = '';
+    if(codeId !== undefined && codeId !== 0){
+      requestParam = '?codeId=' + String(codeId);
+    }
+    return this.http.post<FullArticle>(environment.apiHost + 'articles/buy/' + String(id) + requestParam, {});
   }
 
   addToFavorite(id: number): Observable<string> {
@@ -45,6 +62,6 @@ export class ArticleService {
   }
 
   rateArticle(articleId: number, rating: number): Observable<void> {
-    return this.http.post<void>(environment.apiHost + 'articles/rate', {articleId: articleId, rating: rating});
+    return this.http.post<void>(environment.apiHost + 'articles/rate', { articleId: articleId, rating: rating });
   }
 }
