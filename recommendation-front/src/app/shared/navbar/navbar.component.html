@@ -17,6 +17,9 @@
               <a class="nav-button" [routerLink]="['manage/profile']" *ngIf="isLoggedIn">Profil</a>
             </li>
             <li class="nav-item">
+              <a class="nav-button" [routerLink]="['favorite']" *ngIf="isLoggedIn">Omiljeni artikli</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-button" id="logout" (click)="logout()" *ngIf="isLoggedIn">Izlogujte se</a>
             </li>
 

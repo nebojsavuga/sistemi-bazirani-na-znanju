@@ -11,6 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CamelCasePipe } from './pipes/camel-case.pipe';
 import { ArticlesTypeDisplayComponent } from './articles-type-display/articles-type-display.component';
+import { FavoriteDisplayComponent } from './favorite-display/favorite-display.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { ArticlesTypeDisplayComponent } from './articles-type-display/articles-t
     ArticleDisplayComponent,
     StoreHomeComponent,
     CamelCasePipe,
-    ArticlesTypeDisplayComponent
+    ArticlesTypeDisplayComponent,
+    FavoriteDisplayComponent
   ],
   imports: [
     CommonModule,

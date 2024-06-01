@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StoreHomeComponent } from './store-home/store-home.component';
 import { ArticleDisplayComponent } from './article-display/article-display.component';
 import { ArticlesTypeDisplayComponent } from './articles-type-display/articles-type-display.component';
+import { FavoriteDisplayComponent } from './favorite-display/favorite-display.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,9 @@ const routes: Routes = [
   },
   {
     path: ':type/articles', component: ArticlesTypeDisplayComponent
+  },
+  {
+    path: 'favorite', component: FavoriteDisplayComponent
   }
 ];
 
