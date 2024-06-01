@@ -16,6 +16,7 @@ import { AdminArticlesComponent } from './admin-articles/admin-articles.componen
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { RatingDisplayComponent } from './rating-display/rating-display.component';
 import { AddRatingComponent } from './add-rating/add-rating.component';
+import { TranslationPipe } from './pipes/translate-pipe.pipe';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { AddRatingComponent } from './add-rating/add-rating.component';
     ArticleDisplayComponent,
     StoreHomeComponent,
     CamelCasePipe,
+    TranslationPipe,
     ArticlesTypeDisplayComponent,
     FavoriteDisplayComponent,
     AdminArticlesComponent,

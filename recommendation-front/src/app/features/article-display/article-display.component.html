@@ -2,7 +2,7 @@
     <div class="row my-5" style="text-align: left;">
         <div class="col-md-4 col-12">
             <span *ngFor="let bw of backwardTypes; index as i"><a (click)="onBackwardClick(bw);" class="link-style">{{bw
-                    | camelCase}}</a> <span *ngIf="i < backwardTypes.length - 1"> -> </span> </span>
+                    | translate | camelCase}}</a> <span *ngIf="i < backwardTypes.length - 1"> -> </span> </span>
         </div>
     </div>
     <div class="row">
@@ -19,7 +19,7 @@
         </div>
         <div class="col-md-6 col-12 p-5 info-div" style="text-align: left;">
             <h4 class="brand">Brend: {{ article.brandName }}</h4>
-            <h4 class="type">Tip: {{ article.articleType | camelCase }}</h4>
+            <h4 class="type">Tip: {{ article.articleType | translate | camelCase }}</h4>
             <h4 class="price">Cena: ${{ article.price }}</h4>
             <h4 class="price" *ngIf="article.articleGenderType == 'Male'">Pol: Musko</h4>
             <h4 class="price" *ngIf="article.articleGenderType == 'Female'">Pol: Žensko</h4>
