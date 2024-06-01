@@ -22,4 +22,8 @@ export class ArticleService {
   buy(id: number): Observable<FullArticle> {
     return this.http.post<FullArticle>(environment.apiHost + 'articles/buy/' + String(id), {});
   }
+
+  addToFavorite(id: number): Observable<string> {
+    return this.http.put<string>(environment.apiHost + 'users/favorite-article/' + String(id), {});
+  }
 }

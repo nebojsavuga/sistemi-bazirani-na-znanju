@@ -32,12 +32,11 @@ export class AddInjuryComponent implements OnInit{
     this.service.deleteUserInjury(injuryId).subscribe({
       next: (result) => {
         this.loadInjuries()
-        this.snackBar.showSnackBar('Successfully registered new licence plate.', "Ok");
+        this.snackBar.showSnackBar('Uspešno ste obrisali povredu.', "Ok");
       },
       error: (err) => {
         this.loadInjuries()
-        this.snackBar.showSnackBar('Successfully deleted licence plate.', "Ok");
-        console.log(err)
+        this.snackBar.showSnackBar('Uspešno ste obrisali povredu.', "Ok");
       }
     })
   }
@@ -100,6 +99,4 @@ export class AddInjuryComponent implements OnInit{
       povreda: 'Povreda skocnog zgloba'
     });
   }
-
-  
 }

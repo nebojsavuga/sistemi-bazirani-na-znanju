@@ -47,7 +47,7 @@
                         <tr *ngFor="let injury of injuries; index as i ">
                             <td class="small-cell table-text-white">{{i + 1}}</td>
                             <td class="small-cell table-text-white">{{injury.injury}}</td>
-                            <td class="small-cell table-text-white">{{injury.executionTime | date:'yyyy/MM/dd'}}</td>
+                            <td class="small-cell table-text-white">{{injury.executionTime | date:'dd/MM/yyyy'}}</td>
                             
                         </tr>
                     </tbody>

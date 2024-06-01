@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FullArticle, RecommendedArticle } from '../../shared/models/articles';
 import { ArticleService } from '../../core/services/article.service';
 import { RecomendationService } from '../../core/services/recomendation.service';
+import { SnackbarService } from '../../core/services/snackbar.service';
 
 @Component({
   selector: 'app-article-display',
@@ -23,6 +24,7 @@ export class ArticleDisplayComponent implements OnInit {
     private authService: AuthenticationService,
     private recomendationService: RecomendationService,
     private route: ActivatedRoute,
+    private snackbar: SnackbarService,
     private router: Router) { }
 
   ngOnInit(): void {
@@ -81,14 +83,31 @@ export class ArticleDisplayComponent implements OnInit {
   buy() {
     this.articleService.buy(this.article.id).subscribe(
       {
-        next: res => {
-          console.log(res);
+        next: _ => {
+          this.snackbar.showSnackBar(`Uspešno ste kupili artiklal ${this.article.name}`, 'Ok');
         },
-        error: err => {
-          alert(err);
+        error: _ => {
+          this.snackbar.showSnackBar(`Došlo je do greške prilikom kupovine artikla ${this.article.name}`, 'Ok');
         }
       }
-    )
+    );
+  }
+
+  addToFavorite() {
+    this.articleService.addToFavorite(this.article.id).subscribe(
+      {
+        next: res => {
+          this.snackbar.showSnackBar(`Uspešno ste dodali ${this.article.name} u listu omiljenih artikala`, 'Ok');
+        },
+        error: response => {
+          if(response.status === 200){
+            this.snackbar.showSnackBar(`Uspešno ste dodali ${this.article.name} u listu omiljenih artikala`, 'Ok');
+            return;
+          }
+          this.snackbar.showSnackBar(`Došlo je do greške prilikom dodavanja artikla ${this.article.name} u listu omiljenih.`, 'Ok');
+        }
+      }
+    );
   }
 
   isLoggedIn(): boolean {
