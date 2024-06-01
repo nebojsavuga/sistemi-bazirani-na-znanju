@@ -34,6 +34,7 @@ export class TemplatesComponent {
     "Black diamond",
     "Power system",
     "erima",
+    "Erima",
     "GYMSTICK",
     "SBD",
     "Gorilla",
@@ -44,6 +45,16 @@ export class TemplatesComponent {
   ];
   selectedBrands: string[] = [];
   selectedPrices: string[] = [];
+  fields: { brand: string, price: number }[] = [];
+
   onSportChange(event: any) {
+    this.fields = [];
+  }
+
+  addField() {
+    this.fields.push({ brand: '', price: 0 });
+  }
+  removeField(index: number) {
+    this.fields.splice(index, 1);
   }
 }
