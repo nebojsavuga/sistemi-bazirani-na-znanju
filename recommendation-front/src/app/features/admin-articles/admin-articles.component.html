@@ -8,7 +8,7 @@
 </div>
 
 <div class="col-12 text-center" style="width: 90%; margin: 0px auto;">
-    <app-articles [articles]="totalArticles" [isFavorite]="false" [isAdmin]="true"></app-articles>
+    <app-articles [articles]="totalArticles" [isFavorite]="false" [isAdmin]="true" (edit)="editArticle($event)"></app-articles>
 </div>
 <div class="row text-center my-3">
     <div class="col-12">

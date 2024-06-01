@@ -18,6 +18,7 @@ export class ArticleListItemComponent implements OnInit {
   ) { }
   @Output() articleId: EventEmitter<any> = new EventEmitter<number>();
   @Output() deleted: EventEmitter<any> = new EventEmitter<boolean>();
+  @Output() edit: EventEmitter<any> = new EventEmitter<number>();
 
   ngOnInit(): void {
     this.authService.getPicture('images/' + this.article.pathToImage).subscribe(result => {
@@ -38,5 +39,9 @@ export class ArticleListItemComponent implements OnInit {
         this.deleted.emit(true);
       }
     )
+  }
+
+  editArticle(){
+    this.edit.emit(this.article.id);
   }
 }

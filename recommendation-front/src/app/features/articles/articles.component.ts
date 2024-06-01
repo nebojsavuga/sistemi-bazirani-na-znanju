@@ -11,8 +11,12 @@ export class ArticlesComponent {
   @Input() isFavorite: boolean | undefined = false;
   @Input() isAdmin: boolean | undefined = false;
   @Output() deleted: EventEmitter<any> = new EventEmitter<boolean>();
+  @Output() edit: EventEmitter<any> = new EventEmitter<number>();
 
   deleteArticle(event: boolean){
     this.deleted.emit(event);
+  }
+  editArticle(event: number){
+    this.edit.emit(event);
   }
 }

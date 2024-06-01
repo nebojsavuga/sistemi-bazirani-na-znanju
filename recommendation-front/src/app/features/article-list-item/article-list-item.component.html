@@ -2,7 +2,7 @@
     <div class="row" *ngIf="isFavorite || isAdmin">
         <div class="col d-flex justify-content-end">
             <i *ngIf="isFavorite" class="bi bi-x close-icon" style="font-size: 20px;" (click)="removeFromFavorites()"></i>
-            <i *ngIf="isAdmin" class="bi bi-pen edit-icon"></i>
+            <i *ngIf="isAdmin" class="bi bi-pen edit-icon" (click)="editArticle()"></i>
         </div>
     </div>
     <div class="image-container" (click)="showArticle(article.id)">

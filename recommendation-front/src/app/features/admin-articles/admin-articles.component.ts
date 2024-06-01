@@ -44,4 +44,8 @@ export class AdminArticlesComponent implements OnInit {
     this.totalArticles = this.articles.slice(0, 8 * (this.sliceIndex + 1));
   }
 
+  editArticle(id: number) {
+    alert(id);
+  }
+
 }
