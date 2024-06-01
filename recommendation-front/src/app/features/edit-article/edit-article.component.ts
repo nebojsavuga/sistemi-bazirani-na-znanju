@@ -22,6 +22,7 @@ export class EditArticleComponent implements OnInit {
   errorValue: string = '';
   @ViewChild('articleImage', { static: false }) articleImage: ElementRef;
   @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
+  fieldsNotToTransform = ['articleGenderType', 'ballType', 'barbellWeight', 'barbelType', 'dumbellWeight', 'elasticBandWeight', 'typeOfFootballGear', 'numberOfCramponsFootballShoeCrampons', 'numberOfCramponsGrassFootballShoe', 'typeOfOrientiringGear', 'racketWeight', 'racketType', 'racketSpanning', 'sweatpantsType', 'typeOfTenisGear', 'tenisShoeSole', 'weightliftingWeight', 'weightliftingTypeOfGear', 'weightliftingGloveSize', 'racketSize'];
 
   constructor(private articleService: ArticleService, private route: ActivatedRoute,
     private authService: AuthenticationService,
