@@ -21,6 +21,8 @@ export class ArticleDisplayComponent implements OnInit {
   totalSimilarArticles: RecommendedArticle[] = [];
   sliceIndex = 0;
   disableShowMore = false;
+  isLoggedIn = false;
+
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
     private recomendationService: RecomendationService,
@@ -32,6 +34,11 @@ export class ArticleDisplayComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.id = params['id'];
     });
+    this.authService.userStateLoggedIn$.subscribe(
+      res => {
+        this.isLoggedIn = res;
+      }
+    );
     this.getAllItems(this.id);
 
   }
@@ -109,7 +116,7 @@ export class ArticleDisplayComponent implements OnInit {
           this.snackbar.showSnackBar(`Uspešno ste dodali ${this.article.name} u listu omiljenih artikala`, 'Ok');
         },
         error: response => {
-          if(response.status === 200){
+          if (response.status === 200) {
             this.snackbar.showSnackBar(`Uspešno ste dodali ${this.article.name} u listu omiljenih artikala`, 'Ok');
             return;
           }
@@ -119,11 +126,9 @@ export class ArticleDisplayComponent implements OnInit {
     );
   }
 
-  isLoggedIn(): boolean {
-    return this.authService.isLoggedIn();
-  }
 
-  ratedArticle($event: any){
+
+  ratedArticle($event: any) {
     this.getAllItems(this.id);
   }
 } 

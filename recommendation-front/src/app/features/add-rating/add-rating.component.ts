@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ArticleService } from '../../core/services/article.service';
+import { SnackbarService } from '../../core/services/snackbar.service';
 
 @Component({
   selector: 'app-add-rating',
@@ -19,7 +20,9 @@ export class AddRatingComponent {
   }
 
 
-  constructor(private articleService: ArticleService) { }
+  constructor(private articleService: ArticleService,
+    private snackbar: SnackbarService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -29,12 +32,30 @@ export class AddRatingComponent {
       {
         next:(_) =>{
           this.rated.emit(true);
+          this.snackbar.showSnackBar('Uspešno ste ocenili artikal.', 'Ok');
         },
         error:(err) =>{
-
+            this.snackbar.showSnackBar('Došlo je do greške.', 'Ok');
         }
       }
     )
   }
-
+  handleMouseEnter(rating: number): void {
+    this.updateStarRatings(rating);
+  }
+  updateStarRatings(rating: number): void {
+    for (let i = 1; i <= 5; i++) {
+      const star = document.getElementById(`rating${i}${i}`);
+      if (star) {
+        if (i <= rating) {
+          star.classList.add('checked');
+        } else {
+          star.classList.remove('checked');
+        }
+      }
+    }
+  }
+  handleMouseExit(): void {
+    this.updateStarRatings(0);
+  }
 }

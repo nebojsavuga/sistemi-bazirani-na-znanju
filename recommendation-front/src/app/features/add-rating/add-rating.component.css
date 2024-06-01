@@ -3,4 +3,5 @@
 }
 .fa-star:hover{
     cursor: pointer;
+    color: orange;
 }
