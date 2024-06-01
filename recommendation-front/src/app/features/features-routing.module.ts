@@ -26,7 +26,7 @@ const routes: Routes = [
     path: 'article-management', component: AdminArticlesComponent
   },
   {
-    path: 'edit-article/:id', component: EditArticleComponent
+    path: 'edit-article', component: EditArticleComponent
   },
   {
     path: 'templates', component: TemplatesComponent

@@ -45,7 +45,7 @@ export class AdminArticlesComponent implements OnInit {
   }
 
   editArticle(id: number) {
-    this.router.navigate(['edit-article', id]);
+    this.router.navigate(['edit-article'], { queryParams: { id: id } });
   }
   add() {
     this.router.navigate(['edit-article']);
