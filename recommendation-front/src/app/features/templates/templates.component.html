@@ -46,16 +46,24 @@
                     <input type="number" class="form-control" [(ngModel)]="field.price" placeholder="Unesite cenu"
                         min="0" max="5000">
                 </div>
+                <div class="col-12 mt-2" *ngIf="selectedSport === 'Fudbal' && field.brand && field.price">
+                    <p>Ako je sport <b>Fudbal</b> i brend <b>{{field.brand}}</b> preporuči dresove tog brenda sa cenom manjom ili
+                        jednakom od <b>{{field.price | number : '1.1-2'}} eur </b></p>
+                </div>
+                <div class="col-12 mt-2" *ngIf="selectedSport === 'Tenis' && field.brand && field.price">
+                    <p>Ako je sport <b>Tenis</b> i brend <b>{{field.brand}}</b> preporuči znojnice tog brenda sa cenom manjom ili
+                        jednakom od <b>{{field.price | number : '1.1-2'}} eur </b></p>
+                </div>
                 <div class="col-12 mt-2">
                     <button type="button" class="button-style" (click)="removeField(i)">Ukloni pravilo</button>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
 <div *ngIf="this.fields.length > 0" class="row mx-4 my-3" style="margin-left: 0px; margin-right:0px; padding: 0px;">
-<div class="col-12">
-    <button type="button" class="button-style" (click)="saveRule()">Sačuvaj template</button>
-</div>
+    <div class="col-12">
+        <button type="button" class="button-style" (click)="saveRule()">Sačuvaj template</button>
+    </div>
 </div>
