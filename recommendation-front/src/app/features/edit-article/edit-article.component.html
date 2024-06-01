@@ -1,1 +1,69 @@
-<p>edit-article works!</p>
+<section class="register-section">
+    <form register [formGroup]="articleForm" (ngSubmit)="onSubmit()">
+        <div class="register-container">
+            <div class="row">
+                <div class="col-md-4 col-12 center dark-blue-background p-5">
+                    <div class="row text-center">
+                        <div class="col center reesen-big-lead-text join-us mb-3">
+                            {{this.id ? 'Ažuriraj' : 'Kreiraj'}} artikal
+                        </div>
+                        <div class="col center">
+                            <img src="../../../assets/sport.png" alt="Certificate" class="logo-image">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8 col-12">
+                    <h1 class="reg-lbl">{{this.id ? 'Ažuriraj' : 'Kreiraj'}}</h1>
+                    <div class="alert alert-danger" role="alert" *ngIf="hasError">
+                        {{errorValue}}
+                    </div>
+                    <div class="alert alert-success" role="alert" *ngIf="!hasError && successfullyRegistered">
+                        {{successMessage}}
+                    </div>
+                    <div class="row">
+                        <div class="mb-2 space col d-flex flex-column align-items-center">
+
+                            <div id="profileImage" class="image-around">
+                                <img *ngIf="imageBase64" class="image-input" [src]="imageBase64" alt="Profile Image">
+                            </div>
+                            <input type="file" #fileInput id="fileInput" style="display: none" accept="image/*"
+                                (change)="onFileChange($event)">
+                            <button type="button" class="button-style" (click)="fileInput.click()">Izaberi
+                                sliku</button>
+                            <div *ngIf="hasError" class="red-dot">
+                                {{ errorValue }}
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col">
+                            <div class="mb-3 space">
+                                <label for="firstName" class="label-reg">First Name</label>
+                                <input type="text" formControlName="name" class="form-control" id="firstName"
+                                    placeholder="Marko">
+
+                            </div>
+                          
+
+                        </div>
+
+                        <div class="col">
+                            
+                        </div>
+
+
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="button-style">Registracija</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
