@@ -25,7 +25,7 @@
             <h4 class="price" *ngIf="article.articleGenderType == 'Female'">Pol: Žensko</h4>
             <h4 class="price" *ngIf="article.articleGenderType == 'Unisex'">Pol: Unisex</h4>
             <div class="col-12 my-3 text-center">
-                <app-rating-display [ratings]="ratings"></app-rating-display>
+                <app-rating-display [id]="id"></app-rating-display>
             </div>
             <div class="row mt-2" *ngIf="isLoggedIn()">
                 <div class="col-lg-6 col-12 mt-1">

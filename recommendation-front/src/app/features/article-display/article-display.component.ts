@@ -33,11 +33,7 @@ export class ArticleDisplayComponent implements OnInit {
       this.id = params['id'];
     });
     this.getAllItems(this.id);
-    this.articleService.getRatings(this.id).subscribe(
-      res =>{
-        this.ratings = res;
-      }
-    );
+
   }
 
   private getAllItems(id: number) {
@@ -78,10 +74,12 @@ export class ArticleDisplayComponent implements OnInit {
 
   changeArticle(id: number) {
     this.sliceIndex = 0;
+
     setTimeout(() => {
       window.scrollTo({ top: 10, behavior: 'smooth' });
     }, 0);
     this.getAllItems(id);
+    this.id = id;
     this.disableShowMore = false;
 
   }
