@@ -11,6 +11,7 @@ import { TokenDecoderService } from '../../core/services/token-decoder.service';
 export class NavbarComponent implements OnInit {
 
   isLoggedIn: boolean = false;
+  role: string = '';
 
   constructor(private authenticationService: AuthenticationService, private router: Router, protected decodeService: TokenDecoderService) {
 
@@ -21,11 +22,16 @@ export class NavbarComponent implements OnInit {
       if (!this.isLoggedIn) {
         this.router.navigate(['']);
       }
-    })
+    });
+    this.getRole();
   }
 
   logout(): void {
     localStorage.clear();
     this.authenticationService.logoutUser();
+  }
+
+  getRole(){
+    this.role = localStorage.getItem('role');
   }
 }

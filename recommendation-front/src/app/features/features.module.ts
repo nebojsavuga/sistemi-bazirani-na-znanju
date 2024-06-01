@@ -12,6 +12,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { CamelCasePipe } from './pipes/camel-case.pipe';
 import { ArticlesTypeDisplayComponent } from './articles-type-display/articles-type-display.component';
 import { FavoriteDisplayComponent } from './favorite-display/favorite-display.component';
+import { AdminArticlesComponent } from './admin-articles/admin-articles.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { FavoriteDisplayComponent } from './favorite-display/favorite-display.co
     StoreHomeComponent,
     CamelCasePipe,
     ArticlesTypeDisplayComponent,
-    FavoriteDisplayComponent
+    FavoriteDisplayComponent,
+    AdminArticlesComponent
   ],
   imports: [
     CommonModule,

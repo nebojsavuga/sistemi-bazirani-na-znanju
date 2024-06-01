@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,6 +49,21 @@ public class ArticleController {
                 .getArticlesByType(type), HttpStatus.OK);
     }
 
+    @GetMapping()
+    public ResponseEntity<?> GetAllArticles(@RequestHeader("Authorization") String token) {
+        String role = "";
+        if (token != null && !token.isEmpty()) {
+            String jwtt = token.substring(7);
+            role = jwt.getRole(jwtt);
+            if (!role.toLowerCase().contains("admin")) {
+                return new ResponseEntity<>("Nemate pravo za upravljanje artiklima.", HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<>("Nemate pravo za upravljanje artiklima.", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(this.articleService.getAll(), HttpStatus.OK);
+    }
+
     @PermitAll
     @PostMapping("buy/{id}")
     public ResponseEntity<ArticleDTO> buyArticle(@PathVariable Long id,
@@ -80,11 +96,27 @@ public class ArticleController {
         if (token != null && !token.isEmpty()) {
             String jwtt = token.substring(7);
             String role = jwt.getRole(jwtt);
-            if(!role.toLowerCase().contains("admin")){
+            if (!role.toLowerCase().contains("admin")) {
                 return new ResponseEntity<>("Nemate pravo za kreiranje artikala.", HttpStatus.BAD_REQUEST);
             }
         }
         this.articleService.addArticle(articleDTO);
         return new ResponseEntity<>(articleDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<?> deleteArticle(@PathVariable Long id,
+            @RequestHeader("Authorization") String token) {
+        String role = "";
+        if (token != null && !token.isEmpty()) {
+            String jwtt = token.substring(7);
+            role = jwt.getRole(jwtt);
+            if (!role.toLowerCase().contains("admin")) {
+                return new ResponseEntity<>("Nemate pravo za upravljanje artiklima.", HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            return new ResponseEntity<>("Nemate pravo za upravljanje artiklima.", HttpStatus.BAD_REQUEST);
+        }
+        return new ResponseEntity<>(this.articleService.deleteArticle(id), HttpStatus.OK);
     }
 }

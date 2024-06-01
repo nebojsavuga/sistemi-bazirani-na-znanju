@@ -1,5 +1,6 @@
 package com.ftn.sbnz.service.services;
 
+import java.util.List;
 import java.util.Set;
 
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
@@ -12,4 +13,6 @@ public interface IArticleService {
     ArticleDTO buyArticle(Long id, Long userId, Long codeId);
     void rateArticle(RateArticleDTO articleDTO, Long userId);
     FullArticle addArticle(FullArticle article);
+    List<ArticleDTO> getAll();
+    boolean deleteArticle(Long id);
 }

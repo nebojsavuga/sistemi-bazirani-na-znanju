@@ -338,7 +338,7 @@ public class ArticleService implements IArticleService {
         art.setName(article.getName());
         art.setGender(ArticleGenderType.valueOf(article.getArticleGenderType()));
         art.setPrice(article.getPrice());
-
+        
         art = articleRepository.save(art);
         article.setId(art.getId());
         String image = article.getImage();
@@ -373,6 +373,30 @@ public class ArticleService implements IArticleService {
             throw new BadRequestException(e.getLocalizedMessage());
         }
         return article;
+    }
+
+    @Override
+    public List<ArticleDTO> getAll() {
+        List<Article> articles = this.articleRepository.findAll();
+        return articles.stream()
+                .map(article -> new ArticleDTO(
+                        article.getId(),
+                        article.getName(),
+                        article.getPrice(),
+                        article.getBrandName(),
+                        article.getClassName(),
+                        article.getPathToImage()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean deleteArticle(Long id) {
+        Optional<Article> article = articleRepository.findById(id);
+        if (article.isEmpty()) {
+            throw new NotFoundException("Article with that id does not exist.");
+        }
+        this.articleRepository.delete(article.get());
+        return true;
     }
 
 }
