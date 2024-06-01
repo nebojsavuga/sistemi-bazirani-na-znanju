@@ -6,5 +6,9 @@ import { Component } from '@angular/core';
   styleUrl: './templates.component.css'
 })
 export class TemplatesComponent {
+  sports: string[] = ['Fudbal', 'Tenis'];
+  selectedSport: string = '0';
 
+  onSportChange(event: any){
+  }
 }
