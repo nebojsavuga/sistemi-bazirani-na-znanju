@@ -26,4 +26,8 @@ export class ArticleService {
   addToFavorite(id: number): Observable<string> {
     return this.http.put<string>(environment.apiHost + 'users/favorite-article/' + String(id), {});
   }
+
+  getFavorites(): Observable<RecommendedArticle[]> {
+    return this.http.get<RecommendedArticle[]>(environment.apiHost + 'users/favorite-articles');
+  }
 }

@@ -113,7 +113,8 @@ public class UserService implements IUserService {
                     article.getName(),
                     article.getPrice(),
                     article.getBrandName(),
-                    article.getClassName()));
+                    article.getClassName(),
+                    article.getPathToImage()));
         }
         return dtos;
     }
