@@ -230,4 +230,26 @@ public class UserService implements IUserService {
         concreteInjuryRepository.delete(injury.get());
         return injury.get();
     }
+
+    @Override
+    public boolean deleteFavoriteArticle(Long articleId, Long userId) {
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new UnauthorizedException("Not authorized.");
+        }
+        Article favoriteArt = null;
+        for (Article article : user.get().getFavoriteArticles()) {
+            if(article.getId() == articleId){
+                favoriteArt = article;
+                break;
+            }
+        }
+        if (favoriteArt == null) {
+            throw new NotFoundException("Article with that id does not exist.");
+        }
+
+        user.get().removeFavoriteArticle(favoriteArt);
+        userRepository.save(user.get());
+        return true;
+    }
 }

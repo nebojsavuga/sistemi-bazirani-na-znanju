@@ -293,4 +293,7 @@ public class User implements UserDetails {
         this.codes = codes;
     }
 
+    public void removeFavoriteArticle(Article favoriteArticle) {
+        this.favoriteArticles.remove(favoriteArticle);
+    }
 }

@@ -19,17 +19,27 @@ export class FavoriteDisplayComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getFavorites();
+  }
+
+  private getFavorites() {
     this.articleService.getFavorites().subscribe(
       {
-        next: res =>{
+        next: res => {
           this.articles = res;
         },
-        error: err =>{
+        error: err => {
           this.snackBarService.showSnackBar('Došlo je do greške prilikom učitavanja omiljenih artikala.', 'Ok');
         }
       }
-    )
+    );
   }
 
+  deleteArticle(event: any) {
+    if (event) {
+      this.snackBarService.showSnackBar('Uspešno ste obrisali artikal iz liste omiljenih.', 'Ok');
+      this.getFavorites();
+    }
+  }
 
 }

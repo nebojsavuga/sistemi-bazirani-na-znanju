@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RecommendedArticle } from '../../shared/models/articles';
 
 @Component({
@@ -8,4 +8,10 @@ import { RecommendedArticle } from '../../shared/models/articles';
 })
 export class ArticlesComponent {
   @Input() articles: RecommendedArticle[] = [];
+  @Input() isFavorite: boolean | undefined = false;
+  @Output() deleted: EventEmitter<any> = new EventEmitter<boolean>();
+
+  deleteArticle(event: boolean){
+    this.deleted.emit(event);
+  }
 }

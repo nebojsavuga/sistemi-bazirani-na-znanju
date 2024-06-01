@@ -1,1 +1,11 @@
-<app-articles [articles]="articles"></app-articles>
+<div class="row">
+    <div class="col-12 text-center my-3">
+        <h2>Omiljeni artikli</h2>
+    </div>
+    <div class="col-12 text-center" style="width: 90%; margin: 0px auto;" *ngIf="articles.length !== 0">
+        <app-articles [articles]="articles" [isFavorite]="true" (deleted)="deleteArticle($event)"></app-articles>
+    </div>
+    <div class="col-12 text-center my-3" *ngIf="articles.length === 0">
+        <h4>Nemate omiljenih artikala u listi.</h4>
+    </div>
+</div>

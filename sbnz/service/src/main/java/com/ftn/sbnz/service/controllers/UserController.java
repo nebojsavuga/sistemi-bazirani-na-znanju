@@ -75,33 +75,33 @@ public class UserController {
 	}
 
 	@PutMapping("/edit-profile")
-    public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO,
-	 @RequestHeader("Authorization") String token) {
+	public ResponseEntity<String> register(@RequestBody RegisterDTO registerDTO,
+			@RequestHeader("Authorization") String token) {
 		Long userId = null;
 		if (token != null && token != "") {
 			String jwtt = token.substring(7);
 			userId = jwt.getId(jwtt);
 		}
-        User user = userService.edit(registerDTO, userId);
-        return new ResponseEntity<>("Edited profile.", HttpStatus.OK);
-    }
+		User user = userService.edit(registerDTO, userId);
+		return new ResponseEntity<>("Edited profile.", HttpStatus.OK);
+	}
 
 	@PostMapping("/add-injury")
-    public ResponseEntity<String> addInjury(@RequestBody ConcreteInjuryDTO injuryDTO,
-	 @RequestHeader("Authorization") String token) {
+	public ResponseEntity<String> addInjury(@RequestBody ConcreteInjuryDTO injuryDTO,
+			@RequestHeader("Authorization") String token) {
 		Long userId = null;
 		if (token != null && token != "") {
 			String jwtt = token.substring(7);
 			userId = jwt.getId(jwtt);
 		}
-        String injuryText = userService.addInjury(injuryDTO, userId);
-        return new ResponseEntity<>(injuryText, HttpStatus.OK);
-    }
+		String injuryText = userService.addInjury(injuryDTO, userId);
+		return new ResponseEntity<>(injuryText, HttpStatus.OK);
+	}
 
 	@GetMapping("/profile")
 	public ResponseEntity<LoggedUserDTO> getLoggedUserProfile(
 			@RequestHeader("Authorization") String token) {
-				Long userId = null;
+		Long userId = null;
 		if (token != null && token != "") {
 			String jwtt = token.substring(7);
 			userId = jwt.getId(jwtt);
@@ -111,26 +111,38 @@ public class UserController {
 	}
 
 	@GetMapping("/injuries")
-    public ResponseEntity<List<LoggedUserInjuryDTO>> getLoggedUserAll(@RequestHeader("Authorization") String token) {
-        Long userId = null;
+	public ResponseEntity<List<LoggedUserInjuryDTO>> getLoggedUserAll(@RequestHeader("Authorization") String token) {
+		Long userId = null;
 		if (token != null && token != "") {
 			String jwtt = token.substring(7);
 			userId = jwt.getId(jwtt);
 		}
 		List<LoggedUserInjuryDTO> injuries = userService.getLoggedUserInjuries(userId);
-        return new ResponseEntity<>(injuries,
-                HttpStatus.OK);
-    }
+		return new ResponseEntity<>(injuries,
+				HttpStatus.OK);
+	}
 
 	@DeleteMapping("/injury/{id}")
 	public ResponseEntity<String> deleteUserInjury(@PathVariable("id") Long injuryId,
 			@RequestHeader("Authorization") String token) {
-				Long userId = null;
+		Long userId = null;
 		if (token != null && token != "") {
 			String jwtt = token.substring(7);
 			userId = jwt.getId(jwtt);
 		}
 		ConcreteInjury injury = userService.deleteUserInjury(injuryId, userId);
 		return new ResponseEntity<>("Successfully deleted concrete injury", HttpStatus.OK);
+	}
+
+	@DeleteMapping("/favorite-articles/{id}")
+	public ResponseEntity<Boolean> deleteFavoriteArticle(@PathVariable("id") Long articleId,
+			@RequestHeader("Authorization") String token) {
+				Long userId = null;
+		if (token != null && token != "") {
+			String jwtt = token.substring(7);
+			userId = jwt.getId(jwtt);
+		}
+		boolean deleted = userService.deleteFavoriteArticle(articleId, userId);
+		return new ResponseEntity<>(deleted, HttpStatus.OK);
 	}
 }

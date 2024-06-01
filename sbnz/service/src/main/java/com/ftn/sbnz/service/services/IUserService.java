@@ -33,4 +33,6 @@ public interface IUserService {
     List<LoggedUserInjuryDTO> getLoggedUserInjuries(Long userId);
 
     ConcreteInjury deleteUserInjury(Long injuryId, Long userId);
+
+    boolean deleteFavoriteArticle(Long articleId, Long userId);
 }

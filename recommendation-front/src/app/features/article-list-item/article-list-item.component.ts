@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RecommendedArticle } from '../../shared/models/articles';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../core/services/authentication.service';
+import { ArticleService } from '../../core/services/article.service';
 
 @Component({
   selector: 'app-article-list-item',
@@ -10,8 +11,12 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 })
 export class ArticleListItemComponent implements OnInit{
   @Input() article: RecommendedArticle;
-  constructor(private router: Router, private authService: AuthenticationService) { }
+  @Input() isFavorite: boolean | undefined = false;
+  constructor(private router: Router, private authService: AuthenticationService,
+     private articleService: ArticleService
+  ) { }
   @Output() articleId: EventEmitter<any> = new EventEmitter<number>();
+  @Output() deleted: EventEmitter<any> = new EventEmitter<boolean>();
 
   ngOnInit(): void {
     this.authService.getPicture('images/' + this.article.pathToImage).subscribe(result =>{
@@ -22,5 +27,13 @@ export class ArticleListItemComponent implements OnInit{
   showArticle(id: number) {
     this.router.navigate([id + '/article']);
     this.articleId.emit(this.article.id);
+  }
+
+  removeFromFavorites(){
+    this.articleService.deleteFavorite(this.article.id).subscribe(
+      res => {
+          this.deleted.emit(true);
+      }
+    )
   }
 }
