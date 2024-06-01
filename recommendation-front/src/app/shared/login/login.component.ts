@@ -44,6 +44,7 @@ export class LoginComponent {
           localStorage.setItem('userEmail', this.tokenDecoderService.getDecodedAccesToken()['email']);
           this.router.navigate(['']);
           this.authenticationService.userLoggedIn$.next(true);
+          this.authenticationService.role$.next(this.tokenDecoderService.getDecodedAccesToken()['role']);
         }
       },
       error: err => {

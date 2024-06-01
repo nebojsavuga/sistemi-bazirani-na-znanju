@@ -15,16 +15,18 @@ export class AuthenticationService {
 
   userLoggedIn$ = new BehaviorSubject(false);
   userStateLoggedIn$ = this.userLoggedIn$.asObservable();
+  role$ = new BehaviorSubject(null);
+  roleState$ = this.role$.asObservable();
   constructor(private http: HttpClient) {
     this.user$.next(this.isLoggedIn());
     this.userLoggedIn$.next(this.isLoggedIn());
-
+    this.role$.next(localStorage.getItem('role'));
   }
 
   isLoggedIn(): boolean {
     return localStorage.getItem('token') != null;
-
   }
+
   login(email: string, password: string): Observable<Token> {
     return this.http.post<Token>(environment.apiHost + 'auth/login', { email, password });
   }
@@ -32,6 +34,7 @@ export class AuthenticationService {
   logoutUser(): void {
     localStorage.clear();
     this.userLoggedIn$.next(false);
+    this.role$.next(null);
   }
 
   registration(newUser: User): Observable<RegisteredUser> {
@@ -59,6 +62,7 @@ export class AuthenticationService {
       responseType: 'text'
     });
   }
+  
   editPassword(passwordInfo: ChangePasswordDTO): Observable<boolean> {
     return this.http.put<boolean>(environment.apiHost + "users/edit-password", passwordInfo);
   }

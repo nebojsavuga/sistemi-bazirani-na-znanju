@@ -23,15 +23,14 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['']);
       }
     });
-    this.getRole();
+    this.authenticationService.roleState$.subscribe(res => {
+      this.role = res;
+      
+    });
   }
 
   logout(): void {
     localStorage.clear();
     this.authenticationService.logoutUser();
-  }
-
-  getRole(){
-    this.role = localStorage.getItem('role');
   }
 }
