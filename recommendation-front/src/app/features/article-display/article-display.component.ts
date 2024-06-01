@@ -5,6 +5,7 @@ import { ArticleRatingDTO, FullArticle, RecommendedArticle } from '../../shared/
 import { ArticleService } from '../../core/services/article.service';
 import { RecomendationService } from '../../core/services/recomendation.service';
 import { SnackbarService } from '../../core/services/snackbar.service';
+import { UserService } from '../../core/services/user.service';
 
 @Component({
   selector: 'app-article-display',
@@ -26,6 +27,7 @@ export class ArticleDisplayComponent implements OnInit {
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
     private recomendationService: RecomendationService,
+    private userService: UserService,
     private route: ActivatedRoute,
     private snackbar: SnackbarService,
     private router: Router) { }
@@ -69,6 +71,11 @@ export class ArticleDisplayComponent implements OnInit {
         this.ratings = res;
       }
     );
+    this.userService.getCodes().subscribe(
+      res =>{
+        console.log(res);
+      }
+    )
   }
 
   showMore() {

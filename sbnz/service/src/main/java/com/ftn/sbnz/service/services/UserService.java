@@ -6,17 +6,21 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ftn.sbnz.model.Code;
 import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.users.ConcreteInjury;
 import com.ftn.sbnz.model.users.Injury;
 import com.ftn.sbnz.model.users.Role;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.ArticleRatingDTO;
+import com.ftn.sbnz.service.controllers.dtos.CodeDTO;
 import com.ftn.sbnz.service.controllers.dtos.ConcreteInjuryDTO;
 import com.ftn.sbnz.service.controllers.dtos.LoggedUserDTO;
 import com.ftn.sbnz.service.controllers.dtos.LoggedUserInjuryDTO;
@@ -27,6 +31,7 @@ import com.ftn.sbnz.service.exceptions.BadRequestException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.exceptions.UnauthorizedException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
+import com.ftn.sbnz.service.repositories.CodeRepository;
 import com.ftn.sbnz.service.repositories.ConcreteInjuryRepository;
 import com.ftn.sbnz.service.repositories.InjuryRepository;
 import com.ftn.sbnz.service.repositories.UserRepository;
@@ -35,6 +40,7 @@ import com.ftn.sbnz.service.repositories.UserRepository;
 public class UserService implements IUserService {
 
     private UserRepository userRepository;
+    private CodeRepository codeRepository;
     private ArticleRepository articleRepository;
     private InjuryRepository injuryRepository;
     private PasswordEncoder passwordEncoder;
@@ -42,12 +48,13 @@ public class UserService implements IUserService {
 
     @Autowired
     public UserService(UserRepository userRepository, ArticleRepository articleRepository, InjuryRepository injuryRepository,
-            PasswordEncoder passwordEncoder, ConcreteInjuryRepository concreteInjuryRepository) {
+            PasswordEncoder passwordEncoder, ConcreteInjuryRepository concreteInjuryRepository, CodeRepository codeRepository) {
         this.userRepository = userRepository;
         this.articleRepository = articleRepository;
         this.injuryRepository = injuryRepository;
         this.passwordEncoder = passwordEncoder;
         this.concreteInjuryRepository = concreteInjuryRepository;
+        this.codeRepository = codeRepository;
     }
 
     @Override
@@ -251,5 +258,24 @@ public class UserService implements IUserService {
         user.get().removeFavoriteArticle(favoriteArt);
         userRepository.save(user.get());
         return true;
+    }
+
+    @Override
+    public List<CodeDTO> getCodes(Long userId) {
+        List<Code> codes = codeRepository.findByUserIdAndIsUsed(userId, false);
+
+        return codes.stream()
+                .map(code -> new CodeDTO(
+                    code.getId(),
+                    code.getDiscountPercentage(),
+                    code.getDiscountPrice(),
+                    code.isUsed(),
+                    code.getName(),
+                    code.getSport(),
+                    code.getUser().getId(),
+                    code.getFlag(),
+                    code.getExecutionTime()
+                    ))
+                .collect(Collectors.toList());
     }
 }

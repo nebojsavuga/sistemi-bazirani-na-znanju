@@ -6,6 +6,7 @@ import java.util.Set;
 import com.ftn.sbnz.model.users.ConcreteInjury;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.CodeDTO;
 import com.ftn.sbnz.service.controllers.dtos.ConcreteInjuryDTO;
 import com.ftn.sbnz.service.controllers.dtos.LoggedUserDTO;
 import com.ftn.sbnz.service.controllers.dtos.LoggedUserInjuryDTO;
@@ -35,4 +36,6 @@ public interface IUserService {
     ConcreteInjury deleteUserInjury(Long injuryId, Long userId);
 
     boolean deleteFavoriteArticle(Long articleId, Long userId);
+
+    List<CodeDTO> getCodes(Long userId);
 }

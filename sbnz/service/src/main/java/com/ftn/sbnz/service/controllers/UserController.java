@@ -20,6 +20,7 @@ import com.ftn.sbnz.model.users.ConcreteInjury;
 import com.ftn.sbnz.model.users.User;
 import com.ftn.sbnz.service.config.JwtUtils;
 import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.CodeDTO;
 import com.ftn.sbnz.service.controllers.dtos.ConcreteInjuryDTO;
 import com.ftn.sbnz.service.controllers.dtos.LoggedUserDTO;
 import com.ftn.sbnz.service.controllers.dtos.LoggedUserInjuryDTO;
@@ -130,7 +131,7 @@ public class UserController {
 			String jwtt = token.substring(7);
 			userId = jwt.getId(jwtt);
 		}
-		ConcreteInjury injury = userService.deleteUserInjury(injuryId, userId);
+		userService.deleteUserInjury(injuryId, userId);
 		return new ResponseEntity<>("Successfully deleted concrete injury", HttpStatus.OK);
 	}
 
@@ -144,5 +145,17 @@ public class UserController {
 		}
 		boolean deleted = userService.deleteFavoriteArticle(articleId, userId);
 		return new ResponseEntity<>(deleted, HttpStatus.OK);
+	}
+
+	@GetMapping("/codes")
+	public ResponseEntity<List<CodeDTO>> getCodes(@RequestHeader(value = "Authorization", required = true) String token) {
+		Long userId = null;
+		if (token != null && token != "") {
+			String jwtt = token.substring(7);
+			userId = jwt.getId(jwtt);
+		}
+		List<CodeDTO> codes = userService.getCodes(userId);
+		return new ResponseEntity<>(codes,
+				HttpStatus.OK);
 	}
 }
