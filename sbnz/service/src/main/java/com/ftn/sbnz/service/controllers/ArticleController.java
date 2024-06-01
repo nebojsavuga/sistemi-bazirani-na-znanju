@@ -93,7 +93,7 @@ public class ArticleController {
 
     @GetMapping("rate/{id}")
     public ResponseEntity<Set<ArticleRatingDTO>> getRating(@PathVariable Long id,
-            @RequestHeader(value="Authorization", required = false) String token) {
+            @RequestHeader(value = "Authorization", required = false) String token) {
         return new ResponseEntity<>(this.articleService.getRatings(id), HttpStatus.OK);
     }
 
@@ -125,5 +125,17 @@ public class ArticleController {
             return new ResponseEntity<>("Nemate pravo za upravljanje artiklima.", HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(this.articleService.deleteArticle(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/purchases")
+    public ResponseEntity<Set<ArticleDTO>> getPurchases(
+            @RequestHeader(value = "Authorization", required = true) String token) {
+        Long userId = null;
+        if (token != null && token != "") {
+            String jwtt = token.substring(7);
+            userId = jwt.getId(jwtt);
+        }
+        return new ResponseEntity<>(this.articleService
+                .getPurchases(userId), HttpStatus.OK);
     }
 }

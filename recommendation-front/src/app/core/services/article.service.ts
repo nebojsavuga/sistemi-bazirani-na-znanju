@@ -64,4 +64,8 @@ export class ArticleService {
   rateArticle(articleId: number, rating: number): Observable<void> {
     return this.http.post<void>(environment.apiHost + 'articles/rate', { articleId: articleId, rating: rating });
   }
+
+  getPurchases(): Observable<RecommendedArticle[]> {
+    return this.http.get<RecommendedArticle[]>(environment.apiHost + 'articles/purchases');
+  }
 }

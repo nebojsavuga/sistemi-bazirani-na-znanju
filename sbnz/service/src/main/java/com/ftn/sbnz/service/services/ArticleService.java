@@ -414,4 +414,19 @@ public class ArticleService implements IArticleService {
                         rating.getExecutionTime()))
                 .collect(Collectors.toSet());
     }
+
+    @Override
+    public Set<ArticleDTO> getPurchases(Long userId) {
+        Set<Purchase> purchases = purchaseRepository.findByUserId(userId);
+        return purchases.stream()
+                .map(articlePurchase -> new ArticleDTO(
+                        articlePurchase.getArticle().getId(),
+                        articlePurchase.getArticle().getName(),
+                        articlePurchase.getPrice(),
+                        articlePurchase.getArticle().getBrandName(),
+                        articlePurchase.getArticle().getClassName(),
+                        articlePurchase.getArticle().getPathToImage()
+                       ))
+                .collect(Collectors.toSet());
+    }
 }

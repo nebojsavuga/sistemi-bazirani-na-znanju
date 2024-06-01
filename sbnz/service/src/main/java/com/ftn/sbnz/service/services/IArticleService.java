@@ -17,4 +17,5 @@ public interface IArticleService {
     List<ArticleDTO> getAll();
     boolean deleteArticle(Long id);
     Set<ArticleRatingDTO> getRatings(Long id);
+    Set<ArticleDTO> getPurchases(Long userId);
 }
