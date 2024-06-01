@@ -45,9 +45,9 @@ export class AdminArticlesComponent implements OnInit {
   }
 
   editArticle(id: number) {
-    alert(id);
+    this.router.navigate(['edit-article', id]);
   }
-  add(){
-    
+  add() {
+    this.router.navigate(['edit-article']);
   }
 }

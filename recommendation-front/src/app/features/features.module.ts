@@ -13,6 +13,7 @@ import { CamelCasePipe } from './pipes/camel-case.pipe';
 import { ArticlesTypeDisplayComponent } from './articles-type-display/articles-type-display.component';
 import { FavoriteDisplayComponent } from './favorite-display/favorite-display.component';
 import { AdminArticlesComponent } from './admin-articles/admin-articles.component';
+import { EditArticleComponent } from './edit-article/edit-article.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { AdminArticlesComponent } from './admin-articles/admin-articles.componen
     CamelCasePipe,
     ArticlesTypeDisplayComponent,
     FavoriteDisplayComponent,
-    AdminArticlesComponent
+    AdminArticlesComponent,
+    EditArticleComponent
   ],
   imports: [
     CommonModule,

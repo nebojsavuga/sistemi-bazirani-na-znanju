@@ -5,6 +5,7 @@ import { ArticleDisplayComponent } from './article-display/article-display.compo
 import { ArticlesTypeDisplayComponent } from './articles-type-display/articles-type-display.component';
 import { FavoriteDisplayComponent } from './favorite-display/favorite-display.component';
 import { AdminArticlesComponent } from './admin-articles/admin-articles.component';
+import { EditArticleComponent } from './edit-article/edit-article.component';
 
 const routes: Routes = [
   {
@@ -19,9 +20,11 @@ const routes: Routes = [
   {
     path: 'favorite', component: FavoriteDisplayComponent
   },
-  ,
   {
     path: 'article-management', component: AdminArticlesComponent
+  },
+  {
+    path: 'edit-article/:id', component: EditArticleComponent
   }
 ];
 
