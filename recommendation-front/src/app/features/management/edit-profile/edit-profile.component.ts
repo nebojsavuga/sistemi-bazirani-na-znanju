@@ -68,7 +68,6 @@ export class EditProfileComponent implements OnInit{
       error:(err) =>{
         this.errorValue = err.error;
         this.hasError = true;
-        console.log(this.errorValue);
       }
     })
 

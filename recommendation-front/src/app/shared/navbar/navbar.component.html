@@ -1,31 +1,32 @@
-<nav class="navbar navbar-expand-lg navbar-light dark-blue-background" >
-    <a class="nav-logo" href="#">Preporuka sportske opreme</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+<nav class="navbar navbar-expand-lg navbar-light dark-blue-background">
+  <a class="nav-logo" href="#">Preporuka sportske opreme</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
 
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-button" [routerLink]="['login']" *ngIf="!isLoggedIn">Login</a>
-            </li>
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-button" [routerLink]="['login']" *ngIf="!isLoggedIn">Login</a>
+      </li>
 
-            <li class="nav-item active">
-                <a class="nav-button" [routerLink]="['register']" *ngIf="!isLoggedIn">Registracija</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-button" [routerLink]="['manage/profile']" *ngIf="isLoggedIn">Profil</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-button" [routerLink]="['article-management']" *ngIf="isLoggedIn && role==='Admin'">Artikli</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-button" [routerLink]="['favorite']" *ngIf="isLoggedIn">Omiljeni artikli</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-button" id="logout" (click)="logout()" *ngIf="isLoggedIn">Izlogujte se</a>
-            </li>
+      <li class="nav-item active">
+        <a class="nav-button" [routerLink]="['register']" *ngIf="!isLoggedIn">Registracija</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-button" [routerLink]="['manage/profile']" *ngIf="isLoggedIn">Profil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-button" [routerLink]="['article-management']" *ngIf="isLoggedIn && role==='Admin'">Artikli</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-button" [routerLink]="['favorite']" *ngIf="isLoggedIn">Omiljeni artikli</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-button" id="logout" (click)="logout()" *ngIf="isLoggedIn">Izlogujte se</a>
+      </li>
 
-          </ul>
-    </div>
-  </nav>
+    </ul>
+  </div>
+</nav>

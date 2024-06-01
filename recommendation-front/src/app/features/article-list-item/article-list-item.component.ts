@@ -25,7 +25,6 @@ export class ArticleListItemComponent implements OnInit {
       const url = URL.createObjectURL(result);
       (document.getElementById(this.article.id.toString()) as HTMLImageElement).src = url;
     });
-    console.log(this.isAdmin);
   }
 
   showArticle(id: number) {
