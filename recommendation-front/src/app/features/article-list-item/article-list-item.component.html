@@ -11,7 +11,7 @@
     <div class="details" (click)="showArticle(article.id)">
         <h2 class="name">{{ article.name }}</h2>
         <p class="brand">Brend: {{ article.brandName }}</p>
-        <p class="type">Tip: {{ article.articleType | camelCase }}</p>
+        <p class="type">Tip: {{ article.articleType | translate | camelCase }}</p>
         <p class="price">Cena: ${{ article.price }}</p>
     </div>
     <div>
