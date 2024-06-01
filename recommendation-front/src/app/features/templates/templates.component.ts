@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RecomendationService } from '../../core/services/recomendation.service';
+import { SnackbarService } from '../../core/services/snackbar.service';
 
 @Component({
   selector: 'app-templates',
@@ -47,6 +49,9 @@ export class TemplatesComponent {
   selectedPrices: string[] = [];
   fields: { brand: string, price: number }[] = [];
 
+  constructor(private recomendationService: RecomendationService, private snackbar: SnackbarService) {
+  }
+
   onSportChange(event: any) {
     this.fields = [];
   }
@@ -56,5 +61,21 @@ export class TemplatesComponent {
   }
   removeField(index: number) {
     this.fields.splice(index, 1);
+  }
+
+  saveRule() {
+    const transformedData = {
+      brandNames: this.fields.map(item => [item.brand, item.price.toFixed(2).toString()])
+    };
+    this.recomendationService.generateTemplate(transformedData, this.selectedSport).subscribe(
+      {
+        next: _ =>{
+          this.snackbar.showSnackBar('Uspešno ste generisali nova pravila.', 'Ok.');
+        },
+        error: _ =>{
+          this.snackbar.showSnackBar('Došlo je do greške prilikom generisanja pravila.', 'Ok');
+        }
+      }
+    )
   }
 }

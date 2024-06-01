@@ -302,7 +302,7 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_t
 VALUES ('adidas Argentina 22 Home Jersey Women', 80.99, 'Female', 'Nike', 'FootballGear', 'Dres', 'fudbal', '97.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
-VALUES ('PUMA Santiago TG Women Jersey', 55.99, 'Female', 'Nike', 'FootballGear', 'Dres', 'fudbal', '98.jpg');
+VALUES ('Nike Santiago TG Women Jersey', 55.99, 'Female', 'Nike', 'FootballGear', 'Dres', 'fudbal', '98.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport, path_to_image) 
 VALUES ('Wilson Rg Dampeners vibrastop', 2.99, 'Unisex', 'Wilson', 'Vibrastop', 'TenisGear', 'tenis', '99.jpg');

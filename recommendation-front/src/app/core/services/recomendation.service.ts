@@ -76,4 +76,12 @@ export class RecomendationService {
     }
     return this.http.put<RecommendedArticle[]>(environment.apiHost + 'recommendation', filters);
   }
+
+  generateTemplate(brandNames: any, sport: string): Observable<void>{
+    let path = 'tenis-template';
+    if(sport.toLocaleLowerCase()==='fudbal'){
+      path = 'football-template';
+    }
+    return this.http.put<void>(environment.apiHost + `recommendation/${path}`, brandNames);
+  }
 }
