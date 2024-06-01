@@ -1,8 +1,8 @@
 <section class="main-section text-center" *ngIf="article">
     <div class="row my-5" style="text-align: left;">
         <div class="col-md-4 col-12">
-            <span *ngFor="let bw of backwardTypes; index as i"><a (click)="onBackwardClick(bw);"
-                    class="link-style">{{bw | camelCase}}</a> <span *ngIf="i < backwardTypes.length - 1"> -> </span> </span>
+            <span *ngFor="let bw of backwardTypes; index as i"><a (click)="onBackwardClick(bw);" class="link-style">{{bw
+                    | camelCase}}</a> <span *ngIf="i < backwardTypes.length - 1"> -> </span> </span>
         </div>
     </div>
     <div class="row">
@@ -24,7 +24,10 @@
             <h4 class="price" *ngIf="article.articleGenderType == 'Male'">Pol: Musko</h4>
             <h4 class="price" *ngIf="article.articleGenderType == 'Female'">Pol: Žensko</h4>
             <h4 class="price" *ngIf="article.articleGenderType == 'Unisex'">Pol: Unisex</h4>
-            <div class="row mt-5" *ngIf="isLoggedIn()">
+            <div class="col-12 my-3 text-center">
+                <app-rating-display [ratings]="ratings"></app-rating-display>
+            </div>
+            <div class="row mt-2" *ngIf="isLoggedIn()">
                 <div class="col-lg-6 col-12 mt-1">
                     <button type="button" class="button-style" style="min-width: 150px;" (click)="buy()">Kupi</button>
                 </div>
@@ -70,7 +73,8 @@
             <app-article-list-item [article]="sim" (articleId)="changeArticle($event)"></app-article-list-item>
         </div>
         <div class="col-12">
-            <p><button type="button" class="button-style" (click)="showMore()" [hidden]="disableShowMore">Prikaži više</button></p>
+            <p><button type="button" class="button-style" (click)="showMore()" [hidden]="disableShowMore">Prikaži
+                    više</button></p>
 
         </div>
     </div>

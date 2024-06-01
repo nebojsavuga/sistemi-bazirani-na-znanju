@@ -35,7 +35,7 @@ export class ArticleDisplayComponent implements OnInit {
     this.getAllItems(this.id);
     this.articleService.getRatings(this.id).subscribe(
       res =>{
-        this.ratings = this.ratings;
+        this.ratings = res;
       }
     );
   }
