@@ -11,40 +11,42 @@ export class TemplatesComponent {
   sports: string[] = ['Fudbal', 'Tenis'];
   selectedSport: string = '0';
   brands: string[] = [
-    "Wilson",
-    "Icebug",
-    "Silva",
-    "Balega",
-    "Vapro",
-    "Trimtex",
-    "Suunto",
-    "SportIdent",
-    "Nike",
+    "Adidas",
     "Babolat",
-    "Luxilon",
-    "Joga",
-    "Picador",
-    "INOV8",
-    "Head",
-    "Puma",
-    "Cyberfit",
-    "Pulse fitness",
-    "Fitness power",
-    "Decathlon",
-    "Sveltus",
-    "Y&Y",
+    "Balega",
     "Black diamond",
-    "Power system",
+    "BOOMFIT",
+    "Cyberfit",
+    "Decathlon",
     "erima",
     "Erima",
-    "GYMSTICK",
-    "SBD",
+    "Fitness power",
     "Gorilla",
-    "Power Gym",
-    "BOOMFIT",
+    "GYMSTICK",
+    "Head",
+    "Icebug",
+    "INOV8",
+    "Joga",
+    "Luxilon",
     "Mirafit",
-    "Strength"
+    "Nike",
+    "Picador",
+    "Power Gym",
+    "Power system",
+    "Pulse fitness",
+    "Puma",
+    "Silva",
+    "SBD",
+    "SportIdent",
+    "Strength",
+    "Suunto",
+    "Sveltus",
+    "Trimtex",
+    "Vapro",
+    "Wilson",
+    "Y&Y"
   ];
+
   selectedBrands: string[] = [];
   selectedPrices: string[] = [];
   fields: { brand: string, price: number }[] = [];
@@ -69,10 +71,10 @@ export class TemplatesComponent {
     };
     this.recomendationService.generateTemplate(transformedData, this.selectedSport).subscribe(
       {
-        next: _ =>{
+        next: _ => {
           this.snackbar.showSnackBar('Uspešno ste generisali nova pravila.', 'Ok.');
         },
-        error: _ =>{
+        error: _ => {
           this.snackbar.showSnackBar('Došlo je do greške prilikom generisanja pravila.', 'Ok');
         }
       }

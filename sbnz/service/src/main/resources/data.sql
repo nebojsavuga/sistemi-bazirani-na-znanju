@@ -299,7 +299,7 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_t
 VALUES ('Nike Women Soccer Norway Home Jersey', 80.99, 'Female', 'Nike', 'FootballGear', 'Dres', 'fudbal', '96.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
-VALUES ('adidas Argentina 22 Home Jersey Women', 80.99, 'Female', 'Nike', 'FootballGear', 'Dres', 'fudbal', '97.jpg');
+VALUES ('adidas Argentina 22 Home Jersey Women', 80.99, 'Female', 'Adidas', 'FootballGear', 'Dres', 'fudbal', '97.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
 VALUES ('Nike Santiago TG Women Jersey', 55.99, 'Female', 'Nike', 'FootballGear', 'Dres', 'fudbal', '98.jpg');
