@@ -15,12 +15,12 @@ export class ArticleDisplayComponent implements OnInit {
 
   id: number;
   article: FullArticle = null;
+  ratings: ArticleRatingDTO[] = [];
   backwardTypes: string[] = []
   similarArticles: RecommendedArticle[] = [];
   totalSimilarArticles: RecommendedArticle[] = [];
   sliceIndex = 0;
   disableShowMore = false;
-  ratings: ArticleRatingDTO[] = [];
   constructor(private articleService: ArticleService,
     private authService: AuthenticationService,
     private recomendationService: RecomendationService,
@@ -57,6 +57,11 @@ export class ArticleDisplayComponent implements OnInit {
         this.totalSimilarArticles = this.similarArticles.slice(0, 4 * (this.sliceIndex + 1));
       }
     );
+    this.articleService.getRatings(id).subscribe(
+      res => {
+        this.ratings = res;
+      }
+    );
   }
 
   showMore() {
@@ -78,8 +83,8 @@ export class ArticleDisplayComponent implements OnInit {
     setTimeout(() => {
       window.scrollTo({ top: 10, behavior: 'smooth' });
     }, 0);
-    this.getAllItems(id);
     this.id = id;
+    this.getAllItems(id);
     this.disableShowMore = false;
 
   }
@@ -118,4 +123,7 @@ export class ArticleDisplayComponent implements OnInit {
     return this.authService.isLoggedIn();
   }
 
+  ratedArticle($event: any){
+    this.getAllItems(this.id);
+  }
 } 

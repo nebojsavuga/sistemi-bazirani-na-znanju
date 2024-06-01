@@ -43,4 +43,8 @@ export class ArticleService {
   getRatings(id: number): Observable<ArticleRatingDTO[]> {
     return this.http.get<ArticleRatingDTO[]>(environment.apiHost + 'articles/rate/' + String(id));
   }
+
+  rateArticle(articleId: number, rating: number): Observable<void> {
+    return this.http.post<void>(environment.apiHost + 'articles/rate', {articleId: articleId, rating: rating});
+  }
 }

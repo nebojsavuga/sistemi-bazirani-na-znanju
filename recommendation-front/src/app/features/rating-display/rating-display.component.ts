@@ -12,29 +12,31 @@ export class RatingDisplayComponent implements OnInit {
   _id: number;
   @Input() set id(value: number) {
     this._id = value;
-    this.articleService.getRatings(this.id).subscribe(
-      res => {
-        this.ratings = res;
-        this.setRatings();
-      }
-    );
+    
   }
 
   get id() {
     return this._id;
   }
+  _ratings: ArticleRatingDTO[] = [];
 
-  ratings: ArticleRatingDTO[] = [];
+  @Input() set ratings(value: ArticleRatingDTO[]){
+    this._ratings = value;
+    this.setRatings();
+  }
   averageRating: number = 0;
 
-  constructor(private articleService: ArticleService) { }
+  constructor(private articleService: ArticleService) {
+
+   }
 
   ngOnInit(): void {
+    this.setRatings();
   }
 
   private setRatings() {
     this.averageRating = 0;
-    const ratingValues: number[] = this.ratings.map(x => x.rating);
+    const ratingValues: number[] = this._ratings.map(x => x.rating);
     let total = 0;
     ratingValues.forEach(element => {
       total += element;
@@ -44,7 +46,6 @@ export class RatingDisplayComponent implements OnInit {
     }
     const roundedRating = Math.round(this.averageRating);
     this.updateStarRatings(roundedRating);
-
   }
 
   updateStarRatings(rating: number): void {
@@ -59,5 +60,4 @@ export class RatingDisplayComponent implements OnInit {
       }
     }
   }
-
 }

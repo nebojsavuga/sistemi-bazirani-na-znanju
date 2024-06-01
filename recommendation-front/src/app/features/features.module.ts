@@ -15,6 +15,7 @@ import { FavoriteDisplayComponent } from './favorite-display/favorite-display.co
 import { AdminArticlesComponent } from './admin-articles/admin-articles.component';
 import { EditArticleComponent } from './edit-article/edit-article.component';
 import { RatingDisplayComponent } from './rating-display/rating-display.component';
+import { AddRatingComponent } from './add-rating/add-rating.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { RatingDisplayComponent } from './rating-display/rating-display.componen
     FavoriteDisplayComponent,
     AdminArticlesComponent,
     EditArticleComponent,
-    RatingDisplayComponent
+    RatingDisplayComponent,
+    AddRatingComponent
   ],
   imports: [
     CommonModule,
