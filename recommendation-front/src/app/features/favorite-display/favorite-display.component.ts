@@ -14,7 +14,6 @@ export class FavoriteDisplayComponent implements OnInit {
   articles: RecommendedArticle[] = [];
 
   constructor(private articleService: ArticleService,
-    private userService: UserService,
     private snackBarService: SnackbarService
   ) { }
 

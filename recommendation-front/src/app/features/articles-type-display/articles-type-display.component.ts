@@ -11,11 +11,12 @@ import { RecommendedArticle } from '../../shared/models/articles';
 export class ArticlesTypeDisplayComponent implements OnInit {
 
   value: string = '';
-  disableShowMore = false;
   constructor(private articleService: ArticleService, private route: ActivatedRoute) { }
   articles: RecommendedArticle[] = [];
   totalArticles: RecommendedArticle[] = [];
+  disableShowMore = false;
   sliceIndex = 0;
+  
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.value = params['type'];

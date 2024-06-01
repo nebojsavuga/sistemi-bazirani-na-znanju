@@ -34,4 +34,9 @@ export class ArticleService {
   deleteFavorite(id: number): Observable<boolean> {
     return this.http.delete<boolean>(environment.apiHost + 'users/favorite-articles/' + String(id));
   }
+
+
+  getAll(): Observable<RecommendedArticle[]> {
+    return this.http.get<RecommendedArticle[]>(environment.apiHost + 'articles');
+  }
 }
