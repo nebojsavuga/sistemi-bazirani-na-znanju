@@ -1,7 +1,8 @@
 <div class="article-card dark-border px-3 pt-2">
-    <div class="row" *ngIf="isFavorite">
+    <div class="row" *ngIf="isFavorite || isAdmin">
         <div class="col d-flex justify-content-end">
-            <i class="bi bi-x close-icon" style="font-size: 20px;" (click)="removeFromFavorites()"></i>
+            <i *ngIf="isFavorite" class="bi bi-x close-icon" style="font-size: 20px;" (click)="removeFromFavorites()"></i>
+            <i *ngIf="isAdmin" class="bi bi-pen edit-icon"></i>
         </div>
     </div>
     <div class="image-container" (click)="showArticle(article.id)">

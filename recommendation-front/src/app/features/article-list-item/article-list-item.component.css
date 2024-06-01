@@ -40,13 +40,23 @@
   font-size: 14px;
 }
 
-.close-icon{
+.close-icon {
   cursor: pointer;
   color: rgb(69, 10, 10)
 }
-.close-icon:hover{
+
+.close-icon:hover {
   color: red;
 }
+
 .mt-auto {
   margin-top: auto;
+}
+
+.edit-icon {
+  color: rgb(165, 165, 165);
+}
+
+.edit-icon:hover {
+  color: black;
 }

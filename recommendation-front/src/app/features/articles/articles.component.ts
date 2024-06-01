@@ -9,6 +9,7 @@ import { RecommendedArticle } from '../../shared/models/articles';
 export class ArticlesComponent {
   @Input() articles: RecommendedArticle[] = [];
   @Input() isFavorite: boolean | undefined = false;
+  @Input() isAdmin: boolean | undefined = false;
   @Output() deleted: EventEmitter<any> = new EventEmitter<boolean>();
 
   deleteArticle(event: boolean){

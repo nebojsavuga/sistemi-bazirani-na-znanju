@@ -1,6 +1,6 @@
 <div class="row text-center">
-    <div class="col-12">
-        <h1>Artikli</h1>
+    <div class="col-12 my-3">
+        <h2>Artikli</h2>
     </div>
     <div class="col-lg-4 col-md-6 col-12">
         <p>Ukupno artikala za prikaz: {{articles.length}}</p>
@@ -8,7 +8,7 @@
 </div>
 
 <div class="col-12 text-center" style="width: 90%; margin: 0px auto;">
-    <app-articles [articles]="totalArticles" [isFavorite]="false"></app-articles>
+    <app-articles [articles]="totalArticles" [isFavorite]="false" [isAdmin]="true"></app-articles>
 </div>
 <div class="row text-center my-3">
     <div class="col-12">
