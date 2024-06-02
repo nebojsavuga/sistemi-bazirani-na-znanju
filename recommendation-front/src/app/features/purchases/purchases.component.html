@@ -12,7 +12,7 @@
     <div class="col-12 text-center my-3" *ngIf="articles.length === 0">
         <h4>Nemate kupljenih artikalla.</h4>
     </div>
-    <div class="col-12 mt-5 text-center">
+    <div class="col-12 mt-5 text-center" *ngIf="articles.length !== 0">
         <p><button type="button" class="button-style" (click)="showMore()" [hidden]="disableShowMore">Prikaži
                 više</button></p>
 
