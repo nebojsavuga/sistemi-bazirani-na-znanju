@@ -369,7 +369,6 @@ public class ArticleService implements IArticleService {
             File imageFile = new File(directoryPath + "/" + article.getId() + "." + fileType);
             art.setPathToImage(article.getId() + "." + fileType);
             articleRepository.save(art);
-            // Save the image to the file system
             try (FileOutputStream fos = new FileOutputStream(imageFile)) {
                 fos.write(imageBytes);
             }

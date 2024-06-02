@@ -54,7 +54,6 @@ when
     count($rating)
 )
 then
-    System.out.println($article);
     recommendations.remove($article);
 end
 
