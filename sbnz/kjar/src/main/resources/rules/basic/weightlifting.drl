@@ -117,7 +117,7 @@ end
 rule "Bavi se dizanjem tegova i weightlifter ili powerlifter je, ponudi mu krede kao artikle"
 salience 100
 when
-    $filters: Filters(sport == Sport.DizanjeTegova, typeOfWeightlifting != SportWeightliftingType.Bodybuilding)
+    $filters: Filters(sport == Sport.DizanjeTegova, (typeOfWeightlifting == SportWeightliftingType.Weightlifting || typeOfWeightlifting == SportWeightliftingType.Powerlifting ))
     $article: Article()
     WeightliftingGear(type == WlTypeOfGear.Chalk) from $article
 then
