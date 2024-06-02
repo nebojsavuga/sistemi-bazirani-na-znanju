@@ -65,6 +65,11 @@ export class ArticleDisplayComponent implements OnInit {
     this.recomendationService.getParents(id).subscribe(
       res => {
         this.backwardTypes = res.reverse();
+        if(this.backwardTypes[1] === 'Article'){
+          const back = this.backwardTypes[1];
+          this.backwardTypes[1] = this.backwardTypes[0];
+          this.backwardTypes[0] = back;
+        }
       }
     );
     this.recomendationService.getSimilar(id).subscribe(
