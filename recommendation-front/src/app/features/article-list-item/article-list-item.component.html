@@ -13,7 +13,7 @@
         <p class="type">Tip: {{ article.articleType | translate | camelCase }}</p>
         <p class="price">Cena: ${{ article.price | number: '1.1-2' }}</p>
     </div>
-    <div>
+    <div class="button-container">
         <button type="button" class="button-style" (click)="showArticle(article.id)">Prikaži</button>
     </div>
 </div>

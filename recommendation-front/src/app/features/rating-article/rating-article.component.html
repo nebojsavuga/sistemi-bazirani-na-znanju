@@ -11,7 +11,7 @@
             <p class="price">Prosečna ocena: <b>{{ article.rating | number: '1.1-2' }}</b></p>
             <p class="price">Ukupno ocena: <b>{{ article.totalRatings }}</b></p>
         </div>
-        <div>
+        <div class="button-container">
             <button type="button" class="button-style" (click)="showArticle(article.id)">Prikaži</button>
         </div>
     </div>

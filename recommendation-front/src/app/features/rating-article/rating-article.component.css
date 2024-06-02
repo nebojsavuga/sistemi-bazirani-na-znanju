@@ -1,63 +1,84 @@
 .article-card {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 10px;
-    width: 250px;
-    min-height: 450px;
-  }
-  
-  .article-card :hover {
-    cursor: pointer;
-  }
-  
-  .image-container {
-    height: 150px;
-    overflow: hidden;
-  }
-  
-  .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-  
-  .details {
-    padding: 10px;
-    margin-bottom: auto;
-  }
-  
-  .name {
-    margin: 0;
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 18px;
-  }
-  
-  .brand,
-  .type,
-  .price {
-    margin: 5px 0;
-    font-size: 14px;
-  }
-  
-  .close-icon {
-    cursor: pointer;
-    color: rgb(69, 10, 10)
-  }
-  
-  .close-icon:hover {
-    color: red;
-  }
-  
-  .mt-auto {
-    margin-top: auto;
-  }
-  
-  .edit-icon {
-    color: rgb(165, 165, 165);
-  }
-  
-  .edit-icon:hover {
-    color: black;
-  }
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px;
+  width: 250px;
+  min-height: 400px;
+}
+
+.article-card :hover {
+  cursor: pointer;
+}
+
+.image-container {
+  height: 150px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.details {
+  padding: 10px;
+}
+
+.name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 18px;
+}
+
+.brand,
+.type,
+.price {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.close-icon {
+  cursor: pointer;
+  color: rgb(69, 10, 10)
+}
+
+.close-icon:hover {
+  color: red;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.edit-icon {
+  color: rgb(165, 165, 165);
+}
+
+.edit-icon:hover {
+  color: black;
+}
+.article-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.image-container {
+  flex: 1 1 auto;
+}
+
+.details {
+  flex: 1 1 auto;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-top: auto;
+  margin-bottom: 10px;
+}
