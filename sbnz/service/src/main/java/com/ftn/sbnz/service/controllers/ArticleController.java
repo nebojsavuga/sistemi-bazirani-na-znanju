@@ -138,4 +138,19 @@ public class ArticleController {
         return new ResponseEntity<>(this.articleService
                 .getPurchases(userId), HttpStatus.OK);
     }
+
+    @GetMapping("top-ratings")
+    public ResponseEntity<?> getTopRatedArticles(
+            @RequestHeader(value = "Authorization", required = true) String token) {
+        String role = "";
+        if (token != null && token != "") {
+            String jwtt = token.substring(7);
+            role = jwt.getRole(jwtt);
+            if (!role.toLowerCase().contains("admin")) {
+                return new ResponseEntity<>("Nemate pravo za upravljanje artiklima.", HttpStatus.BAD_REQUEST);
+            }
+        }
+        return new ResponseEntity<>(this.articleService
+                .getTopFiveRatedArticles(), HttpStatus.OK);
+    }
 }

@@ -11,6 +11,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.Base64;
+import java.util.Calendar;
+import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.kie.api.runtime.KieContainer;
@@ -43,6 +45,7 @@ import com.ftn.sbnz.service.controllers.dtos.ArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.ArticleRatingDTO;
 import com.ftn.sbnz.service.controllers.dtos.FullArticle;
 import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.RatedArticleDTO;
 import com.ftn.sbnz.service.exceptions.BadRequestException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
@@ -425,8 +428,37 @@ public class ArticleService implements IArticleService {
                         articlePurchase.getPrice(),
                         articlePurchase.getArticle().getBrandName(),
                         articlePurchase.getArticle().getClassName(),
-                        articlePurchase.getArticle().getPathToImage()
-                       ))
+                        articlePurchase.getArticle().getPathToImage()))
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Set<RatedArticleDTO> getTopFiveRatedArticles() {
+        List<Article> allArticles = articleRepository.findAll();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.YEAR, -1);
+        Date oneYearAgo = calendar.getTime();
+        List<RatedArticleDTO> topRated = new ArrayList<>();
+        for (Article article : allArticles) {
+            Set<Rating> recentRatings = article.getRatings().stream()
+                    .filter(rating -> rating.getExecutionTime().after(oneYearAgo))
+                    .collect(Collectors.toSet());
+            double averageRating = recentRatings.stream()
+                    .mapToDouble(Rating::getRating)
+                    .average()
+                    .orElse(0);
+            topRated.add(new RatedArticleDTO(article.getId(), article.getName(),
+                    article.getPrice(), article.getBrandName(),
+                    article.getClassName(), article.getPathToImage(), averageRating, recentRatings.size()));
+        }
+
+        Set<RatedArticleDTO> topRatedArticles = topRated.stream()
+                .filter(article -> article.getRating() > 0)
+                // Sort articles by average rating in descending order
+                .sorted(Comparator.comparingDouble(RatedArticleDTO::getRating).reversed())
+                .limit(5)
+                .collect(Collectors.toSet());
+        return topRatedArticles;
     }
 }

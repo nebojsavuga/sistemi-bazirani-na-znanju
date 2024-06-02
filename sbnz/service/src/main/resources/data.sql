@@ -232,13 +232,24 @@ VALUES (1, 21, '2022-02-16',false, false, 38.99);
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 
 VALUES (2, 41, '2024-05-18', 2);
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 
-VALUES (2, 42, '2024-05-19', 2);
+VALUES (2, 42, '2024-05-19', 4);
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 
-VALUES (2, 43, '2024-05-17', 2);
+VALUES (2, 43, '2024-05-17', 3);
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 
-VALUES (2, 44, '2024-05-16', 2);
+VALUES (2, 44, '2024-05-16', 5);
 INSERT INTO Rating (user_id, article_id, execution_time, rating) 
 VALUES (2, 45, '2022-05-15', 2);
+
+INSERT INTO Rating (user_id, article_id, execution_time, rating) 
+VALUES (1, 41, '2024-05-18', 4);
+INSERT INTO Rating (user_id, article_id, execution_time, rating) 
+VALUES (1, 42, '2024-05-19', 5);
+INSERT INTO Rating (user_id, article_id, execution_time, rating) 
+VALUES (1, 43, '2024-05-17', 3);
+INSERT INTO Rating (user_id, article_id, execution_time, rating) 
+VALUES (1, 44, '2024-05-16', 5);
+INSERT INTO Rating (user_id, article_id, execution_time, rating) 
+VALUES (1, 45, '2022-05-15', 1);
 
 -- tegovi
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
