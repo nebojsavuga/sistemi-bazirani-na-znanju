@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../../core/services/article.service';
 import { RecommendedArticle, SportSales, TopRatedArticle } from '../../shared/models/articles';
+import Chart from 'chart.js';
+import { CamelCasePipe } from '../pipes/camel-case.pipe';
 
 @Component({
   selector: 'app-reports',
   templateUrl: './reports.component.html',
-  styleUrl: './reports.component.css'
+  styleUrl: './reports.component.css',
 })
 export class ReportsComponent implements OnInit {
-
+  hasLoaded = false;
   topRated: TopRatedArticle[] = [];
   articles: RecommendedArticle[] = [];
   sales: SportSales;
+  public pieChartData: any[];
 
   constructor(private articleService: ArticleService) { }
 
@@ -37,6 +40,13 @@ export class ReportsComponent implements OnInit {
     this.articleService.getSalesPerSport().subscribe(
       res => {
         this.sales = res;
+        this.hasLoaded = true;
+        this.pieChartData = this.sales.sales.map(sale => {
+          return {
+            name: new CamelCasePipe().transform(sale.sport),
+            value: sale.totalSales
+          };
+        });
       }
     );
   }

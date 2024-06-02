@@ -20,7 +20,7 @@ import { TemplatesComponent } from './templates/templates.component';
 import { PurchasesComponent } from './purchases/purchases.component';
 import { ReportsComponent } from './reports/reports.component';
 import { RatingArticleComponent } from './rating-article/rating-article.component';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -46,9 +46,10 @@ import { RatingArticleComponent } from './rating-article/rating-article.componen
     FeaturesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NgxChartsModule
   ],
-  exports:[
+  exports: [
   ]
 })
 export class FeaturesModule { }

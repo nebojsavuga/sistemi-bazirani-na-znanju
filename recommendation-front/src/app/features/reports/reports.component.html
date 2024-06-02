@@ -4,6 +4,14 @@
     </div>
     <div class="col-12">
         <!-- SALES PER SPORT -->
+        <div class="row">
+            <div class="col-12">
+                <h4>Prodaja artikala po sportu</h4>
+            </div>
+        </div>
+        <ngx-charts-pie-chart *ngIf="hasLoaded" [legendTitle]="'Sportovi'" [legend]="true" [view]="[700, 400]" [results]="pieChartData"
+            [labels]="true">
+        </ngx-charts-pie-chart>
     </div>
     <div class="col-12">
         <!-- TOP RATED -->

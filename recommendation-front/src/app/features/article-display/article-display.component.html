@@ -32,7 +32,7 @@
                     <label for="code">Kodovi</label>
                     <select id="code" class="form-control" [(ngModel)]="selectedCodeId" (change)="onCodeChange($event)">
                         <option value="0" selected>Izaberite kod</option>
-                        <option *ngFor="let code of codes" [value]="code.id">{{ code.name }}</option>
+                        <option *ngFor="let code of codes" [value]="code.id">{{ code.name | camelCase }}</option>
                     </select>
 
                 </div>
