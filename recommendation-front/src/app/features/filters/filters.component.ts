@@ -77,15 +77,14 @@ export class FiltersComponent implements OnInit {
         if (!filterFormValue.injuries) {
           return;
         }
-        console.log(filterFormValue.injuries);
-        console.log(this.injuries);
         for (let injuryId of this.injuries.map(x => x.id)) {
           if (filterFormValue.injuries.includes(injuryId)) {
             const checkbox = document.getElementById('injury_' + String(injuryId)) as HTMLInputElement;
             checkbox.checked = true;
-            this.selectedInjuries.push(injuryId)
+            this.selectedInjuries.push(injuryId);
           }
         }
+        this.filterSubmitted();
       }
     });
   }
