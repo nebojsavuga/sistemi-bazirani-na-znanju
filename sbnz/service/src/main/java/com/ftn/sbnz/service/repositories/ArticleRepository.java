@@ -1,5 +1,6 @@
 package com.ftn.sbnz.service.repositories;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import com.ftn.sbnz.model.events.Purchase;
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     Optional<Article> findById(Long id);
 
-    Page<Article> findAll(Pageable pageable);
+    List<Article> findAll();
 
     long count();
 }

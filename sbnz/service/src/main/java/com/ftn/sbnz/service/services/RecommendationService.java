@@ -99,12 +99,7 @@ public class RecommendationService implements IRecommendationService {
             tenisKsession.setGlobal("recommendations", recommendations);
             tenisKsession.insert(filters);
         }
-        long totalArticles = articleRepository.count();
-        int j = 0;
-        for (int i = 0; i < totalArticles; i += 100) {
-            PageRequest pageRequest = PageRequest.of(j, i + 100);
-            Page<Article> allArticles = articleRepository.findAll(pageRequest);
-            j += 1;
+            List<Article> allArticles = articleRepository.findAll();
             for (Article article : allArticles) {
                 kieSession.insert(article);
                 templateKsession.insert(article);
@@ -115,7 +110,6 @@ public class RecommendationService implements IRecommendationService {
                     tenisKsession.insert(article);
                 }
             }
-        }
        
         templateKsession.fireAllRules();
         templateKsession.dispose();
@@ -146,15 +140,13 @@ public class RecommendationService implements IRecommendationService {
         cepKsession.setGlobal("injuries", injuries);
         cepKsession.insert(user);
         cepKsession.insert(filters);
-        j = 0;
-        for (int i = 0; i < totalArticles; i += 100) {
-            PageRequest pageRequest = PageRequest.of(j, i + 100);
-            Page<Article> allArticles = articleRepository.findAll(pageRequest);
-            j += 1;
-            for (Article article : allArticles) {
+       
+            List<Article> allArticles1 = articleRepository.findAll();
+          
+            for (Article article : allArticles1) {
                 cepKsession.insert(article);
             }
-        }
+        
         Set<Purchase> purchases = purchaseRepository.findByUserId(user.get().getId());
         for (Purchase purchase : purchases) {
             cepKsession.insert(purchase);
