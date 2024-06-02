@@ -13,7 +13,6 @@ import { CamelCasePipe } from './pipes/camel-case.pipe';
 import { ArticlesTypeDisplayComponent } from './articles-type-display/articles-type-display.component';
 import { FavoriteDisplayComponent } from './favorite-display/favorite-display.component';
 import { AdminArticlesComponent } from './admin-articles/admin-articles.component';
-import { EditArticleComponent } from './edit-article/edit-article.component';
 import { RatingDisplayComponent } from './rating-display/rating-display.component';
 import { AddRatingComponent } from './add-rating/add-rating.component';
 import { TranslationPipe } from './pipes/translate-pipe.pipe';
@@ -33,7 +32,6 @@ import { PurchasesComponent } from './purchases/purchases.component';
     ArticlesTypeDisplayComponent,
     FavoriteDisplayComponent,
     AdminArticlesComponent,
-    EditArticleComponent,
     RatingDisplayComponent,
     AddRatingComponent,
     TemplatesComponent,

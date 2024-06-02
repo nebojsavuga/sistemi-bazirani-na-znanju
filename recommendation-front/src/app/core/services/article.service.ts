@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ArticleRatingDTO, FullArticle, RecommendedArticle } from '../../shared/models/articles';
+import { ArticleRatingDTO, FullArticle, RecommendedArticle, SportSales, TopRatedArticle } from '../../shared/models/articles';
 import { environment } from '../../../environment/environment';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -29,7 +29,7 @@ export class ArticleService {
   setFilterForm(value: any) {
     this.filterForm.patchValue({ ...value });
   }
-  
+
   getFilterForm() {
     return this.filterForm.value;
   }
@@ -92,5 +92,13 @@ export class ArticleService {
 
   getPurchases(): Observable<RecommendedArticle[]> {
     return this.http.get<RecommendedArticle[]>(environment.apiHost + 'articles/purchases');
+  }
+
+  getTopRated(): Observable<TopRatedArticle[]> {
+    return this.http.get<TopRatedArticle[]>(environment.apiHost + 'articles/top-ratings');
+  }
+
+  getSalesPerSport(): Observable<SportSales> {
+    return this.http.get<SportSales>(environment.apiHost + 'articles/sport-sales');
   }
 }

@@ -5,7 +5,6 @@ import { ArticleDisplayComponent } from './article-display/article-display.compo
 import { ArticlesTypeDisplayComponent } from './articles-type-display/articles-type-display.component';
 import { FavoriteDisplayComponent } from './favorite-display/favorite-display.component';
 import { AdminArticlesComponent } from './admin-articles/admin-articles.component';
-import { EditArticleComponent } from './edit-article/edit-article.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { PurchasesComponent } from './purchases/purchases.component';
 
@@ -24,9 +23,6 @@ const routes: Routes = [
   },
   {
     path: 'article-management', component: AdminArticlesComponent
-  },
-  {
-    path: 'edit-article', component: EditArticleComponent
   },
   {
     path: 'templates', component: TemplatesComponent

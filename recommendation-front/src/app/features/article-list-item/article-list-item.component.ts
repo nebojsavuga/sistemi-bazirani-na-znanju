@@ -12,7 +12,6 @@ import { ArticleService } from '../../core/services/article.service';
 export class ArticleListItemComponent implements OnInit {
   @Input() article: RecommendedArticle;
   @Input() isFavorite: boolean | undefined = false;
-  @Input() isAdmin: boolean | undefined = false;
   @ViewChild('articleImage') articleImage: ElementRef<HTMLImageElement>;
 
   constructor(private router: Router, private authService: AuthenticationService,
@@ -41,9 +40,5 @@ export class ArticleListItemComponent implements OnInit {
         this.deleted.emit(true);
       }
     )
-  }
-
-  editArticle(){
-    this.edit.emit(this.article.id);
   }
 }

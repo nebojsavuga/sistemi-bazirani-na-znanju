@@ -46,3 +46,24 @@ export interface ArticleRatingDTO {
 export enum ArticleGenderType {
     Male, Female, Unisex
 }
+
+export interface SportSales{
+    sales: SportSale[],
+    totalSales: number
+}
+
+export interface SportSale{
+    sport: string,
+    totalSales: number
+}
+
+export interface TopRatedArticle{
+    id: number,
+    name: string,
+    price: number,
+    brandName: string,
+    articleType: string,
+    pathToImage: string,
+    rating: number,
+    totalRatings: number
+}

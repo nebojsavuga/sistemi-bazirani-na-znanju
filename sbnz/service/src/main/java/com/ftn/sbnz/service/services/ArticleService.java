@@ -482,7 +482,6 @@ public class ArticleService implements IArticleService {
                 orientiring.addSale();
             } else if (sport.equals("tenis")) {
                 tenis.addSale();
-                System.out.println(tenis.getTotalSales());
             }
         }
         sales.add(football);
