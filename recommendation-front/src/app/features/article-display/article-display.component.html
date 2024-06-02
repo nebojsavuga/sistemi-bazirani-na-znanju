@@ -85,7 +85,7 @@
         <div class="col-lg-3 col-md-6 col-12" *ngFor="let sim of totalSimilarArticles">
             <app-article-list-item [article]="sim" (articleId)="changeArticle($event)"></app-article-list-item>
         </div>
-        <div class="col-12">
+        <div class="col-12 mt-5">
             <p><button type="button" class="button-style" (click)="showMore()" [hidden]="disableShowMore">Prikaži
                     više</button></p>
 

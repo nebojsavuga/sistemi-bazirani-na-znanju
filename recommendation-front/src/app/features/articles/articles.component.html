@@ -1,5 +1,5 @@
-<div class="row text-center">
-    <div *ngFor="let article of articles" class="col-lg-3 col-md-4 col-12">
+<div class="row text-center mb-5">
+    <div *ngFor="let article of articles" class="col-lg-3 col-md-4 col-12 mt-2">
         <app-article-list-item [article]="article" [isFavorite]="isFavorite" (deleted)="deleteArticle($event)" (edit)="editArticle($event)"></app-article-list-item>
     </div>
 </div>

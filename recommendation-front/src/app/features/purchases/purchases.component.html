@@ -7,9 +7,14 @@
         <p>Ukupno artikala za prikaz: {{articles.length}}</p>
     </div>
     <div class="col-12 text-center" style="width: 90%; margin: 0px auto;" *ngIf="articles.length !== 0">
-        <app-articles [articles]="articles" [isFavorite]="false"></app-articles>
+        <app-articles [articles]="totalSimilarArticles" [isFavorite]="false"></app-articles>
     </div>
     <div class="col-12 text-center my-3" *ngIf="articles.length === 0">
         <h4>Nemate kupljenih artikalla.</h4>
+    </div>
+    <div class="col-12 mt-5 text-center">
+        <p><button type="button" class="button-style" (click)="showMore()" [hidden]="disableShowMore">Prikaži
+                više</button></p>
+
     </div>
 </div>
