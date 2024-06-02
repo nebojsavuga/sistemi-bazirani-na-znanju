@@ -343,10 +343,10 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path
 VALUES ('RIOT CAST IRON PLATES 10KG', 32.99, 'Unisex', 'Strength', 'Weight', 20.0, 'dizanjeTegova', '107.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
-VALUES ('Deep Dish Iron Plates 20KG', 38.99, 'Unisex', 'Strength', 'Weight', 20.0, 'dizanjeTegova', '108.jpg');
+VALUES ('Adidas Iron Plates 20KG', 38.99, 'Unisex', 'Adidas', 'Weight', 20.0, 'dizanjeTegova', '108.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, type, sport, path_to_image) 
-VALUES ('Deep Dish Iron Plates Olympic Barbell', 80.99, 'Unisex', 'Deep Dish', 'Barbel', 20.0, 'Olimpijska', 'dizanjeTegova', '109.jpg');
+VALUES ('Adidas Iron Plates Olympic Barbell', 80.99, 'Unisex', 'Adidas', 'Barbel', 20.0, 'Olimpijska', 'dizanjeTegova', '109.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
 VALUES ('Adidas Ronaldinho 80', 80.99, 'Male', 'Adidas', 'FootballGear', 'Dres', 'fudbal', '110.jpg');
