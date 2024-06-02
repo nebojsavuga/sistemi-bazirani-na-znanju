@@ -3,11 +3,36 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ArticleRatingDTO, FullArticle, RecommendedArticle } from '../../shared/models/articles';
 import { environment } from '../../../environment/environment';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ArticleService {
+
+  filterForm = new FormGroup(
+    {
+      sport: new FormControl('', []),
+      height: new FormControl('', []),
+      age: new FormControl('', []),
+      level: new FormControl('', []),
+      typeOfFotballPlayer: new FormControl('', []),
+      typeOfFootball: new FormControl('', []),
+      typeOfRace: new FormControl('', []),
+      typeOfField: new FormControl('', []),
+      typeOfWeightlifting: new FormControl('', []),
+      gender: new FormControl('', []),
+      injuries: new FormControl([])
+    }
+  );
+
+  setFilterForm(value: any) {
+    this.filterForm.patchValue({ ...value });
+  }
+  
+  getFilterForm() {
+    return this.filterForm.value;
+  }
 
   getTypeOfArticle(article: FullArticle): string {
     if (article.ballType || article.typeOfFootballGear || article.numberOfCramponsFootballShoeCrampons || article.numberOfCramponsGrassFootballShoe) {
@@ -34,7 +59,7 @@ export class ArticleService {
 
   buy(id: number, codeId: number | undefined): Observable<FullArticle> {
     let requestParam = '';
-    if(codeId !== undefined && codeId !== 0){
+    if (codeId !== undefined && codeId !== 0) {
       requestParam = '?codeId=' + String(codeId);
     }
     return this.http.post<FullArticle>(environment.apiHost + 'articles/buy/' + String(id) + requestParam, {});

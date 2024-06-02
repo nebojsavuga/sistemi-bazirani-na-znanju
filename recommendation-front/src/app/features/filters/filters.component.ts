@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Injury } from '../../shared/models/injury';
 import { InjuryService } from '../../core/services/injury.service';
 import { TokenDecoderService } from '../../core/services/token-decoder.service';
+import { ArticleService } from '../../core/services/article.service';
 
 @Component({
   selector: 'app-filters',
@@ -44,6 +45,7 @@ export class FiltersComponent implements OnInit {
 
   constructor(private injuryService: InjuryService,
     private authService: AuthenticationService,
+    private articleService: ArticleService,
     private jwtService: TokenDecoderService
   ) { }
 
@@ -55,9 +57,37 @@ export class FiltersComponent implements OnInit {
     this.injuryService.getAll().subscribe(
       res => {
         this.injuries = res;
+        this.checkCheckboxes();
       }
-    )
+    );
 
+  }
+
+  private checkCheckboxes() {
+    setTimeout(() => {
+      const filterFormValue = this.articleService.getFilterForm();
+      if (filterFormValue.sport) {
+        const nonUndefinedValues = Object.entries(filterFormValue)
+          .filter(([key, value]) => value !== undefined)
+          .reduce((obj, [key, value]) => {
+            obj[key] = value;
+            return obj;
+          }, {});
+        this.filterForm.patchValue({ ...nonUndefinedValues });
+        if (!filterFormValue.injuries) {
+          return;
+        }
+        console.log(filterFormValue.injuries);
+        console.log(this.injuries);
+        for (let injuryId of this.injuries.map(x => x.id)) {
+          if (filterFormValue.injuries.includes(injuryId)) {
+            const checkbox = document.getElementById('injury_' + String(injuryId)) as HTMLInputElement;
+            checkbox.checked = true;
+            this.selectedInjuries.push(injuryId)
+          }
+        }
+      }
+    });
   }
 
   filterSubmitted() {
@@ -67,6 +97,7 @@ export class FiltersComponent implements OnInit {
     if (this.filterForm.valid) {
       this.hasError = false;
       this.searchFilter.emit(this.filterForm.value);
+      this.articleService.setFilterForm(this.filterForm.value);
     } else {
       this.hasError = true;
 
