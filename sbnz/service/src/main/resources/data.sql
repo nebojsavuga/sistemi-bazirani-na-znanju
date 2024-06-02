@@ -342,5 +342,17 @@ VALUES ('M3 7ft 20kg Olympic Barbell Weight Bar Black Orange', 199.99, 'Unisex',
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
 VALUES ('RIOT CAST IRON PLATES 10KG', 32.99, 'Unisex', 'Strength', 'Weight', 20.0, 'dizanjeTegova', '107.jpg');
 
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Deep Dish Iron Plates 20KG', 38.99, 'Unisex', 'Strength', 'Weight', 20.0, 'dizanjeTegova', '108.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, type, sport, path_to_image) 
+VALUES ('Deep Dish Iron Plates Olympic Barbell', 80.99, 'Unisex', 'Deep Dish', 'Barbel', 20.0, 'Olimpijska', 'dizanjeTegova', '109.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Adidas Ronaldinho 80', 80.99, 'Male', 'Adidas', 'FootballGear', 'Dres', 'fudbal', '110.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Nike CR7', 100.99, 'Male', 'Nike', 'FootballGear', 'Dres', 'fudbal', '111.jpg');
+
 
 
