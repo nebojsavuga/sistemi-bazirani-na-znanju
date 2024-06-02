@@ -8,6 +8,7 @@ import com.ftn.sbnz.service.controllers.dtos.ArticleRatingDTO;
 import com.ftn.sbnz.service.controllers.dtos.FullArticle;
 import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.RatedArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.SportSalesDTO;
 
 public interface IArticleService {
     FullArticle getArticle(Long id);
@@ -20,4 +21,5 @@ public interface IArticleService {
     Set<ArticleRatingDTO> getRatings(Long id);
     Set<ArticleDTO> getPurchases(Long userId);
     Set<RatedArticleDTO> getTopFiveRatedArticles();
+    SportSalesDTO getSportSales();
 }

@@ -46,6 +46,8 @@ import com.ftn.sbnz.service.controllers.dtos.ArticleRatingDTO;
 import com.ftn.sbnz.service.controllers.dtos.FullArticle;
 import com.ftn.sbnz.service.controllers.dtos.RateArticleDTO;
 import com.ftn.sbnz.service.controllers.dtos.RatedArticleDTO;
+import com.ftn.sbnz.service.controllers.dtos.SportSaleDTO;
+import com.ftn.sbnz.service.controllers.dtos.SportSalesDTO;
 import com.ftn.sbnz.service.exceptions.BadRequestException;
 import com.ftn.sbnz.service.exceptions.NotFoundException;
 import com.ftn.sbnz.service.repositories.ArticleRepository;
@@ -455,10 +457,38 @@ public class ArticleService implements IArticleService {
 
         Set<RatedArticleDTO> topRatedArticles = topRated.stream()
                 .filter(article -> article.getRating() > 0)
-                // Sort articles by average rating in descending order
                 .sorted(Comparator.comparingDouble(RatedArticleDTO::getRating).reversed())
                 .limit(5)
                 .collect(Collectors.toSet());
         return topRatedArticles;
+    }
+
+    @Override
+    public SportSalesDTO getSportSales() {
+        List<Purchase> purchases = purchaseRepository.findAll();
+        List<SportSaleDTO> sales = new ArrayList<>();
+        SportSaleDTO football = new SportSaleDTO("fudbal", 0);
+        SportSaleDTO weights = new SportSaleDTO("dizanjeTegova", 0);
+        SportSaleDTO orientiring = new SportSaleDTO("orijentiring", 0);
+        SportSaleDTO tenis = new SportSaleDTO("tenis", 0);
+
+        for (Purchase purchase : purchases) {
+            String sport = purchase.getArticle().getSport().toLowerCase();
+            if (sport.equals("fudbal")) {
+                football.addSale();
+            } else if (sport.equals("dizanjetegova")) {
+                weights.addSale();
+            } else if (sport.equals("orijentiring") || sport.equals("orientiring")) {
+                orientiring.addSale();
+            } else if (sport.equals("tenis")) {
+                tenis.addSale();
+                System.out.println(tenis.getTotalSales());
+            }
+        }
+        sales.add(football);
+        sales.add(tenis);
+        sales.add(orientiring);
+        sales.add(weights);
+        return new SportSalesDTO(sales, purchases.size());
     }
 }
