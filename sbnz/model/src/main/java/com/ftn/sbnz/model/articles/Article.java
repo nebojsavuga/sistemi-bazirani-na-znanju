@@ -32,7 +32,7 @@ public class Article implements Serializable {
 
     @OneToMany(mappedBy = "article")
     private Set<Rating> ratings = new HashSet<Rating>();
-    
+
     @OneToMany(mappedBy = "article")
     private Set<Purchase> purchases = new HashSet<Purchase>();
 
@@ -47,7 +47,6 @@ public class Article implements Serializable {
 
     @Column
     private String pathToImage;
-    
 
     public Long getId() {
         return id;
@@ -151,7 +150,7 @@ public class Article implements Serializable {
         if (parentClass != null) {
             return parentClass.getSimpleName();
         } else {
-            return "No superclass"; 
+            return "No superclass";
         }
     }
 
@@ -160,7 +159,7 @@ public class Article implements Serializable {
         if (grandParentClass != null) {
             return grandParentClass.getSimpleName();
         } else {
-            return "No superclass"; 
+            return "No superclass";
         }
     }
 

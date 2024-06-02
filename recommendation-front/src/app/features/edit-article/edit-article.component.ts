@@ -20,6 +20,7 @@ export class EditArticleComponent implements OnInit {
   successfullyRegistered = false;
   successMessage: string = '';
   errorValue: string = '';
+  selectedArticleType = '';
   @ViewChild('articleImage', { static: false }) articleImage: ElementRef;
   @ViewChild('fileInput') fileInput: ElementRef<HTMLInputElement>;
   fieldsNotToTransform = ['articleGenderType', 'ballType', 'barbellWeight', 'barbelType', 'dumbellWeight', 'elasticBandWeight', 'typeOfFootballGear', 'numberOfCramponsFootballShoeCrampons', 'numberOfCramponsGrassFootballShoe', 'typeOfOrientiringGear', 'racketWeight', 'racketType', 'racketSpanning', 'sweatpantsType', 'typeOfTenisGear', 'tenisShoeSole', 'weightliftingWeight', 'weightliftingTypeOfGear', 'weightliftingGloveSize', 'racketSize'];
