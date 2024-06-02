@@ -21,6 +21,9 @@
         <a class="nav-button" [routerLink]="['article-management']" *ngIf="isLoggedIn && role==='Admin'">Artikli</a>
       </li>
       <li class="nav-item">
+        <a class="nav-button" [routerLink]="['reports']" *ngIf="isLoggedIn && role==='Admin'">Izveštaji</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-button" [routerLink]="['templates']" *ngIf="isLoggedIn && role==='Admin'">Templejti</a>
       </li>
       <li class="nav-item">

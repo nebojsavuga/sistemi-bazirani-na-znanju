@@ -18,6 +18,8 @@ import { AddRatingComponent } from './add-rating/add-rating.component';
 import { TranslationPipe } from './pipes/translate-pipe.pipe';
 import { TemplatesComponent } from './templates/templates.component';
 import { PurchasesComponent } from './purchases/purchases.component';
+import { ReportsComponent } from './reports/reports.component';
+import { RatingArticleComponent } from './rating-article/rating-article.component';
 
 
 @NgModule({
@@ -35,7 +37,9 @@ import { PurchasesComponent } from './purchases/purchases.component';
     RatingDisplayComponent,
     AddRatingComponent,
     TemplatesComponent,
-    PurchasesComponent
+    PurchasesComponent,
+    ReportsComponent,
+    RatingArticleComponent
   ],
   imports: [
     CommonModule,

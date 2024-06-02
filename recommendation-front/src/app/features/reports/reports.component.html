@@ -1,0 +1,20 @@
+<div class="row text-center m-3">
+    <div class="col-12">
+        <h2>Izveštaji</h2>
+    </div>
+    <div class="col-12">
+        <!-- SALES PER SPORT -->
+    </div>
+    <div class="col-12">
+        <!-- TOP RATED -->
+        <div class="row">
+            <div class="col-12">
+                <h4>Najbolje ocenjeni artikli</h4>
+            </div>
+            <div class="col-lg-2 col-l-6 col-md-6 col-12 mx-3" *ngFor="let art of articles">
+                <app-rating-article [article]="art"></app-rating-article>
+
+            </div>
+        </div>
+    </div>
+</div>

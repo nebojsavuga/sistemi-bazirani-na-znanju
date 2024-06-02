@@ -5,13 +5,14 @@ import { AuthenticationService } from '../../core/services/authentication.servic
 import { ArticleService } from '../../core/services/article.service';
 
 @Component({
-  selector: 'app-article-list-item',
-  templateUrl: './article-list-item.component.html',
-  styleUrl: './article-list-item.component.css'
+  selector: 'app-rating-article',
+  templateUrl: './rating-article.component.html',
+  styleUrl: './rating-article.component.css'
 })
-export class ArticleListItemComponent implements OnInit {
+export class RatingArticleComponent implements OnInit {
   @Input() article: RecommendedArticle;
-  @Input() isFavorite: boolean | undefined = false;
+  @Input() rating: number = 0;
+  @Input() totalRatings: number = 0;
   @ViewChild('articleImage') articleImage: ElementRef<HTMLImageElement>;
   
   constructor(private router: Router, private authService: AuthenticationService,

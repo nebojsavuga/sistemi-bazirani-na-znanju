@@ -7,6 +7,7 @@ import { FavoriteDisplayComponent } from './favorite-display/favorite-display.co
 import { AdminArticlesComponent } from './admin-articles/admin-articles.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { PurchasesComponent } from './purchases/purchases.component';
+import { ReportsComponent } from './reports/reports.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,9 @@ const routes: Routes = [
   },
   {
     path: 'purchases', component: PurchasesComponent
+  },
+  {
+    path: 'reports', component: ReportsComponent
   }
 ];
 
