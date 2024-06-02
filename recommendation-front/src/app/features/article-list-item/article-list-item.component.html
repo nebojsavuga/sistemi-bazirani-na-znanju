@@ -1,0 +1,19 @@
+<div class="article-card dark-border px-3 pt-2">
+    <div class="row" *ngIf="isFavorite">
+        <div class="col d-flex justify-content-end">
+            <i *ngIf="isFavorite" class="bi bi-x close-icon" style="font-size: 20px;" (click)="removeFromFavorites()"></i>
+        </div>
+    </div>
+    <div class="image-container" (click)="showArticle(article.id)">
+        <img #articleImage src="../../../assets/sport.png" alt="Article Image" [id]="article.id.toString()">
+    </div>
+    <div class="details" (click)="showArticle(article.id)">
+        <h2 class="name">{{ article.name }}</h2>
+        <p class="brand">Brend: {{ article.brandName }}</p>
+        <p class="type">Tip: {{ article.articleType | translate | camelCase }}</p>
+        <p class="price">Cena: ${{ article.price | number: '1.1-2' }}</p>
+    </div>
+    <div>
+        <button type="button" class="button-style" (click)="showArticle(article.id)">Prikaži</button>
+    </div>
+</div>

@@ -14,6 +14,8 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 
+import com.ftn.sbnz.model.events.Purchase;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Article implements Serializable {
@@ -31,11 +33,20 @@ public class Article implements Serializable {
     @OneToMany(mappedBy = "article")
     private Set<Rating> ratings = new HashSet<Rating>();
 
+    @OneToMany(mappedBy = "article")
+    private Set<Purchase> purchases = new HashSet<Purchase>();
+
     @Enumerated(EnumType.STRING)
     private ArticleGenderType gender;
 
     @Column
+    private String sport;
+
+    @Column
     private String brandName;
+
+    @Column
+    private String pathToImage;
 
     public Long getId() {
         return id;
@@ -87,6 +98,24 @@ public class Article implements Serializable {
                 + gender + "]";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Article other = (Article) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+
+        return true;
+    }
+
     public Article() {
     }
 
@@ -105,5 +134,56 @@ public class Article implements Serializable {
         this.ratings = ratings;
         this.gender = gender;
         this.brandName = brandName;
+    }
+
+    public String getSupper() {
+        Class<?> superclass = this.getClass().getSuperclass();
+        return (superclass != null && superclass != Object.class) ? superclass.getSimpleName() : null;
+    }
+
+    public String getClassName() {
+        return this.getClass().getSimpleName();
+    }
+
+    public String getParentClassName() {
+        Class<?> parentClass = this.getClass().getSuperclass();
+        if (parentClass != null) {
+            return parentClass.getSimpleName();
+        } else {
+            return "No superclass";
+        }
+    }
+
+    public String getGrandParentClassName() {
+        Class<?> grandParentClass = this.getClass().getSuperclass().getSuperclass();
+        if (grandParentClass != null) {
+            return grandParentClass.getSimpleName();
+        } else {
+            return "No superclass";
+        }
+    }
+
+    public Set<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(Set<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
+    public String getSport() {
+        return sport;
+    }
+
+    public void setSport(String sport) {
+        this.sport = sport;
+    }
+
+    public String getPathToImage() {
+        return pathToImage;
+    }
+
+    public void setPathToImage(String pathToImage) {
+        this.pathToImage = pathToImage;
     }
 }

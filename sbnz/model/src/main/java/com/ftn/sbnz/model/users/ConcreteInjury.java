@@ -1,7 +1,8 @@
 package com.ftn.sbnz.model.users;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +11,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import org.kie.api.definition.type.Role;
+import org.kie.api.definition.type.Timestamp;
+
+@Role(Role.Type.EVENT)
+@Timestamp("executionTime")
 @Entity
+@Table(name = "ConcreteInjury")
 public class ConcreteInjury implements Serializable{
 
     @Id
@@ -23,16 +31,16 @@ public class ConcreteInjury implements Serializable{
     private User user;
 
     @Column
-    private LocalDateTime timestamp;
+    private Date executionTime;
 
     @ManyToOne
     @JoinColumn(name = "injuryId")
     private Injury injury;
     
-    public ConcreteInjury(Long id, User user, LocalDateTime timestamp, Injury injury) {
+    public ConcreteInjury(Long id, User user, Date timestamp, Injury injury) {
         this.id = id;
         this.user = user;
-        this.timestamp = timestamp;
+        this.executionTime = timestamp;
         this.injury = injury;
     }
 
@@ -41,50 +49,20 @@ public class ConcreteInjury implements Serializable{
 
     @Override
     public String toString() {
-        return "ConcreteInjury [id=" + id + ", user=" + user + ", timestamp=" + timestamp + ", injury=" + injury + "]";
+        return "ConcreteInjury [id=" + id + ", user=" + user + ", timestamp=" + executionTime + ", injury=" + injury + "]";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ConcreteInjury that = (ConcreteInjury) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((user == null) ? 0 : user.hashCode());
-        result = prime * result + ((timestamp == null) ? 0 : timestamp.hashCode());
-        result = prime * result + ((injury == null) ? 0 : injury.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        ConcreteInjury other = (ConcreteInjury) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (user == null) {
-            if (other.user != null)
-                return false;
-        } else if (!user.equals(other.user))
-            return false;
-        if (timestamp == null) {
-            if (other.timestamp != null)
-                return false;
-        } else if (!timestamp.equals(other.timestamp))
-            return false;
-        if (injury == null) {
-            if (other.injury != null)
-                return false;
-        } else if (!injury.equals(other.injury))
-            return false;
-        return true;
+        return Objects.hash(id);
     }
 
     public Long getId() {
@@ -103,12 +81,12 @@ public class ConcreteInjury implements Serializable{
         this.user = user;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
+    public Date getExecutionTime() {
+        return executionTime;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
+    public void setExecutionTime(Date executionTime) {
+        this.executionTime = executionTime;
     }
 
     public Injury getInjury() {

@@ -1,0 +1,141 @@
+package cep;
+
+import com.ftn.sbnz.model.events.Purchase;
+import com.ftn.sbnz.model.articles.FootbalShoeCrampons;
+import com.ftn.sbnz.model.articles.FootballGear;
+import com.ftn.sbnz.model.articles.GearTypeFootball;
+import com.ftn.sbnz.model.articles.Article;
+import java.util.List;
+import com.ftn.sbnz.model.Code;
+global List<Purchase> purchases;
+global List<Purchase> purchasesLoyal;
+global List<Code> usedCodes;
+global List<Code> usedLoyalCodes;
+global Code code;
+global Code codeLoyal;
+global Code codePriceDiscount;
+global Code codeLoyalPriceDiscount;
+
+rule "Ukoliko je kupio preko 5 artikala za odredjeni sport u poslednjih godinu dana, daj mu kod za popust na taj sport"
+salience -100
+when
+    String(this == "cepKupovina")
+    $purchase: Purchase($user:user, $article:article, isProcessedForSportCode() == false)
+    Number(intValue >= 4) from accumulate(
+    $p2:Purchase(this!= $purchase, user == $user, article.getSport() == $article.getSport(), isProcessedForSportCode() == false)
+    over window: time(365d),
+    count($p2)
+)
+then
+    code.setSport($article.getSport());
+    code.setDiscountPercentage(10.0f);
+    code.setDiscountPrice(0.0f);
+    code.setUsed(false);
+    code.setUser($user);
+    code.setFlag(0);
+    code.setName("10% popusta za sport: " + $article.getSport());
+    purchases.add($purchase);
+end
+
+rule "Ukoliko je potrosio preko 500e dodeli mu kod na bilo koji artikal"
+salience -100
+when
+    String(this == "cepKupovina")
+    $purchase: Purchase($user:user, $article:article, isProcessedForFavoriteCode() == false)
+    Number(floatValue >= 500) from accumulate(
+    $p2:Purchase($price:price, user == $user, isProcessedForFavoriteCode() == false)
+    over window: time(365d),
+    sum($price)
+)
+then
+    codeLoyal.setSport("");
+    codeLoyal.setDiscountPercentage(10.0f);
+    codeLoyal.setDiscountPrice(0.0f);
+    codeLoyal.setUsed(false);
+    codeLoyal.setUser($user);
+    codeLoyal.setFlag(2);
+    codeLoyal.setName("10% popusta na bilo koji artikal");
+    purchasesLoyal.add($purchase);
+end
+
+rule "Ukoliko je korisnik Iskoristio 4 koda za neki sport u poslednje 2 godine dobija kod od 10e popusta na artikal iz tog sporta"
+salience -100
+when
+    String(this == "cepKupovina")
+    $code: Code($user:user, $sport: sport,getFlag() == 0, isUsed() == true)
+    Number(intValue >= 3) from accumulate(
+    $code2:Code(this!= $code, user == $user,getFlag()==0, sport == $sport, isUsed() == true)
+    over window: time(730d),
+    count($code2)
+)
+then
+    codePriceDiscount.setSport($sport);
+    codePriceDiscount.setDiscountPercentage(0.0f);
+    codePriceDiscount.setDiscountPrice(10.0f);
+    codePriceDiscount.setUsed(false);
+    codePriceDiscount.setUser($user);
+    codePriceDiscount.setFlag(0);
+    codePriceDiscount.setName("10e popusta za sport: " + $sport);
+    usedCodes.add($code);
+end
+
+rule "Ukoliko je korisnik Iskoristio 3 loyal koda u poslednje 2 godine dobija kod od 20e popusta na bilo koji artikal"
+salience -100
+when
+    String(this == "cepKupovina")
+    $code: Code($user:user, $sport: sport,getFlag()==2, isUsed() == true)
+    Number(intValue >= 2) from accumulate(
+    $code2:Code(this!= $code, user == $user,getFlag()==2, isUsed() == true)
+    over window: time(730d),
+    count($code2)
+)
+then
+    codeLoyalPriceDiscount.setSport("");
+    codeLoyalPriceDiscount.setDiscountPercentage(0.0f);
+    codeLoyalPriceDiscount.setDiscountPrice(20.0f);
+    codeLoyalPriceDiscount.setUsed(false);
+    codeLoyalPriceDiscount.setUser($user);
+    codeLoyalPriceDiscount.setFlag(2);
+    codeLoyalPriceDiscount.setName("20e popusta za bilo koji artikal");
+    usedLoyalCodes.add($code);
+end
+
+rule "Ako je kupljena kopacka sa 6 krampona nude mu se rezervni kramponi"
+salience -50
+when
+    Filters(sport == Sport.Fudbal)
+    $article: Article()
+    $kopacka: FootbalShoeCrampons(numberOfCrampons == 6, $kopackaId: id) from $article
+    Purchase(article.getId() == $kopackaId)
+    $krampon: FootballGear(type == GearTypeFootball.Krampon)
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($krampon.getName());
+    recommendedArticle.setPrice($krampon.getPrice());
+    recommendedArticle.setId($krampon.getId());
+    recommendedArticle.setBrandName($krampon.getBrandName());
+    recommendedArticle.setArticleType("Crampons");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Ako su kupljeni kramponi nudi se kljuc za odvrtanje i zavrtanje krampona"
+salience -30
+when
+    Filters(sport == Sport.Fudbal)
+    $article: Article()
+    $kramponi: FootballGear(type == GearTypeFootball.Krampon, $kramponiId: id) from $article
+    Purchase(article.getId() == $kramponiId)
+    $kljuc: FootballGear(type == GearTypeFootball.KljucZaKrampone)
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($kljuc.getName());
+    recommendedArticle.setPrice($kljuc.getPrice());
+    recommendedArticle.setId($kljuc.getId());
+    recommendedArticle.setBrandName($kljuc.getBrandName());
+    recommendedArticle.setArticleType("Crampon key");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end

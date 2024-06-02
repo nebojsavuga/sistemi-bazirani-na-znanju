@@ -1,1 +1,87 @@
 package backward;
+
+import com.ftn.sbnz.model.ClassNameBackward;
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import java.util.Set;
+import java.util.List;
+
+global List<String> parentClasses;
+global Set<RecommendedArticleDTO> recommendations;
+global Long articleId;
+
+query getParent ( String x, String y )
+    ClassNameBackward (x, y; )
+    or
+    ( ClassNameBackward(z, y;) and getParent(x,z;))
+end
+
+rule "go"
+salience 100
+when
+    String( $value: this)
+    getParent($value, thing;)
+then
+    parentClasses.add(thing);
+end
+
+rule "backward level 1"
+salience 10
+when    
+    String(this == "level")
+    $a1:Article($cn:getClassName(), id != articleId)
+    eval(parentClasses.contains($cn))
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($a1.getName());
+    recommendedArticle.setPrice($a1.getPrice());
+    recommendedArticle.setId($a1.getId());
+    recommendedArticle.setBrandName($a1.getBrandName());
+    recommendedArticle.setArticleType($cn);
+    recommendedArticle.setPathToImage($a1.getPathToImage());
+    recommendations.add(recommendedArticle);
+    if (recommendations.size() >= 10) {
+        drools.halt();
+    }
+end
+
+rule "backward level 2"
+salience 4
+when
+    String(this == "level")
+    $a1:Article($cn:getParentClassName(), $mn:getClassName(), id != articleId)
+    eval(parentClasses.contains($cn))
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($a1.getName());
+    recommendedArticle.setPrice($a1.getPrice());
+    recommendedArticle.setId($a1.getId());
+    recommendedArticle.setBrandName($a1.getBrandName());
+    recommendedArticle.setArticleType($mn);
+    recommendedArticle.setPathToImage($a1.getPathToImage());
+    recommendations.add(recommendedArticle);
+    if (recommendations.size() >= 15) {
+        drools.halt();
+    }
+end
+
+rule "backward level 3"
+salience 1
+when
+    String(this == "level")
+    $a1:Article($cn:getGrandParentClassName(),$mn:getClassName(), getGrandParentClassName() != "Article", id != articleId)
+    eval(parentClasses.contains($cn))
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($a1.getName());
+    recommendedArticle.setPrice($a1.getPrice());
+    recommendedArticle.setId($a1.getId());
+    recommendedArticle.setBrandName($a1.getBrandName());
+    recommendedArticle.setArticleType($mn);
+    recommendedArticle.setPathToImage($a1.getPathToImage());
+    recommendations.add(recommendedArticle);
+    if (recommendations.size() >= 20) {
+        drools.halt();
+    }
+end
+

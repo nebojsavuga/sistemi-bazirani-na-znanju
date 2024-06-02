@@ -1,0 +1,35 @@
+template header
+    brand
+    maxPrice
+
+package basic;
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.sport.SportLevel;
+import com.ftn.sbnz.model.articles.GearTypeFootball;
+import com.ftn.sbnz.model.articles.FootballGear;
+import java.util.Set;
+
+global Set<RecommendedArticleDTO> recommendations;
+
+template "football-rules"
+
+rule "Ako je brend @{brand} preporuci dresove tog brenda sa cenom ispod @{maxPrice}"
+when
+    $$filter: Filters(sport == Sport.Fudbal)
+    $$article: Article(brandName == "@{brand}", price <= @{maxPrice})
+    FootballGear(type == GearTypeFootball.Dres) from $$article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($$article.getName());
+    recommendedArticle.setPrice($$article.getPrice());
+    recommendedArticle.setId($$article.getId());
+    recommendedArticle.setBrandName($$article.getBrandName());
+    recommendedArticle.setArticleType("Jersey");
+    recommendedArticle.setPathToImage($$article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+end template

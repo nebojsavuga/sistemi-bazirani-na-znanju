@@ -1,7 +1,9 @@
 package com.ftn.sbnz.model.users;
 
-import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -11,15 +13,22 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import com.ftn.sbnz.model.Code;
 import com.ftn.sbnz.model.articles.Article;
 import com.ftn.sbnz.model.articles.Rating;
+import com.ftn.sbnz.model.events.Purchase;
 
 @Entity
 @Table(name = "Users")
-public class User implements Serializable {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,11 +65,17 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private Set<Rating> ratings = new HashSet<Rating>();
 
-    @OneToMany
+    @ManyToMany
     private Set<Article> favoriteArticles = new HashSet<Article>();
 
     @OneToMany
     private Set<Article> nonRecommendedArticles = new HashSet<Article>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Purchase> purchases = new HashSet<Purchase>();
+
+    @OneToMany(mappedBy = "user")
+    private Set<Code> codes = new HashSet<Code>();
 
     @Override
     public String toString() {
@@ -69,6 +84,32 @@ public class User implements Serializable {
     }
 
     public User() {
+    }
+    
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
     }
 
     public User(Long id, String email, String password, String firstName, String lastName, Role role) {
@@ -80,14 +121,17 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public User(String email, String password, String firstName, String lastName, Role role, Gender gender) {
+    public User(String email, String password, String firstName, String lastName, Role role, Gender gender, int age, float height) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;
         this.gender = gender;
+        this.age = age;
+        this.height = height;
     }
+    
 
     public void addRating(Rating rating) {
         this.ratings.add(rating);
@@ -201,4 +245,56 @@ public class User implements Serializable {
         this.nonRecommendedArticles = nonRecommendedArticles;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role.toString());
+        List<SimpleGrantedAuthority> authorities = new ArrayList<SimpleGrantedAuthority>();
+        authorities.add(authority);
+        return authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    public Set<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(Set<Purchase> purchases) {
+        this.purchases = purchases;
+    }
+
+    public Set<Code> getCodes() {
+        return codes;
+    }
+
+    public void setCodes(Set<Code> codes) {
+        this.codes = codes;
+    }
+
+    public void removeFavoriteArticle(Article favoriteArticle) {
+        this.favoriteArticles.remove(favoriteArticle);
+    }
 }

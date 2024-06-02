@@ -1,0 +1,38 @@
+template header
+    brandName
+    maxPrice
+
+package basic;
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.sport.SportLevel;
+import com.ftn.sbnz.model.articles.TenisGear;
+import com.ftn.sbnz.model.articles.Racket;
+import com.ftn.sbnz.model.articles.TypeOfRacket;
+import com.ftn.sbnz.model.articles.TypeOfRacketSpanning;
+import com.ftn.sbnz.model.articles.TypeOfGear;
+import java.util.Set;
+
+global Set<RecommendedArticleDTO> recommendations;
+
+template "template-tenis-rules"
+
+rule "Ako je brend @{brandName} preporuci znojnice tog brenda sa cenom ispod @{maxPrice}"
+when
+    $$filter: Filters(sport == Sport.Tenis)
+    $$article: Article(brandName == "@{brandName}", price <= @{maxPrice})
+    TenisGear(gearType == TypeOfGear.Znojnica) from $$article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($$article.getName());
+    recommendedArticle.setPrice($$article.getPrice());
+    recommendedArticle.setId($$article.getId());
+    recommendedArticle.setBrandName($$article.getBrandName());
+    recommendedArticle.setArticleType("Sweatband");
+    recommendedArticle.setPathToImage($$article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+end template

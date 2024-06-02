@@ -1,0 +1,94 @@
+<section class="main-section text-center" *ngIf="article">
+    <div class="row my-5" style="text-align: left;">
+        <div class="col-md-4 col-12">
+            <span *ngFor="let bw of backwardTypes; index as i"><a (click)="onBackwardClick(bw);" class="link-style">{{bw
+                    | translate | camelCase}}</a> <span *ngIf="i < backwardTypes.length - 1"> -> </span> </span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-12 p-3 picture-div" style="text-align: left;">
+            <div class="row" style="text-align: center;">
+                <div class="col-12">
+                    <img src="../../../assets/sport.png" alt="Article Image" [id]="article.id.toString()">
+                </div>
+                <div class="col-12">
+                    <h2 class="name">{{ article.name }}</h2>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6 col-12 p-5 info-div" style="text-align: left;">
+            <h4 class="brand">Brend: {{ article.brandName }}</h4>
+            <h4 class="type">Tip: {{ article.articleType | translate | camelCase }}</h4>
+            <h4 class="price">Cena: ${{ article.price }}</h4>
+            <h4 class="price" *ngIf="article.articleGenderType == 'Male'">Pol: Musko</h4>
+            <h4 class="price" *ngIf="article.articleGenderType == 'Female'">Pol: Žensko</h4>
+            <h4 class="price" *ngIf="article.articleGenderType == 'Unisex'">Pol: Unisex</h4>
+            <div class="col-12 my-3 text-center">
+                <app-rating-display [id]="id" [ratings]="ratings"></app-rating-display>
+            </div>
+            <div class="col-12">
+                <div class="form-group col-12 mt-2">
+                    <label for="code">Kodovi</label>
+                    <select id="code" class="form-control" [(ngModel)]="selectedCodeId" (change)="onCodeChange($event)">
+                        <option value="0" selected>Izaberite kod</option>
+                        <option *ngFor="let code of codes" [value]="code.id">{{ code.name | camelCase }}</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="row mt-2" *ngIf="isLoggedIn">
+                <div class="col-lg-6 col-12 mt-1">
+                    <button type="button" class="button-style" style="min-width: 150px;" (click)="buy()">Kupi</button>
+                </div>
+                <div class="col-lg-6 col-12 mt-1">
+                    <button type="button" class="button-style" (click)="addToFavorite()">Dodaj u omiljeno</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-1 additional-info-div py-3 px-1" style="text-align: left;">
+        <h3>Dodatne informacije</h3>
+        <div class="col-12" *ngIf="article.ballType"> {{article.ballType | camelCase}}</div>
+        <div class="col-12" *ngIf="article.barbelType"> {{article.barbelType | camelCase}}</div>
+        <div class="col-12" *ngIf="article.barbellWeight"> {{article.barbellWeight | camelCase}}</div>
+        <div class="col-12" *ngIf="article.dumbellWeight"> {{article.dumbellWeight | camelCase}}</div>
+        <div class="col-12" *ngIf="article.elasticBandWeight"> {{article.elasticBandWeight | camelCase}}</div>
+        <div class="col-12" *ngIf="article.numberOfCramponsFootballShoeCrampons">
+            {{article.numberOfCramponsFootballShoeCrampons | camelCase}}</div>
+        <div class="col-12" *ngIf="article.numberOfCramponsGrassFootballShoe">
+            {{article.numberOfCramponsGrassFootballShoe
+            | camelCase}}</div>
+        <div class="col-12" *ngIf="article.racketSize"> {{article.racketSize | camelCase}}</div>
+        <div class="col-12" *ngIf="article.racketSpanning"> {{article.racketSpanning | camelCase}}</div>
+        <div class="col-12" *ngIf="article.racketType"> {{article.racketType | camelCase}}</div>
+        <div class="col-12" *ngIf="article.racketWeight"> {{article.racketWeight | camelCase}}</div>
+        <div class="col-12" *ngIf="article.sweatpantsType"> {{article.sweatpantsType | camelCase}}</div>
+        <div class="col-12" *ngIf="article.tenisShoeSole"> {{article.tenisShoeSole | camelCase}}</div>
+        <div class="col-12" *ngIf="article.typeOfFootballGear"> {{article.typeOfFootballGear | camelCase}}</div>
+        <div class="col-12" *ngIf="article.typeOfOrientiringGear"> {{article.typeOfOrientiringGear | camelCase}}</div>
+        <div class="col-12" *ngIf="article.typeOfTenisGear"> {{article.typeOfTenisGear | camelCase}}</div>
+        <div class="col-12" *ngIf="article.weightliftingGloveSize"> {{article.weightliftingGloveSize | camelCase}}</div>
+        <div class="col-12" *ngIf="article.weightliftingTypeOfGear"> {{article.weightliftingTypeOfGear | camelCase}}
+        </div>
+        <div class="col-12" *ngIf="article.weightliftingWeight"> {{article.weightliftingWeight | camelCase}}</div>
+    </div>
+    <div class="row my-1 additional-info-div py-3 px-1" style="text-align: left;" *ngIf="isLoggedIn">
+        <h4>Oceni artikal</h4>
+        <app-add-rating [id]="this.id" (rated)="ratedArticle($event)"></app-add-rating>
+    </div>
+    <div class="row mt-3">
+        <div class="col-12">
+            <h2>Slični artikli</h2>
+        </div>
+        <div class="col-lg-3 col-md-6 col-12" *ngFor="let sim of totalSimilarArticles">
+            <app-article-list-item [article]="sim" (articleId)="changeArticle($event)"></app-article-list-item>
+        </div>
+        <div class="col-12">
+            <p><button type="button" class="button-style" (click)="showMore()" [hidden]="disableShowMore">Prikaži
+                    više</button></p>
+
+        </div>
+    </div>
+</section>

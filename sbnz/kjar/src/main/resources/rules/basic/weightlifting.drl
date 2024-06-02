@@ -3,26 +3,29 @@ package basic;
 import com.ftn.sbnz.model.Filters;
 import com.ftn.sbnz.model.RecommendedArticleDTO;
 import com.ftn.sbnz.model.articles.Article;
-import com.ftn.sbnz.model.articles.Weightlifting.WeightliftingArticle;
-import com.ftn.sbnz.model.articles.Football.GrassFootbalShoe;
+import com.ftn.sbnz.model.articles.WeightliftingArticle;
+import com.ftn.sbnz.model.articles.GrassFootbalShoe;
 import com.ftn.sbnz.model.sport.Sport;
 import com.ftn.sbnz.model.sport.SportLevel;
 import com.ftn.sbnz.model.sport.SportTenisField;
-import com.ftn.sbnz.model.articles.Weightlifting.WeightliftingShoe;
-import com.ftn.sbnz.model.articles.Weightlifting.ElasticBand;
-import com.ftn.sbnz.model.articles.Weightlifting.Dumbell;
-import com.ftn.sbnz.model.articles.Weightlifting.WeightliftingGlove;
-import com.ftn.sbnz.model.articles.Weightlifting.WeightliftingGear;
-import com.ftn.sbnz.model.articles.Weightlifting.WlTypeOfGear;
+import com.ftn.sbnz.model.articles.WeightliftingShoe;
+import com.ftn.sbnz.model.articles.ElasticBand;
+import com.ftn.sbnz.model.articles.Dumbell;
+import com.ftn.sbnz.model.articles.WeightliftingGlove;
+import com.ftn.sbnz.model.articles.WeightliftingGear;
+import com.ftn.sbnz.model.articles.WlTypeOfGear;
 import com.ftn.sbnz.model.sport.SportWeightliftingType;
 import com.ftn.sbnz.model.users.Gender;
+import com.ftn.sbnz.model.articles.Weight;
+import com.ftn.sbnz.model.users.Injury;
 
 import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
+global List<Injury> injuries;
 
 rule "Preporuci patike sa tvrdim djonom"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova)
     $article: Article()
@@ -34,12 +37,13 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Weightlifting Shoes");
+    recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
 rule "Bavi se dizanjem tegova i ima manja od 13 godina, preporuci bucice do 5kg"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, age < 13)
     $article: Article()
@@ -51,12 +55,13 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Dumbells");
+    recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
 rule "Bavi se dizanjem tegova i ima manja od 13 godina, preporuci el. trake do 15kg"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, age < 13)
     $article: Article()
@@ -68,12 +73,13 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Elastic Band");
+    recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
 rule "Bavi se dizanjem tegova, preporuci rukavice za dizanje"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova)
     $article: Article()
@@ -85,14 +91,33 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Weightlifting Gloves");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Bavi se dizanjem tegova i pro je, preporuci ploce od 20 kg"
+salience 100
+when
+    $filters: Filters(sport == Sport.DizanjeTegova, level == SportLevel.Pro)
+    $article: Article()
+    Weight(weight > 19.9) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Weight");
+    recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
 rule "Bavi se dizanjem tegova i weightlifter ili powerlifter je, ponudi mu krede kao artikle"
-salience 10
+salience 100
 when
-    $filters: Filters(sport == Sport.DizanjeTegova, typeOfWeightlifting != SportWeightliftingType.Bodybuilding)
+    $filters: Filters(sport == Sport.DizanjeTegova, (typeOfWeightlifting == SportWeightliftingType.Weightlifting || typeOfWeightlifting == SportWeightliftingType.Powerlifting ))
     $article: Article()
     WeightliftingGear(type == WlTypeOfGear.Chalk) from $article
 then
@@ -102,12 +127,13 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Chalk");
+    recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
 rule "Ukoliko je zensko, ponudi el trake do 20 kg"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, gender == Gender.Zensko)
     $article: Article()
@@ -119,12 +145,13 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Elastic Band");
+    recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
 rule "Ukoliko je musko, ponudi el trake do 60 kg"
-salience 10
+salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, gender == Gender.Musko)
     $article: Article()
@@ -136,6 +163,26 @@ then
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
     recommendedArticle.setArticleType("Elastic Band");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Ukoliko ima povredu kolena I bavi se dizanjem tegova preporuci steznike za kolena"
+when
+    Filters(sport == Sport.DizanjeTegova, $addedInjuries: injuries)
+    $article: Article()
+    $steznik: WeightliftingGear(type == WlTypeOfGear.KneeWrap) from $article
+    Injury(name == "Povreda kolena", $injuryId: id) from injuries
+    eval($addedInjuries.contains($injuryId))
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Knee Wrap");
+    recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end

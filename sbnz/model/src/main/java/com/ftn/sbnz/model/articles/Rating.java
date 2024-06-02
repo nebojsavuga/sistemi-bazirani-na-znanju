@@ -1,7 +1,7 @@
 package com.ftn.sbnz.model.articles;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,11 @@ import javax.persistence.ManyToOne;
 
 import com.ftn.sbnz.model.users.User;
 import org.hibernate.validator.constraints.Range;
+import org.kie.api.definition.type.Role;
+import org.kie.api.definition.type.Timestamp;
 
+@Role(Role.Type.EVENT)
+@Timestamp("executionTime")
 @Entity
 public class Rating implements Serializable{
 
@@ -30,7 +34,7 @@ public class Rating implements Serializable{
     private Article article;
 
     @Column
-    private LocalDateTime timestamp;
+    private Date executionTime;
 
     @Column
     @Range(min = 1,max = 5)
@@ -60,13 +64,7 @@ public class Rating implements Serializable{
         this.article = article;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
 
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
 
     public int getRating() {
         return rating;
@@ -79,18 +77,32 @@ public class Rating implements Serializable{
 
     @Override
     public String toString() {
-        return "Rating [id=" + id + ", user=" + user + ", article=" + article + ", timestamp=" + timestamp + ", rating="
+        return "Rating [id=" + id + ", user=" + user + ", article=" + article + ", timestamp=" + executionTime + ", rating="
                 + rating + "]";
     }
 
     public Rating() {
     }
 
-    public Rating(Long id, User user, Article article, LocalDateTime timestamp, int rating) {
+    public Rating(Long id, User user, Article article, Date executionTime, int rating) {
         this.id = id;
         this.user = user;
         this.article = article;
-        this.timestamp = timestamp;
+        this.executionTime = executionTime;
         this.rating = rating;
+    }
+    public Rating(User user, Article article, int rating) {
+        this.user = user;
+        this.article = article;
+        this.executionTime = new Date();
+        this.rating = rating;
+    }
+
+    public Date getExecutionTime() {
+        return executionTime;
+    }
+
+    public void setExecutionTime(Date executionTime) {
+        this.executionTime = executionTime;
     }
 }

@@ -1,0 +1,45 @@
+template header
+    sport
+    minHeight
+    maxHeight
+    racketSize
+
+package basic;
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.sport.SportLevel;
+import com.ftn.sbnz.model.sport.SportTenisField;
+import com.ftn.sbnz.model.articles.TenisGear;
+import com.ftn.sbnz.model.articles.Racket;
+import com.ftn.sbnz.model.articles.TypeOfRacket;
+import com.ftn.sbnz.model.articles.TypeOfRacketSpanning;
+import com.ftn.sbnz.model.articles.TypeOfGear;
+import com.ftn.sbnz.model.articles.TenisShoe;
+import com.ftn.sbnz.model.articles.Sole;
+import com.ftn.sbnz.model.articles.RacketString;
+import com.ftn.sbnz.model.articles.Grip;
+import java.util.Set;
+
+global Set<RecommendedArticleDTO> recommendations;
+
+template "tenis-rules"
+
+rule "Ako je visina ispod @{maxHeight} preporuci rekete velicine @{racketSize}"
+when
+    $$filter: Filters(height > @{minHeight}, height <= @{maxHeight}, sport == Sport.Tenis)
+    $$article: Article()
+    Racket(size == @{racketSize}) from $$article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($$article.getName());
+    recommendedArticle.setPrice($$article.getPrice());
+    recommendedArticle.setId($$article.getId());
+    recommendedArticle.setBrandName($$article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
+    recommendedArticle.setPathToImage($$article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+end template

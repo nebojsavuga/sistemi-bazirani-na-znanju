@@ -1,0 +1,7 @@
+.checked {
+    color: orange;
+}
+.fa-star:hover{
+    cursor: pointer;
+    color: orange;
+}

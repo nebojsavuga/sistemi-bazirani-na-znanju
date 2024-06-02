@@ -1,0 +1,43 @@
+.main-section {
+    width: 80%;
+    margin: 40px auto;
+}
+
+img {
+    width: auto;
+    max-height: 300px;
+}
+
+.link-style {
+    font-size: 16px;
+    letter-spacing: 1;
+    color: black;
+    text-decoration: none;
+}
+
+.link-style:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: rgb(108, 76, 222);
+}
+
+
+.name{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.additional-info-div {
+    background-color: rgba(181, 164, 164, 0.2);
+}
+
+.info-div {
+    background-color: rgba(219, 213, 213, 0.2);
+    border: 1px solid rgb(188, 182, 182);
+    border-left: none;
+}
+
+.picture-div {
+    background-color: rgba(249, 238, 238, 0.1);
+    border: 1px solid rgb(181, 177, 177);
+}

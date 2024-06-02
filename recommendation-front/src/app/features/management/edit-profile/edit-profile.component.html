@@ -1,0 +1,95 @@
+<section class="px-5 pt-5 pb-3 dark-blue-background text-light" *ngIf="isLoaded">
+    <div class="row d-flex flex-row-reverse">
+        <div class="col-md-4 col-6">
+            <button (click)="goBack()" class="button-style button-font">Nazad</button>
+        </div>
+    </div>
+
+
+    <form login [formGroup]="editProfileForm" (ngSubmit)="editProfile()" class="p-3">
+        <h1 class="reg-lbl text-light">Izmena profila</h1>
+
+        <div class="alert alert-danger" role="alert" *ngIf="hasError">
+            {{errorValue}}
+        </div>
+        
+        <div class="mb-3">
+            <label for="firstName" class="col-form-label text-light">Ime</label>
+            <input type="text" class="form-control" name="firstName" id="firstName" formControlName="firstName">
+            <div *ngIf="editProfileForm.get('firstName').hasError('required') 
+            && editProfileForm.get('firstName').touched" class="red-dot">
+            Ime je obavezno polje.
+            </div>
+            <div *ngIf="editProfileForm.get('firstName').hasError('minlength') 
+            && editProfileForm.get('firstName').touched" class="red-dot">
+              Ime treba da ima barem 3 karaktera.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="col-form-label text-light">Prezime</label>
+            <input type="text" class="form-control" name="lastName" id="lastName" formControlName="lastName">
+            <div *ngIf="editProfileForm.get('lastName').hasError('required') 
+            && editProfileForm.get('lastName').touched" class="red-dot">
+            Prezime je obavezno polje.
+            </div>
+            <div *ngIf="editProfileForm.get('lastName').hasError('minlength') 
+            && editProfileForm.get('lastName').touched" class="red-dot">
+            Prezime treba da ima barem 3 karaktera.
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="age" class="col-form-label text-light">Godine</label>
+            <input type="number" class="form-control" name="age" id="age" formControlName="age">
+            <div *ngIf="editProfileForm.get('age').hasError('required') 
+            && editProfileForm.get('age').touched" class="red-dot">
+            Godine su obavezno polje.
+            </div>
+            <div *ngIf="editProfileForm.get('age').hasError('min')
+            && editProfileForm.get('age').touched" class="red-dot">
+             Godine moraju biti vece od 0.
+            </div>
+
+            <div *ngIf="editProfileForm.get('age').hasError('max')
+            && editProfileForm.get('age').touched" class="red-dot">
+             Godine moraju biti manje od 125.
+            </div>
+            
+        </div>
+
+        <div class="mb-3">
+            <label for="height" class="col-form-label text-light">Visina</label>
+            <input type="number" class="form-control" name="height" id="height" formControlName="height">
+            <div *ngIf="editProfileForm.get('height').hasError('required') 
+            && editProfileForm.get('height').touched" class="red-dot">
+            Visina je obavezno polje.
+            </div>
+            <div *ngIf="editProfileForm.get('height').hasError('min')
+            && editProfileForm.get('height').touched" class="red-dot">
+            Visina mora biti veca od 0.
+            </div>
+            <div *ngIf="editProfileForm.get('height').hasError('max')
+            && editProfileForm.get('height').touched" class="red-dot">
+            Visina mora biti manja od 250.
+            </div>
+            
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="col-form-label text-light">Pol</label>
+            <select class="form-control" name="gender" id="gender" formControlName="gender">
+              <option value="" disabled selected>Izaberite pol</option>
+              <option value="Musko">Musko</option>
+              <option value="Zensko">Zensko</option>
+            </select>
+            <div *ngIf="editProfileForm.get('gender').hasError('required') 
+            && editProfileForm.get('gender').touched" class="red-dot">
+            Pol je obavezno polje.
+            </div>
+          </div>
+        <div class="mt-2 text-center">
+            <button type="submit" class="button-style" id="confirmRegistration">Potvrdi</button>
+        </div>
+
+    </form>
+</section>

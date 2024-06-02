@@ -1,0 +1,133 @@
+package cep;
+
+import com.ftn.sbnz.model.users.Injury;
+import com.ftn.sbnz.model.Filters;
+import com.ftn.sbnz.model.RecommendedArticleDTO;
+import com.ftn.sbnz.model.articles.Article;
+import com.ftn.sbnz.model.articles.GrassFootbalShoe;
+import com.ftn.sbnz.model.sport.Sport;
+import com.ftn.sbnz.model.sport.SportLevel;
+import com.ftn.sbnz.model.sport.SportTenisField;
+import com.ftn.sbnz.model.articles.Ball;
+import com.ftn.sbnz.model.articles.BallType;
+import com.ftn.sbnz.model.articles.GearTypeFootball;
+import com.ftn.sbnz.model.articles.FootballGear;
+import com.ftn.sbnz.model.articles.FootbalShoeNoCrampons;
+import com.ftn.sbnz.model.sport.SportFootballType;
+import com.ftn.sbnz.model.events.Purchase;
+import com.ftn.sbnz.model.articles.Rating;
+import com.ftn.sbnz.model.articles.Barbel;
+import com.ftn.sbnz.model.articles.BarbelType;
+import com.ftn.sbnz.model.articles.Weight;
+import com.ftn.sbnz.model.articles.WlTypeOfGear;
+import com.ftn.sbnz.model.articles.WeightliftingGear;
+import com.ftn.sbnz.model.sport.SportWeightliftingType;
+import com.ftn.sbnz.model.articles.OrientiringGear;
+import com.ftn.sbnz.model.articles.TypeOfOrientiringGear;
+import com.ftn.sbnz.model.articles.Sweatpants;
+import com.ftn.sbnz.model.articles.SweatpantsType;
+import com.ftn.sbnz.model.users.Injury;
+import com.ftn.sbnz.model.users.ConcreteInjury;
+import com.ftn.sbnz.model.articles.Racket;
+import com.ftn.sbnz.model.articles.TypeOfRacket;
+import com.ftn.sbnz.model.articles.TypeOfRacketSpanning;
+
+import java.util.Set;
+import java.util.List;
+
+global Set<RecommendedArticleDTO> recommendations;
+global List<Injury> injuries;
+
+rule "Ukoliko je u poslednjih godinu dana imao povredu kolena I bavi se dizanjem tegova preporuci steznike za kolena"
+when
+    Filters(sport == Sport.DizanjeTegova)
+    $article: Article()
+    $steznik: WeightliftingGear(type == WlTypeOfGear.KneeWrap) from $article
+    Injury(name == "Povreda kolena", $injuryId: id) from injuries
+    Number(intValue >= 1) from accumulate(
+        $p: ConcreteInjury(injury.getId() == $injuryId)
+        over window: time(365d),
+        count($p)
+    )
+
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Knee Wrap");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Ukoliko je u poslednje 3 godine, 2 povrede lakta i bavi se tenisom reket laksi od 300g"
+when
+    Filters(sport == Sport.Tenis)
+    $article: Article()
+    $reket: Racket(weight <= 300.0) from $article
+    Injury(name == "Povreda lakta", $injuryId: id) from injuries
+    Number(intValue >= 2) from accumulate(
+        $p: ConcreteInjury(injury.getId() == $injuryId)
+        over window: time(1095d),
+        count($p)
+    )
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Ukoliko je u poslednjih 5 godina 2 povrede rucnog zgloba i bavi se tenisom, mekse spanovanje reketa I reket laksi od 300g"
+when
+    Filters(sport == Sport.Tenis)
+    $article: Article()
+    $reket: Racket(weight <= 300.0,spanningType == TypeOfRacketSpanning.Meko) from $article
+    Injury(name == "Povreda rucnog zgloba", $injuryId: id) from injuries
+    Number(intValue >= 2) from accumulate(
+        $p: ConcreteInjury(injury.getId() == $injuryId)
+        over window: time(1825d),
+        count($p)
+    )
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Sport fudbal, povreda skocnog zgloba u poslednje 2 godine, preporuci kostobran sa stitnikom za skocni zglob"
+salience 100
+when
+    Filters(sport == Sport.Fudbal)
+    $article: Article()
+    $shinProtector: FootballGear(type == GearTypeFootball.KostobranSaStitnikomZaSkocniZglob) from $article
+    Injury(name == "Povreda skocnog zgloba", $injuryId: id) from injuries
+    Number(intValue >= 1) from accumulate(
+        $p: ConcreteInjury(injury.getId() == $injuryId)
+        over window: time(730d),
+        count($p)
+    )
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Shin protector");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
