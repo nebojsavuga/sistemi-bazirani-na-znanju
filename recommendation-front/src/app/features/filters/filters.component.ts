@@ -75,6 +75,7 @@ export class FiltersComponent implements OnInit {
           }, {});
         this.filterForm.patchValue({ ...nonUndefinedValues });
         if (!filterFormValue.injuries) {
+          this.filterSubmitted();
           return;
         }
         for (let injuryId of this.injuries.map(x => x.id)) {
