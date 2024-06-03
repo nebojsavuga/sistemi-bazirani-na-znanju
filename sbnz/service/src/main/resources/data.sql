@@ -354,5 +354,46 @@ VALUES ('Adidas Ronaldinho 80', 80.99, 'Male', 'Adidas', 'FootballGear', 'Dres',
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
 VALUES ('Nike CR7', 100.99, 'Male', 'Nike', 'FootballGear', 'Dres', 'fudbal', '111.jpg');
 
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
+VALUES ('Fogfree Sport Reading Glasses', 32.99, 'Unisex', 'Fogfree', 'Naocare', 'OrientiringGear', 'orijentiring', '112.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('VJ BOLD 9 Orienteering Shoes', 99.99, 'Unisex', 'VJ', 'BigCramponOrientiringShoe', 'orijentiring', '113.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('VJ BOLD Grasshopper Orienteering Shoes', 105.99, 'Unisex', 'VJ', 'BigCramponOrientiringShoe', 'orijentiring', '114.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Adidas Lopta Ucl Pro', 159.99, 'Unisex', 'Adidas', 'Ball', 'Profesionalna', 'fudbal', '115.png');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Adidas Patike X Crazyfast 4', 59.99, 'Unisex', 'Adidas', 'FootbalShoeNoCrampons', 'fudbal', '116.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Puma Majice Fss Home Jersey Replica Jr', 79.99, 'Male', 'Puma', 'FootballGear', 'Dres', 'fudbal', '117.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport, path_to_image) 
+VALUES ('Yonex znojnica bela', 5.00, 'Unisex', 'Yonex', 'Znojnica', 'TenisGear', 'tenis', '118.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport, path_to_image) 
+VALUES ('Yonex znojnica teget', 6.00, 'Unisex', 'Yonex', 'Znojnica', 'TenisGear', 'tenis', '119.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Extreme Soft 10 + 2 White (Overgrip)', 13.99, 'Unisex', 'Head', 'Grip', 'Tenis', '120.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport, path_to_image) 
+VALUES ('Wilson Pro Feel Ultra Vibrastop', 5.99, 'Unisex', 'Wilson', 'Vibrastop', 'TenisGear', 'tenis', '121.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, number_of_crampons, path_to_image) 
+VALUES ('Nike Kopačke Zoom Mercurial Superfly 9 Academy 41', 111.99, 'Male', 'Nike', 'FootbalShoeCrampons', 'fudbal', 6, '122.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('Nike Vaporfly 3', 259.99, 'Female', 'Nike', 'NoCramponOrientiringShoe', 'orijentiring', '123.png');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
+VALUES ('Trimtex Speed O-Gaiters Black', 36.99, 'Unisex', 'Trimtex', 'Kamasne', 'OrientiringGear', 'orijentiring', '124.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
+VALUES ('INOV8 Speed Mid Running Socks (2 Pack)', 15.99, 'Unisex', 'INOV8', 'KratkeCarape', 'OrientiringGear', 'orijentiring', '125.jpg');
 
 

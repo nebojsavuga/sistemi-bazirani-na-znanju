@@ -34,6 +34,42 @@ then
     insert(recommendedArticle);
 end
 
+rule "Preporuci patike sa kramponima ukoliko nije izabrao tip trke"
+salience 100
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == null)
+    $article: Article()
+    $patike: BigCramponOrientiringShoe() from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Sportska busola");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci patike bez krampona ukoliko nije izabrao tip trke"
+salience 100
+when
+    $filters: Filters(sport == Sport.Orijentiring, typeOfRace == null)
+    $article: Article()
+    $patike: NoCramponOrientiringShoe() from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Sportska busola");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
 rule "Preporuci patike sa velikim kramponima ako se bavi orijentiringom i trka je sumska sprint"
 salience 100
 when
