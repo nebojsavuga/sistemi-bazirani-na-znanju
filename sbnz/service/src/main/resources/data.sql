@@ -396,4 +396,42 @@ VALUES ('Trimtex Speed O-Gaiters Black', 36.99, 'Unisex', 'Trimtex', 'Kamasne', 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
 VALUES ('INOV8 Speed Mid Running Socks (2 Pack)', 15.99, 'Unisex', 'INOV8', 'KratkeCarape', 'OrientiringGear', 'orijentiring', '125.jpg');
 
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('Asics Solution Speed FF 3 HC White/Tuna Blue Tennis Shoe', 200.00, 'Unisex', 'Asics', 'Ravan', 'TenisShoe', 'tenis', '126.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('Asics Gel-Dedicate 7 (HC) White/Hot Pink Men Tennis Shoe', 120.00, 'Male', 'Asics', 'Ravan', 'TenisShoe', 'tenis', '127.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('Nike Court Vapor Lite 2 Men Tennis Shoe', 120.00, 'Male', 'Nike', 'Ravan', 'TenisShoe', 'tenis', '128.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('Nike Air Zoom Vapor Pro 2 Black/White (HC) Women Tennis Shoe', 180.00, 'Female', 'Nike', 'Ravan', 'TenisShoe', 'tenis', '129.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
+VALUES ('Head Barty 19 Junior', 39.99, 'Unisex', 'Head', 180.0,'Klasik','Meko',19.0, 'Racket', 'tenis', '130.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('Babolat Jet Mach III Wimbledon Grass White Men Shoes', 110.00, 'Male', 'Babolat', 'Kramponi', 'TenisShoe', 'tenis', '131.png');
+
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('adidas barricade 13 grass', 140.00, 'Male', 'Adidas', 'Kramponi', 'TenisShoe', 'tenis', '132.jpeg');
+
+INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
+VALUES ('Rush Pro ACE CLY Clay Court Shoe Women', 80.00, 'Female', 'Wilson', 'Kramponi', 'TenisShoe', 'tenis', '133.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Adidas Lopte Starlancer Clb', 18.99, 'Unisex', 'Adidas', 'Ball', 'Trening', 'fudbal', '134.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Hummel Lopte Futsal Elite FB', 39.99, 'Unisex', 'Hummel', 'Ball', 'CetiriSaTegom', 'fudbal', '135.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Adidas Lopte Starlancer Clb Crno Narandzasto', 18.99, 'Unisex', 'Adidas', 'Ball', 'Trening', 'fudbal', '136.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Adidas Kostobrani Predator SG XL', 13.99, 'Unisex', 'Adidas', 'FootballGear', 'KostobranBezStitnika', 'fudbal', '137.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, number_of_crampons, path_to_image) 
+VALUES ('Nike Kopačke Jr. Tiempo Legend 9 Club ', 45.99, 'Male', 'Adidas', 'FootbalShoeCrampons', 'fudbal', 7, '138.jpg');
 
