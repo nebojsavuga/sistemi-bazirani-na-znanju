@@ -304,7 +304,7 @@ INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_t
 VALUES ('Challenge Pro Clay Black', 110.00, 'Unisex', 'Nike', 'RibljaKost', 'TenisShoe', 'tenis', '94.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, type, sport, path_to_image) 
-VALUES ('Duga šipka za tegove 13kg', 60.99, 'Unisex', 'Gorilla', 'Barbel', 13.0, 'Klasik', 'dizanjeTegova', '95.jpg');
+VALUES ('Duga sipka za tegove 13kg', 60.99, 'Unisex', 'Gorilla', 'Barbel', 13.0, 'Klasik', 'dizanjeTegova', '95.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
 VALUES ('Nike Women Soccer Norway Home Jersey', 80.99, 'Female', 'Nike', 'FootballGear', 'Dres', 'fudbal', '96.jpg');
@@ -364,7 +364,7 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_imag
 VALUES ('VJ BOLD Grasshopper Orienteering Shoes', 105.99, 'Unisex', 'VJ', 'BigCramponOrientiringShoe', 'orijentiring', '114.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
-VALUES ('Adidas Lopta Ucl Pro', 159.99, 'Unisex', 'Adidas', 'Ball', 'Profesionalna', 'fudbal', '115.png');
+VALUES ('Adidas Lopta Ucl Pro', 159.99, 'Unisex', 'Adidas', 'Ball', 'Profesionalna', 'fudbal', '115.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
 VALUES ('Adidas Patike X Crazyfast 4', 59.99, 'Unisex', 'Adidas', 'FootbalShoeNoCrampons', 'fudbal', '116.jpg');
@@ -385,7 +385,7 @@ INSERT INTO Article (name, price, gender, brand_name, gear_type, DTYPE, sport, p
 VALUES ('Wilson Pro Feel Ultra Vibrastop', 5.99, 'Unisex', 'Wilson', 'Vibrastop', 'TenisGear', 'tenis', '121.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, number_of_crampons, path_to_image) 
-VALUES ('Nike Kopačke Zoom Mercurial Superfly 9 Academy 41', 111.99, 'Male', 'Nike', 'FootbalShoeCrampons', 'fudbal', 6, '122.jpg');
+VALUES ('Nike Kopacke Zoom Mercurial Superfly 9 Academy 41', 111.99, 'Male', 'Nike', 'FootbalShoeCrampons', 'fudbal', 6, '122.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
 VALUES ('Nike Vaporfly 3', 259.99, 'Female', 'Nike', 'NoCramponOrientiringShoe', 'orijentiring', '123.png');
@@ -433,7 +433,7 @@ INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_t
 VALUES ('Adidas Kostobrani Predator SG XL', 13.99, 'Unisex', 'Adidas', 'FootballGear', 'KostobranBezStitnika', 'fudbal', '137.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, number_of_crampons, path_to_image) 
-VALUES ('Nike Kopačke Jr. Tiempo Legend 9 Club ', 45.99, 'Male', 'Adidas', 'FootbalShoeCrampons', 'fudbal', 7, '138.jpg');
+VALUES ('Nike Kopacke Jr. Tiempo Legend 9 Club ', 45.99, 'Male', 'Adidas', 'FootbalShoeCrampons', 'fudbal', 7, '138.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, number_Of_Crampsons, DTYPE, sport, path_to_image) 
 VALUES ('Nike Tiempo Legend 10 Elite', 199.99, 'Unisex', 'Nike', 8, 'GrassFootbalShoe', 'fudbal', '139.png');

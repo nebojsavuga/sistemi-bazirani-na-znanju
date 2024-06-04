@@ -59,5 +59,14 @@ export class TranslationPipe implements PipeTransform {
         this.translations.set("Weightlifting Shoes", "Patike za dizanje tegova");
         this.translations.set("WeightliftingGlove", "Rukavice za dizanje tegova");
         this.translations.set("Weightlifting Gloves", "Rukavice za dizanje tegova");
+        this.translations.set("Half sweatpants", "Poludugacka trenerka");
+        this.translations.set("Orientiring shoes", "Poludugacka trenerka");
+        this.translations.set("Shoes", "Patike");
+        this.translations.set("Gaiters", "Kamasne");
+        this.translations.set("Short socks", "Kratke carape");
+        this.translations.set("Shin protector", "Kostobrani");
+        this.translations.set("Leg warmers", "Stucne");
+        this.translations.set("Racket string", "Zica za rekete");
+
     }
 }

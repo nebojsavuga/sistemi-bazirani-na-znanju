@@ -44,7 +44,8 @@ export class TemplatesComponent {
     "Trimtex",
     "Vapro",
     "Wilson",
-    "Y&Y"
+    "Y&Y",
+    "Yonex"
   ];
 
   selectedBrands: string[] = [];

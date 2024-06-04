@@ -115,7 +115,7 @@ then
     recommendedArticle.setId($krampon.getId());
     recommendedArticle.setBrandName($krampon.getBrandName());
     recommendedArticle.setArticleType("Crampons");
-    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendedArticle.setPathToImage($krampon.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
@@ -135,7 +135,7 @@ then
     recommendedArticle.setId($kljuc.getId());
     recommendedArticle.setBrandName($kljuc.getBrandName());
     recommendedArticle.setArticleType("Crampon key");
-    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendedArticle.setPathToImage($kljuc.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
