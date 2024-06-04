@@ -435,3 +435,29 @@ VALUES ('Adidas Kostobrani Predator SG XL', 13.99, 'Unisex', 'Adidas', 'Football
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, number_of_crampons, path_to_image) 
 VALUES ('Nike Kopačke Jr. Tiempo Legend 9 Club ', 45.99, 'Male', 'Adidas', 'FootbalShoeCrampons', 'fudbal', 7, '138.jpg');
 
+INSERT INTO Article (name, price, gender, brand_name, number_Of_Crampsons, DTYPE, sport, path_to_image) 
+VALUES ('Nike Tiempo Legend 10 Elite', 199.99, 'Unisex', 'Nike', 8, 'GrassFootbalShoe', 'fudbal', '139.png');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('Brazil Academy', 29.99, 'Unisex', 'Nike', 'Ball', 'Decija', 'fudbal', '140.png');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, sport, path_to_image) 
+VALUES ('TYR L-1 Weightlifting Shoes', 207.99, 'Male', 'Tyr', 'WeightliftingShoe', 'dizanjeTegova', '141.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('BORN STRONG Weightlifting Belt', 36.99, 'Unisex', 'Born strong', 'WeightliftingGear', 'Belt', 'dizanjeTegova','142.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Standard cast-iron Tri Grips weight plate 5 kg', 23.99, 'Unisex', 'Marbo sport', 'Weight', 5.0, 'dizanjeTegova', '143.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('Standard cast-iron Tri Grips weight plate 10 kg', 47.99, 'Unisex', 'Marbo sport', 'Weight', 10.0, 'dizanjeTegova', '144.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
+VALUES ('ISC Long O-Pants', 28.99, 'Unisex', 'ISC', 'Dugacko', 'Sweatpants', 'orijentiring', '145.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
+VALUES ('Trimtex Trail O-Pants Black', 48.99, 'Unisex', 'Trimtex', 'Poludugacko', 'Sweatpants', 'orijentiring', '146.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
+VALUES ('Trimtex Speed O-Gaiters Navy', 36.99, 'Unisex', 'Trimtex', 'Kamasne', 'OrientiringGear', 'orijentiring', '147.jpg');
