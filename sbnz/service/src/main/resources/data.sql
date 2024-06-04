@@ -461,3 +461,12 @@ VALUES ('Trimtex Trail O-Pants Black', 48.99, 'Unisex', 'Trimtex', 'Poludugacko'
 
 INSERT INTO Article (name, price, gender, brand_name, type, DTYPE, sport, path_to_image) 
 VALUES ('Trimtex Speed O-Gaiters Navy', 36.99, 'Unisex', 'Trimtex', 'Kamasne', 'OrientiringGear', 'orijentiring', '147.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('ROGUE KNEE WRAPS', 24.99, 'Unisex', 'ROGUE', 'WeightliftingGear', 'KneeWrap', 'dizanjeTegova','148.jpeg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, type, sport, path_to_image) 
+VALUES ('ROGUE 5" NYLON WEIGHTLIFTING BELT', 21.99, 'Unisex', 'ROGUE', 'WeightliftingGear', 'Belt', 'dizanjeTegova','149.jpeg');
+
+INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
+VALUES ('2 X 2.5 KG Set Cast Iron Dumbbell Weight Plates', 29.99, 'Unisex', 'Amonax', 'Weight', 5.0, 'dizanjeTegova', '150.jpeg');
