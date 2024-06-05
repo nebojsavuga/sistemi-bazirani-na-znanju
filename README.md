@@ -1,7 +1,8 @@
 # sistemi-bazirani-na-znanju
-Tim 3_1
-Nebojsa Vuga SV53/2020
-Bogdan Janosevic SV65/2020
+### Tim 3_1
+## Members
+- Nebojsa Vuga SV53/2020
+- Bogdan Janosevic SV65/2020
 
 ## How to start
 
