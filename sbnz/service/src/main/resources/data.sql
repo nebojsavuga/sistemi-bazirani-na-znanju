@@ -470,3 +470,6 @@ VALUES ('ROGUE 5" NYLON WEIGHTLIFTING BELT', 21.99, 'Unisex', 'ROGUE', 'Weightli
 
 INSERT INTO Article (name, price, gender, brand_name, DTYPE, weight, sport, path_to_image) 
 VALUES ('2 X 2.5 KG Set Cast Iron Dumbbell Weight Plates', 29.99, 'Unisex', 'Amonax', 'Weight', 5.0, 'dizanjeTegova', '150.jpeg');
+
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
+VALUES ('Babolat Ballfighter Jnr 17 inch Tennis Racket', 24.99, 'Unisex', 'Babolat', 160.0,'Klasik','Meko',17.0, 'Racket', 'tenis', '151.jpg');
