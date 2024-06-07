@@ -64,6 +64,7 @@ export class TranslationPipe implements PipeTransform {
         this.translations.set("Shoes", "Patike");
         this.translations.set("Gaiters", "Kamasne");
         this.translations.set("Short socks", "Kratke carape");
+        this.translations.set("sock garters", "Podvezice");
         this.translations.set("Shin protector", "Kostobrani");
         this.translations.set("Leg warmers", "Stucne");
         this.translations.set("Racket string", "Zica za rekete");
