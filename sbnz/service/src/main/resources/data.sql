@@ -406,7 +406,7 @@ INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_t
 VALUES ('Nike Court Vapor Lite 2 Men Tennis Shoe', 120.00, 'Male', 'Nike', 'Ravan', 'TenisShoe', 'tenis', '128.jpg');
 
 INSERT INTO Article (name, price, gender, brand_name, sole, DTYPE, sport, path_to_image) 
-VALUES ('Nike Air Zoom Vapor Pro 2 Black/White (HC) Women Tennis Shoe', 180.00, 'Female', 'Nike', 'Ravan', 'TenisShoe', 'tenis', '129.jpg');
+VALUES ('Nike Air Zoom Vapor Pro 2 Black/White (HC) Women Tennis Shoe', 180.00, 'Female', 'Nike', 'Ravan', 'TenisShoe', 'tenis', '129.jpeg');
 
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
 VALUES ('Head Barty 19 Junior', 39.99, 'Unisex', 'Head', 180.0,'Klasik','Meko',19.0, 'Racket', 'tenis', '130.jpg');
