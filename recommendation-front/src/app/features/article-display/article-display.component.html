@@ -27,7 +27,7 @@
             <div class="col-12 my-3 text-center">
                 <app-rating-display [id]="id" [ratings]="ratings"></app-rating-display>
             </div>
-            <div class="col-12">
+            <div class="col-12" *ngIf="isLoggedIn">
                 <div class="form-group col-12 mt-2">
                     <label for="code">Kodovi</label>
                     <select id="code" class="form-control" [(ngModel)]="selectedCodeId" (change)="onCodeChange($event)">
