@@ -68,9 +68,6 @@ public class User implements UserDetails {
     @ManyToMany
     private Set<Article> favoriteArticles = new HashSet<Article>();
 
-    @OneToMany
-    private Set<Article> nonRecommendedArticles = new HashSet<Article>();
-
     @OneToMany(mappedBy = "user")
     private Set<Purchase> purchases = new HashSet<Purchase>();
 
@@ -235,14 +232,6 @@ public class User implements UserDetails {
 
     public void addFavoriteArticle(Article favoriteArticle) {
         this.favoriteArticles.add(favoriteArticle);
-    }
-
-    public Set<Article> getNonRecommendedArticles() {
-        return nonRecommendedArticles;
-    }
-
-    public void setNonRecommendedArticles(Set<Article> nonRecommendedArticles) {
-        this.nonRecommendedArticles = nonRecommendedArticles;
     }
 
     @Override
