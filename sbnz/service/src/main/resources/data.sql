@@ -473,3 +473,9 @@ VALUES ('2 X 2.5 KG Set Cast Iron Dumbbell Weight Plates', 29.99, 'Unisex', 'Amo
 
 INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
 VALUES ('Babolat Ballfighter Jnr 17 inch Tennis Racket', 24.99, 'Unisex', 'Babolat', 160.0,'Klasik','Meko',17.0, 'Racket', 'tenis', '151.jpg');
+
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
+VALUES ('Wilson Pro Staff Six One Team Legend', 200.00, 'Unisex', 'Wilson', 290.0,'Profesionalni','Tvrdo',27.0, 'Racket', 'tenis', '152.jpeg');
+
+INSERT INTO Article (name, price, gender, brand_name, weight, type, spanning_type, size, DTYPE, sport, path_to_image) 
+VALUES ('BABOLAT PURE DRIVE JUNIOR 26 RACQUET (250 GR)', 100.00, 'Unisex', 'Babolat', 250.0,'Klasik','Meko',26.0, 'Racket', 'tenis', '153.jpeg');
