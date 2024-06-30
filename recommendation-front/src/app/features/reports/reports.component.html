@@ -1,16 +1,16 @@
 <div class="row text-center m-3">
     <div class="col-12">
-        <h2>Izveštaji</h2>
+        <h2>Reports</h2>
     </div>
     <div class="col-12">
         <!-- SALES PER SPORT -->
         <div class="row">
             <div class="col-12">
-                <h4>Prodaja artikala po sportu</h4>
-                <h6>Ukupno prodato: {{this.sales.totalSales}} artikala</h6>
+                <h4>Article sale per sport</h4>
+                <h6>Total sold: {{this.sales.totalSales}} articles</h6>
             </div>
         </div>
-        <ngx-charts-pie-chart *ngIf="hasLoaded" [legendTitle]="'Sportovi'" [legend]="true" [view]="[700, 400]"
+        <ngx-charts-pie-chart *ngIf="hasLoaded" [legendTitle]="'Sports'" [legend]="true" [view]="[700, 400]"
             [results]="pieChartData" [labels]="true">
         </ngx-charts-pie-chart>
     </div>
@@ -18,7 +18,7 @@
         <!-- TOP RATED -->
         <div class="row">
             <div class="col-12">
-                <h4>Top 5 najbolje ocenjenih artikala</h4>
+                <h4>Top 5 best rated articles</h4>
             </div>
             <div class="col-lg-2 col-l-6 col-md-6 col-12 mx-3 mb-5" *ngFor="let art of articles">
                 <app-rating-article [article]="art"></app-rating-article>

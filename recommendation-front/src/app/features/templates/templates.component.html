@@ -1,6 +1,6 @@
 <div class="row text-center my-3" style="margin-left: 0px; margin-right:0px; padding: 0px;">
     <div class="col-12">
-        <h2>Generišite template pravila</h2>
+        <h2>Generate template rules</h2>
     </div>
 </div>
 
@@ -10,52 +10,50 @@
             <label for="sport" class="my-1">Sport</label>
             <select id="sport" name="sport" class="form-control" [(ngModel)]="selectedSport"
                 (change)="onSportChange($event)">
-                <option value="0" selected>Izaberite sport</option>
+                <option value="0" selected>Choose sport</option>
                 <option *ngFor="let sport of sports" [value]="sport">{{ sport | camelCase }}</option>
             </select>
         </div>
     </div>
 </div>
 <div class="row m-3">
-    <div class="col-12" *ngIf="selectedSport === 'Fudbal'">
-        <h4>Tekst pravila</h4>
-        <h6>Ako je sport fudbal i brend (selektovan brend) preporuči dresove tog brenda sa cenom ispod zadate cene</h6>
+    <div class="col-12" *ngIf="selectedSport === 'Football'">
+        <h4>Rule text</h4>
+        <h6>If sport is football and brand is (selected brand) recommend jerseys with the price below the given price</h6>
     </div>
     <div class="col-12" *ngIf="selectedSport === 'Tenis'">
-        <h4>Tekst pravila</h4>
-        <h6>Ako je sport tenis i brend (selektovan brend) preporuči znojnice tog brenda sa cenom ispod zadate cene</h6>
+        <h4>Rule text</h4>
+        <h6>If sport is tenis and brand is (selected brand) recommend sweatbands with the price below the given price</h6>
     </div>
 </div>
 
 <div *ngIf="selectedSport !== '0'" class="mx-3" style="margin-left: 0px; margin-right:0px; padding: 0px;">
     <div class="row mx-2">
         <div class="text-center">
-            <button type="button" class="button-style" (click)="addField()">Dodaj pravilo</button>
+            <button type="button" class="button-style" (click)="addField()">Add Rule</button>
         </div>
         <div *ngFor="let field of fields; let i = index" class="col-12">
             <div class="row my-3">
                 <div class="col-lg-4 col-12">
-                    <label>Brend</label>
+                    <label>Brand</label>
                     <select class="form-control" [(ngModel)]="field.brand">
-                        <option value="" disabled selected>Izaberite brend</option>
+                        <option value="" disabled selected>Choose brand</option>
                         <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
                     </select>
                 </div>
                 <div class="col-lg-4 col-12">
-                    <label>Najveća cena (eur)</label>
-                    <input type="number" class="form-control" [(ngModel)]="field.price" placeholder="Unesite cenu"
+                    <label>Max price (eur)</label>
+                    <input type="number" class="form-control" [(ngModel)]="field.price" placeholder="Enter price"
                         min="0" max="5000">
                 </div>
-                <div class="col-12 mt-2" *ngIf="selectedSport === 'Fudbal' && field.brand && field.price">
-                    <p>Ako je sport <b>Fudbal</b> i brend <b>{{field.brand}}</b> preporuči dresove tog brenda sa cenom manjom ili
-                        jednakom od <b>{{field.price | number : '1.1-2'}} eur </b></p>
+                <div class="col-12 mt-2" *ngIf="selectedSport === 'Football' && field.brand && field.price">
+                    <p>If the sport is <b>Football</b> and the brand is <b>{{field.brand}}</b> recommend jerseys with the price less or equal than <b>{{field.price | number : '1.1-2'}} eur </b></p>
                 </div>
                 <div class="col-12 mt-2" *ngIf="selectedSport === 'Tenis' && field.brand && field.price">
-                    <p>Ako je sport <b>Tenis</b> i brend <b>{{field.brand}}</b> preporuči znojnice tog brenda sa cenom manjom ili
-                        jednakom od <b>{{field.price | number : '1.1-2'}} eur </b></p>
+                    <p>If the sport is <b>Tenis</b> and the brand is <b>{{field.brand}}</b> recommend sweatbands with the price less or equal than <b>{{field.price | number : '1.1-2'}} eur </b></p>
                 </div>
                 <div class="col-12 mt-2">
-                    <button type="button" class="button-style" (click)="removeField(i)">Ukloni pravilo</button>
+                    <button type="button" class="button-style" (click)="removeField(i)">Remove rule</button>
                 </div>
             </div>
 
@@ -64,6 +62,6 @@
 </div>
 <div *ngIf="this.fields.length > 0" class="row mx-4 my-3" style="margin-left: 0px; margin-right:0px; padding: 0px;">
     <div class="col-12 mb-3">
-        <button type="button" class="button-style" (click)="saveRule()">Sačuvaj template</button>
+        <button type="button" class="button-style" (click)="saveRule()">Save template</button>
     </div>
 </div>

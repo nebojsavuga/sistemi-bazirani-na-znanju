@@ -32,10 +32,10 @@ export class AddRatingComponent {
       {
         next:(_) =>{
           this.rated.emit(true);
-          this.snackbar.showSnackBar('Uspešno ste ocenili artikal.', 'Ok');
+          this.snackbar.showSnackBar('Successfully rated the article.', 'Ok');
         },
         error:(err) =>{
-            this.snackbar.showSnackBar('Došlo je do greške.', 'Ok');
+            this.snackbar.showSnackBar('There was an error.', 'Ok');
         }
       }
     )

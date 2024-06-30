@@ -8,7 +8,7 @@ import { SnackbarService } from '../../core/services/snackbar.service';
   styleUrl: './templates.component.css'
 })
 export class TemplatesComponent {
-  sports: string[] = ['Fudbal', 'Tenis'];
+  sports: string[] = ['Football', 'Tenis'];
   selectedSport: string = '0';
   brands: string[] = [
     "Adidas",
@@ -62,7 +62,7 @@ export class TemplatesComponent {
   addField() {
     const lastField = this.fields[this.fields.length - 1];
     if (lastField && this.fields.some((field, idx) => field.brand === lastField.brand && field.price === lastField.price && idx !== this.fields.length - 1)) {
-      this.snackbar.showSnackBar('Duplirani brend i cena. Unesite jedinstvene vrednosti.', 'Ok');
+      this.snackbar.showSnackBar('Duplicate brand and price. Enter unique values.', 'Ok');
       lastField.brand = '';
       lastField.price = 0;
     } else {
@@ -77,13 +77,16 @@ export class TemplatesComponent {
     const transformedData = {
       brandNames: this.fields.map(item => [item.brand, item.price.toFixed(2).toString()])
     };
+    if(this.selectedSport === 'Football'){
+      this.selectedSport = 'Fudbal';
+    }
     this.recomendationService.generateTemplate(transformedData, this.selectedSport).subscribe(
       {
         next: _ => {
-          this.snackbar.showSnackBar('Uspešno ste generisali nova pravila.', 'Ok.');
+          this.snackbar.showSnackBar('Sucessfully generated new rules.', 'Ok.');
         },
         error: _ => {
-          this.snackbar.showSnackBar('Došlo je do greške prilikom generisanja pravila.', 'Ok');
+          this.snackbar.showSnackBar('There was a mistake generating new rules.', 'Ok');
         }
       }
     )

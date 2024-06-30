@@ -2,7 +2,7 @@
     <div class="row my-5" style="text-align: left;">
         <div class="col-md-4 col-12">
             <span *ngFor="let bw of backwardTypes; index as i"><a (click)="onBackwardClick(bw);" class="link-style">{{bw
-                    | translate | camelCase}}</a> <span *ngIf="i < backwardTypes.length - 1"> -> </span> </span>
+                    | camelCase}}</a> <span *ngIf="i < backwardTypes.length - 1"> -> </span> </span>
         </div>
     </div>
     <div class="row">
@@ -18,20 +18,20 @@
 
         </div>
         <div class="col-md-6 col-12 p-5 info-div" style="text-align: left;">
-            <h4 class="brand">Brend: {{ article.brandName }}</h4>
-            <h4 class="type">Tip: {{ article.articleType | translate | camelCase }}</h4>
-            <h4 class="price">Cena: ${{ article.price }}</h4>
-            <h4 class="price" *ngIf="article.articleGenderType == 'Male'">Pol: Musko</h4>
-            <h4 class="price" *ngIf="article.articleGenderType == 'Female'">Pol: Žensko</h4>
-            <h4 class="price" *ngIf="article.articleGenderType == 'Unisex'">Pol: Unisex</h4>
+            <h4 class="brand">Brand: {{ article.brandName }}</h4>
+            <h4 class="type">Type: {{ article.articleType | camelCase }}</h4>
+            <h4 class="price">Price: ${{ article.price }}</h4>
+            <h4 class="price" *ngIf="article.articleGenderType == 'Male'">Gender: Male</h4>
+            <h4 class="price" *ngIf="article.articleGenderType == 'Female'">Gender: Female</h4>
+            <h4 class="price" *ngIf="article.articleGenderType == 'Unisex'">Gender: Unisex</h4>
             <div class="col-12 my-3 text-center">
                 <app-rating-display [id]="id" [ratings]="ratings"></app-rating-display>
             </div>
             <div class="col-12" *ngIf="isLoggedIn">
                 <div class="form-group col-12 mt-2">
-                    <label for="code">Kodovi</label>
+                    <label for="code">Codes</label>
                     <select id="code" class="form-control" [(ngModel)]="selectedCodeId" (change)="onCodeChange($event)">
-                        <option value="0" selected>Izaberite kod</option>
+                        <option value="0" selected>Choose code</option>
                         <option *ngFor="let code of codes" [value]="code.id">{{ code.name | camelCase }}</option>
                     </select>
 
@@ -39,17 +39,17 @@
             </div>
             <div class="row mt-2" *ngIf="isLoggedIn">
                 <div class="col-lg-6 col-12 mt-1">
-                    <button type="button" class="button-style" style="min-width: 150px;" (click)="buy()">Kupi</button>
+                    <button type="button" class="button-style" style="min-width: 150px;" (click)="buy()">Buy</button>
                 </div>
                 <div class="col-lg-6 col-12 mt-1">
-                    <button type="button" class="button-style" (click)="addToFavorite()">Dodaj u omiljeno</button>
+                    <button type="button" class="button-style" (click)="addToFavorite()">Add to favorites</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row my-1 additional-info-div py-3 px-1" style="text-align: left;">
-        <h3>Dodatne informacije</h3>
+        <h3>Additional information</h3>
         <div class="col-12" *ngIf="article.ballType"> {{article.ballType | camelCase}}</div>
         <div class="col-12" *ngIf="article.barbelType"> {{article.barbelType | camelCase}}</div>
         <div class="col-12" *ngIf="article.barbellWeight"> {{article.barbellWeight | camelCase}}</div>
@@ -75,19 +75,19 @@
         <div class="col-12" *ngIf="article.weightliftingWeight"> {{article.weightliftingWeight | camelCase}}</div>
     </div>
     <div class="row my-1 additional-info-div py-3 px-1" style="text-align: left;" *ngIf="isLoggedIn">
-        <h4>Oceni artikal</h4>
+        <h4>Rate article</h4>
         <app-add-rating [id]="this.id" (rated)="ratedArticle($event)"></app-add-rating>
     </div>
     <div class="row mt-3">
         <div class="col-12">
-            <h2>Slični artikli</h2>
+            <h2>Similar articles</h2>
         </div>
         <div class="col-lg-3 col-md-6 col-12" *ngFor="let sim of totalSimilarArticles">
             <app-article-list-item [article]="sim" (articleId)="changeArticle($event)"></app-article-list-item>
         </div>
         <div class="col-12 mt-5">
-            <p><button type="button" class="button-style" (click)="showMore()" [hidden]="disableShowMore">Prikaži
-                    više</button></p>
+            <p><button type="button" class="button-style" (click)="showMore()" [hidden]="disableShowMore">Show
+                    more</button></p>
 
         </div>
     </div>

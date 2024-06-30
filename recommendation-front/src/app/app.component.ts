@@ -7,6 +7,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Preporuka sportske opreme';
+  title = 'Sports equipment recommendation';
 
 }

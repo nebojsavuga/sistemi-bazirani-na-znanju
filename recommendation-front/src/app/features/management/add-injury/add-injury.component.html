@@ -1,17 +1,17 @@
 <section class="px-5 pt-5 pb-3 dark-blue-background text-light" *ngIf="isLoaded">
     <div class="row d-flex flex-row-reverse">
         <div class="col-md-4 col-6">
-            <button (click)="goBack()" class="button-style button-font">Nazad</button>
+            <button (click)="goBack()" class="button-style button-font">Back</button>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-6 col-12">
-            <form (ngSubmit)="Submit()" [formGroup]="povredaForm">
-                <h2 class="reg-lbl text-light">Unos povrede</h2>
+            <form (ngSubmit)="Submit()" [formGroup]="injuryForm">
+                <h2 class="reg-lbl text-light">Enter Injury</h2>
                 <mat-form-field appearance="fill">
-                    <mat-label>Datum</mat-label>
-                    <input matInput [matDatepicker]="picker" placeholder="Unesite datum" id="datepicker"
+                    <mat-label>Date</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Enter date" id="datepicker"
                         formControlName="date">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
@@ -23,17 +23,17 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="povreda" class="col-form-label text-light">Vrsta povrede</label>
-                    <select class="form-control" name="povreda" id="povreda" formControlName="povreda">
-                        <option selected value="Povreda skocnog zgloba">Povreda skocnog zgloba</option>
-                        <option value="Povreda kolena">Povreda kolena</option>
-                        <option value="Povreda lakta">Povreda lakta</option>
-                        <option value="Povreda rucnog zgloba">Povreda rucnog zgloba</option>
+                    <label for="injury" class="col-form-label text-light">Type of injury</label>
+                    <select class="form-control" name="injury" id="injury" formControlName="injury">
+                        <option selected value="Povreda skocnog zgloba">Ankle injury</option>
+                        <option value="Povreda kolena">Knee injury</option>
+                        <option value="Povreda lakta">Elbow injury</option>
+                        <option value="Povreda rucnog zgloba">Wrist injury</option>
                     </select>
 
                 </div>
                 <div class="mt-2 text-center">
-                    <button type="submit" class="button-style" id="confirmRegistration">Unesi</button>
+                    <button type="submit" class="button-style" id="confirmRegistration">Enter</button>
                 </div>
             </form>
         </div>
@@ -43,18 +43,22 @@
                     <thead>
                         <tr>
                             <th scope="col" class="table-text-white">#</th>
-                            <th scope="col" class="table-text-white">Naziv</th>
-                            <th scope="col" class="table-text-white">Vreme</th>
-                            <th scope="col" class="table-text-white">Akcija</th>
+                            <th scope="col" class="table-text-white">Name</th>
+                            <th scope="col" class="table-text-white">Time</th>
+                            <th scope="col" class="table-text-white">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let injury of injuries; index as i ">
                             <td class="small-cell table-text-white">{{i + 1}}</td>
+                            <td class="small-cell table-text-white" *ngIf="injury.injury === 'Povreda skocnog zgloba'">Ankle injury</td>
+                            <td class="small-cell table-text-white" *ngIf="injury.injury === 'Povreda kolena'">Knee injury</td>
+                            <td class="small-cell table-text-white" *ngIf="injury.injury === 'Povreda lakta'">Elbow injury</td>
+                            <td class="small-cell table-text-white" *ngIf="injury.injury === 'Povreda rucnog zgloba'">Wrist injury</td>
                             <td class="small-cell table-text-white">{{injury.injury}}</td>
                             <td class="small-cell table-text-white">{{injury.executionTime | date:'dd/MM/yyyy'}}</td>
                             <td class="small">
-                                <button class="btn btn-danger" (click)="deleteInjury(injury.id)">Obrisi</button>
+                                <button class="btn btn-danger" (click)="deleteInjury(injury.id)">Delete</button>
                             </td>
                         </tr>
                     </tbody>

@@ -1,9 +1,9 @@
 <div class="row text-center my-3">
     <div class="col-12">
-        <h1>{{value | translate | camelCase}}</h1>
+        <h1>{{value | camelCase}}</h1>
     </div>
     <div class="col-lg-4 col-md-6 col-12">
-        <p>Ukupno artikala za prikaz: {{articles.length}}</p>
+        <p>Total articles to display: {{articles.length}}</p>
     </div>
     <div class="col-12 text-center" style="width: 90%; margin: 0px auto;">
         <app-articles [articles]="totalArticles" [isFavorite]="false"></app-articles>
@@ -12,7 +12,7 @@
 
 <div class="row text-center my-3">
     <div class="col-12">
-        <p><button type="button" class="button-style" (click)="showMore()" [hidden]="disableShowMore">Prikaži
-                više</button></p>
+        <p><button type="button" class="button-style" (click)="showMore()" [hidden]="disableShowMore">Show more</button>
+        </p>
     </div>
 </div>

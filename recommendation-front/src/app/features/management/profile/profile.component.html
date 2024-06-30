@@ -10,37 +10,39 @@
                 <div class="col-6 info-text">{{profile.email}}</div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-4 col-6 info-text">Pol</div>
-                <div class="col-6 info-text">{{profile.gender}}</div>
+                <div class="col-md-4 col-6 info-text">Gender</div>
+                <div class="col-6 info-text" *ngIf="profile.gender !== 'Musko' && profile.gender !== 'Zensko'">{{profile.gender}}</div>
+                <div class="col-6 info-text" *ngIf="profile.gender === 'Musko'">Male</div>
+                <div class="col-6 info-text" *ngIf="profile.gender === 'Zensko'">Female</div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-4 col-6 info-text">Visina</div>
+                <div class="col-md-4 col-6 info-text">Height</div>
                 <div class="col-6 info-text">{{profile.height}}</div>
             </div>
             <div class="row mt-2">
-                <div class="col-md-4 col-6 info-text">Godine</div>
+                <div class="col-md-4 col-6 info-text">Age</div>
                 <div class="col-6 info-text">{{profile.age}}</div>
             </div>
             <div class="row mt-5">
                 <div class="col-6">
-                    <button type="button" class="button-style button-font" id="change password" (click)="addInjury()">Upravljaj povredama</button>
+                    <button type="button" class="button-style button-font" id="change password" (click)="addInjury()">Manage Injuries</button>
                 </div>
                 <div class="col-6">
-                    <button type="button" class="button-style button-font" id="change password" (click)="editProfile()">Izmeni profil</button>
+                    <button type="button" class="button-style button-font" id="change password" (click)="editProfile()">Edit profile</button>
                 </div>
             </div>
         </div>
         <div class="col-md-6 col-12">
             <div class="col-12">
-                <h2>Povrede</h2>
+                <h2>Injuries</h2>
             </div>
             <div class="table-container mt-3">
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
                             <th scope="col" class="table-text-white">#</th>
-                            <th scope="col" class="table-text-white">Naziv</th>
-                            <th scope="col" class="table-text-white">Vreme</th>
+                            <th scope="col" class="table-text-white">Name</th>
+                            <th scope="col" class="table-text-white">Time</th>
                         </tr>
                     </thead>
                     <tbody>

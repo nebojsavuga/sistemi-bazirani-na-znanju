@@ -32,7 +32,7 @@ export class FavoriteDisplayComponent implements OnInit {
           this.totalSimilarArticles = this.articles.slice(0, 4 * (this.sliceIndex + 1));
         },
         error: err => {
-          this.snackBarService.showSnackBar('Došlo je do greške prilikom učitavanja omiljenih artikala.', 'Ok');
+          this.snackBarService.showSnackBar('There was a mistake while loading favorite articles.', 'Ok');
         }
       }
     );
@@ -49,7 +49,7 @@ export class FavoriteDisplayComponent implements OnInit {
 
   deleteArticle(event: any) {
     if (event) {
-      this.snackBarService.showSnackBar('Uspešno ste obrisali artikal iz liste omiljenih.', 'Ok');
+      this.snackBarService.showSnackBar('Successfully deleted article from favorites.', 'Ok');
       this.getFavorites();
     }
   }

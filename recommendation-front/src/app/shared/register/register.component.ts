@@ -34,11 +34,11 @@ export class RegisterComponent {
   register(): void {
     if (!this.registerForm.valid) {
       this.hasError = true;
-      this.errorValue = "Nisu sva polja ispravno uneta.";
+      this.errorValue = "Not all fields are correct.";
     }
     if (this.password.value !== this.repeatedPassword.value) {
       this.hasError = true;
-      this.errorValue = "Lozinke se ne podudaraju";
+      this.errorValue = "The passwords don't match.";
       return;
     }
 
@@ -58,15 +58,15 @@ export class RegisterComponent {
         next: _ => {
           this.hasError = false;
           this.successfullyRegistered = true;
-          this.successMessage = "Uspešna registracija.";
+          this.successMessage = "Successful registration.";
         }, error: err => {
           this.hasError = true;
-          this.errorValue = 'Nisu sva polja ispravno uneta.';
+          this.errorValue = 'Not all fields are correct.';
         }
       })
     } else {
       this.hasError = true;
-      this.errorValue = 'Nisu sva polja ispravno uneta.';
+      this.errorValue = 'Not all fields are correct.';
     }
   }
 

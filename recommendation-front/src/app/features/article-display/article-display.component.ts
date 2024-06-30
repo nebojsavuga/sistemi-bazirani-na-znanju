@@ -65,7 +65,7 @@ export class ArticleDisplayComponent implements OnInit {
     this.recomendationService.getParents(id).subscribe(
       res => {
         this.backwardTypes = res.reverse();
-        if(this.backwardTypes[1] === 'Article'){
+        if (this.backwardTypes[1] === 'Article') {
           const back = this.backwardTypes[1];
           this.backwardTypes[1] = this.backwardTypes[0];
           this.backwardTypes[0] = back;
@@ -138,13 +138,13 @@ export class ArticleDisplayComponent implements OnInit {
       {
         next: (res) => {
           const price = parseFloat(Number.parseFloat(res.price).toFixed(2));
-          this.snackbar.showSnackBar(`Uspešno ste kupili artiklal ${this.article.name} sa cenom ${price} eur`, 'Ok');
+          this.snackbar.showSnackBar(`You have successfully purchased the ${this.article.name} article with the price of ${price} eur`, 'Ok');
           this.selectedCodeId = 0;
           this.getCodes();
           this.article.price = this.oldPrice;
         },
         error: _ => {
-          this.snackbar.showSnackBar(`Došlo je do greške prilikom kupovine artikla ${this.article.name}`, 'Ok');
+          this.snackbar.showSnackBar(`There was a mistake while buying the article ${this.article.name}`, 'Ok');
         }
       }
     );
@@ -154,14 +154,14 @@ export class ArticleDisplayComponent implements OnInit {
     this.articleService.addToFavorite(this.article.id).subscribe(
       {
         next: res => {
-          this.snackbar.showSnackBar(`Uspešno ste dodali ${this.article.name} u listu omiljenih artikala`, 'Ok');
+          this.snackbar.showSnackBar(`Successfully added the article ${this.article.name} to favorites.`, 'Ok');
         },
         error: response => {
           if (response.status === 200) {
-            this.snackbar.showSnackBar(`Uspešno ste dodali ${this.article.name} u listu omiljenih artikala`, 'Ok');
+            this.snackbar.showSnackBar(`Successfully added the article ${this.article.name} to favorites`, 'Ok');
             return;
           }
-          this.snackbar.showSnackBar(`Došlo je do greške prilikom dodavanja artikla ${this.article.name} u listu omiljenih.`, 'Ok');
+          this.snackbar.showSnackBar(`There was a mistake while adding the article ${this.article.name} to favorites.`, 'Ok');
         }
       }
     );
@@ -170,17 +170,17 @@ export class ArticleDisplayComponent implements OnInit {
   onCodeChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.selectedCodeId = Number(selectElement.value);
-    if(this.selectedCodeId === 0){
+    if (this.selectedCodeId === 0) {
       this.article.price = this.oldPrice;
       return;
     }
     const code = this.codes.find(c => c.id === this.selectedCodeId);
-    if(code.discountPrice > 0){
+    if (code.discountPrice > 0) {
       this.article.price = String(Number.parseFloat(this.article.price) - code.discountPrice);
-    }else{
+    } else {
       this.article.price = String(Number.parseFloat(this.article.price) - Number.parseFloat(this.article.price) * (code.discountPercentage / 100));
     }
-    if(Number.parseFloat(this.article.price) < 0){
+    if (Number.parseFloat(this.article.price) < 0) {
       this.article.price = '0';
       return;
     }

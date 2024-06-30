@@ -48,7 +48,7 @@ export class EditProfileComponent implements OnInit{
 
   editProfile(){
     if(!this.editProfileForm.valid){
-      this.errorValue = 'Molimo Vas popunite sva polja validno.';
+      this.errorValue = 'Not all fields are fulfilled correctly.';
       this.hasError = true;
       return;
     }
@@ -62,7 +62,7 @@ export class EditProfileComponent implements OnInit{
     }
     this.service.editProfile(editUserDTO).subscribe({
       next:(result) =>{
-        this.snackBar.showSnackBar('Uspesno ste izmenili profil.', "Ok");
+        this.snackBar.showSnackBar('Successfully edited profile.', "Ok");
         this.goBack();
       },
       error:(err) =>{
