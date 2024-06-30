@@ -55,7 +55,6 @@
                             <td class="small-cell table-text-white" *ngIf="injury.injury === 'Povreda kolena'">Knee injury</td>
                             <td class="small-cell table-text-white" *ngIf="injury.injury === 'Povreda lakta'">Elbow injury</td>
                             <td class="small-cell table-text-white" *ngIf="injury.injury === 'Povreda rucnog zgloba'">Wrist injury</td>
-                            <td class="small-cell table-text-white">{{injury.injury}}</td>
                             <td class="small-cell table-text-white">{{injury.executionTime | date:'dd/MM/yyyy'}}</td>
                             <td class="small">
                                 <button class="btn btn-danger" (click)="deleteInjury(injury.id)">Delete</button>
