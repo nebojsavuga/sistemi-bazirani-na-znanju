@@ -16,7 +16,7 @@ global Code codeLoyal;
 global Code codePriceDiscount;
 global Code codeLoyalPriceDiscount;
 
-rule "Ukoliko je kupio preko 5 artikala za odredjeni sport u poslednjih godinu dana, daj mu kod za popust na taj sport"
+rule "If they have purchased more than 5 items for a specific sport in the last year, provide them with a discount code for that sport"
 salience -100
 when
     String(this == "cepKupovina")
@@ -33,11 +33,11 @@ then
     code.setUsed(false);
     code.setUser($user);
     code.setFlag(0);
-    code.setName("10% popusta za sport: " + $article.getSport());
+    code.setName("10% discount for sport: " + $article.getSport());
     purchases.add($purchase);
 end
 
-rule "Ukoliko je potrosio preko 500e dodeli mu kod na bilo koji artikal"
+rule "If they have spent over 500€, give them a discount code for any article."
 salience -100
 when
     String(this == "cepKupovina")
@@ -54,11 +54,11 @@ then
     codeLoyal.setUsed(false);
     codeLoyal.setUser($user);
     codeLoyal.setFlag(2);
-    codeLoyal.setName("10% popusta na bilo koji artikal");
+    codeLoyal.setName("10% discount for any article");
     purchasesLoyal.add($purchase);
 end
 
-rule "Ukoliko je korisnik Iskoristio 4 koda za neki sport u poslednje 2 godine dobija kod od 10e popusta na artikal iz tog sporta"
+rule "If the user has used 4 codes for a specific sport in the last 2 years, give them a €10 discount code for an item in that sport"
 salience -100
 when
     String(this == "cepKupovina")
@@ -75,11 +75,11 @@ then
     codePriceDiscount.setUsed(false);
     codePriceDiscount.setUser($user);
     codePriceDiscount.setFlag(0);
-    codePriceDiscount.setName("10e popusta za sport: " + $sport);
+    codePriceDiscount.setName("10e discount for sport: " + $sport);
     usedCodes.add($code);
 end
 
-rule "Ukoliko je korisnik Iskoristio 3 loyal koda u poslednje 2 godine dobija kod od 20e popusta na bilo koji artikal"
+rule "If the user has used 3 loyalty codes in the last 2 years, give them a €20 discount code for any item."
 salience -100
 when
     String(this == "cepKupovina")
@@ -96,11 +96,11 @@ then
     codeLoyalPriceDiscount.setUsed(false);
     codeLoyalPriceDiscount.setUser($user);
     codeLoyalPriceDiscount.setFlag(2);
-    codeLoyalPriceDiscount.setName("20e popusta za bilo koji artikal");
+    codeLoyalPriceDiscount.setName("20e discount for any article");
     usedLoyalCodes.add($code);
 end
 
-rule "Ako je kupljena kopacka sa 6 krampona nude mu se rezervni kramponi"
+rule "If shoes with 6 crampons are purchased, offer replacement crampons."
 salience -50
 when
     Filters(sport == Sport.Fudbal)
@@ -120,7 +120,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Ako su kupljeni kramponi nudi se kljuc za odvrtanje i zavrtanje krampona"
+rule "If crampons are purchased, offer a key for removing and installing crampons"
 salience -30
 when
     Filters(sport == Sport.Fudbal)

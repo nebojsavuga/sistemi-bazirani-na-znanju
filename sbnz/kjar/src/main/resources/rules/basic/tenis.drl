@@ -24,7 +24,7 @@ global List<Injury> injuries;
 global Set<RecommendedArticleDTO> recommendations;
 
 
-rule "Preporuci loptice ako se bavi tenisom"
+rule "Recommend tennis balls if they play tennis"
 salience 100
 when
     $filters: Filters(sport == Sport.Tenis)
@@ -42,7 +42,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci rekete sa tvrdim spanovanjem koji su pro ako se bavi tenisom i profesionalac je"
+rule "Recommend professional-grade tennis rackets with a stiff string bed if they are a tennis professional."
 salience 100
 when
     $filters: Filters(sport == Sport.Tenis, (level == SportLevel.Pro))
@@ -60,7 +60,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci sve rekete ako se bavi tenisom i nije izabrao filtere"
+rule "Recommend all rackets if they play tennis and haven't chosen filters."
 salience 100
 when
     $filters: Filters(sport == Sport.Tenis, level == null, $myInj:injuries, height == null || height == 0)
@@ -79,7 +79,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Ukoliko ima povrede lakta i bavi se tenisom reket laksi od 300g"
+rule "If they have elbow injuries and play tennis, recommend a racket lighter than 300g."
 salience 100
 when
     Filters(sport == Sport.Tenis, $addedInjuries: injuries)
@@ -99,7 +99,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Ukoliko ima povrede rucnog zgloba i bavi se tenisom reket laksi od 300g i meko spanovanje"
+rule "If they have wrist injuries and play tennis, recommend a racket lighter than 300g with a soft string bed."
 salience 100
 when
     Filters(sport == Sport.Tenis, $addedInjuries: injuries)
@@ -119,7 +119,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci rekete sa mekim spanovanjem koji su klasik ako se bavi tenisom i amater ili rekreativac je"
+rule "Recommend classic tennis rackets with a soft string bed if they play tennis and are an amateur or recreational player"
 salience 100
 when
     $filters: Filters(sport == Sport.Tenis, (level == SportLevel.Amater || level == SportLevel.Rekreativac))
@@ -137,7 +137,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci teniske patike sa ravnim djonom ako zeli da igra na tvrdoj podlozi"
+rule "Recommend tennis shoes with a flat sole if they want to play on hard courts"
 salience 100
 when
     $filters: Filters(sport == Sport.Tenis, typeOfField == SportTenisField.Beton)
@@ -155,7 +155,8 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci teniske patike sa riblja kost djonom ako zeli da igra na sljaci"
+rule 
+"Recommend tennis shoes with a herringbone sole if they want to play on clay courts"
 salience 100
 when
     $filters: Filters(sport == Sport.Tenis, typeOfField == SportTenisField.Sljaka)
@@ -173,7 +174,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci teniske patike sa kramponima ako zeli da igra na travnatoj podlozi"
+rule "Recommend tennis shoes with crampons if they want to play on grass courts."
 salience 100
 when
     $filters: Filters(sport == Sport.Tenis, typeOfField == SportTenisField.Trava)
@@ -192,7 +193,7 @@ then
 end
 
 
-rule "Preporuci zicu ukoliko je preporucen pro reket"
+rule "Recommend strings if a pro racket is recommended"
 salience 10
 when
     $article: Article()
@@ -211,7 +212,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci grip ukoliko je preporucen pro reket"
+rule "Recommend a grip if a pro racket is recommended"
 salience 10
 when
     $article: Article()
@@ -230,7 +231,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci vibrastop ukoliko je preporucena zica"
+rule "Recommend a vibrastop if strings are recommended"
 salience 9
 when
     $article: Article()
@@ -249,7 +250,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci Wilson kackete ukoliko je preporuceno preko 4 wilson artikla"
+rule "Recommend Wilson hat if more than 4 Wilson items are recommended."
 no-loop
 salience 8
 when
@@ -266,13 +267,13 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Kacket");
+    recommendedArticle.setArticleType("hat");
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
-rule "Ukoliko je korisnik musko izbaci zenske artikle iz preporuke"
+rule "If the user is male, exclude female items from the recommendations."
 salience -200
 when
     Filters(getGender() == Gender.Musko)
@@ -282,7 +283,7 @@ then
     recommendations.remove($recommendedArticle);
 end
 
-rule "Ukoliko je korisnik zensko izbaci muske artikle iz preporuke"
+rule "If the user is female, exclude male items from the recommendations"
 salience -200
 when
     Filters(getGender() == Gender.Zensko)

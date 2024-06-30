@@ -16,7 +16,7 @@ global Set<RecommendedArticleDTO> recommendations;
 
 template "football-rules"
 
-rule "Ako je brend @{brand} preporuci dresove tog brenda sa cenom ispod @{maxPrice}"
+rule "If the brand is @{brand}, recommend jerseys of that brand with a price below @{maxPrice}"
 when
     $$filter: Filters(sport == Sport.Fudbal)
     $$article: Article(brandName == "@{brand}", price <= @{maxPrice})

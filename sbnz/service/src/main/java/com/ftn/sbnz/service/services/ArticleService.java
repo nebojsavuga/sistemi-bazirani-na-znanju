@@ -103,53 +103,53 @@ public class ArticleService implements IArticleService {
         fullArticle.setImagePath(opt.getPathToImage());
         if (opt instanceof Ball) {
             Ball item = (Ball) opt;
-            fullArticle.setBallType("Tip lopte: " + item.getType().toString());
+            fullArticle.setBallType("Ball type: " + item.getType().toString());
         } else if (opt instanceof Barbel) {
             Barbel item = (Barbel) opt;
-            fullArticle.setBarbelType("Tip sipke: " + item.getType().toString());
-            fullArticle.setBarbelType("Tezina sipke: " + item.getWeight());
+            fullArticle.setBarbelType("Barbell type: " + item.getType().toString());
+            fullArticle.setBarbelType("Barbell weight: " + item.getWeight());
         } else if (opt instanceof Dumbell) {
             Dumbell item = (Dumbell) opt;
-            fullArticle.setDumbellWeight("Tezina bucice: " + item.getWeight());
+            fullArticle.setDumbellWeight("Dumbell weight: " + item.getWeight());
         } else if (opt instanceof ElasticBand) {
             ElasticBand item = (ElasticBand) opt;
-            fullArticle.setElasticBandWeight("Tezina elasticne trake: " + item.getEbWeight());
+            fullArticle.setElasticBandWeight("Elastic band weight: " + item.getEbWeight());
         } else if (opt instanceof FootballGear) {
             FootballGear item = (FootballGear) opt;
-            fullArticle.setTypeOfFootballGear("Tip opreme: " + item.getType().toString());
+            fullArticle.setTypeOfFootballGear("Gear type: " + item.getType().toString());
         } else if (opt instanceof FootbalShoeCrampons) {
             FootbalShoeCrampons item = (FootbalShoeCrampons) opt;
-            fullArticle.setNumberOfCramponsFootballShoeCrampons("Broj krampona: " + item.getNumberOfCrampons());
+            fullArticle.setNumberOfCramponsFootballShoeCrampons("Number of crampons: " + item.getNumberOfCrampons());
         } else if (opt instanceof GrassFootbalShoe) {
             GrassFootbalShoe item = (GrassFootbalShoe) opt;
-            fullArticle.setNumberOfCramponsGrassFootballShoe("Broj krampona: " + item.getNumberOfCrampsons());
+            fullArticle.setNumberOfCramponsGrassFootballShoe("Number of crampons: " + item.getNumberOfCrampsons());
         } else if (opt instanceof OrientiringGear) {
             OrientiringGear item = (OrientiringGear) opt;
-            fullArticle.setTypeOfOrientiringGear("Tip opreme: " + item.getType().toString());
+            fullArticle.setTypeOfOrientiringGear("Gear type: " + item.getType().toString());
         } else if (opt instanceof Racket) {
             Racket item = (Racket) opt;
-            fullArticle.setRacketSpanning("Spanovanje: " + item.getSpanningType().toString());
-            fullArticle.setRacketType("Tip reketa: " + item.getType().toString());
-            fullArticle.setRacketWeight("Tezina reketa: " + item.getWeight());
-            fullArticle.setRacketSize("Velicina reketa (in): " + item.getSize());
+            fullArticle.setRacketSpanning("Spanning: " + item.getSpanningType().toString());
+            fullArticle.setRacketType("Racket type: " + item.getType().toString());
+            fullArticle.setRacketWeight("Racket weight: " + item.getWeight());
+            fullArticle.setRacketSize("Racket size (in): " + item.getSize());
         } else if (opt instanceof Sweatpants) {
             Sweatpants item = (Sweatpants) opt;
-            fullArticle.setSweatpantsType("Tip trenerke: " + item.getType().toString());
+            fullArticle.setSweatpantsType("Sweatpants type: " + item.getType().toString());
         } else if (opt instanceof TenisGear) {
             TenisGear item = (TenisGear) opt;
-            fullArticle.setTypeOfTenisGear("Tip opreme: " + item.getGearType().toString());
+            fullArticle.setTypeOfTenisGear("Gear type: " + item.getGearType().toString());
         } else if (opt instanceof TenisShoe) {
             TenisShoe item = (TenisShoe) opt;
-            fullArticle.setTenisShoeSole("Tip djona: " + item.getSole().toString());
+            fullArticle.setTenisShoeSole("Sole type: " + item.getSole().toString());
         } else if (opt instanceof Weight) {
             Weight item = (Weight) opt;
-            fullArticle.setWeightliftingWeight("Tezina tega: " + item.getWeight());
+            fullArticle.setWeightliftingWeight("Weight weight: " + item.getWeight());
         } else if (opt instanceof WeightliftingGear) {
             WeightliftingGear item = (WeightliftingGear) opt;
-            fullArticle.setWeightliftingTypeOfGear("Tip opreme: " + item.getType().toString());
+            fullArticle.setWeightliftingTypeOfGear("Gear type: " + item.getType().toString());
         } else if (opt instanceof WeightliftingGlove) {
             WeightliftingGlove item = (WeightliftingGlove) opt;
-            fullArticle.setWeightliftingGloveSize("Velicina rukavice: " + item.getGloveSize());
+            fullArticle.setWeightliftingGloveSize("Glove size: " + item.getGloveSize());
         }
         return fullArticle;
     }
@@ -466,9 +466,9 @@ public class ArticleService implements IArticleService {
     public SportSalesDTO getSportSales() {
         List<Purchase> purchases = purchaseRepository.findAll();
         List<SportSaleDTO> sales = new ArrayList<>();
-        SportSaleDTO football = new SportSaleDTO("fudbal", 0);
-        SportSaleDTO weights = new SportSaleDTO("dizanjeTegova", 0);
-        SportSaleDTO orientiring = new SportSaleDTO("orijentiring", 0);
+        SportSaleDTO football = new SportSaleDTO("football", 0);
+        SportSaleDTO weights = new SportSaleDTO("weightlifting", 0);
+        SportSaleDTO orientiring = new SportSaleDTO("orientiring", 0);
         SportSaleDTO tenis = new SportSaleDTO("tenis", 0);
 
         for (Purchase purchase : purchases) {

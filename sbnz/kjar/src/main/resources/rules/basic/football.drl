@@ -24,7 +24,7 @@ global Set<RecommendedArticleDTO> recommendations;
 global List<Injury> injuries;
 
 
-rule "Preporuci mu fudbalske lopte"
+rule "Recommend soccer balls"
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null || age == 0), level == null, typeOfFootball == null)
@@ -42,7 +42,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci mu fudbalske lopte za decu"
+rule "Recommend soccer balls for kids"
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, age < 12)
@@ -60,7 +60,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Izabrana opcija mali fudbal, preporuci patike bez krampona"
+rule "The chosen option is small football, we recommend sneakers without crampons"
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, typeOfFootball == SportFootballType.Mali)
@@ -78,7 +78,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Mali fudbal, preko 12 godina, Preporuci mu fudbalkse lopte 4 sa tegom"
+rule "Futsal, over 12 years old, Recommend him 4 soccer balls with weights"
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, age > 12, typeOfFootball == SportFootballType.Mali)
@@ -96,7 +96,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Rekreativan, preporuci amaterske lopte"
+rule "Recreational, amateur balls recommended"
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null || age == 0), level == SportLevel.Rekreativac)
@@ -114,7 +114,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Amater, preporuci amaterske i trening lopte"
+rule "Amateur, recommend amateur and training balls"
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null || age == 0), level == SportLevel.Amater)
@@ -132,7 +132,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Profesionalac, preporuci pro i trening lopte"
+rule "Professional, recommend pro and training balls"
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, (age >= 12 || age == null || age == 0), level == SportLevel.Pro)
@@ -150,7 +150,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Povreda skocnog zgloba, ponudi kostobran sa stitnikom za skocni zglob"
+rule "Injury of the ankle joint, offer a shin protector with an ankle protector"
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, $selectedInjuries: injuries)
@@ -170,7 +170,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Nema povrede skocnog zgloba, ponudi kostobran bez stitnika"
+rule "There is no injury to the ankle joint, offer a shin protector without a guard"
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, $selectedInjuries: injuries)
@@ -190,7 +190,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci kostobrane ako je amater ili pro"
+rule "Shin protector recommended if amateur or pro"
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, (level == SportLevel.Pro || level == SportLevel.Amater), injuries.size() == 0 )
@@ -209,7 +209,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci stucne ukoliko je preporucen kostobran"
+rule "Offer a leg warmers if shin protector was offered"
 salience 10
 when
     $filters: Filters(sport == Sport.Fudbal, (level == SportLevel.Pro || level == SportLevel.Amater))
@@ -229,7 +229,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci podvezice ukoliko su preporucene stucne i pro je"
+rule "Recommend sock garters if leg warmers were recommended and user is a pro"
 salience 9
 when
     $filters: Filters(sport == Sport.Fudbal, level == SportLevel.Pro)
@@ -247,7 +247,7 @@ then
     recommendations.add(recommendedArticle);
 end
 
-rule "Ukoiko je golman nudi kopacku sa 6 krampona"
+rule "Recommend shoes with 6 crampons if the player is a goalkeeper."
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, typeOfFotballPlayer == SportFootballPlayer.Golman)

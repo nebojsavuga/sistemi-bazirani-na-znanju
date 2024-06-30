@@ -16,7 +16,7 @@ import java.util.Set;
 
 global Set<RecommendedArticleDTO> recommendations;
 
-rule "Preporuci sportsku busolu ukoliko se bavi orijentiringom"
+rule "Recommend a sports compass if they participate in orienteering"
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring)
@@ -28,13 +28,13 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Sportska busola");
+    recommendedArticle.setArticleType("sports compass");
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
-rule "Preporuci patike sa kramponima ukoliko nije izabrao tip trke"
+rule "Recommend Shoes with crampons if they haven't chosen the type of race."
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == null)
@@ -46,13 +46,13 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Patike sa kramponima");
+    recommendedArticle.setArticleType("Shoes with crampons");
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
-rule "Preporuci patike bez krampona ukoliko nije izabrao tip trke"
+rule "Recommend Shoes without crampons if they haven't chosen the type of race"
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == null)
@@ -64,13 +64,13 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Patike bez krampona");
+    recommendedArticle.setArticleType("Shoes without crampons");
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
-rule "Preporuci patike sa velikim kramponima ako se bavi orijentiringom i trka je sumska sprint"
+rule "Recommend shoes with big crampons if they participate in orienteering and the race is a forest sprint"
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaSprint)
@@ -82,14 +82,14 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Patike sa kramponima");
+    recommendedArticle.setArticleType("Shoes with crampons");
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
 
-rule "Preporuci patike sa velikim kramponima ako se bavi orijentiringom i trka je sumska duga"
+rule "Recommend shoes with big crampons if they participate in orienteering and the race is a forest long"
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaDuga)
@@ -101,13 +101,13 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Patike sa kramponima");
+    recommendedArticle.setArticleType("Shoes with big crampons");
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
-rule "Preporuci patikeza trcanje ako se bavi orijentiringom i trka je gradska"
+rule "Recommend running shoes if they participate in orienteering and the race is urban"
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.GradskaSprint)
@@ -125,7 +125,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci sorc ako se bavi orijentiringom i trka je gradska"
+rule "Recommend shorts if they participate in orienteering and the race is urban"
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.GradskaSprint)
@@ -143,7 +143,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci poludugacke ako se bavi orijentiringom i trka je sumska dugacka"
+rule "Recommend half sweatpants if they participate in orienteering and the race is a long forest race."
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaDuga)
@@ -161,7 +161,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci dugacke ako se bavi orijentiringom i trka je sumska dugacka"
+rule "Recommend sweatpants if they participate in orienteering and the race is a long forest race"
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaDuga)
@@ -179,7 +179,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci poludugacke ako se bavi orijentiringom i trka je sumska sprint"
+rule "Recommend half sweatpants if they participate in orienteering and the race is a forest sprint."
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaSprint)
@@ -197,7 +197,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci dugacke ako se bavi orijentiringom i trka je sumska sprint"
+rule "Recommend sweatpants if they participate in orienteering and the race is a forest sprint"
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaSprint)
@@ -215,7 +215,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci kamasne ako se bavi orijentiringom i trka je sumska sprint"
+rule "Recommend gaiters if they participate in orienteering and the race is a forest sprint"
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaSprint)
@@ -233,7 +233,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci kamasne ako se bavi orijentiringom i trka je sumska duga"
+rule "Recommend gaiters if they participate in orienteering and the race is a long forest race"
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace == SportOrientiringType.SumskaDuga)
@@ -251,7 +251,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci naocare za orijentiring ako se bavi orijentiringom i trka nije gradska sprint"
+rule "Recommend orienteering glasses if they participate in orienteering and the race is not an urban sprint."
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring, typeOfRace != SportOrientiringType.GradskaSprint)
@@ -269,7 +269,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Preporuci mu sportIdent sporiji ukoliko se bavi profesionalno orijentiringom, ukoliko je preporucena busola i trka je sumska duga "
+rule "Recommend the slower SportIdent SI card if they are into orienteering professionally, a compass is recommended, and the race is a long forest one"
 salience 10
 when
     $filters: Filters(sport == Sport.Orijentiring, level == SportLevel.Pro,typeOfRace == SportOrientiringType.SumskaDuga )
@@ -283,13 +283,13 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Sportski Cip");
+    recommendedArticle.setArticleType("SI card");
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
-rule "Preporuci mu sportIdent brzi ukoliko se bavi profesionalno orijentiringom, ukoliko je preporucena busola i trka je sumska sprint "
+rule "Recommend the faster SportIdent SI card if they are into orienteering professionally, a compass is recommended, and the race is a forest sprint."
 salience 10
 when
     $filters: Filters(sport == Sport.Orijentiring, level == SportLevel.Pro,typeOfRace == SportOrientiringType.SumskaSprint )
@@ -303,13 +303,13 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Sportski Cip");
+    recommendedArticle.setArticleType("SI card");
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
-rule "Preporuci mu sportIdent brzi ukoliko se bavi profesionalno orijentiringom, ukoliko je preporucena busola i trka je gradska sprint "
+rule "Recommend the faster SportIdent SI card if they are into orienteering professionally, a compass is recommended, and the race is an urban sprint"
 salience 10
 when
     $filters: Filters(sport == Sport.Orijentiring, level == SportLevel.Pro,typeOfRace == SportOrientiringType.GradskaSprint )
@@ -323,13 +323,13 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Sportski Cip");
+    recommendedArticle.setArticleType("SI card");
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
-rule "Preporuci mu kanap za vezivanje cipa ukoliko je preporucen Cip  i trka je sumska sprint "
+rule "Recommend a lanyard for attaching the SI card if an SI card is recommended and the race is a forest sprint."
 salience 9
 when
     $filters: Filters(typeOfRace == SportOrientiringType.SumskaSprint )
@@ -343,13 +343,13 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Kanap za cip");
+    recommendedArticle.setArticleType("lanyard");
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);
 end
 
-rule "Preporuci mu kanap za vezivanje cipa ukoliko je preporucen Cip  i trka je sumska duga "
+rule "Recommend a lanyard for attaching the SI card if an SI card is recommended and the race is a long forest race."
 salience 9
 when
     $filters: Filters(typeOfRace == SportOrientiringType.SumskaDuga )
@@ -363,7 +363,7 @@ then
     recommendedArticle.setPrice($article.getPrice());
     recommendedArticle.setId($article.getId());
     recommendedArticle.setBrandName($article.getBrandName());
-    recommendedArticle.setArticleType("Kanap za cip");
+    recommendedArticle.setArticleType("lanyard");
     recommendedArticle.setPathToImage($article.getPathToImage());
     recommendations.add(recommendedArticle);
     insert(recommendedArticle);

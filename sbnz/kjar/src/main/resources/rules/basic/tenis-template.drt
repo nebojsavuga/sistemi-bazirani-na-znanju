@@ -26,7 +26,7 @@ global Set<RecommendedArticleDTO> recommendations;
 
 template "tenis-rules"
 
-rule "Ako je visina ispod @{maxHeight} preporuci rekete velicine @{racketSize}"
+rule "If height is below @{maxHeight} recommend racket size @{racketSize}"
 when
     $$filter: Filters(height > @{minHeight}, height <= @{maxHeight}, sport == Sport.Tenis)
     $$article: Article()
