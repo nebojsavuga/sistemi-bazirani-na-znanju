@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ArticleService } from '../../core/services/article.service';
 import { RecommendedArticle, SportSales, TopRatedArticle } from '../../shared/models/articles';
-import Chart from 'chart.js';
 import { CamelCasePipe } from '../pipes/camel-case.pipe';
 
 @Component({

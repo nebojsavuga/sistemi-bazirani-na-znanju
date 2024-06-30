@@ -34,5 +34,9 @@ export class TranslationPipe implements PipeTransform {
         this.translations.set("Powerlifting", "Powerlifting");
         this.translations.set("Weightlifting", "Weightlifting");
         this.translations.set("Bodybuilding", "Bodybuilding");
+        this.translations.set("Fudbal", "Football");
+        this.translations.set("Tenis", "Tenis");
+        this.translations.set("DizanjeTegova", "Bodybuilding");
+        this.translations.set("Orijentiring", "Orientiring");
     }
 }

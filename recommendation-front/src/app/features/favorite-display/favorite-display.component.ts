@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecommendedArticle } from '../../shared/models/articles';
 import { ArticleService } from '../../core/services/article.service';
-import { UserService } from '../../core/services/user.service';
 import { SnackbarService } from '../../core/services/snackbar.service';
 
 @Component({
