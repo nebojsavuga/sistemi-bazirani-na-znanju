@@ -24,7 +24,7 @@ import java.util.Set;
 global Set<RecommendedArticleDTO> recommendations;
 global List<Injury> injuries;
 
-rule "Preporuci patike sa tvrdim djonom"
+rule "Recommend shoes with a hard sole"
 salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova)
@@ -42,7 +42,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Bavi se dizanjem tegova i ima manja od 13 godina, preporuci bucice do 5kg"
+rule "If they are weightlifting and under 13 years old, recommend dumbbells up to 5kg"
 salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, age < 13)
@@ -60,7 +60,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Bavi se dizanjem tegova i ima manja od 13 godina, preporuci el. trake do 15kg"
+rule "If they are weightlifting and under 13 years old, recommend resistance bands up to 15kg"
 salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, age < 13)
@@ -78,7 +78,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Bavi se dizanjem tegova, preporuci rukavice za dizanje"
+rule "If they are weightlifting, recommend weightlifting gloves"
 salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova)
@@ -96,7 +96,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Bavi se dizanjem tegova i pro je, preporuci ploce od 20 kg"
+rule "If they are weightlifting and are a professional, recommend 20kg weight plates"
 salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, level == SportLevel.Pro)
@@ -114,7 +114,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Bavi se dizanjem tegova i weightlifter ili powerlifter je, ponudi mu krede kao artikle"
+rule "If they are into weightlifting and are a weightlifter or powerlifter, offer chalk as an item"
 salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, (typeOfWeightlifting == SportWeightliftingType.Weightlifting || typeOfWeightlifting == SportWeightliftingType.Powerlifting ))
@@ -132,7 +132,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Ukoliko je zensko, ponudi el trake do 20 kg"
+rule "If they are female, offer resistance bands up to 20 kg"
 salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, gender == Gender.Zensko)
@@ -150,7 +150,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Ukoliko je musko, ponudi el trake do 60 kg"
+rule "If they are male, offer resistance bands up to 60 kg"
 salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, gender == Gender.Musko)
@@ -168,7 +168,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Ukoliko ima povredu kolena I bavi se dizanjem tegova preporuci steznike za kolena"
+rule "If they have a knee injury and are weightlifting, recommend knee wraps."
 when
     Filters(sport == Sport.DizanjeTegova, $addedInjuries: injuries)
     $article: Article()

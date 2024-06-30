@@ -35,7 +35,7 @@ import java.util.List;
 
 global Set<RecommendedArticleDTO> recommendations;
 
-rule "Ukoliko je kupljen neki artikal u poslednjih mesec dana, ne preporucivati ga"
+rule "If an item has been purchased in the last month, do not recommend it again"
 salience -1000
 when
     $article: RecommendedArticleDTO($id: id) from recommendations
@@ -44,7 +44,7 @@ then
     recommendations.remove($article);
 end
 
-rule "Ukoliko je brend ocenjen ispod 3 5 ili vise puta u poslednjih godinu dana ne preporucuj ga"
+rule "If a brand has been rated below 3 for five or more times in the last year, do not recommend it"
 salience -100
 when
     $article: RecommendedArticleDTO($brand: brandName) from recommendations
@@ -57,7 +57,7 @@ then
     recommendations.remove($article);
 end
 
-rule "Ukoliko je kupio preko 4 ploce od 20kg nudimo olimpijsku sipku"
+rule "If they have purchased more than 4 20kg weight plates, offer an Olympic barbell"
 salience 1000
 when
     $article: Article()
@@ -81,7 +81,8 @@ then
     
 end
 
-rule "Ukoliko je kupio preko 4 ploce od 20kg i olimpijsku sipku i powerlifter je, nudimo mu kais za dizanje tegova"
+rule 
+"If they have purchased more than 4 20kg weight plates and an Olympic barbell, and they are a powerlifter, offer them a weightlifting belt"
 salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, typeOfWeightlifting == SportWeightliftingType.Powerlifting)
@@ -108,7 +109,7 @@ then
     
 end
 
-rule "Ukoliko je kupio preko 4 ploce od 20kg i olimpijsku sipku i powerlifter je, nudimo mu steznike za kolena"
+rule "If they have purchased more than 4 20kg weight plates and an Olympic barbell, and they are a powerlifter, offer them knee wrap"
 salience 100
 when
     $filters: Filters(sport == Sport.DizanjeTegova, typeOfWeightlifting == SportWeightliftingType.Powerlifting)
@@ -135,7 +136,7 @@ then
     
 end
 
-rule "Ukoliko se bavi orijentiringom i kupio je poludugacku trenerku u poslednjih 6 meseci preporucuju mu se kamasne"
+rule "If they are into orienteering and have purchased mid-length pants in the last 6 months, recommend gaiters"
 salience 100
 when
     $filters: Filters(sport == Sport.Orijentiring)
@@ -158,7 +159,7 @@ then
     
 end
 
-rule "Ukoliko se bavi orijentiringom i kupio je kamasne uposlednjih 6 meseci kratke carape"
+rule "If they are into orienteering and have purchased gaiters in the last 6 months, recommend short socks."
 salience 99
 when
     $filters: Filters(sport == Sport.Orijentiring)
@@ -181,7 +182,7 @@ then
     
 end
 
-rule "Ukoliko je prosecna tezina kupljenih reketa veca nego u poslednje 3 godine, izbaci iz preporucenih rekete lakse od najlakseg reketa kupljenog pre 3 godine"
+rule "If the average weight of purchased rackets in last year is higher than in the last 3 years, exclude rackets lighter than the lightest racket purchased in last 3 years from the recommendations"
 salience -50
 when
     $filters: Filters(sport == Sport.Tenis)

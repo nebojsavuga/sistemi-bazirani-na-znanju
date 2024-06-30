@@ -28,7 +28,7 @@ global Set<RecommendedArticleDTO> recommendations;
 
 template "weight-rules"
 
-rule "Ukoliko je @{level} i @{gender} je, ponnudi bucice do @{maxWeight}"
+rule "If it is @{level} and is @{gender} , offer dumbbells up to @{maxWeight}"
 when
     $$filter: Filters(sport == Sport.DizanjeTegova, gender == Gender.@{gender}, level == SportLevel.@{level})
     $$article: Article()
