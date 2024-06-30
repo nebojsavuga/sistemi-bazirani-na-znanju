@@ -78,7 +78,7 @@ then
     insert(recommendedArticle);
 end
 
-rule "Futsal, over 12 years old, Recommend him 4 soccer balls with weights"
+rule "Futsal, over 12 years old, Recommend him soccer ball type 4 with weights"
 salience 100
 when
     $filters: Filters(sport == Sport.Fudbal, age > 12, typeOfFootball == SportFootballType.Mali)
