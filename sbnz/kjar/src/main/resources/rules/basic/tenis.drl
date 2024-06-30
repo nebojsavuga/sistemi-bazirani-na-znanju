@@ -17,8 +17,9 @@ import com.ftn.sbnz.model.articles.RacketString;
 import com.ftn.sbnz.model.articles.Grip;
 import com.ftn.sbnz.model.users.Gender;
 import com.ftn.sbnz.model.articles.ArticleGenderType;
-
+import com.ftn.sbnz.model.users.Injury;
 import java.util.Set;
+global List<Injury> injuries;
 
 global Set<RecommendedArticleDTO> recommendations;
 
@@ -44,9 +45,68 @@ end
 rule "Preporuci rekete sa tvrdim spanovanjem koji su pro ako se bavi tenisom i profesionalac je"
 salience 100
 when
-    $filters: Filters(sport == Sport.Tenis, (level == SportLevel.Pro || level == null))
+    $filters: Filters(sport == Sport.Tenis, (level == SportLevel.Pro))
     $article: Article()
     $ewkwr: Racket(spanningType == TypeOfRacketSpanning.Tvrdo, type== TypeOfRacket.Profesionalni) from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Preporuci sve rekete ako se bavi tenisom i nije izabrao filtere"
+salience 100
+when
+    $filters: Filters(sport == Sport.Tenis, level == null, $myInj:injuries, height == null || height == 0)
+    $article: Article()
+    eval($myInj.isEmpty())
+    $ewkwr: Racket() from $article
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Ukoliko ima povrede lakta i bavi se tenisom reket laksi od 300g"
+salience 100
+when
+    Filters(sport == Sport.Tenis, $addedInjuries: injuries)
+    $article: Article()
+    $reket: Racket(weight <= 300.0) from $article
+    Injury(name == "Povreda lakta", $injuryId: id) from injuries
+    eval($addedInjuries.contains($injuryId))
+then
+    RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
+    recommendedArticle.setName($article.getName());
+    recommendedArticle.setPrice($article.getPrice());
+    recommendedArticle.setId($article.getId());
+    recommendedArticle.setBrandName($article.getBrandName());
+    recommendedArticle.setArticleType("Racket");
+    recommendedArticle.setPathToImage($article.getPathToImage());
+    recommendations.add(recommendedArticle);
+    insert(recommendedArticle);
+end
+
+rule "Ukoliko ima povrede rucnog zgloba i bavi se tenisom reket laksi od 300g i meko spanovanje"
+salience 100
+when
+    Filters(sport == Sport.Tenis, $addedInjuries: injuries)
+    $article: Article()
+    $reket: Racket(weight <= 300.0, spanningType == TypeOfRacketSpanning.Meko) from $article
+    Injury(name == "Povreda rucnog zgloba", $injuryId: id) from injuries
+    eval($addedInjuries.contains($injuryId))
 then
     RecommendedArticleDTO recommendedArticle = new RecommendedArticleDTO();
     recommendedArticle.setName($article.getName());
@@ -62,7 +122,7 @@ end
 rule "Preporuci rekete sa mekim spanovanjem koji su klasik ako se bavi tenisom i amater ili rekreativac je"
 salience 100
 when
-    $filters: Filters(sport == Sport.Tenis, (level == SportLevel.Amater || level == SportLevel.Rekreativac), height == null || height == 0)
+    $filters: Filters(sport == Sport.Tenis, (level == SportLevel.Amater || level == SportLevel.Rekreativac))
     $article: Article()
     $reket: Racket((spanningType == TypeOfRacketSpanning.Meko || spanningType == TypeOfRacketSpanning.Tvrdo), type== TypeOfRacket.Klasik) from $article
 then
