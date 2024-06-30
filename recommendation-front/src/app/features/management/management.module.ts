@@ -25,7 +25,7 @@ import { MatInputModule } from '@angular/material/input';
     ManagementRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    MatInputModule
+    MatInputModule  
     
   ],
   exports:[
